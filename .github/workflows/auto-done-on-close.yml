@@ -13,7 +13,7 @@ jobs:
       github.event_name == 'issues' ||
       (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
     env:
-      GH_TOKEN: ${{ secrets.PROEJCT_BOARD_AUTO_ADD }}
+      GH_TOKEN: ${{ secrets.PROJECT_BOARD_AUTO_ADD }}
     steps:
       - name: Get content node ID
         id: node
