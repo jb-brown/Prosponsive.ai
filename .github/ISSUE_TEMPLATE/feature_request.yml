@@ -19,3 +19,52 @@ body:
     attributes:
       label: Alternatives considered
       description: Any workarounds or alternatives you have tried?
+  - type: input
+    id: app-version
+    attributes:
+      label: App Version
+      description: Auto-populated by Prosponsive app
+    validations:
+      required: false
+  - type: input
+    id: platform
+    attributes:
+      label: Platform
+      description: Auto-populated by Prosponsive app
+    validations:
+      required: false
+  - type: input
+    id: ai-provider
+    attributes:
+      label: AI Provider
+      description: Auto-populated by Prosponsive app
+    validations:
+      required: false
+  - type: input
+    id: ai-model
+    attributes:
+      label: AI Model
+      description: Auto-populated by Prosponsive app
+    validations:
+      required: false
+  - type: input
+    id: os-version
+    attributes:
+      label: OS Version
+      description: Auto-populated by Prosponsive app
+    validations:
+      required: false
+  - type: input
+    id: total-ram
+    attributes:
+      label: Total RAM
+      description: Auto-populated by Prosponsive app
+    validations:
+      required: false
+  - type: input
+    id: cpu-cores
+    attributes:
+      label: CPU Cores
+      description: Auto-populated by Prosponsive app
+    validations:
+      required: false
