@@ -1,0 +1,114 @@
+name: Auto-done on merge/close
+
+on:
+  pull_request:
+    types: [closed]
+  issues:
+    types: [closed]
+
+jobs:
+  mark-done:
+    runs-on: ubuntu-latest
+    if: >-
+      github.event_name == 'issues' ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+    env:
+      GH_TOKEN: ${{ secrets.PROEJCT_BOARD_AUTO_ADD }}
+    steps:
+      - name: Get content node ID
+        id: node
+        run: |
+          if [ "${{ github.event_name }}" = "issues" ]; then
+            echo "node_id=${{ github.event.issue.node_id }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "node_id=${{ github.event.pull_request.node_id }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Find project item and set Done
+        run: |
+          NODE_ID="${{ steps.node.outputs.node_id }}"
+          PROJECT_OWNER="jb-brown"
+          PROJECT_NUMBER=1
+
+          # Find the item on the project board by content node ID (paginated)
+          ITEM_ID=""
+          CURSOR=""
+          while true; do
+            CURSOR_ARGS=""
+            if [ -n "$CURSOR" ]; then
+              CURSOR_ARGS="-f cursor=$CURSOR"
+              QUERY='query($owner: String!, $number: Int!, $cursor: String!) {
+                user(login: $owner) { projectV2(number: $number) {
+                  items(first: 100, after: $cursor) {
+                    pageInfo { hasNextPage endCursor }
+                    nodes { id content { ... on Issue { id } ... on PullRequest { id } } }
+                  }
+                }}}'
+            else
+              QUERY='query($owner: String!, $number: Int!) {
+                user(login: $owner) { projectV2(number: $number) {
+                  items(first: 100) {
+                    pageInfo { hasNextPage endCursor }
+                    nodes { id content { ... on Issue { id } ... on PullRequest { id } } }
+                  }
+                }}}'
+            fi
+
+            PAGE=$(gh api graphql -f query="$QUERY" -f owner="$PROJECT_OWNER" -F number="$PROJECT_NUMBER" $CURSOR_ARGS)
+
+            ITEM_ID=$(echo "$PAGE" | jq -r ".data.user.projectV2.items.nodes[] | select(.content.id == \"$NODE_ID\") | .id")
+            if [ -n "$ITEM_ID" ]; then
+              break
+            fi
+
+            HAS_NEXT=$(echo "$PAGE" | jq -r '.data.user.projectV2.items.pageInfo.hasNextPage')
+            if [ "$HAS_NEXT" != "true" ]; then
+              break
+            fi
+            CURSOR=$(echo "$PAGE" | jq -r '.data.user.projectV2.items.pageInfo.endCursor')
+          done
+
+          if [ -z "$ITEM_ID" ]; then
+            echo "Item not found on project board — skipping"
+            exit 0
+          fi
+
+          # Get project ID and Status field info
+          PROJECT_DATA=$(gh api graphql -f query='
+            query($owner: String!, $number: Int!) {
+              user(login: $owner) {
+                projectV2(number: $number) {
+                  id
+                  field(name: "Status") {
+                    ... on ProjectV2SingleSelectField {
+                      id
+                      options { id name }
+                    }
+                  }
+                }
+              }
+            }' -f owner="$PROJECT_OWNER" -F number="$PROJECT_NUMBER")
+
+          PROJECT_ID=$(echo "$PROJECT_DATA" | jq -r '.data.user.projectV2.id')
+          FIELD_ID=$(echo "$PROJECT_DATA" | jq -r '.data.user.projectV2.field.id')
+          DONE_OPTION_ID=$(echo "$PROJECT_DATA" | jq -r '.data.user.projectV2.field.options[] | select(.name == "Done") | .id')
+
+          if [ -z "$DONE_OPTION_ID" ]; then
+            echo "No 'Done' option found on Status field — skipping"
+            exit 0
+          fi
+
+          # Update the item status to Done
+          gh api graphql -f query='
+            mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) {
+              updateProjectV2ItemFieldValue(input: {
+                projectId: $projectId
+                itemId: $itemId
+                fieldId: $fieldId
+                value: { singleSelectOptionId: $optionId }
+              }) {
+                projectV2Item { id }
+              }
+            }' -f projectId="$PROJECT_ID" -f itemId="$ITEM_ID" -f fieldId="$FIELD_ID" -f optionId="$DONE_OPTION_ID"
+
+          echo "✅ Board status set to Done"
