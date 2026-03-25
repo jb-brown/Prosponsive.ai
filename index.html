@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prosponsive — Download</title>
+  <meta name="description" content="Download Prosponsive, the AI-powered productivity app for your desktop.">
+  <link rel="icon" href="assets/icon.png" type="image/png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main>
+    <section class="hero" aria-labelledby="app-name">
+      <img src="assets/icon.png" alt="Prosponsive app icon" class="app-icon" width="128" height="128">
+      <h1 id="app-name">Prosponsive</h1>
+      <p class="tagline">AI-powered productivity for your desktop.</p>
+
+      <div class="download-area">
+        <a
+          id="download-btn"
+          class="btn-download"
+          href="#"
+          role="button"
+          aria-label="Download Prosponsive for macOS"
+        >
+          Download for macOS
+        </a>
+        <p id="version-info" class="version-info" aria-live="polite"></p>
+      </div>
+
+      <p id="platform-note" class="platform-note" aria-live="polite"></p>
+      <p class="platform-switch">
+        Not on macOS? See <button type="button" class="link-btn" data-platform="windows">Windows</button>
+        or <button type="button" class="link-btn" data-platform="linux">Linux</button> availability.
+      </p>
+    </section>
+
+    <section class="requirements" aria-labelledby="requirements-heading">
+      <h2 id="requirements-heading">System Requirements</h2>
+      <ul>
+        <li><strong>macOS</strong> 12 (Monterey) or later</li>
+        <li><strong>Apple Silicon</strong> (arm64)</li>
+        <li>Intel support: <em>Coming soon</em></li>
+        <li>Minimum 4 GB RAM, 500 MB disk space</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Prosponsive. All rights reserved.</p>
+    <nav aria-label="Footer links">
+      <a href="https://github.com/jb-brown/Prosponsive/issues/new?template=bug_report.md">Report a Bug</a>
+      <a href="https://github.com/jb-brown/Prosponsive/issues/new?template=feature_request.md">Request a Feature</a>
+    </nav>
+  </footer>
+
+  <script src="js/download.js"></script>
+</body>
+</html>
