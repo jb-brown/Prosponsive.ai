@@ -5,6 +5,9 @@
   var MANIFEST_URL = CLOUDFRONT + '/latest-mac.yml';
   var FALLBACK_VERSION = '1.0.9';
 
+  // Cached version info for platform switching
+  var cachedVersionInfo = null;
+
   // ---- Platform detection ----
 
   function detectPlatform() {
@@ -53,21 +56,33 @@
     if (platform === 'macos' || platform === 'unknown') {
       btn.textContent = 'Download for macOS';
       btn.removeAttribute('aria-disabled');
+      // Restore download URL and version display from cache
+      if (cachedVersionInfo) {
+        updateVersionInfo(cachedVersionInfo);
+      } else {
+        btn.href = buildDownloadURL(null);
+      }
       if (platform === 'unknown') {
         note.textContent = 'Platform not detected. Showing macOS download.';
+      } else {
+        note.textContent = '';
       }
     } else {
       var name = platform === 'windows' ? 'Windows' : 'Linux';
-      btn.textContent = name + ' — Coming Soon';
+      btn.textContent = name + ' \u2014 Coming Soon';
       btn.setAttribute('aria-disabled', 'true');
       btn.removeAttribute('href');
       note.textContent = name + ' support is coming soon. Stay tuned!';
+      document.getElementById('version-info').textContent = '';
     }
   }
 
   function updateVersionInfo(info) {
     var btn = document.getElementById('download-btn');
     var versionEl = document.getElementById('version-info');
+
+    // Cache for platform switching
+    if (info.version) cachedVersionInfo = info;
 
     // Set download URL regardless of version display
     btn.href = buildDownloadURL(info.version);
