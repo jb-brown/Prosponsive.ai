@@ -14,7 +14,6 @@
     var platform = navigator.platform || '';
     if (/Mac/.test(platform)) return 'macos';
     if (/Win/.test(platform)) return 'windows';
-    if (/Linux/.test(platform)) return 'linux';
     return 'unknown';
   }
 
@@ -68,11 +67,10 @@
         note.textContent = '';
       }
     } else {
-      var name = platform === 'windows' ? 'Windows' : 'Linux';
-      btn.textContent = name + ' \u2014 Coming Soon';
+      btn.textContent = 'Windows \u2014 Coming Soon';
       btn.setAttribute('aria-disabled', 'true');
       btn.removeAttribute('href');
-      note.textContent = name + ' support is coming soon. Stay tuned!';
+      note.textContent = 'Windows support is coming soon. Stay tuned!';
       document.getElementById('version-info').textContent = '';
     }
   }
