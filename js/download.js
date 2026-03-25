@@ -41,9 +41,8 @@
 
   // ---- URL construction ----
 
-  function buildDownloadURL(version) {
-    var v = version || FALLBACK_VERSION;
-    return CLOUDFRONT + '/Prosponsive-' + v + '-arm64.dmg';
+  function buildDownloadURL() {
+    return CLOUDFRONT + '/latest';
   }
 
   // ---- DOM updates ----
@@ -59,7 +58,7 @@
       if (cachedVersionInfo) {
         updateVersionInfo(cachedVersionInfo);
       } else {
-        btn.href = buildDownloadURL(null);
+        btn.href = buildDownloadURL();
       }
       if (platform === 'unknown') {
         note.textContent = 'Platform not detected. Showing macOS download.';
@@ -83,7 +82,7 @@
     if (info.version) cachedVersionInfo = info;
 
     // Set download URL regardless of version display
-    btn.href = buildDownloadURL(info.version);
+    btn.href = buildDownloadURL();
     btn.setAttribute(
       'aria-label',
       'Download Prosponsive' +
