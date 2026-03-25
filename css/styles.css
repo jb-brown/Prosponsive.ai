@@ -3,13 +3,13 @@
    ================================================================ */
 
 :root {
-  --bg: #0d1117;
-  --surface: #161b22;
-  --text-primary: #e6edf3;
-  --text-secondary: #8b949e;
-  --accent: #58a6ff;
-  --accent-hover: #79c0ff;
-  --border: #30363d;
+  --bg: #f4f6f4;
+  --surface: #e6eae7;
+  --text-primary: #1f2321;
+  --text-secondary: #5c635f;
+  --accent: #2f4f3e;
+  --accent-hover: #3a6149;
+  --border: #d6dbd7;
   --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
@@ -89,7 +89,7 @@ h1 {
   padding: 0.875rem 2.5rem;
   font-size: 1.125rem;
   font-weight: 600;
-  color: var(--bg);
+  color: #f4f6f4;
   background-color: var(--accent);
   border: none;
   border-radius: 8px;
