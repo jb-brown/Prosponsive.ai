@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prosponsive User Guide</title>
+  <style>
+  @page {
+    margin: 0.75in 1in;
+    size: letter;
+  }
+  body, .vscode-body, .markdown-body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    color: #1F2321 !important;
+    background-color: #F4F6F4 !important;
+    line-height: 1.6;
+    max-width: 7.5in;
+    margin: 0 auto;
+  }
+  h1 { color: #2F4F3E; font-size: 2em; border-bottom: 3px solid #2F4F3E; padding-bottom: 0.4em; margin-top: 0; }
+  h2 { color: #2F4F3E; font-size: 1.4em; border-bottom: 1px solid #D6DBD7; padding-bottom: 0.3em; margin-top: 2em; page-break-after: avoid; }
+  h3 { color: #3A5F4A; font-size: 1.1em; margin-top: 1.5em; page-break-after: avoid; }
+  a { color: #2F4F3E; text-decoration: underline; }
+  code { background: #E6EAE7; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace; }
+  pre { background: #E6EAE7; border-left: 4px solid #2F4F3E; padding: 0.8em 1em; border-radius: 4px; overflow-x: auto; page-break-inside: avoid; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 4px solid #4F6F5C; background: #F4F6F4; margin: 1em 0; padding: 0.6em 1em; border-radius: 0 4px 4px 0; color: #3A5F4A; page-break-inside: avoid; }
+  blockquote p { margin: 0.3em 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.9em; page-break-inside: avoid; }
+  th { background: #2F4F3E; color: white; padding: 0.5em 0.8em; text-align: left; font-weight: 600; }
+  td { padding: 0.5em 0.8em; border-bottom: 1px solid #D6DBD7; }
+  tr:nth-child(even) td { background: #F4F6F4; }
+  strong { color: #2F4F3E; }
+  hr { border: none; border-top: 2px solid #D6DBD7; margin: 2em 0; }
+  li { margin-bottom: 0.3em; }
+  .cover { text-align: center; padding: 3in 0 2in 0; page-break-after: always; }
+  .cover img { width: 160px; height: 160px; }
+  .cover h1 { border-bottom: none; font-size: 2.8em; margin: 0.5em 0 0.1em 0; letter-spacing: 0.02em; }
+  .cover .tagline { color: #5C635F; font-size: 1.2em; font-style: italic; margin-top: 0.3em; }
+  .cover .version { color: #5C635F; font-size: 0.9em; margin-top: 2em; }
+  .tip { background: #E6EAE7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; page-break-inside: avoid; }
+  .tip strong { color: #2F4F3E; }
+  .section-number { color: #4F6F5C; font-weight: 400; }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
+    <img src="prosponsive-icon.png" alt="Prosponsive" style="width: 120px; height: 120px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <svg style="position: absolute; inset: 0; width: 100%; height: 100%;" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" rx="8" ry="8" width="40" height="26" fill="#2F4F3E" />
+      <polygon points="30,26 38,36 32,26" fill="#2F4F3E" />
+      <line x1="8" y1="9" x2="32" y2="9" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="8" y1="17" x2="24" y2="17" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <rect x="72" y="86" rx="8" ry="8" width="40" height="26" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" />
+      <polygon points="82,86 74,76 84,86" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" stroke-linejoin="round" />
+      <line x1="81" y1="86" x2="85" y2="86" stroke="#F4F6F4" stroke-width="3" />
+      <line x1="80" y1="95" x2="104" y2="95" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="80" y1="103" x2="96" y2="103" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
+  </div>
+  <h1>Prosponsive</h1>
+  <div class="tagline">User Guide</div>
+  <div class="version">Proactive Responsive AI</div>
+</div>
+
+<h1>Prosponsive User Guide</h1>
+
+<p>This guide walks you through setup, core features, and a hands-on scenario managing an example project called "Project Zen."</p>
+
+<p>By the end of this guide you will have a tangible experience trusting Prosponsive agents to start doing your work 24x7. Following this guide, you will have:</p>
+
+<ul>
+  <li>Connected your email inbox to Prosponsive</li>
+  <li>Organized emails you care about into purpose-built Prosponsive channels</li>
+  <li>Customized your email agent with routing rules and deletion capabilities</li>
+  <li>Used filtering, grouping, auto-approval, and bulk actions to manage at scale</li>
+</ul>
+
+<p>Of course, dealing with email isn't the big win. The guide simply uses email as a ubiquitous, well understood source of knowledge, communication and noise to demonstrate Prosponsive's flexibility, ease of use, and positive impact to you.</p>
+
+<hr>
+
+<h2><span class="section-number">1.</span> Install Prosponsive</h2>
+
+<h3>macOS</h3>
+
+<ol>
+  <li>Download the Prosponsive <code>.dmg</code> file from <a href="https://www.prosponsive.ai/">Prosponsive.ai</a>.</li>
+  <li>Open the <code>.dmg</code> and drag <strong>Prosponsive</strong> into your Applications folder.</li>
+  <li>Open Prosponsive from Applications. macOS may ask you to confirm since the app was downloaded from the internet — click <strong>Open</strong>.</li>
+</ol>
+
+<h3>Windows</h3>
+
+<ol>
+  <li>Download the Prosponsive <code>.exe</code> installer from <a href="https://www.prosponsive.ai/">Prosponsive.ai</a>.</li>
+  <li>Bypass the security warnings. This is temporary until official Prosponsive incorporation and Microsoft developer registration.</li>
+  <li>Run the installer and follow the prompts. Choose "Install for all users" if you want it available system-wide.</li>
+  <li>Launch Prosponsive from the Start Menu.</li>
+</ol>
+
+<h3>Installation Overview</h3>
+
+<p>Prosponsive manages its own infrastructure. On first launch, it automatically starts the services it needs.</p>
+
+<p>To install and run Prosponsive, you'll need:</p>
+<ul>
+  <li>A stable internet connection</li>
+  <li>Available disk space</li>
+  <li>Local administrator privileges</li>
+  <li>Winget (Windows) or Homebrew (macOS)</li>
+</ul>
+
+<hr>
+
+<h3>What Prosponsive Installs</h3>
+
+<p>Prosponsive sets up three core components:</p>
+
+<h4>1. Virtualized Runtime Environment</h4>
+
+<p>Prosponsive runs its dependencies in a containerized environment:</p>
+
+<ul>
+  <li><strong>Container engine</strong><br>
+    Prosponsive prefers Podman and will install it if neither Podman nor Docker is present.
+    If Docker is already installed, Prosponsive will use it.</li>
+  <li><strong>Database</strong><br>
+    A PostgreSQL container is installed for persistent storage.</li>
+  <li><strong>Workflow engine</strong><br>
+    Prosponsive installs n8n, an open-source workflow engine used as a tool layer for your agents.
+    <p>n8n provides:</p>
+    <ul>
+      <li>A visual workflow designer</li>
+      <li>Code-level extensibility</li>
+      <li>Secure credential storage</li>
+      <li>Thousands of templates</li>
+      <li>Full transparency into execution and data flow</li>
+    </ul>
+  </li>
+</ul>
+
+<hr>
+
+<h4>2. Secure Local Networking</h4>
+
+<p>Your trust is a top priority. Even though all communication between Prosponsive, PostgreSQL, and n8n stays on your machine, Prosponsive enforces encrypted connections.</p>
+
+<p>During installation:</p>
+<ul>
+  <li>A unique localhost SSL certificate is generated</li>
+  <li>You'll be prompted to trust it at the OS level</li>
+  <li>All certificate generation inputs are securely deleted afterward</li>
+</ul>
+
+<hr>
+
+<h4>3. LLM Provider and Model Selection</h4>
+
+<p>You can choose from popular cloud providers or run models locally.</p>
+
+<p>Prosponsive works well with smaller, instruction-tuned models, including:</p>
+<ul>
+  <li>Local models via Ollama</li>
+  <li>Example: Qwen 3 (4B Instruct), if your machine has sufficient resources</li>
+</ul>
+
+<p>If you select Ollama, Prosponsive will install it (if needed) and download your chosen model.</p>
+
+<hr>
+
+<h3>Installation Time</h3>
+
+<p>Installation typically takes <strong>5–30 minutes</strong>, depending on:</p>
+<ul>
+  <li>Whether container tooling (Podman/Docker) needs to be installed</li>
+  <li>Whether optional components like Ollama and models are downloaded</li>
+</ul>
+
+<h2><span class="section-number">2.</span> First Launch</h2>
+
+<p>When you open Prosponsive for the first time, you'll see the <strong>System Health</strong> screen. This is where Prosponsive checks that its services are running and attempts to install and repair them if not healthy.</p>
+
+<h3>What you'll see</h3>
+
+<p>A grid of service tiles showing health status. Hover over each to understand its purpose more. The services are checked, and repaired, in dependency order to ensure a working Prosponsive user experience when complete.</p>
+
+<p>Each tile shows a green checkmark when healthy. If a service shows an error, click the <strong>Refresh</strong> button — Prosponsive will attempt to start it automatically.</p>
+
+<h3>Choose your AI provider</h3>
+
+<p>Once services are healthy, Prosponsive asks you to select an AI provider. Pick the one you have access to:</p>
+
+<ul>
+  <li><strong>Ollama</strong> — Fully local, no API key needed. Requires Ollama installed with a model pulled.</li>
+  <li><strong>Anthropic</strong> — Claude models. Requires an API key.</li>
+  <li><strong>OpenAI</strong> — GPT models. Requires an API key.</li>
+  <li><strong>Google</strong> — Gemini models. Requires an API key.</li>
+  <li><strong>Groq</strong> — Fast inference. Requires an API key.</li>
+  <li><strong>Mistral</strong> — Open-weight models. Requires an API key.</li>
+</ul>
+
+<p>Enter your API key if prompted, then click <strong>Continue</strong>.</p>
+
+<h3>Trust the SSL certificate authority</h3>
+
+<p>Prosponsive and its dependencies use only HTTPS with a self-signed certificate. You'll see a prompt to trust this certificate authority — click <strong>Trust Certificate</strong> and follow the instructions to allow Prosponsive to function. It will quickly restart after to use proper SSL authority verification.</p>
+
+<h3>Create your n8n Admin account</h3>
+
+<p>You'll be asked to create an n8n Admin account for the locally running n8n instance in your virtual environment. Fill in your details and click <strong>Save</strong>, then click the <strong>Refresh</strong> button in Prosponsive so it detects the new account.</p>
+
+<h3>Create an n8n API key and give it to Prosponsive</h3>
+
+<p>You'll then be asked to create an n8n API key and paste it into the Prosponsive UI, then click the <strong>Refresh</strong> button again. Prosponsive only communicates with n8n using its API; a critical, and very valuable, implementation detail because it means your Prosponsive agents <strong>never have access to credentials</strong> used by the tools you want them to use.</p>
+
+<hr>
+
+<h2><span class="section-number">3.</span> Tour the Interface</h2>
+
+<p>Once setup completes, you'll see the main Prosponsive interface. Here's what's on screen:</p>
+
+<h3>Sidebar (left)</h3>
+
+<p>The sidebar has five tabs, shown as icons when collapsed:</p>
+
+<table>
+  <thead>
+    <tr><th>Tab</th><th>Icon</th><th>What it does</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Chat</strong></td><td>Speech bubble</td><td>Your conversations and channels</td></tr>
+    <tr><td><strong>Agents</strong></td><td>Puzzle piece</td><td>View, edit, and create AI agents</td></tr>
+    <tr><td><strong>Settings</strong></td><td>Gear</td><td>App configuration, AI provider, tool approval rules</td></tr>
+    <tr><td><strong>System Health</strong></td><td>Heart</td><td>Service health dashboard (same as first-launch screen)</td></tr>
+    <tr><td><strong>n8n</strong></td><td>Plug icon</td><td>Workflow management, credentials, health check</td></tr>
+  </tbody>
+</table>
+
+<h3>Chat tab</h3>
+
+<p>This is where you'll spend most of your time. The Chat tab has two areas:</p>
+
+<ul>
+  <li><strong>Channel list</strong> (sidebar) — Shows your conversations, each with a message count. Click a channel to open it.</li>
+  <li><strong>Message area</strong> (main panel) — Shows the conversation thread. Type at the bottom to send messages.</li>
+</ul>
+
+<h3>Agents tab</h3>
+
+<p>Lists all available agents. Click one to open its definition in the editor. You can:</p>
+
+<ul>
+  <li>Read the agent's instructions and capabilities</li>
+  <li>Modify its allowed tools, routing rules, and behavior</li>
+  <li>Duplicate an agent to create a variant</li>
+  <li>See which channels the agent is shared to</li>
+</ul>
+
+<p>The default agent is <strong>Prosponsive</strong> — your general-purpose coordinator. Prosponsive will be in all channels, and can be delegated to by all agents.</p>
+
+<h3>n8n tab</h3>
+
+<p>Shows connection status and quick-access buttons:</p>
+
+<ul>
+  <li><strong>Workflows</strong> — Opens the n8n workflow editor in your browser</li>
+  <li><strong>Credentials</strong> — Opens n8n credential management</li>
+  <li><strong>Documentation</strong> — Links to n8n docs</li>
+</ul>
+
+<hr>
+
+<h2><span class="section-number">4.</span> Your First Conversation</h2>
+
+<p>Let's make sure everything is working.</p>
+
+<ol>
+  <li>Click the <strong>Chat</strong> tab in the sidebar.</li>
+  <li>You should see a default channel (or an empty channel list). If empty, just start typing — Prosponsive creates a channel automatically.</li>
+  <li>Type a message:
+    <blockquote><p>What can you help me with?</p></blockquote>
+  </li>
+  <li>Press <strong>Enter</strong> (or click Send).</li>
+</ol>
+
+<p>The <strong>Prosponsive</strong> agent responds. It will explain its capabilities — organizing conversations, moving threads, archiving content, and delegating to specialist agents.</p>
+
+<p>Try one more:</p>
+
+<blockquote><p>Create a channel called "Project Zen"</p></blockquote>
+
+<p>Prosponsive proposes a <strong>create-conversation</strong> tool card. You'll see the tool name, parameters, and a reason. Click <strong>Approve</strong> to execute it.</p>
+
+<p>A new "Project Zen" channel appears in your sidebar. You've just used your first tool.</p>
+
+<hr>
+
+<h2><span class="section-number">5.</span> Understanding Agents</h2>
+
+<p>Agents are AI assistants with specific roles, tools, and instructions. Prosponsive ships with three:</p>
+
+<h3>Prosponsive (default)</h3>
+
+<p>Your strategic coordinator. It can:</p>
+
+<ul>
+  <li>Create, move, and archive conversations and threads</li>
+  <li>Delegate to other agents when specialized help is needed</li>
+  <li>Organize your workspace</li>
+</ul>
+
+<p>Think of Prosponsive as your desk — it's where incoming work lands and where you decide what goes where.</p>
+
+<h3>Prosponsive Support</h3>
+
+<p>Collects bug reports and feature requests for the Prosponsive team to make things better for you. If something isn't working right, tell Prosponsive "I want to report a bug" and it will delegate to this agent.</p>
+
+<h3>Executive Assistant Email Agent</h3>
+
+<p>Handles email triage. When emails arrive, this agent:</p>
+
+<ul>
+  <li>Prioritizes by urgency (urgent, high, medium, low)</li>
+  <li>Routes emails to channels based on your rules</li>
+  <li>Archives low-value emails to keep your inbox focused</li>
+  <li>Cleans up tombstones left behind by moved threads</li>
+</ul>
+
+<p>The Executive Assistant Email Agent is an example agent to help you get started. You can delete it if it's not useful.</p>
+
+<h3>How delegation works</h3>
+
+<p>When you ask Prosponsive something that another agent handles better, Prosponsive proposes a <strong>delegate-agent</strong> tool card. You approve, and the specialist takes over the conversation thread. The specialist's messages show its name and a badge so you always know who's talking.</p>
+
+<h3>Sharing agents to channels</h3>
+
+<p>Agents must be <strong>shared</strong> to a channel before they can be automatically routed there. When an agent creates a channel (like the email agent creating "Email Inbox"), it's automatically shared. You can also manually share agents to channels via the channel settings.</p>
+
+<h3>Delegation and Sharing working together</h3>
+
+<p>Your prompts in a channel will only be routed to agents shared to that channel. They in turn can delegate to agents you've previously configured as allowed to accomplish work on their behalf. Delegated agents that are not shared to the channel will show as "guest" agents.</p>
+
+<hr>
+
+<h2><span class="section-number">6.</span> Connect Your Email</h2>
+
+<p>To work through a real, valuable use of Prosponsive, let's connect your email inbox so Prosponsive can help you triage it.</p>
+
+<h3>Step 1: Open n8n Credentials</h3>
+
+<ol>
+  <li>Click the <strong>n8n</strong> tab in the sidebar.</li>
+  <li>Click <strong>Credentials</strong> to open the n8n credential manager in your browser.</li>
+</ol>
+
+<h3>Step 2: Create an IMAP credential</h3>
+
+<ol>
+  <li>In n8n, click <strong>Add Credential</strong>.</li>
+  <li>Search for "IMAP" and select it.</li>
+  <li>Fill in your email server details:
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Example (Gmail)</th><th>Example (Outlook)</th><th>Example (iCloud)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Host</strong></td><td><code>imap.gmail.com</code></td><td><code>outlook.office365.com</code></td><td><code>imap.mail.me.com</code></td></tr>
+        <tr><td><strong>Port</strong></td><td><code>993</code></td><td><code>993</code></td><td><code>993</code></td></tr>
+        <tr><td><strong>User</strong></td><td><code>you@gmail.com</code></td><td><code>you@company.com</code></td><td><code>you@company.com</code></td></tr>
+        <tr><td><strong>Password</strong></td><td>App password (see below)</td><td>Your password or app password</td><td>App-Specific password (see below)</td></tr>
+        <tr><td><strong>SSL/TLS</strong></td><td>Enabled</td><td>Enabled</td><td>Enabled</td></tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<blockquote><p><strong>Gmail users</strong>: Gmail requires an "App Password" instead of your regular password. Go to <a href="https://myaccount.google.com/apppasswords">myaccount.google.com/apppasswords</a>, generate one for "Prosponsive", and use that as the password above.</p></blockquote>
+
+<blockquote><p><strong>Outlook/Microsoft 365 users</strong>: If your organization uses modern authentication, you may need to use OAuth2 instead of a password. Ask your IT admin if app passwords are enabled.</p></blockquote>
+
+<blockquote><p><strong>iCloud users</strong>: Apple requires an "App-Specific Password" instead of your regular password. Go to your iCloud <a href="https://account.apple.com/account/manage">account management page</a> and click "App-Specific Passwords", generate one for "Prosponsive", and use that as password above.</p></blockquote>
+
+<h3>Step 3: Configure the email polling workflow</h3>
+
+<ol>
+  <li>Go back to the n8n tab and click <strong>Workflows</strong>.</li>
+  <li>Find <strong>"Prosponsive: IMAP New Email"</strong> and open it.</li>
+  <li>Click the <strong>Email Read IMAP (Prosponsive)</strong> node (the second node in the chain).</li>
+  <li>In the node settings, find the <strong>Credential</strong> dropdown and select the IMAP credential you just created. (it may look already selected, but select it again)</li>
+  <li>Click <strong>Save</strong> on the node, then <strong>Save</strong> on the workflow.</li>
+  <li>Toggle the workflow to <strong>Publish</strong> (button in the top-right corner).</li>
+</ol>
+
+<p>This workflow polls your inbox every 5 minutes and sends new emails to Prosponsive for triage. It does not mark them as read, or impact your normal email client in any way.</p>
+
+<h3>Step 4: Configure the email move-to-folder tool</h3>
+
+<ol>
+  <li>Still in n8n Workflows, find <strong>"email-move-to-folder"</strong> and open it.</li>
+  <li>Click the IMAP node in the workflow.</li>
+  <li>Set the <strong>Credential</strong> to the same IMAP credential.</li>
+  <li>Save and <strong>Publish</strong> the workflow.</li>
+</ol>
+
+<p>This allows the email agent to move emails between IMAP folders when folder routing rules are configured.</p>
+
+<div class="tip">
+<strong>Note:</strong> The "email-delete" workflow exists but is left inactive for now. You'll enable it later in this guide when you add deletion capabilities to the email agent.
+</div>
+
+<hr>
+
+<h2><span class="section-number">7.</span> Watch Email Triage in Action</h2>
+
+<p>With the IMAP workflow active, new emails will start appearing in the <strong>Email Inbox</strong> channel within 5 minutes. Send yourself one or two to see it in action.</p>
+
+<h3>What happens automatically</h3>
+
+<ol>
+  <li>A new email arrives in your inbox.</li>
+  <li>The n8n workflow fetches it and sends it to the "Email Inbox" channel, created by the <strong>Executive Assistant Email Agent</strong>.</li>
+  <li>The agent evaluates the email and <strong>summarizes the recommended action</strong> and may ask you for approval to use a tool.</li>
+</ol>
+
+<h3>What you'll see in the channel</h3>
+
+<p>Each email appears as a thread. The agent's response includes:</p>
+
+<ul>
+  <li><strong>Priority level</strong> (urgent, high, medium, low)</li>
+  <li><strong>Summary</strong> of the email content</li>
+  <li><strong>Action items</strong> if any were identified</li>
+  <li>A <strong>tool card</strong> if the agent proposes an action (move, archive)</li>
+</ul>
+
+<p>You can approve, or implicitly decline by replying to guide the agent differently.</p>
+
+<hr>
+
+<h2><span class="section-number">8.</span> Organize with Channels: Your First Move</h2>
+
+<p>Let's say a Project Zen email has arrived in your Email Inbox. You want to move it to its own channel to keep things organized.</p>
+
+<ol>
+  <li>Open the <strong>Email Inbox</strong> channel.</li>
+  <li>Find the Project Zen email thread.</li>
+  <li>Reply to the thread:
+    <blockquote><p>Move this to Project Zen</p></blockquote>
+  </li>
+  <li>The <strong>Prosponsive</strong> agent (your default coordinator) proposes a <strong>move-thread</strong> tool card with target "Project Zen".</li>
+  <li>Click <strong>Approve</strong>.</li>
+</ol>
+
+<h3>What happens</h3>
+
+<ul>
+  <li>The entire thread moves to the <strong>Project Zen</strong> channel (created in Section 4, or auto-created if you skipped it).</li>
+  <li>A <strong>tombstone</strong> with a link to the new destination is left in Email Inbox: <em>"Thread moved to Project Zen — 3 messages"</em>.</li>
+</ul>
+
+<p>Click "Project Zen" in the sidebar to see your moved thread in its new home.</p>
+
+<hr>
+
+<h2><span class="section-number">9.</span> Organize with Channels: Approvals</h2>
+
+<p>Now let's do the same for an email requesting your approval.</p>
+
+<ol>
+  <li>Back in <strong>Email Inbox</strong>, find an email where someone is asking for your sign-off or approval.</li>
+  <li>Reply:
+    <blockquote><p>Move this to Approvals</p></blockquote>
+  </li>
+  <li>Approve the <strong>move-thread</strong> tool card.</li>
+</ol>
+
+<p>The "Approvals" channel is created automatically. You now have a dedicated space for approval requests — no more hunting through your inbox.</p>
+
+<hr>
+
+<h2><span class="section-number">10.</span> Customize the Email Agent: Add Delete Rules</h2>
+
+<p>The email agent ships without deletion capabilities — you add them when you're ready. This is a safety measure: you control exactly when the agent can delete emails.</p>
+
+<h3>Step 1: Add the delete tool</h3>
+
+<ol>
+  <li>Click the <strong>Agents</strong> tab in the sidebar.</li>
+  <li>Select <strong>Executive Assistant Email Agent</strong>.</li>
+  <li>In the agent editor, find the <code>allowedTools</code> line in the frontmatter (near the top):
+    <pre><code>allowedTools: ["email_move_to_folder", "move-thread", "archive-thread", "archive-message"]</code></pre>
+  </li>
+  <li>Add <code>"email_delete"</code> to the list:
+    <pre><code>allowedTools: ["email_move_to_folder", "move-thread", "archive-thread", "archive-message", "email_delete"]</code></pre>
+  </li>
+</ol>
+
+<h3>Step 2: Add delete rules</h3>
+
+<p>In the <strong>Capabilities</strong> section of the agent definition, add the following block. You can place it right after the "Tombstone cleanup" bullet:</p>
+
+<pre><code>- **CRITICAL: Apply delete rules BEFORE routing rules.** If an email matches a delete rule, delete it immediately — do not evaluate routing rules.
+- Apply the delete rules below when deciding `email_delete` actions:
+  - **Thread participation override**: NEVER delete an email if the thread contains a previous reply from the user. If the user has participated in the thread, it's a conversation — not spam. Skip all delete rules and evaluate routing rules instead.
+  - **Unsubscribe / manage preferences signals**: Delete when the HTML body contains any link or text to unsubscribe, manage email preferences, or opt out. These links are typically in the footer. Always scan the full HTML body.
+  - **Marketing / promotional content**: Delete when the email is bulk marketing — product recommendations, promotional offers, newsletters from commercial brands, "shop now" calls-to-action, or automated notifications from retail/e-commerce platforms.
+  - **Sales cold solicitation**: Delete when the email is an unsolicited outreach attempting to sell a product or service. Hallmarks: no prior relationship, generic pitch language, calls-to-action to book a demo or schedule a call.</code></pre>
+
+<h3>Step 3: Add delete tool parameters</h3>
+
+<p>In the <strong>Tool Parameter Sourcing</strong> section, add:</p>
+
+<pre><code>When calling `email_delete`, provide these parameters:
+- **uid**: The numeric IMAP UID from the Request Context (e.g., 123, 456). This is always a plain integer — never a UUID or any other format.
+- **mailbox**: From the Request Context (default to `INBOX` if missing)
+- **reason**: A one-line justification for deletion (e.g., "Marketing newsletter with unsubscribe link")</code></pre>
+
+<h3>Step 4: Activate the delete workflow in n8n</h3>
+
+<ol>
+  <li>Go to the <strong>n8n</strong> tab &gt; <strong>Workflows</strong>.</li>
+  <li>Find <strong>"email-delete"</strong> and open it.</li>
+  <li>Set the IMAP credential on the IMAP node (same as before).</li>
+  <li>Save and <strong>Activate</strong> the workflow.</li>
+</ol>
+
+<h3>Step 5: Update the guardrails</h3>
+
+<p>In the <strong>Guardrails</strong> section, update the evaluation order to check delete rules first:</p>
+
+<p>Replace the routing evaluation bullet with:</p>
+
+<pre><code>- First evaluate delete rules. If a match, call `email_delete`. Then evaluate channel routing rules. If a match, call `move-thread`. Then evaluate folder routing rules. If a match, call `email_move_to_folder`. If no rules match and no action is needed, call `archive-thread`. If no rules match but action may be needed, summarize and ask the user.</code></pre>
+
+<h3>Test it</h3>
+
+<p>Wait for a marketing email or newsletter to arrive. The email agent will propose an <strong>email_delete</strong> tool card with a reason like "Marketing newsletter with unsubscribe link." Approve it and the email is moved to trash on your mail server.</p>
+
+<hr>
+
+<h2><span class="section-number">11.</span> Add Channel Routing Rules and Manage at Scale</h2>
+
+<p>So far you've moved threads manually by telling Prosponsive to move them. Now let's teach the email agent to propose moves automatically.</p>
+
+<h3>Step 1: Add channel routing rules</h3>
+
+<ol>
+  <li>Open the <strong>Agents</strong> tab &gt; <strong>Executive Assistant Email Agent</strong>.</li>
+  <li>In the <strong>Capabilities</strong> section, find the channel routing rules placeholder (the example table with "Project Alpha"). Replace it with your actual rules:
+    <pre><code>| Channel | When to route |
+|---|---|
+| `Project Zen` | Email is about Project Zen — mentions the project name, related people, or deliverables. |
+| `Approvals` | Email is requesting manager approval or sign-off from the user. |</code></pre>
+  </li>
+  <li>Save the agent definition.</li>
+</ol>
+
+<p>Now the email agent will automatically propose <code>move-thread</code> tool cards for emails matching these rules.</p>
+
+<h3>Step 2: Send some test emails</h3>
+
+<p>Send yourself 3-4 emails related to Project Zen from another account (or forward existing ones). Use subjects like:</p>
+
+<ul>
+  <li>"Project Zen: Updated timeline for Phase 2"</li>
+  <li>"Re: Project Zen milestone review"</li>
+  <li>"Zen team standup notes — March 31"</li>
+</ul>
+
+<p>Wait a few minutes for the n8n polling workflow to pick them up.</p>
+
+<h3>Step 3: See the results in Email Inbox</h3>
+
+<p>Open the <strong>Email Inbox</strong> channel. You'll see several new threads, each with a <strong>move-thread</strong> tool card proposed by the email agent, targeting the "Project Zen" channel.</p>
+
+<h3>Step 4: Use filtering and grouping</h3>
+
+<p>Above the message list, click the <strong>Filter &amp; Group</strong> controls:</p>
+
+<ol>
+  <li><strong>Group by</strong>: Select <strong>Tool Name</strong>.</li>
+  <li>The approval cards are now grouped — all "Move Thread" proposals appear together under a single header.</li>
+</ol>
+
+<p>This makes it easy to review similar actions in bulk instead of scrolling through individual threads.</p>
+
+<h3>Step 5: Set up auto-approval</h3>
+
+<p>Before approving the existing cards, let's set up auto-approval so future Project Zen moves happen without manual intervention:</p>
+
+<ol>
+  <li>Open <strong>Settings</strong> (gear icon in the sidebar).</li>
+  <li>Navigate to <strong>Tool Approval Rules</strong>.</li>
+  <li>Click <strong>Add Rule</strong>.</li>
+  <li>Configure the rule:
+    <ul>
+      <li><strong>Tool name</strong>: <code>move-thread</code></li>
+      <li><strong>Condition</strong>: Target contains "Project Zen"</li>
+      <li><strong>Action</strong>: Auto-approve</li>
+    </ul>
+  </li>
+  <li>Save the rule.</li>
+</ol>
+
+<p>From now on, any <code>move-thread</code> targeting "Project Zen" will execute automatically — no approval card, no waiting.</p>
+
+<h3>Step 6: Bulk-approve existing cards</h3>
+
+<p>Back in the Email Inbox channel, your grouped Move Thread cards are still pending. Instead of approving them one by one:</p>
+
+<ol>
+  <li>Look at the group header for "Move Thread" proposals.</li>
+  <li>Click the <strong>Approve All</strong> button on the group header.</li>
+  <li>All pending move-thread cards execute at once.</li>
+</ol>
+
+<p>The Project Zen emails move to the Project Zen channel, tombstones are left behind (the email agent will auto-archive them), and your inbox is clean.</p>
+
+<h3>The result</h3>
+
+<ul>
+  <li><strong>Email Inbox</strong>: Clean — only emails needing your attention remain.</li>
+  <li><strong>Project Zen</strong>: All related emails, past and future, automatically routed here.</li>
+  <li><strong>Approvals</strong>: Approval requests collected in one place.</li>
+  <li><strong>Future emails</strong>: Project Zen emails auto-approve and move without your intervention. Approval emails still show a card for your review (you can add auto-approval for those too when you're confident in the routing).</li>
+</ul>
+
+<hr>
+
+<h2><span class="section-number">12.</span> Report a Bug or Request a Feature</h2>
+
+<p>Prosponsive has a built-in feedback system. If you find something that isn't working right or have an idea for improvement:</p>
+
+<ol>
+  <li>In any channel, type:
+    <blockquote><p>I want to report a bug</p></blockquote>
+  </li>
+  <li>Prosponsive delegates to the <strong>Prosponsive Support</strong> agent.</li>
+  <li>The Support agent asks you to describe the issue — what happened, what you expected, and steps to reproduce.</li>
+  <li>Once it has enough detail, it submits a <strong>feedback</strong> tool card. Approve it to file the report.</li>
+</ol>
+
+<p>You can also:</p>
+
+<ul>
+  <li>Say "I'd like to request a feature" for feature requests.</li>
+  <li>Ask "What issues have I submitted?" to see your history.</li>
+  <li>Ask "What are the current engineering priorities?" to see what the team is focused on.</li>
+</ul>
+
+<hr>
+
+<h2><span class="section-number">13.</span> What's Next</h2>
+
+<p>You've covered the fundamentals. Here are some directions to explore:</p>
+
+<h3>Create your own agents</h3>
+
+<p>Open the <strong>Agents</strong> tab and click <strong>Create New Agent</strong>. An agent definition is a markdown file with YAML frontmatter. You define:</p>
+
+<ul>
+  <li><strong>System prompt</strong> — The agent's personality and instructions</li>
+  <li><strong>Allowed tools</strong> — What the agent can do</li>
+  <li><strong>Delegatable agents</strong> — Who the agent can hand off to</li>
+  <li><strong>Routing rules</strong> — Custom logic for the agent's domain</li>
+</ul>
+
+<h3>Build custom tools with n8n</h3>
+
+<p>Tools in Prosponsive are n8n workflows. To create one:</p>
+
+<ol>
+  <li>Open n8n and create a new workflow.</li>
+  <li>Add a <strong>Webhook</strong> trigger node — this becomes the tool's endpoint.</li>
+  <li>Build your automation (API calls, data transforms, notifications, etc.).</li>
+  <li>Publish the workflow — within a few minutes it will appear in agent tool lists.</li>
+</ol>
+
+<hr>
+
+<h2>Quick Reference</h2>
+
+<table>
+  <thead>
+    <tr><th>Action</th><th>How</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Move a thread</td><td>Reply: "Move this to [channel name]"</td></tr>
+    <tr><td>Archive a thread</td><td>Reply: "Archive this thread"</td></tr>
+    <tr><td>Clean up a tombstone</td><td>Reply: "Remove that tombstone"</td></tr>
+    <tr><td>Create a channel</td><td>Say: "Create a channel called [name]"</td></tr>
+    <tr><td>Report a bug</td><td>Say: "I want to report a bug"</td></tr>
+    <tr><td>Edit an agent</td><td>Agents tab &gt; select agent &gt; edit in editor</td></tr>
+    <tr><td>Open n8n workflows</td><td>n8n tab &gt; Workflows</td></tr>
+    <tr><td>Manage credentials</td><td>n8n tab &gt; Credentials</td></tr>
+    <tr><td>Set auto-approval rules</td><td>Settings &gt; Tool Approval Rules</td></tr>
+    <tr><td>Check service health</td><td>System Health tab</td></tr>
+  </tbody>
+</table>
+
+<div style="text-align: center; margin-top: 3em; padding-top: 1em; border-top: 2px solid #D6DBD7; color: #5C635F; font-size: 0.85em;">
+  <img src="prosponsive-icon.png" alt="Prosponsive" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 0.5em;">
+  <strong style="color: #2F4F3E;">Prosponsive</strong> — Proactive Responsive AI
+</div>
+
+</body>
+</html>
