@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prosponsive n8n Workflow Developer Guide</title>
+  <style>
+  @page {
+    margin: 0.75in 1in;
+    size: letter;
+  }
+  body, .vscode-body, .markdown-body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    color: #1F2321 !important;
+    background-color: #F4F6F4 !important;
+    line-height: 1.6;
+    max-width: 7.5in;
+    margin: 0 auto;
+  }
+  h1 { color: #2F4F3E; font-size: 2em; border-bottom: 3px solid #2F4F3E; padding-bottom: 0.4em; margin-top: 0; }
+  h2 { color: #2F4F3E; font-size: 1.4em; border-bottom: 1px solid #D6DBD7; padding-bottom: 0.3em; margin-top: 2em; page-break-after: avoid; }
+  h3 { color: #3A5F4A; font-size: 1.1em; margin-top: 1.5em; page-break-after: avoid; }
+  a { color: #2F4F3E; text-decoration: underline; }
+  code { background: #E6EAE7; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace; }
+  pre { background: #E6EAE7; border-left: 4px solid #2F4F3E; padding: 0.8em 1em; border-radius: 4px; overflow-x: auto; page-break-inside: avoid; }
+  pre code { background: none; padding: 0; color: #1F2321 !important; }
+  pre code .hljs-attr, pre code .token.property { color: #2F4F3E !important; }
+  pre code .hljs-string, pre code .token.string { color: #8B5C2A !important; }
+  pre code .hljs-number, pre code .hljs-literal, pre code .token.number, pre code .token.boolean { color: #2A6F6F !important; }
+  pre code .hljs-punctuation, pre code .hljs-keyword, pre code .hljs-built_in,
+  pre code .token.punctuation, pre code .token.operator, pre code .token.keyword { color: #5C635F !important; }
+  blockquote { border-left: 4px solid #4F6F5C; background: #F4F6F4; margin: 1em 0; padding: 0.6em 1em; border-radius: 0 4px 4px 0; color: #3A5F4A; page-break-inside: avoid; }
+  blockquote p { margin: 0.3em 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.9em; page-break-inside: avoid; }
+  th { background: #2F4F3E; color: white; padding: 0.5em 0.8em; text-align: left; font-weight: 600; }
+  td { padding: 0.5em 0.8em; border-bottom: 1px solid #D6DBD7; }
+  tr:nth-child(even) td { background: #F4F6F4; }
+  strong { color: #2F4F3E; }
+  hr { border: none; border-top: 2px solid #D6DBD7; margin: 2em 0; }
+  li { margin-bottom: 0.3em; }
+  .cover { text-align: center; padding: 3in 0 2in 0; page-break-after: always; }
+  .cover img { width: 160px; height: 160px; }
+  .cover h1 { border-bottom: none; font-size: 2.8em; margin: 0.5em 0 0.1em 0; letter-spacing: 0.02em; }
+  .cover .tagline { color: #5C635F; font-size: 1.2em; font-style: italic; margin-top: 0.3em; }
+  .cover .version { color: #5C635F; font-size: 0.9em; margin-top: 2em; }
+  .tip { background: #E6EAE7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; page-break-inside: avoid; }
+  .tip strong { color: #2F4F3E; }
+  .section-number { color: #4F6F5C; font-weight: 400; }
+  .mermaid .messageText { font-size: 14px !important; fill: #1F2321 !important; font-weight: 500 !important; }
+  .mermaid .messageLine0, .mermaid .messageLine1 { stroke: #2F4F3E !important; stroke-width: 2px !important; }
+  .mermaid .actor { stroke: #2F4F3E !important; stroke-width: 2px !important; }
+  .mermaid .actor-line { stroke: #3A5F4A !important; stroke-width: 1.5px !important; }
+  .mermaid text.actor { font-size: 14px !important; fill: #1F2321 !important; font-weight: 600 !important; }
+  .mermaid .note { fill: #E6EAE7 !important; stroke: #2F4F3E !important; stroke-width: 1.5px !important; }
+  .mermaid .noteText { font-size: 13px !important; fill: #1F2321 !important; }
+  .mermaid .loopText, .mermaid .loopLine { font-size: 13px !important; fill: #3A5F4A !important; stroke: #3A5F4A !important; }
+  .mermaid .activation0, .mermaid .activation1, .mermaid .activation2 { stroke: #2F4F3E !important; stroke-width: 1.5px !important; }
+  .mermaid marker path { fill: #2F4F3E !important; }
+  </style>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+  </script>
+</head>
+<body>
+
+<div class="cover">
+  <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
+    <img src="prosponsive-icon.png" alt="Prosponsive" style="width: 120px; height: 120px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <svg style="position: absolute; inset: 0; width: 100%; height: 100%;" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" rx="8" ry="8" width="40" height="26" fill="#2F4F3E" />
+      <polygon points="30,26 38,36 32,26" fill="#2F4F3E" />
+      <line x1="8" y1="9" x2="32" y2="9" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="8" y1="17" x2="24" y2="17" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <rect x="72" y="86" rx="8" ry="8" width="40" height="26" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" />
+      <polygon points="82,86 74,76 84,86" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" stroke-linejoin="round" />
+      <line x1="81" y1="86" x2="85" y2="86" stroke="#F4F6F4" stroke-width="3" />
+      <line x1="80" y1="95" x2="104" y2="95" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="80" y1="103" x2="96" y2="103" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
+  </div>
+  <h1>Prosponsive</h1>
+  <div class="tagline">n8n Workflow Developer Guide</div>
+  <div class="version">Build Prosponsive-Compatible Tools with n8n</div>
+</div>
+
+<h1>n8n Workflow Developer Guide</h1>
+
+<p>This guide is for technical workflow developers who want to build n8n workflows that work as tools inside Prosponsive. It covers the architecture, the async execution model, the API surface, tool discovery mechanics, and a step-by-step tutorial for building your first tool.</p>
+
+<p>By the end of this guide you will understand:</p>
+
+<ul>
+  <li>How Prosponsive discovers and executes n8n workflows as agent tools</li>
+  <li>The full asynchronous round-trip between Prosponsive and n8n</li>
+  <li>The API endpoints your workflows interact with</li>
+  <li>How to structure workflows so Prosponsive can find, describe, and invoke them</li>
+  <li>Troubleshooting strategies for common integration issues</li>
+</ul>
+
+<hr>
+
+<h2><span class="section-number">1.</span> Architecture Overview</h2>
+
+<p>Prosponsive is an Electron desktop application that runs a local HTTPS API server. n8n runs in a container (Podman or Docker) alongside PostgreSQL on the same machine. All communication between these components uses HTTPS with locally-generated SSL certificates.</p>
+
+<h3>Component layout</h3>
+
+<table>
+  <thead>
+    <tr><th>Component</th><th>Where it runs</th><th>Port</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Prosponsive</strong></td><td>Electron main process (host OS)</td><td>HTTPS on port 3100</td></tr>
+    <tr><td><strong>n8n</strong></td><td>Container (Podman or Docker)</td><td>HTTPS on port 5678</td></tr>
+    <tr><td><strong>PostgreSQL</strong></td><td>Container (Podman or Docker)</td><td>Port 5432</td></tr>
+  </tbody>
+</table>
+
+<h3>Network topology</h3>
+
+<p>Because n8n runs inside a container, it cannot reach the host machine at <code>localhost</code> or <code>127.0.0.1</code>. Prosponsive uses a single, consistent callback hostname regardless of container runtime: <strong><code>host.containers.internal</code></strong>.</p>
+
+<p>Podman provides this hostname natively. For Docker, Prosponsive's compose file adds an <code>extra_hosts</code> entry that maps <code>host.containers.internal</code> to Docker's <code>host-gateway</code>, so the same hostname resolves in both environments.</p>
+
+<p>The full callback URL is always <code>https://host.containers.internal:3100</code>. This is the address n8n uses to POST results back to Prosponsive.</p>
+
+<blockquote><p><strong>HTTPS is required.</strong> Callback URLs <strong>must</strong> use HTTPS. The external hook silently refuses to send results to HTTP callback URLs -- there is no error message, the callback simply never arrives. If tool executions complete in n8n but results never appear in Prosponsive, verify that the callback URL uses <code>https://</code>, not <code>http://</code>.</p></blockquote>
+
+<hr>
+
+<h2><span class="section-number">2.</span> How Tool Discovery Works</h2>
+
+<p>Prosponsive automatically discovers n8n workflows and presents them as tools available to agents. Understanding this process is essential for building workflows that Prosponsive will recognize.</p>
+
+<h3>Discovery process</h3>
+
+<p>Discovery happens in two phases: an initial <strong>filter</strong> pass over the workflow list, followed by a <strong>process</strong> pass that fetches each workflow's details.</p>
+
+<p><strong>Phase 1 -- Filter</strong> (operates on the workflow list summary):</p>
+
+<ol>
+  <li><strong>Polling</strong> -- The Tool Discovery Service polls the n8n API every <strong>15 minutes</strong> to fetch all workflows.</li>
+  <li><strong>Active check</strong> -- Only workflows that are <strong>active (published)</strong> pass the filter. Inactive workflows are invisible to Prosponsive.</li>
+</ol>
+
+<p><strong>Phase 2 -- Process</strong> (operates on each surviving workflow's full detail):</p>
+
+<ol start="4">
+  <li><strong>Adapter exclusion</strong> -- The adapter workflow itself (<code>Prosponsive: n8n Workflow Adapter</code>) is skipped.</li>
+  <li><strong>Webhook detection</strong> -- The workflow must have a <strong>Webhook trigger node</strong> with a <code>path</code> parameter. Workflows without a webhook trigger are skipped. (Note: this check happens during processing, not during the initial filter.)</li>
+  <li><strong>Name derivation</strong> -- The workflow display name is converted to snake_case to produce the tool name. For example, <code>Email Move To Folder</code> becomes <code>email_move_to_folder</code>.</li>
+  <li><strong>Description extraction</strong> -- The tool description is sourced in priority order: (a) <code>meta.description</code> on the workflow, (b) the first paragraph of a Sticky Note node, (c) an auto-generated description from the workflow name.</li>
+  <li><strong>Parameter extraction</strong> -- Code nodes are scanned for patterns like <code>body.param_name || default</code> and <code>parameters.param_name ?? default</code> to extract input parameters, types, and defaults.</li>
+  <li><strong>Caching</strong> -- Discovered tools are cached with a <strong>5-minute TTL</strong>. Stale entries are pruned on each refresh cycle.</li>
+</ol>
+
+<pre class="mermaid">
+sequenceDiagram
+    participant P as Prosponsive
+    participant N as n8n API
+
+    loop Every 15 minutes
+        P->>N: GET /api/v1/workflows
+        N-->>P: List of all workflows
+        P->>P: Phase 1: Filter (active only)
+        loop Phase 2: For each filtered workflow
+            P->>N: GET /api/v1/workflows/{id}
+            N-->>P: Workflow detail (nodes, connections, meta)
+            P->>P: Skip if adapter workflow
+            P->>P: Extract webhook path (skip if none)
+            P->>P: Derive tool name (snake_case)
+            P->>P: Extract description
+            P->>P: Extract parameters from code nodes
+        end
+        P->>P: Update tool cache
+    end
+</pre>
+
+<h3>What makes a workflow discoverable</h3>
+
+<table>
+  <thead>
+    <tr><th>Requirement</th><th>Details</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Active/published</strong></td><td>The workflow must be toggled on in n8n</td></tr>
+    <tr><td><strong>Webhook trigger node</strong></td><td>Must have a node of type <code>n8n-nodes-base.webhook</code> with a <code>path</code> parameter</td></tr>
+    <tr><td><strong>Not the adapter</strong></td><td>Workflow name must not be <code>Prosponsive: n8n Workflow Adapter</code></td></tr>
+  </tbody>
+</table>
+
+<h3>Tool naming rules</h3>
+
+<p>The tool name is derived from the workflow display name:</p>
+
+<ol>
+  <li>Convert to lowercase</li>
+  <li>Remove all characters except letters, numbers, and spaces</li>
+  <li>Trim whitespace</li>
+  <li>Replace spaces with underscores</li>
+</ol>
+
+<p><strong>Examples:</strong></p>
+
+<table>
+  <thead>
+    <tr><th>Workflow name</th><th>Tool name</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>Email Move To Folder</code></td><td><code>email_move_to_folder</code></td></tr>
+    <tr><td><code>Get Channel Activity</code></td><td><code>get_channel_activity</code></td></tr>
+    <tr><td><code>Prosponsive: IMAP New Email</code></td><td><code>prosponsive_imap_new_email</code></td></tr>
+    <tr><td><code>Search Jira Issues (v2)</code></td><td><code>search_jira_issues_v2</code></td></tr>
+  </tbody>
+</table>
+
+<p>If two workflows produce the same tool name, the second one gets a suffix based on its workflow ID (e.g., <code>my_tool_a1b2c3</code>).</p>
+
+<hr>
+
+<h2><span class="section-number">3.</span> The Async Execution Model</h2>
+
+<p>Tool execution in Prosponsive is fully asynchronous. When an AI agent proposes a tool call, the execution follows a multi-step round-trip through the adapter workflow. This section explains every step.</p>
+
+<h3>The Prosponsive Tool Adapter</h3>
+
+<p>All tool executions are routed through a single adapter workflow called <strong>Prosponsive: n8n Workflow Adapter</strong>. This adapter is a custom n8n node (<code>ProsponsiveToolAdapterTrigger</code>) that:</p>
+
+<ol>
+  <li>Receives the tool call request from Prosponsive</li>
+  <li>Looks up the target workflow by <code>workflowId</code></li>
+  <li>Validates the target workflow is active and has a supported trigger node</li>
+  <li>Executes the target workflow, injecting parameters as pin data</li>
+  <li>Returns <code>202 Accepted</code> immediately so Prosponsive is not blocked</li>
+  <li>After the target workflow completes, an external hook sends results back to Prosponsive via the callback URL</li>
+</ol>
+
+<p>Individual tool workflows do not need to handle callbacks, authentication, or routing. The adapter handles all of that plumbing.</p>
+
+<blockquote><p><strong>Advanced note:</strong> While tool <em>discovery</em> requires a Webhook trigger node (so Prosponsive can determine the webhook path), the adapter itself can route to workflows with five trigger types: <code>webhook</code>, <code>executeWorkflowTrigger</code>, <code>chatTrigger</code>, <code>formTrigger</code>, and <code>scheduleTrigger</code>. This means you can build adapter-invocable workflows that use non-webhook triggers, but they must be registered through a different mechanism (such as a wrapper workflow with a webhook trigger that calls them via the Execute Workflow node).</p></blockquote>
+
+<h3>Full execution flow</h3>
+
+<pre class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant P as Prosponsive UI
+    participant A as Prosponsive API Server
+    participant AI as AI Provider (LLM)
+    participant AD as n8n Adapter Workflow
+    participant T as n8n Target Workflow
+    participant H as n8n External Hook
+
+    U->>P: Sends message in conversation
+    P->>A: POST /api/ai/inference
+    A->>AI: Inference request with tool definitions
+    AI-->>A: Response with tool_calls
+    A-->>P: Tool calls for approval
+    P->>U: Shows tool approval card
+    U->>P: Clicks Approve
+
+    A->>AD: POST /webhook/{adapter-path}
+    Note over AD: Payload includes toolName,<br/>workflowId, parameters,<br/>callbackUrl, execution
+    AD-->>A: 202 Accepted (async ack)
+
+    AD->>T: Execute target workflow<br/>(parameters injected as pin data)
+    T->>T: Process request
+    T-->>AD: Workflow completes
+
+    H->>A: POST /api/ai/agentic-loop-result
+    Note over H: External hook sends<br/>toolResults, execution,<br/>workflowId, workflowName
+    A-->>H: 200 OK
+    A->>P: IPC broadcast: tool result
+    P->>U: Displays result in conversation
+</pre>
+
+<h3>Adapter request payload</h3>
+
+<p>When Prosponsive calls the adapter, it sends the following payload:</p>
+
+<pre><code>{
+  "toolName": "email_move_to_folder",
+  "workflowId": "abc123",
+  "parameters": {
+    "uid": "456",
+    "mailbox": "INBOX",
+    "destination": "Project Zen"
+  },
+  "execution": {
+    "executionId": "exec-789",
+    "startedAt": "2026-04-03T10:00:00.000Z"
+  },
+  "callbackUrl": "https://host.containers.internal:3100",
+  "toolCallId": "toolu_01XYZ"
+}</code></pre>
+
+<h3>Adapter response</h3>
+
+<p>The adapter immediately returns <code>202 Accepted</code>:</p>
+
+<pre><code>{
+  "status": "accepted",
+  "message": "Tool request accepted and processing",
+  "execution": {
+    "executionId": "n8n-exec-001",
+    "workflowId": "abc123",
+    "workflowName": "Email Move To Folder",
+    "startedAt": "2026-04-03T10:00:00.500Z"
+  }
+}</code></pre>
+
+<h3>Callback payload (external hook)</h3>
+
+<p>After the target workflow completes, the n8n external hook POSTs results to <code>{callbackUrl}/api/ai/agentic-loop-result</code>:</p>
+
+<pre><code>{
+  "execution": {
+    "executionId": "n8n-exec-001",
+    "workflowId": "abc123",
+    "workflowName": "Email Move To Folder",
+    "startedAt": "2026-04-03T10:00:00.500Z",
+    "completedAt": "2026-04-03T10:00:03.200Z"
+  },
+  "workflowId": "abc123",
+  "workflowName": "Email Move To Folder",
+  "toolResults": [
+    {
+      "tool_name": "email_move_to_folder",
+      "tool_call_id": "toolu_01XYZ",
+      "success": true,
+      "result": [[{"json": {"moved": true, "uid": "456"}}]]
+    }
+  ],
+  "timestamp": "2026-04-03T10:00:03.250Z"
+}</code></pre>
+
+<hr>
+
+<h2><span class="section-number">4.</span> Prosponsive API Endpoints</h2>
+
+<p>These are the HTTP endpoints that Prosponsive exposes on its local API server (port 3100). While most of the callback plumbing is handled automatically by the adapter and external hooks, understanding these endpoints is valuable for debugging and building advanced workflows.</p>
+
+<h3><span class="section-number">4.1</span> POST /api/ai/inference</h3>
+
+<p>Sends a prompt to the active AI provider with full conversation history. Used by n8n workflows that need to invoke AI reasoning as part of their processing.</p>
+
+<p><strong>Request body:</strong></p>
+
+<table>
+  <thead>
+    <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>prompt</code></td><td>string</td><td>Yes</td><td>The user message or instruction</td></tr>
+    <tr><td><code>conversationId</code></td><td>string</td><td>Yes</td><td>Conversation to add the message to</td></tr>
+    <tr><td><code>context</code></td><td>object</td><td>Yes</td><td>Must include <code>activeAgentId</code></td></tr>
+    <tr><td><code>execution</code></td><td>object</td><td>Yes</td><td>Execution metadata (see below)</td></tr>
+    <tr><td><code>systemPrompt</code></td><td>string</td><td>No</td><td>Override the agent's system prompt</td></tr>
+    <tr><td><code>tools</code></td><td>array</td><td>No</td><td>Custom tool definitions for this request</td></tr>
+    <tr><td><code>temperature</code></td><td>number</td><td>No</td><td>Sampling temperature</td></tr>
+    <tr><td><code>maxTokens</code></td><td>number</td><td>No</td><td>Maximum tokens in response</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Execution object:</strong></p>
+
+<table>
+  <thead>
+    <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>executionId</code></td><td>string</td><td>Yes</td><td>Unique identifier for this execution</td></tr>
+    <tr><td><code>workflowId</code></td><td>string</td><td>No</td><td>n8n workflow ID</td></tr>
+    <tr><td><code>startedAt</code></td><td>string</td><td>No</td><td>ISO 8601 timestamp</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Response body:</strong></p>
+
+<pre><code>{
+  "success": true,
+  "content": "The AI response text",
+  "stopReason": "end_turn",
+  "usage": { "inputTokens": 150, "outputTokens": 42 },
+  "model": "claude-3-5-sonnet-20241022",
+  "provider": { "id": "anthropic", "name": "Anthropic" },
+  "toolCalls": []
+}</code></pre>
+
+<h3><span class="section-number">4.2</span> POST /api/ai/agent-inference</h3>
+
+<p>Same as <code>/api/ai/inference</code> but does <strong>not</strong> include conversation history in the provider request. Takes an explicit <code>agentId</code> and uses that agent's system prompt and tool definitions. Useful for stateless, one-shot AI calls from within workflows.</p>
+
+<p><strong>Additional request field:</strong></p>
+
+<table>
+  <thead>
+    <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>agentId</code></td><td>string</td><td>Yes</td><td>The agent whose definition to use</td></tr>
+  </tbody>
+</table>
+
+<h3><span class="section-number">4.3</span> POST /api/ai/agentic-loop-result</h3>
+
+<p>The primary callback endpoint. This is where n8n sends tool execution results back to Prosponsive. In normal operation, the external hook calls this automatically -- you do not need to call it from your tool workflows.</p>
+
+<p><strong>Request body:</strong></p>
+
+<table>
+  <thead>
+    <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>execution</code></td><td>object</td><td>Yes</td><td>Execution metadata with <code>executionId</code> and <code>workflowId</code></td></tr>
+    <tr><td><code>workflowId</code></td><td>string</td><td>No</td><td>n8n workflow ID (also in execution object)</td></tr>
+    <tr><td><code>workflowName</code></td><td>string</td><td>No</td><td>Human-readable workflow name</td></tr>
+    <tr><td><code>toolResults</code></td><td>array</td><td>No</td><td>Array of tool result objects (see below)</td></tr>
+    <tr><td><code>content</code></td><td>string</td><td>No</td><td>Text content (used for error messages)</td></tr>
+    <tr><td><code>requiresApproval</code></td><td>boolean</td><td>No</td><td>If <code>true</code>, routes through tool approval</td></tr>
+    <tr><td><code>tool_calls</code></td><td>array</td><td>No</td><td>Tool calls requiring approval</td></tr>
+    <tr><td><code>agentId</code></td><td>string</td><td>No</td><td>Agent that initiated the tool call</td></tr>
+    <tr><td><code>timestamp</code></td><td>string</td><td>No</td><td>ISO 8601 timestamp</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Tool result object:</strong></p>
+
+<table>
+  <thead>
+    <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>tool_name</code></td><td>string</td><td>The snake_case tool name</td></tr>
+    <tr><td><code>tool_call_id</code></td><td>string</td><td>Matches the original tool call ID</td></tr>
+    <tr><td><code>success</code></td><td>boolean</td><td>Whether execution succeeded</td></tr>
+    <tr><td><code>result</code></td><td>any</td><td>The workflow output data</td></tr>
+    <tr><td><code>error</code></td><td>string</td><td>Error message if <code>success</code> is <code>false</code></td></tr>
+  </tbody>
+</table>
+
+<p><strong>Response body:</strong></p>
+
+<pre><code>{
+  "success": true,
+  "message": "Tool result processed",
+  "type": "final-result",
+  "timestamp": "2026-04-03T10:00:03.300Z"
+}</code></pre>
+
+<h3><span class="section-number">4.4</span> POST /api/ai/agentic-loop-health</h3>
+
+<p>Polling endpoint for checking whether a callback result has been received for a given execution. Useful for debugging or for workflows that want to confirm delivery.</p>
+
+<p><strong>Request body:</strong></p>
+
+<pre><code>{
+  "execution": {
+    "executionId": "n8n-exec-001",
+    "workflowId": "abc123"
+  }
+}</code></pre>
+
+<p><strong>Response body:</strong></p>
+
+<pre><code>{
+  "received": true,
+  "receivedAt": "2026-04-03T10:00:03.300Z",
+  "result": { }
+}</code></pre>
+
+<h3><span class="section-number">4.5</span> GET /api/ai/provider-info</h3>
+
+<p>Returns information about the active AI provider and all available providers. No request body required.</p>
+
+<p><strong>Response body:</strong></p>
+
+<pre><code>{
+  "success": true,
+  "activeProvider": {
+    "id": "anthropic",
+    "name": "Anthropic",
+    "description": "Claude models via Anthropic API",
+    "status": "ready",
+    "statusMessage": null,
+    "isLocal": false,
+    "selectedModel": "claude-3-5-sonnet-20241022",
+    "models": [
+      { "id": "claude-3-5-sonnet-20241022", "name": "Claude 3.5 Sonnet", "available": true, "isDefault": true }
+    ]
+  },
+  "availableProviders": []
+}</code></pre>
+
+<hr>
+
+<h2><span class="section-number">5.</span> How Parameters Are Extracted</h2>
+
+<p>Prosponsive reads your workflow's code nodes to discover tool parameters. This is how the AI knows what inputs your tool accepts. Understanding the extraction patterns lets you design workflows that advertise the right parameters.</p>
+
+<h3>Pattern 1: Parameters with defaults</h3>
+
+<p>Code that reads from the request body with a fallback value:</p>
+
+<pre><code>const limit = body.limit || 10;
+const format = body.format ?? 'json';</code></pre>
+
+<p>Produces:</p>
+
+<table>
+  <thead>
+    <tr><th>Parameter</th><th>Type</th><th>Required</th><th>Default</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>limit</code></td><td>number</td><td>No</td><td><code>10</code></td></tr>
+    <tr><td><code>format</code></td><td>string</td><td>No</td><td><code>"json"</code></td></tr>
+  </tbody>
+</table>
+
+<h3>Pattern 2: Required parameters (no default)</h3>
+
+<p>Code that reads from the request body without a fallback:</p>
+
+<pre><code>const uid = body.uid;
+const mailbox = body.mailbox;</code></pre>
+
+<p>Produces:</p>
+
+<table>
+  <thead>
+    <tr><th>Parameter</th><th>Type</th><th>Required</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>uid</code></td><td>string</td><td>Yes</td></tr>
+    <tr><td><code>mailbox</code></td><td>string</td><td>Yes</td></tr>
+  </tbody>
+</table>
+
+<blockquote><p><strong>Important:</strong> The required-parameter scanner only matches <code>const</code> declarations (e.g., <code>const uid = body.uid</code>). Variables declared with <code>let</code> or <code>var</code> will <strong>not</strong> be detected as parameters. Always use <code>const</code> when reading from <code>body.*</code> so that Prosponsive discovers them correctly.</p></blockquote>
+
+<h3>Pattern 3: Nested parameters object</h3>
+
+<p>Code that reads from <code>parameters.*</code> (the adapter wraps inputs in a <code>parameters</code> envelope):</p>
+
+<pre><code>const query = parameters.query ?? '';
+const maxResults = parameters.maxResults ?? 25;</code></pre>
+
+<p>Produces:</p>
+
+<table>
+  <thead>
+    <tr><th>Parameter</th><th>Type</th><th>Required</th><th>Default</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>query</code></td><td>string</td><td>No</td><td><code>""</code></td></tr>
+    <tr><td><code>maxResults</code></td><td>number</td><td>No</td><td><code>25</code></td></tr>
+  </tbody>
+</table>
+
+<h3>Type inference</h3>
+
+<p>The type is inferred from the default value:</p>
+
+<table>
+  <thead>
+    <tr><th>Default value pattern</th><th>Inferred type</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Integer (e.g., <code>10</code>, <code>0</code>)</td><td><code>number</code></td></tr>
+    <tr><td><code>true</code> or <code>false</code></td><td><code>boolean</code></td></tr>
+    <tr><td>Starts with <code>[</code></td><td><code>array</code></td></tr>
+    <tr><td>Starts with <code>{</code></td><td><code>object</code></td></tr>
+    <tr><td>Anything else</td><td><code>string</code></td></tr>
+  </tbody>
+</table>
+
+<div class="tip">
+<strong>Best practice:</strong> Use explicit default values in your code nodes so Prosponsive can infer the correct types. A code node with <code>const limit = parameters.limit ?? 10</code> advertises a numeric parameter. Without the default, it defaults to <code>string</code>.
+</div>
+
+<hr>
+
+<h2><span class="section-number">6.</span> Build Your First Tool</h2>
+
+<p>Let's walk through creating a simple tool workflow that Prosponsive can discover and invoke. This example creates a "Hello World" tool that accepts a name parameter and returns a greeting.</p>
+
+<h3>Step 1: Create the workflow</h3>
+
+<ol>
+  <li>Open n8n (click the <strong>n8n</strong> tab in Prosponsive, then <strong>Workflows</strong>).</li>
+  <li>Click <strong>Add Workflow</strong> (or the <strong>+</strong> button).</li>
+  <li>Name the workflow: <code>Hello World Greeter</code></li>
+</ol>
+
+<p>The tool name will be derived as <code>hello_world_greeter</code>.</p>
+
+<h3>Step 2: Add a Webhook trigger</h3>
+
+<ol>
+  <li>Click <strong>Add first step</strong> and search for <strong>Webhook</strong>.</li>
+  <li>Select the <strong>Webhook</strong> node.</li>
+  <li>Set the <strong>HTTP Method</strong> to <code>POST</code>.</li>
+  <li>Set the <strong>Path</strong> to <code>tool-hello-world-greeter</code>.</li>
+  <li>Leave <strong>Respond</strong> set to <code>Immediately</code> (the adapter handles response timing).</li>
+</ol>
+
+<h3>Step 3: Add a Code node for processing</h3>
+
+<ol>
+  <li>Add a <strong>Code</strong> node after the Webhook trigger.</li>
+  <li>Set the language to <strong>JavaScript</strong>.</li>
+  <li>Enter the following code:
+    <pre><code>// Extract parameters from the adapter envelope
+const body = $input.first().json.body || $input.first().json;
+const parameters = body.parameters || body;
+
+// Read inputs -- the patterns below are what Prosponsive scans for discovery
+const name = parameters.name ?? 'World';
+const enthusiasm = parameters.enthusiasm ?? false;
+
+// Build greeting
+const greeting = enthusiasm
+  ? `Hello, ${name}! Great to meet you!`
+  : `Hello, ${name}.`;
+
+return [{
+  json: {
+    greeting,
+    generatedAt: new Date().toISOString()
+  }
+}];</code></pre>
+  </li>
+</ol>
+
+<p>This code will cause Prosponsive to discover two parameters:</p>
+
+<table>
+  <thead>
+    <tr><th>Parameter</th><th>Type</th><th>Required</th><th>Default</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>name</code></td><td>string</td><td>No</td><td><code>"World"</code></td></tr>
+    <tr><td><code>enthusiasm</code></td><td>boolean</td><td>No</td><td><code>false</code></td></tr>
+  </tbody>
+</table>
+
+<h3>Step 4: Add a description</h3>
+
+<p>Add a <strong>Sticky Note</strong> node anywhere on the canvas and type:</p>
+
+<pre><code>Generates a personalized greeting. Use this tool when the user asks to be greeted or wants a hello message.</code></pre>
+
+<p>Alternatively, set the workflow's <strong>description</strong> in Settings (gear icon in n8n) &gt; <strong>Description</strong> field. The <code>meta.description</code> field takes priority over sticky notes.</p>
+
+<h3>Step 5: Save and publish</h3>
+
+<ol>
+  <li>Click <strong>Save</strong> in the top-right corner.</li>
+  <li>Toggle the workflow to <strong>Published</strong> (also in the top-right corner).</li>
+</ol>
+
+<h3>Step 6: Wait for discovery</h3>
+
+<p>Prosponsive discovers new tools on its 15-minute polling cycle. To speed things up, you can restart Prosponsive -- discovery runs on startup.</p>
+
+<p>After discovery, the tool <code>hello_world_greeter</code> will appear in agent tool lists.</p>
+
+<h3>Step 7: Test from a conversation</h3>
+
+<ol>
+  <li>Open Prosponsive and start a conversation.</li>
+  <li>Make sure your agent has access to all tools (or add <code>hello_world_greeter</code> to its <code>allowedTools</code>).</li>
+  <li>Type a message like:
+    <blockquote><p>Can you greet me? My name is Alex.</p></blockquote>
+  </li>
+  <li>The AI agent should propose a <code>hello_world_greeter</code> tool call with <code>name: "Alex"</code>.</li>
+  <li>Approve the tool card.</li>
+  <li>The result appears in the conversation.</li>
+</ol>
+
+<hr>
+
+<h2><span class="section-number">7.</span> Agentic Loop with Multiple Tool Calls</h2>
+
+<p>Some conversations involve the AI calling multiple tools in sequence. This is the "agentic loop" -- the AI reasons, calls a tool, gets the result, reasons again, and may call another tool.</p>
+
+<pre class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant P as Prosponsive
+    participant AI as AI Provider
+    participant N as n8n (via Adapter)
+
+    U->>P: "Find my unread Project Zen emails<br/>and move them to the Zen channel"
+
+    P->>AI: Inference (with tool definitions)
+    AI-->>P: tool_call: search_emails(query="Project Zen")
+    P->>U: Show approval card
+    U->>P: Approve
+
+    P->>N: Execute search_emails
+    N-->>P: Callback: [3 emails found]
+
+    P->>AI: Inference (tool result + history)
+    AI-->>P: tool_call: move_thread(target="Project Zen")<br/>x3 (one per email)
+    P->>U: Show 3 approval cards
+    U->>P: Approve All
+
+    P->>N: Execute move_thread (x3)
+    N-->>P: Callbacks: [moved, moved, moved]
+
+    P->>AI: Inference (results + history)
+    AI-->>P: "Done! I moved 3 Project Zen emails<br/>to the Project Zen channel."
+    P->>U: Display final response
+</pre>
+
+<p>Each tool call in the loop goes through the same async pattern: Prosponsive calls the adapter, the adapter executes the target workflow, and the external hook sends results back via the callback endpoint.</p>
+
+<hr>
+
+<h2><span class="section-number">8.</span> Workflow Best Practices</h2>
+
+<h3>Naming conventions</h3>
+
+<ul>
+  <li>Use descriptive, action-oriented names: <code>Email Move To Folder</code>, <code>Search Jira Issues</code>, <code>Get Channel Activity</code></li>
+  <li>The name becomes the tool identity -- changing a workflow name changes its tool name, which may break agent configurations that reference it</li>
+</ul>
+
+<h3>Descriptions</h3>
+
+<ul>
+  <li>Always provide a description. Without one, the AI receives a generic auto-generated description that may not accurately convey when to use the tool.</li>
+  <li>Write descriptions from the AI's perspective: "Use this tool when you need to move an email to a different IMAP folder."</li>
+  <li>The <code>meta.description</code> field (workflow settings) takes priority over sticky notes.</li>
+</ul>
+
+<h3>Parameter design</h3>
+
+<ul>
+  <li>Use the <code>parameters.*</code> pattern in code nodes for clear parameter extraction</li>
+  <li>Provide default values to make parameters optional and to help Prosponsive infer types</li>
+  <li>Use descriptive parameter names -- they are converted to human-readable descriptions automatically (<code>maxResults</code> becomes "The max results")</li>
+</ul>
+
+<h3>Output structure</h3>
+
+<ul>
+  <li>Return data as JSON objects in the <code>json</code> property of output items</li>
+  <li>The last node's output is what gets sent back to Prosponsive via the callback</li>
+  <li>Keep outputs focused -- the AI will summarize the result for the user</li>
+</ul>
+
+<h3>Error handling</h3>
+
+<ul>
+  <li>If your workflow encounters an error, the external hook captures it and reports <code>success: false</code> with the error message</li>
+  <li>For expected failures (e.g., "email not found"), return an explicit error object:
+    <pre><code>return [{
+  json: {
+    error: "Email with UID 456 not found in INBOX",
+    success: false
+  }
+}];</code></pre>
+  </li>
+</ul>
+
+<hr>
+
+<h2><span class="section-number">9.</span> Configuration Reference</h2>
+
+<h3>Timing defaults</h3>
+
+<table>
+  <thead>
+    <tr><th>Setting</th><th>Default</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Cache TTL</td><td>5 minutes</td><td>How long discovered tools remain cached before being considered stale</td></tr>
+    <tr><td>Refresh interval</td><td>15 minutes</td><td>How often Prosponsive polls n8n for workflow changes</td></tr>
+    <tr><td>Webhook timeout</td><td>2 minutes</td><td>Maximum time to wait for the adapter's initial 202 response</td></tr>
+    <tr><td>Retry attempts</td><td>3</td><td>Number of retries with linear backoff (1s, 2s, 3s) on webhook failures</td></tr>
+    <tr><td>n8n API timeout</td><td>10 seconds</td><td>Timeout for individual n8n API requests during discovery</td></tr>
+  </tbody>
+</table>
+
+<h3>Authentication</h3>
+
+<p>Prosponsive authenticates to n8n using an API token stored in secure storage. This is the same token you created during Prosponsive setup (see the <a href="user-guide.html">User Guide</a>, Section 2). The token is sent as a <code>Bearer</code> token in the <code>Authorization</code> header on webhook calls.</p>
+
+<h3>Request limits</h3>
+
+<ul>
+  <li>Maximum request body size: <strong>1 MB</strong></li>
+  <li>The adapter validates that <code>workflowId</code> is present and the target workflow is active before executing</li>
+</ul>
+
+<hr>
+
+<h2><span class="section-number">10.</span> Troubleshooting</h2>
+
+<h3>Tool not appearing in Prosponsive</h3>
+
+<table>
+  <thead>
+    <tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Tool missing from agent tools</td><td>Workflow is not published</td><td>Toggle the workflow to <strong>Published</strong> in n8n</td></tr>
+    <tr><td>Tool missing after publishing</td><td>Discovery hasn't run yet</td><td>Wait up to 15 minutes, or restart Prosponsive</td></tr>
+    <tr><td>Tool missing despite being active</td><td>No Webhook trigger node</td><td>Add a Webhook trigger node with a <code>path</code> parameter</td></tr>
+    <tr><td>Wrong tool name</td><td>Unexpected characters in workflow name</td><td>Special characters are stripped; check the naming rules in Section 2</td></tr>
+  </tbody>
+</table>
+
+<h3>Callback failures</h3>
+
+<table>
+  <thead>
+    <tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Tool executes but result never appears</td><td>SSL certificate not trusted by n8n container</td><td>Ensure the Prosponsive-generated SSL cert is mounted into the n8n container</td></tr>
+    <tr><td><code>ECONNREFUSED</code> in n8n logs</td><td>Container cannot reach host</td><td>Verify <code>host.containers.internal</code> resolves correctly. For Docker, check that the <code>extra_hosts</code> entry mapping <code>host.containers.internal:host-gateway</code> is present in the compose file</td></tr>
+    <tr><td>Callback rejected (non-HTTPS)</td><td>Callback URL uses <code>http://</code></td><td>The external hook <strong>silently drops</strong> non-HTTPS callback URLs -- no error is logged. Ensure the callback URL starts with <code>https://</code> and that SSL certificates are configured</td></tr>
+    <tr><td>Result arrives but no conversation match</td><td>Missing <code>conversationId</code> in execution context</td><td>Ensure the original inference request included a <code>conversationId</code></td></tr>
+  </tbody>
+</table>
+
+<h3>Debugging workflow execution</h3>
+
+<ol>
+  <li><strong>n8n execution log</strong> -- Open n8n and check the execution list for your workflow. Look for errors in individual node runs.</li>
+  <li><strong>Prosponsive logs</strong> -- Check <code>~/Library/Application Support/prosponsive/logs/combined.log</code> for <code>[N8N-BRIDGE]</code> and <code>[TOOL-DISCOVERY]</code> entries.</li>
+  <li><strong>Health check endpoint</strong> -- POST to <code>/api/ai/agentic-loop-health</code> with the <code>executionId</code> and <code>workflowId</code> to confirm whether the callback was received.</li>
+  <li><strong>Adapter 400/404 errors</strong> -- If the adapter returns 400, the <code>workflowId</code> is missing. If 404, the workflow doesn't exist. If the workflow exists but isn't active, you get a 400 with a message about the workflow not being active.</li>
+</ol>
+
+<h3>Common code node issues</h3>
+
+<table>
+  <thead>
+    <tr><th>Issue</th><th>Cause</th><th>Fix</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Parameters are empty</td><td>Reading from wrong path</td><td>Use <code>$input.first().json.body.parameters</code> or <code>$input.first().json.parameters</code></td></tr>
+    <tr><td>Parameters always use defaults</td><td>Adapter envelope not unwrapped</td><td>The adapter wraps inputs in <code>{ parameters, execution, callbackUrl, ... }</code> -- read from the <code>parameters</code> key</td></tr>
+    <tr><td>Type mismatch</td><td>Default value confuses type inference</td><td>Use explicit defaults like <code>?? 10</code> for numbers, <code>?? false</code> for booleans</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2><span class="section-number">11.</span> Glossary</h2>
+
+<table>
+  <thead>
+    <tr><th>Term</th><th>Definition</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Adapter</strong></td><td>The <code>Prosponsive: n8n Workflow Adapter</code> workflow that routes all tool calls to target workflows</td></tr>
+    <tr><td><strong>Callback URL</strong></td><td>The HTTPS address n8n uses to send results back to Prosponsive (e.g., <code>https://host.containers.internal:3100</code>)</td></tr>
+    <tr><td><strong>External hook</strong></td><td>An n8n lifecycle hook (<code>workflow.postExecute</code>) that fires after any workflow completes and sends results to the callback URL</td></tr>
+    <tr><td><strong>Tool discovery</strong></td><td>The process by which Prosponsive scans n8n workflows and registers them as agent tools</td></tr>
+    <tr><td><strong>Tool approval</strong></td><td>The UI step where users approve or reject a tool call proposed by an AI agent</td></tr>
+    <tr><td><strong>Agentic loop</strong></td><td>A conversation pattern where the AI calls tools, receives results, and reasons iteratively</td></tr>
+    <tr><td><strong>Pin data</strong></td><td>n8n mechanism for injecting data into a workflow's trigger node without an actual trigger event</td></tr>
+    <tr><td><strong>Execution key</strong></td><td>A composite identifier (<code>workflowId:executionId</code>) used to correlate callbacks with conversations</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>Quick Reference</h2>
+
+<table>
+  <thead>
+    <tr><th>Task</th><th>How</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Check discovered tools</td><td>Prosponsive logs: search for <code>[TOOL-DISCOVERY]</code></td></tr>
+    <tr><td>Force tool re-discovery</td><td>Restart Prosponsive</td></tr>
+    <tr><td>View tool execution</td><td>n8n &gt; Executions &gt; filter by workflow</td></tr>
+    <tr><td>Check callback delivery</td><td>POST to <code>/api/ai/agentic-loop-health</code></td></tr>
+    <tr><td>View API server logs</td><td><code>~/Library/Application Support/prosponsive/logs/combined.log</code></td></tr>
+    <tr><td>Add tool to an agent</td><td>Edit agent definition &gt; add tool name to <code>allowedTools</code> array</td></tr>
+    <tr><td>Test a workflow manually</td><td>Use n8n's built-in test execution, or POST to the webhook path directly</td></tr>
+  </tbody>
+</table>
+
+<div style="text-align: center; margin-top: 3em; padding-top: 1em; border-top: 2px solid #D6DBD7; color: #5C635F; font-size: 0.85em;">
+  <img src="prosponsive-icon.png" alt="Prosponsive" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 0.5em;">
+  <strong style="color: #2F4F3E;">Prosponsive</strong> -- Proactive Responsive AI
+</div>
+
+</body>
+</html>
