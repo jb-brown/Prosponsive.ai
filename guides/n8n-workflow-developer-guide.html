@@ -146,7 +146,7 @@
 
 <p><strong>Phase 2 -- Process</strong> (operates on each surviving workflow's full detail):</p>
 
-<ol start="4">
+<ol start="3">
   <li><strong>Adapter exclusion</strong> -- The adapter workflow itself (<code>Prosponsive: n8n Workflow Adapter</code>) is skipped.</li>
   <li><strong>Webhook detection</strong> -- The workflow must have a <strong>Webhook trigger node</strong> with a <code>path</code> parameter. Workflows without a webhook trigger are skipped. (Note: this check happens during processing, not during the initial filter.)</li>
   <li><strong>Name derivation</strong> -- The workflow display name is converted to snake_case to produce the tool name. For example, <code>Email Move To Folder</code> becomes <code>email_move_to_folder</code>.</li>
