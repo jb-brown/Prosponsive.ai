@@ -633,6 +633,57 @@ const maxResults = parameters.maxResults ?? 25;</code></pre>
 <strong>Best practice:</strong> Use explicit default values in your code nodes so Prosponsive can infer the correct types. A code node with <code>const limit = parameters.limit ?? 10</code> advertises a numeric parameter. Without the default, it defaults to <code>string</code>.
 </div>
 
+<h3>Request Context and tool parameter mapping</h3>
+
+<p>When a workflow sends data to Prosponsive (e.g., the <code>imap-new-email</code> workflow posting an email notification), that data arrives as <strong>Request Context</strong> — a JSON object attached to the message. You can see it on any message that carries it by clicking the <strong>Request Context</strong> expander in the conversation.</p>
+
+<p>Request Context fields become available for <strong>tool parameter mapping</strong> in agent definitions. This is how you connect incoming data to outgoing tool calls — for example, mapping the <code>uid</code> field from an incoming email notification to the <code>uid</code> parameter of the <code>email_move_to_folder</code> tool.</p>
+
+<h4>How Request Context flows</h4>
+
+<ol>
+  <li><strong>Workflow sends data</strong> — Your n8n workflow calls <code>/api/ai/agent-inference</code> with a <code>context</code> object. This becomes the message's Request Context.</li>
+  <li><strong>Prosponsive learns the fields</strong> — As messages arrive, Prosponsive samples Request Context payloads and discovers all available field paths (including nested fields up to 4 levels deep).</li>
+  <li><strong>Fields appear in the agent editor</strong> — The discovered fields populate the Request Context field picker in the Tool Parameter Guidance Builder.</li>
+  <li><strong>Agent uses mapped values</strong> — When the agent calls a tool, the generated guidance in its system prompt tells it to read parameter values from the Request Context instead of asking the user.</li>
+</ol>
+
+<h4>Mapping parameters in the agent editor</h4>
+
+<p>Each agent has a <strong>Tool Parameter Guidance Builder</strong> in its editor sidebar. To map a tool's parameters:</p>
+
+<ol>
+  <li>Open the <strong>Agents</strong> tab and select your agent.</li>
+  <li>In the right sidebar, find the <strong>Tool Parameter Guidance Builder</strong>.</li>
+  <li>Select a tool from the dropdown — its discovered parameters appear.</li>
+  <li>For each parameter, choose a source:
+    <ul>
+      <li><strong>Request Context field</strong> — Use a value from the trigger data. A field picker shows all discovered paths (e.g., <code>uid</code>, <code>mailbox</code>, <code>from</code>). Best for automated workflows where the data is already present.</li>
+      <li><strong>Constant value</strong> — Always use a fixed value. Best for parameters that never change (e.g., a default mailbox name).</li>
+      <li><strong>Ask at runtime</strong> — The agent asks the user before calling the tool. Best for interactive conversations.</li>
+    </ul>
+  </li>
+  <li>The builder generates a <strong>natural language guidance block</strong>. Copy it and paste it into your agent's definition (in the markdown body). This becomes part of the agent's system prompt.</li>
+</ol>
+
+<h4>Example: email agent parameter mapping</h4>
+
+<p>The <code>imap-new-email</code> workflow sends Request Context containing email fields like <code>uid</code>, <code>mailbox</code>, <code>from</code>, <code>subject</code>, and <code>body</code>. The email agent's definition maps these to the <code>email_move_to_folder</code> tool:</p>
+
+<pre><code>## Tool Parameter Guidance
+When using the **email_move_to_folder** tool:
+Purpose: Move an email to a different IMAP folder
+Parameter sources:
+- **uid**: Use the "uid" value from the Request Context. If missing, ask the user.
+- **mailbox**: Use the "mailbox" value from the Request Context. If missing, ask the user.
+- **destination**: Ask the user for this value before calling the tool.</code></pre>
+
+<p>This tells the agent: "When you need to move an email, get the <code>uid</code> and <code>mailbox</code> from the message data automatically, but ask the user which folder to move it to."</p>
+
+<div class="tip">
+<strong>Tip:</strong> Request Context field discovery is based on sampling — fields only appear in the picker after at least one message carrying that field has been received. If you don't see the fields you expect, trigger your workflow once to send a sample payload, then reopen the agent editor.
+</div>
+
 <hr>
 
 <h2><span class="section-number">6.</span> Build Your First Tool</h2>
