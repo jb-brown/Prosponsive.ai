@@ -681,7 +681,7 @@ Parameter sources:
 <p>This tells the agent: "When you need to move an email, get the <code>uid</code> and <code>mailbox</code> from the message data automatically, but ask the user which folder to move it to."</p>
 
 <div class="tip">
-<strong>Tip:</strong> Request Context field discovery is based on sampling — fields only appear in the picker after at least one message carrying that field has been received. If you don't see the fields you expect, trigger your workflow once to send a sample payload, then reopen the agent editor.
+<strong>Tip:</strong> Request Context field discovery is based on sampling — fields only appear in the picker after at least one message carrying those fields has been received. To see what fields are available, find a message in the conversation that represents the kind of trigger your tool should act on (e.g., an inbound email notification) and expand its <strong>Request Context</strong>. Those are the fields you can map to tool parameters in the agent definition.
 </div>
 
 <hr>
