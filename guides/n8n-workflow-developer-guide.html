@@ -927,6 +927,56 @@ Priority: Normal</code></pre>
 <strong>Tip:</strong> Keep field names short and human-readable (e.g., <code>"From"</code> not <code>"sender_email_address"</code>). The AI will echo them as-is, and short keys produce the best two-column layout. If you have more than 8-10 fields, consider grouping them or omitting less important ones -- the compact display works best with focused, scannable data.
 </div>
 
+<h3>Open in external app link</h3>
+
+<p>You can add an "open in external app" link to any message by including an <code>openLink</code> object in the <code>context</code> payload sent to <code>/api/ai/agent-inference</code>. Prosponsive renders a small external-link icon in the top-right corner of the message bubble. Clicking it opens the URL in the user's default application.</p>
+
+<p><strong>Structure:</strong></p>
+
+<pre><code>{
+  "prompt": "New email from alice@example.com...",
+  "conversationId": "a1b2c3d4-...",
+  "agentId": "executive-assistant-email-agent",
+  "context": {
+    "subject": "Re: Q3 Planning",
+    "from": "alice@example.com",
+    "openLink": {
+      "url": "message://message-id-here",
+      "label": "Open in Mail"
+    }
+  }
+}</code></pre>
+
+<table>
+  <thead>
+    <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>openLink.url</code></td><td>string</td><td>Yes</td><td>The URL to open. Can be any protocol the OS handles: <code>message://</code>, <code>ms-outlook://</code>, <code>https://</code>, <code>slack://</code>, etc.</td></tr>
+    <tr><td><code>openLink.label</code></td><td>string</td><td>Yes</td><td>Tooltip text shown on hover (e.g., "Open in Mail", "Find in Outlook", "View in browser").</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Both fields are required.</strong> If either <code>url</code> or <code>label</code> is missing or not a string, the link is silently omitted — no error is thrown.</p>
+
+<p>The <code>imap-new-email</code> workflow uses this to link email messages back to the user's mail client:</p>
+
+<pre><code>// macOS Mail
+openLink = {
+  url: `message://${encodeURIComponent(messageId)}`,
+  label: 'Open in Mail'
+};
+
+// Outlook
+openLink = {
+  url: `ms-outlook://emails/search?query=${encodeURIComponent(subject)}`,
+  label: 'Find in Outlook'
+};</code></pre>
+
+<div class="tip">
+<strong>Tip:</strong> The URL is opened via the OS shell, so any registered protocol handler works — not just HTTP. This is useful for linking back to the source application (email client, Slack, Jira, etc.) from the Prosponsive conversation.
+</div>
+
 <h3>Error handling</h3>
 
 <ul>
