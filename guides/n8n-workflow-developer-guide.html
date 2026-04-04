@@ -494,6 +494,59 @@ sequenceDiagram
   "availableProviders": []
 }</code></pre>
 
+<h3><span class="section-number">4.6</span> POST /api/conversations/resolve</h3>
+
+<p>Resolves a conversation by name, creating it if it doesn't exist. This is how workflows route messages to a specific conversation in the Prosponsive UI. The <code>imap-new-email</code> workflow uses this to ensure all inbound emails land in the "Email Inbox" conversation.</p>
+
+<p><strong>Request body:</strong></p>
+
+<pre><code>{
+  "slug": "Email Inbox"
+}</code></pre>
+
+<table>
+  <thead>
+    <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>slug</code></td><td>string</td><td>Yes</td><td>The conversation name (e.g., <code>"Email Inbox"</code>, <code>"Support Tickets"</code>). Prosponsive derives a URL-safe slug from this value (e.g., <code>email-inbox</code>) and uses the original value as the display name. Must not be empty or include the <code>slug:</code> prefix.</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Response body:</strong></p>
+
+<pre><code>{
+  "success": true,
+  "conversationId": "a1b2c3d4-...",
+  "slug": "Email Inbox"
+}</code></pre>
+
+<p><strong>Behavior:</strong></p>
+<ul>
+  <li><strong>Idempotent:</strong> If a conversation with the given name already exists, its <code>conversationId</code> is returned. Calling this endpoint repeatedly with the same name is safe and returns the same conversation.</li>
+  <li><strong>Auto-creates:</strong> If no matching conversation exists, one is created automatically and the renderer is notified so the sidebar refreshes immediately.</li>
+  <li>The value is stored as both the conversation's slug (for lookup) and its <code>externalId</code> (for external system correlation).</li>
+</ul>
+
+<p><strong>Typical usage pattern:</strong> Call this endpoint first to get a <code>conversationId</code>, then pass it to <code>/api/ai/agent-inference</code> so the AI response appears in the correct conversation. For example:</p>
+
+<pre><code>// Step 1: Resolve conversation by name
+POST /api/conversations/resolve
+{ "slug": "Email Inbox" }
+// Returns: { "conversationId": "a1b2c3d4-..." }
+
+// Step 2: Send AI inference into that conversation
+POST /api/ai/agent-inference
+{
+  "prompt": "New email from alice@example.com...",
+  "conversationId": "a1b2c3d4-...",
+  "agentId": "executive-assistant-email-agent"
+}</code></pre>
+
+<div class="tip">
+<strong>Tip:</strong> Use a consistent, descriptive name for each workflow's target conversation. All executions of a workflow that resolve the same name will feed into the same conversation, giving the user a single place to see all related activity.
+</div>
+
 <hr>
 
 <h2><span class="section-number">5.</span> How Parameters Are Extracted</h2>
