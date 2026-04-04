@@ -648,6 +648,19 @@ const maxResults = parameters.maxResults ?? 25;</code></pre>
   <li><strong>Agent uses mapped values</strong> — When the agent calls a tool, the generated guidance in its system prompt tells it to read parameter values from the Request Context instead of asking the user.</li>
 </ol>
 
+<h4>Request Context is cumulative</h4>
+
+<p>The set of available Request Context fields is a <strong>superset of all fields seen across the conversation</strong>, not just the fields from a single message. Prosponsive samples every message that carries Request Context and merges their field paths together. This means different workflows — or different executions of the same workflow — can contribute different fields, and all of them become available for parameter mapping.</p>
+
+<p>For example, imagine a conversation that receives two types of messages:</p>
+
+<ul>
+  <li>An <strong>inbound email notification</strong> with fields: <code>uid</code>, <code>mailbox</code>, <code>from</code>, <code>subject</code>, <code>body</code></li>
+  <li>A <strong>calendar event reminder</strong> with fields: <code>eventId</code>, <code>title</code>, <code>startTime</code>, <code>attendees</code></li>
+</ul>
+
+<p>The Tool Parameter Guidance Builder would show <strong>all nine fields</strong> combined: <code>uid</code>, <code>mailbox</code>, <code>from</code>, <code>subject</code>, <code>body</code>, <code>eventId</code>, <code>title</code>, <code>startTime</code>, <code>attendees</code>. When mapping parameters for a tool, you pick from the full set — Prosponsive handles matching the right field to the right message at runtime.</p>
+
 <h4>Mapping parameters in the agent editor</h4>
 
 <p>Each agent has a <strong>Tool Parameter Guidance Builder</strong> in its editor sidebar. To map a tool's parameters:</p>
