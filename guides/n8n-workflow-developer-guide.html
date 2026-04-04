@@ -753,6 +753,63 @@ sequenceDiagram
   <li>Keep outputs focused -- the AI will summarize the result for the user</li>
 </ul>
 
+<h3>Structured key-value display</h3>
+
+<p>Prosponsive automatically detects short key-value pairs in AI responses and renders them as a compact two-column grid with bold keys. This produces a polished, scannable layout instead of a plain text list.</p>
+
+<p><strong>How it works:</strong> When the AI's response contains <strong>two or more consecutive lines</strong> that match a key-value pattern, Prosponsive formats them as a two-column table -- two pairs per row, keys in bold.</p>
+
+<p>Supported delimiters:</p>
+<ul>
+  <li><code>Key: Value</code> (colon followed by space)</li>
+  <li><code>Key = Value</code> (equals sign)</li>
+  <li><code>Key - Value</code> (space-dash-space)</li>
+</ul>
+
+<p>Rules for detection:</p>
+<ul>
+  <li>The key must be <strong>under 30 characters</strong> and start with a letter</li>
+  <li>There must be at least <strong>2 consecutive</strong> key-value lines (blank lines between them are OK)</li>
+  <li>A bare key with no value (e.g., <code>Body:</code>) ends the key-value section -- everything after is treated as body content</li>
+  <li>URLs after a colon are not treated as key-value pairs (they become clickable links instead)</li>
+</ul>
+
+<p><strong>How to take advantage of this in your tool workflows:</strong> Structure your workflow's output JSON with flat, descriptive field names. When the AI summarizes the result, it will naturally present the fields as key-value lines, triggering the compact display.</p>
+
+<p>For example, a tool that returns:</p>
+
+<pre><code>return [{
+  json: {
+    "Subject": "Re: Q3 Planning",
+    "From": "alice@example.com",
+    "Date": "April 3, 2026",
+    "Status": "Unread",
+    "Folder": "INBOX",
+    "Priority": "Normal"
+  }
+}];</code></pre>
+
+<p>...will cause the AI to respond with lines like:</p>
+
+<pre><code>Subject: Re: Q3 Planning
+From: alice@example.com
+Date: April 3, 2026
+Status: Unread
+Folder: INBOX
+Priority: Normal</code></pre>
+
+<p>Prosponsive renders this as a compact grid:</p>
+
+<table style="width: auto; margin: 1em 0;">
+  <tr><td><strong>Subject:</strong></td><td>Re: Q3 Planning</td><td style="width: 2em;"></td><td><strong>From:</strong></td><td>alice@example.com</td></tr>
+  <tr><td><strong>Date:</strong></td><td>April 3, 2026</td><td></td><td><strong>Status:</strong></td><td>Unread</td></tr>
+  <tr><td><strong>Folder:</strong></td><td>INBOX</td><td></td><td><strong>Priority:</strong></td><td>Normal</td></tr>
+</table>
+
+<div class="tip">
+<strong>Tip:</strong> Keep field names short and human-readable (e.g., <code>"From"</code> not <code>"sender_email_address"</code>). The AI will echo them as-is, and short keys produce the best two-column layout. If you have more than 8-10 fields, consider grouping them or omitting less important ones -- the compact display works best with focused, scannable data.
+</div>
+
 <h3>Error handling</h3>
 
 <ul>
