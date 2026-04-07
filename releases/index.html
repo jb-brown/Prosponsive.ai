@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prosponsive — Release Notes</title>
+  <meta name="description" content="What's new in Prosponsive. Release notes and changelog for every version.">
+  <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../assets/icon.png">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    /* ---- Release Notes ---- */
+
+    .releases-header {
+      text-align: center;
+      padding: 2rem 0 1.5rem;
+    }
+
+    .releases-header h1 {
+      font-size: 2.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .releases-header p {
+      color: var(--text-secondary);
+      font-size: 1.0625rem;
+    }
+
+    .releases-list {
+      width: 100%;
+    }
+
+    .release-entry {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .release-entry h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+    }
+
+    .release-entry ul {
+      list-style: disc;
+      padding-left: 1.25rem;
+      margin: 0;
+    }
+
+    .release-entry li {
+      padding: 0.25rem 0;
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      border-bottom: none;
+    }
+
+    .no-releases {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    @media (max-width: 767px) {
+      .releases-header h1 {
+        font-size: 1.75rem;
+      }
+
+      .release-entry {
+        padding: 1.25rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="releases-header" aria-labelledby="releases-title">
+      <a href="../" aria-label="Back to Prosponsive home">
+        <img src="../assets/icon.png" alt="Prosponsive app icon" class="app-icon" width="80" height="80">
+      </a>
+      <h1 id="releases-title">Release Notes</h1>
+      <p>What's new in Prosponsive</p>
+    </section>
+
+    <section class="releases-list" aria-label="Release notes">
+      <!-- RELEASES START -->
+      <p class="no-releases">Release notes will appear here with the next update.</p>
+      <!-- RELEASES END -->
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Prosponsive. All rights reserved.</p>
+    <nav aria-label="Footer links">
+      <a href="../">Download</a>
+      <a href="https://github.com/jb-brown/Prosponsive/issues/new?template=bug_report.md">Report a Bug</a>
+      <a href="https://github.com/jb-brown/Prosponsive/issues/new?template=feature_request.md">Request a Feature</a>
+    </nav>
+  </footer>
+</body>
+</html>
