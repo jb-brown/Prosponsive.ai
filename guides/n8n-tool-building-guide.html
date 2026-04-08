@@ -283,7 +283,106 @@ Priority: Normal</code></pre>
 
 <hr>
 
-<h2><span class="section-number">6.</span> Error Handling</h2>
+<h2><span class="section-number">6.</span> Prosponsive API Endpoints</h2>
+
+<p>Prosponsive runs a local HTTPS API server (port 3100) that your workflows can call. These are the endpoints used by workflows like <code>imap-new-email</code> to route messages into conversations and invoke AI agents.</p>
+
+<h3>POST /api/conversations/resolve</h3>
+
+<p>Resolves a conversation by name, creating it if it doesn't exist. This is how workflows route messages to a specific conversation in the Prosponsive UI. For example, the <code>imap-new-email</code> workflow uses this to ensure all inbound emails land in the "Email Inbox" conversation.</p>
+
+<p><strong>Request body:</strong></p>
+
+<pre><code>{
+  "slug": "Email Inbox"
+}</code></pre>
+
+<table>
+  <thead>
+    <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>slug</code></td><td>string</td><td>Yes</td><td>The conversation name (e.g., <code>"Email Inbox"</code>, <code>"Support Tickets"</code>). Prosponsive derives a URL-safe slug from this value and uses the original value as the display name.</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Response body:</strong></p>
+
+<pre><code>{
+  "success": true,
+  "conversationId": "a1b2c3d4-...",
+  "slug": "Email Inbox"
+}</code></pre>
+
+<p><strong>Behavior:</strong></p>
+<ul>
+  <li><strong>Idempotent:</strong> If a conversation with the given name already exists, its <code>conversationId</code> is returned. Calling this endpoint repeatedly with the same name is safe.</li>
+  <li><strong>Auto-creates:</strong> If no matching conversation exists, one is created automatically and the sidebar refreshes immediately.</li>
+</ul>
+
+<h3>POST /api/ai/agent-inference</h3>
+
+<p>Sends a prompt to the active AI provider using a specific agent's system prompt and tool definitions. Does <strong>not</strong> include conversation history &mdash; each call is stateless. This is the primary endpoint for workflows that push data into Prosponsive conversations.</p>
+
+<p><strong>Request body:</strong></p>
+
+<table>
+  <thead>
+    <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>prompt</code></td><td>string</td><td>Yes</td><td>The message text (e.g., "New email from alice@example.com...")</td></tr>
+    <tr><td><code>conversationId</code></td><td>string</td><td>Yes</td><td>Conversation to add the message to (from <code>/api/conversations/resolve</code>)</td></tr>
+    <tr><td><code>agentId</code></td><td>string</td><td>Yes</td><td>The agent whose definition to use</td></tr>
+    <tr><td><code>context</code></td><td>object</td><td>No</td><td>Becomes the message's Request Context. Include <code>openLink</code> here for external app links.</td></tr>
+    <tr><td><code>execution</code></td><td>object</td><td>Yes</td><td>Execution metadata with <code>executionId</code>, <code>workflowId</code>, and optional <code>startedAt</code></td></tr>
+  </tbody>
+</table>
+
+<p><strong>Typical usage pattern:</strong></p>
+
+<pre><code>// Step 1: Resolve conversation by name
+POST /api/conversations/resolve
+{ "slug": "Email Inbox" }
+// Returns: { "conversationId": "a1b2c3d4-..." }
+
+// Step 2: Send AI inference into that conversation
+POST /api/ai/agent-inference
+{
+  "prompt": "New email from alice@example.com: Re: Q3 Planning",
+  "conversationId": "a1b2c3d4-...",
+  "agentId": "executive-assistant-email-agent",
+  "context": {
+    "uid": "12345",
+    "mailbox": "INBOX",
+    "from": "alice@example.com",
+    "subject": "Re: Q3 Planning",
+    "openLink": {
+      "url": "message://msg-id-here",
+      "label": "Open in Mail"
+    }
+  },
+  "execution": {
+    "executionId": "exec-abc-123",
+    "workflowId": "wf-456"
+  }
+}</code></pre>
+
+<div class="tip">
+  <strong>Tip:</strong> The <code>context</code> object is where you put both the data that becomes Request Context (for parameter mapping) and the <code>openLink</code> for external app links. Everything in <code>context</code> is visible to the user when they expand Request Context on the message.
+</div>
+
+<h3>POST /api/ai/inference</h3>
+
+<p>Same as <code>/api/ai/agent-inference</code> but <strong>includes full conversation history</strong> in the provider request. Use this when a workflow needs the AI to reason about prior messages in the conversation. Takes <code>context.activeAgentId</code> instead of a top-level <code>agentId</code>.</p>
+
+<h3>GET /api/ai/provider-info</h3>
+
+<p>Returns information about the active AI provider and all available providers. No request body required. Useful for workflows that need to know which model is in use or check provider status.</p>
+
+<hr>
+
+<h2><span class="section-number">7.</span> Error Handling</h2>
 
 <p>For expected failures (e.g., "email not found"), return an explicit error object from your workflow:</p>
 
@@ -298,7 +397,7 @@ Priority: Normal</code></pre>
 
 <hr>
 
-<h2><span class="section-number">7.</span> Workflow Checklist</h2>
+<h2><span class="section-number">8.</span> Workflow Checklist</h2>
 
 <p>Use this checklist when building a new tool workflow:</p>
 
