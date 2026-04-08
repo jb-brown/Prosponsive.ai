@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prosponsive — Building Tools with n8n</title>
+  <style>
+  @page {
+    margin: 0.75in 1in;
+    size: letter;
+  }
+  body, .vscode-body, .markdown-body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    color: #1F2321 !important;
+    background-color: #F4F6F4 !important;
+    line-height: 1.6;
+    max-width: 7.5in;
+    margin: 0 auto;
+  }
+  h1 { color: #2F4F3E; font-size: 2em; border-bottom: 3px solid #2F4F3E; padding-bottom: 0.4em; margin-top: 0; }
+  h2 { color: #2F4F3E; font-size: 1.4em; border-bottom: 1px solid #D6DBD7; padding-bottom: 0.3em; margin-top: 2em; page-break-after: avoid; }
+  h3 { color: #3A5F4A; font-size: 1.1em; margin-top: 1.5em; page-break-after: avoid; }
+  a { color: #2F4F3E; text-decoration: underline; }
+  code { background: #E6EAE7; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace; }
+  pre { background: #E6EAE7; border-left: 4px solid #2F4F3E; padding: 0.8em 1em; border-radius: 4px; overflow-x: auto; page-break-inside: avoid; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 4px solid #4F6F5C; background: #F4F6F4; margin: 1em 0; padding: 0.6em 1em; border-radius: 0 4px 4px 0; color: #3A5F4A; page-break-inside: avoid; }
+  blockquote p { margin: 0.3em 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.9em; page-break-inside: avoid; }
+  th { background: #2F4F3E; color: white; padding: 0.5em 0.8em; text-align: left; font-weight: 600; }
+  td { padding: 0.5em 0.8em; border-bottom: 1px solid #D6DBD7; }
+  tr:nth-child(even) td { background: #F4F6F4; }
+  strong { color: #2F4F3E; }
+  hr { border: none; border-top: 2px solid #D6DBD7; margin: 2em 0; }
+  li { margin-bottom: 0.3em; }
+  .cover { text-align: center; padding: 3in 0 2in 0; page-break-after: always; }
+  .cover img { width: 160px; height: 160px; }
+  .cover h1 { border-bottom: none; font-size: 2.8em; margin: 0.5em 0 0.1em 0; letter-spacing: 0.02em; }
+  .cover .tagline { color: #5C635F; font-size: 1.2em; font-style: italic; margin-top: 0.3em; }
+  .cover .version { color: #5C635F; font-size: 0.9em; margin-top: 2em; }
+  .tip { background: #E6EAE7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; page-break-inside: avoid; }
+  .tip strong { color: #2F4F3E; }
+  .section-number { color: #4F6F5C; font-weight: 400; }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
+    <img src="prosponsive-icon.png" alt="Prosponsive" style="width: 120px; height: 120px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <svg style="position: absolute; inset: 0; width: 100%; height: 100%;" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" rx="8" ry="8" width="40" height="26" fill="#2F4F3E" />
+      <polygon points="30,26 38,36 32,26" fill="#2F4F3E" />
+      <line x1="8" y1="9" x2="32" y2="9" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="8" y1="17" x2="24" y2="17" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <rect x="72" y="86" rx="8" ry="8" width="40" height="26" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" />
+      <polygon points="82,86 74,76 84,86" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" stroke-linejoin="round" />
+      <line x1="81" y1="86" x2="85" y2="86" stroke="#F4F6F4" stroke-width="3" />
+      <line x1="80" y1="95" x2="104" y2="95" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="80" y1="103" x2="96" y2="103" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
+  </div>
+  <h1>Prosponsive</h1>
+  <div class="tagline">Building Tools with n8n</div>
+  <div class="version">A guide to creating n8n workflows that work as Prosponsive agent tools</div>
+</div>
+
+<h1>Building Tools with n8n</h1>
+
+<p>Tools in Prosponsive are <a href="https://n8n.io">n8n</a> workflows. When you build a workflow that follows the conventions in this guide, Prosponsive automatically discovers it and makes it available to your agents. This guide covers how to structure your workflows, how to design their output for the best display in Prosponsive, and how to connect incoming data to outgoing tool calls.</p>
+
+<hr>
+
+<h2><span class="section-number">1.</span> Making a Workflow Discoverable</h2>
+
+<p>Prosponsive periodically scans your n8n instance for workflows it can use as tools. A workflow must meet three requirements to be discovered:</p>
+
+<table>
+  <thead>
+    <tr><th>Requirement</th><th>Details</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Published</strong></td><td>The workflow must be toggled to <strong>Active</strong> (published) in n8n.</td></tr>
+    <tr><td><strong>Webhook trigger</strong></td><td>The workflow must start with a <strong>Webhook</strong> node set to <code>POST</code> with a <code>path</code> value.</td></tr>
+    <tr><td><strong>Not the adapter</strong></td><td>The workflow must not be named <code>Prosponsive: n8n Workflow Adapter</code> (that workflow is used internally).</td></tr>
+  </tbody>
+</table>
+
+<p>After discovery, the tool appears in agent tool lists within Prosponsive. Discovery runs on startup and every 15 minutes thereafter.</p>
+
+<h3>Tool naming</h3>
+
+<p>The tool name is derived automatically from the workflow's display name: converted to lowercase, non-alphanumeric characters removed, spaces replaced with underscores.</p>
+
+<table>
+  <thead>
+    <tr><th>Workflow name</th><th>Tool name</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>Email Move To Folder</code></td><td><code>email_move_to_folder</code></td></tr>
+    <tr><td><code>Search Jira Issues</code></td><td><code>search_jira_issues</code></td></tr>
+    <tr><td><code>Get Channel Activity</code></td><td><code>get_channel_activity</code></td></tr>
+  </tbody>
+</table>
+
+<blockquote><p>Changing a workflow's name changes its tool name, which may break agent configurations that reference it.</p></blockquote>
+
+<h3>Tool description</h3>
+
+<p>The description tells the AI agent when and why to use your tool. Prosponsive looks for a description in this order:</p>
+
+<ol>
+  <li><strong>Workflow settings</strong> &mdash; The <code>Description</code> field in the workflow's Settings (gear icon in n8n). This takes highest priority.</li>
+  <li><strong>Sticky Note</strong> &mdash; The first paragraph of a Sticky Note node on the canvas.</li>
+  <li><strong>Auto-generated</strong> &mdash; A generic description derived from the workflow name. Avoid relying on this.</li>
+</ol>
+
+<p>Write descriptions from the AI's perspective: <em>"Use this tool when you need to move an email to a different IMAP folder."</em></p>
+
+<hr>
+
+<h2><span class="section-number">2.</span> Defining Parameters</h2>
+
+<p>Prosponsive discovers your tool's input parameters by scanning Code nodes for common patterns. Use these patterns in your JavaScript code so that Prosponsive can detect parameter names, types, and defaults automatically:</p>
+
+<pre><code>// These patterns are detected by Prosponsive
+const name = parameters.name ?? 'World';
+const maxResults = body.maxResults || 10;
+const includeArchived = parameters.includeArchived ?? false;</code></pre>
+
+<p>From these patterns, Prosponsive infers:</p>
+
+<table>
+  <thead>
+    <tr><th>Parameter</th><th>Type</th><th>Default</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>name</code></td><td>string</td><td><code>"World"</code></td></tr>
+    <tr><td><code>maxResults</code></td><td>number</td><td><code>10</code></td></tr>
+    <tr><td><code>includeArchived</code></td><td>boolean</td><td><code>false</code></td></tr>
+  </tbody>
+</table>
+
+<p>Parameter names are automatically converted to human-readable descriptions (<code>maxResults</code> becomes "The max results").</p>
+
+<div class="tip">
+  <strong>Tip:</strong> Use descriptive parameter names and always provide defaults. Defaults make parameters optional and help Prosponsive infer the correct type.
+</div>
+
+<hr>
+
+<h2><span class="section-number">3.</span> Structuring Output for Display</h2>
+
+<p>How you structure your workflow's output directly affects how results look in Prosponsive conversations. The AI summarizes tool results for the user, and Prosponsive applies formatting rules to the AI's response.</p>
+
+<h3>Key-value display</h3>
+
+<p>Prosponsive automatically detects short key-value pairs in AI responses and renders them as a compact two-column grid with bold keys. This produces a polished, scannable layout instead of a plain text list.</p>
+
+<p>When your tool returns flat, descriptive fields:</p>
+
+<pre><code>return [{
+  json: {
+    "Subject": "Re: Q3 Planning",
+    "From": "alice@example.com",
+    "Date": "April 3, 2026",
+    "Status": "Unread",
+    "Folder": "INBOX",
+    "Priority": "Normal"
+  }
+}];</code></pre>
+
+<p>The AI will naturally respond with lines like:</p>
+
+<pre><code>Subject: Re: Q3 Planning
+From: alice@example.com
+Date: April 3, 2026
+Status: Unread
+Folder: INBOX
+Priority: Normal</code></pre>
+
+<p>Prosponsive renders this as a compact grid:</p>
+
+<table>
+  <tbody>
+    <tr><td><strong>Subject:</strong></td><td>Re: Q3 Planning</td><td></td><td><strong>From:</strong></td><td>alice@example.com</td></tr>
+    <tr><td><strong>Date:</strong></td><td>April 3, 2026</td><td></td><td><strong>Status:</strong></td><td>Unread</td></tr>
+    <tr><td><strong>Folder:</strong></td><td>INBOX</td><td></td><td><strong>Priority:</strong></td><td>Normal</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Rules for key-value detection:</strong></p>
+<ul>
+  <li>Supported delimiters: <code>Key: Value</code>, <code>Key = Value</code>, or <code>Key - Value</code></li>
+  <li>The key must be under 30 characters and start with a letter</li>
+  <li>At least 2 consecutive key-value lines are required (blank lines between them are OK)</li>
+  <li>A bare key with no value (e.g., <code>Body:</code>) ends the key-value section &mdash; everything after is treated as body content</li>
+  <li>URLs after a colon are rendered as clickable links, not as key-value pairs</li>
+</ul>
+
+<div class="tip">
+  <strong>Tip:</strong> Keep field names short and human-readable (e.g., <code>"From"</code> not <code>"sender_email_address"</code>). The AI will echo them as-is, and short keys produce the best two-column layout. If you have more than 8&ndash;10 fields, consider omitting less important ones &mdash; the compact display works best with focused, scannable data.
+</div>
+
+<h3>General output guidelines</h3>
+
+<ul>
+  <li>Return data as JSON objects in the <code>json</code> property of output items</li>
+  <li>The last node's output is what gets sent back to Prosponsive</li>
+  <li>Keep outputs focused &mdash; the AI will summarize the result for the user</li>
+</ul>
+
+<hr>
+
+<h2><span class="section-number">4.</span> Open in External App Links</h2>
+
+<p>You can attach an "open in external app" link to any message that a workflow sends to Prosponsive. When present, Prosponsive renders a small external-link icon in the top-right corner of the message bubble. Clicking it opens the URL in the user's default application.</p>
+
+<p>To add a link, include an <code>openLink</code> object in the context data your workflow sends:</p>
+
+<table>
+  <thead>
+    <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>openLink.url</code></td><td>string</td><td>Yes</td><td>The URL to open. Can be any protocol the OS handles: <code>message://</code>, <code>ms-outlook://</code>, <code>https://</code>, <code>slack://</code>, etc.</td></tr>
+    <tr><td><code>openLink.label</code></td><td>string</td><td>Yes</td><td>Tooltip text shown on hover (e.g., "Open in Mail", "Find in Outlook", "View in browser").</td></tr>
+  </tbody>
+</table>
+
+<p>Both fields are required. If either is missing or not a string, the link is silently omitted.</p>
+
+<p>Example uses:</p>
+
+<ul>
+  <li>Link an email notification back to the user's mail client (<code>message://</code> on macOS, <code>ms-outlook://</code> on Windows)</li>
+  <li>Link a Jira notification to the issue in the browser (<code>https://</code>)</li>
+  <li>Link a Slack message to the Slack app (<code>slack://</code>)</li>
+</ul>
+
+<div class="tip">
+  <strong>Tip:</strong> The URL is opened via the OS shell, so any registered protocol handler works &mdash; not just HTTP. This is useful for linking back to the source application from the Prosponsive conversation.
+</div>
+
+<hr>
+
+<h2><span class="section-number">5.</span> Request Context</h2>
+
+<p>When a workflow sends data to Prosponsive (for example, an email polling workflow posting a new email notification), that data is attached to the message as <strong>Request Context</strong> &mdash; a JSON object you can inspect by clicking the <strong>Request Context</strong> expander on any message that carries it.</p>
+
+<h3>Why Request Context matters</h3>
+
+<p>Request Context fields are what make <strong>tool parameter mapping</strong> possible. In the agent editor, you can configure a tool parameter to read its value directly from a Request Context field rather than asking the user. This is how you build fully automated chains: a trigger workflow brings data in, and the agent uses that data to call tools without any user input.</p>
+
+<p>For example, an email notification workflow might send Request Context containing:</p>
+
+<pre><code>{
+  "uid": "12345",
+  "mailbox": "INBOX",
+  "from": "alice@example.com",
+  "subject": "Re: Q3 Planning"
+}</code></pre>
+
+<p>In the agent editor, you can then map the <code>email_move_to_folder</code> tool's parameters:</p>
+
+<ul>
+  <li><strong>uid</strong>: Use the <code>uid</code> value from the Request Context. If missing, ask the user.</li>
+  <li><strong>mailbox</strong>: Use the <code>mailbox</code> value from the Request Context. If missing, ask the user.</li>
+  <li><strong>destination</strong>: Always ask the user (no default &mdash; the user decides where to move it).</li>
+</ul>
+
+<p>This tells the agent: <em>"When you need to move an email, get the uid and mailbox from the message data automatically, but ask the user which folder to move it to."</em></p>
+
+<h3>How fields are discovered</h3>
+
+<p>Prosponsive samples every message that carries Request Context and discovers all available field paths (including nested fields up to 4 levels deep). The set of available fields is <strong>cumulative across the conversation</strong> &mdash; different workflows or different executions of the same workflow can contribute different fields, and all of them become available for parameter mapping.</p>
+
+<p>Discovered fields populate the Request Context field picker in the Tool Parameter Guidance Builder in the agent editor.</p>
+
+<div class="tip">
+  <strong>Tip:</strong> Fields only appear in the picker after at least one message carrying those fields has been received. To see what fields are available, find a message in the conversation that represents the kind of trigger your tool should act on and expand its <strong>Request Context</strong>. Those are the fields you can map.
+</div>
+
+<hr>
+
+<h2><span class="section-number">6.</span> Error Handling</h2>
+
+<p>For expected failures (e.g., "email not found"), return an explicit error object from your workflow:</p>
+
+<pre><code>return [{
+  json: {
+    error: "Email with UID 456 not found in INBOX",
+    success: false
+  }
+}];</code></pre>
+
+<p>The AI will report the error to the user in natural language.</p>
+
+<hr>
+
+<h2><span class="section-number">7.</span> Workflow Checklist</h2>
+
+<p>Use this checklist when building a new tool workflow:</p>
+
+<table>
+  <thead>
+    <tr><th></th><th>Step</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>&#9744;</td><td>Workflow starts with a <strong>Webhook</strong> node (POST, with a path)</td></tr>
+    <tr><td>&#9744;</td><td>Workflow has a clear, action-oriented name</td></tr>
+    <tr><td>&#9744;</td><td>Description is set (workflow settings or Sticky Note)</td></tr>
+    <tr><td>&#9744;</td><td>Code nodes use <code>parameters.x ?? default</code> or <code>body.x || default</code> patterns</td></tr>
+    <tr><td>&#9744;</td><td>Output uses flat, human-readable field names for key-value rendering</td></tr>
+    <tr><td>&#9744;</td><td><code>openLink</code> included if there's a natural source app to link back to</td></tr>
+    <tr><td>&#9744;</td><td>Error cases return <code>{ error: "...", success: false }</code></td></tr>
+    <tr><td>&#9744;</td><td>Workflow is published (toggled to Active)</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<div style="text-align: center; margin-top: 3em; padding-top: 1em; border-top: 2px solid #D6DBD7; color: #5C635F; font-size: 0.85em;">
+  <img src="prosponsive-icon.png" alt="Prosponsive" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 0.5em;">
+  <strong style="color: #2F4F3E;">Prosponsive</strong> &mdash; Lead more. Manage less.
+</div>
+
+</body>
+</html>
