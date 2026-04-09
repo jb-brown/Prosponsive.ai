@@ -162,13 +162,7 @@
 
 <p>You can choose from popular cloud providers or run models locally.</p>
 
-<p>Prosponsive works well with smaller, instruction-tuned models, including:</p>
-<ul>
-  <li>Local models via Ollama</li>
-  <li>Example: Qwen 3 (4B Instruct), if your machine has sufficient resources</li>
-</ul>
-
-<p>If you select Ollama, Prosponsive will install it (if needed) and download your chosen model.</p>
+<p>Cloud providers (Anthropic, OpenAI, Google, Groq, Mistral) deliver the most reliable experience. Local models via Ollama are also supported but may produce inconsistent results depending on model size and hardware.</p>
 
 <hr>
 
@@ -177,7 +171,7 @@
 <p>Installation typically takes <strong>5–30 minutes</strong>, depending on:</p>
 <ul>
   <li>Whether container tooling (Podman/Docker) needs to be installed</li>
-  <li>Whether optional components like Ollama and models are downloaded</li>
+  <li>Whether optional components need to be downloaded</li>
 </ul>
 
 <h2><span class="section-number">2.</span> First Launch</h2>
@@ -195,12 +189,12 @@
 <p>Once services are healthy, Prosponsive asks you to select an AI provider. Pick the one you have access to:</p>
 
 <ul>
-  <li><strong>Ollama</strong> — Fully local, no API key needed. Requires Ollama installed with a model pulled.</li>
-  <li><strong>Anthropic</strong> — Claude models. Requires an API key.</li>
+  <li><strong>Anthropic</strong> — Claude models. Requires an API key. (Recommended)</li>
   <li><strong>OpenAI</strong> — GPT models. Requires an API key.</li>
   <li><strong>Google</strong> — Gemini models. Requires an API key.</li>
   <li><strong>Groq</strong> — Fast inference. Requires an API key.</li>
   <li><strong>Mistral</strong> — Open-weight models. Requires an API key.</li>
+  <li><strong>Ollama</strong> — Local models, no API key needed. Results vary by model and hardware.</li>
 </ul>
 
 <p>Enter your API key if prompted, then click <strong>Continue</strong>.</p>
