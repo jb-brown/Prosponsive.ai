@@ -41,6 +41,9 @@
   .tip { background: #E6EAE7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; page-break-inside: avoid; }
   .tip strong { color: #2F4F3E; }
   .section-number { color: #4F6F5C; font-weight: 400; }
+  .guide-nav { display: flex; justify-content: space-between; align-items: center; border: 1px solid #D6DBD7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; }
+  .guide-nav a { text-decoration: none; color: #2F4F3E; font-weight: 500; }
+  .guide-nav a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -63,6 +66,11 @@
   <h1>Prosponsive</h1>
   <div class="tagline">Building Tools with n8n</div>
   <div class="version">A guide to creating n8n workflows that work as Prosponsive agent tools</div>
+</div>
+
+<div class="guide-nav">
+  <a href="email-assistant-example.html">&larr; Email Assistant</a>
+  <span></span>
 </div>
 
 <h1>Building Tools with n8n</h1>
@@ -422,6 +430,11 @@ POST /api/ai/agent-inference
 </table>
 
 <hr>
+
+<div class="guide-nav">
+  <a href="email-assistant-example.html">&larr; Email Assistant</a>
+  <span></span>
+</div>
 
 <div style="text-align: center; margin-top: 3em; padding-top: 1em; border-top: 2px solid #D6DBD7; color: #5C635F; font-size: 0.85em;">
   <img src="prosponsive-icon.png" alt="Prosponsive" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 0.5em;">

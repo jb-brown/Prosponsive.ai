@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prosponsive Basics</title>
+  <style>
+  @page {
+    margin: 0.75in 1in;
+    size: letter;
+  }
+  body, .vscode-body, .markdown-body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    color: #1F2321 !important;
+    background-color: #F4F6F4 !important;
+    line-height: 1.6;
+    max-width: 7.5in;
+    margin: 0 auto;
+  }
+  h1 { color: #2F4F3E; font-size: 2em; border-bottom: 3px solid #2F4F3E; padding-bottom: 0.4em; margin-top: 0; }
+  h2 { color: #2F4F3E; font-size: 1.4em; border-bottom: 1px solid #D6DBD7; padding-bottom: 0.3em; margin-top: 2em; page-break-after: avoid; }
+  h3 { color: #3A5F4A; font-size: 1.1em; margin-top: 1.5em; page-break-after: avoid; }
+  a { color: #2F4F3E; text-decoration: underline; }
+  code { background: #E6EAE7; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace; }
+  pre { background: #E6EAE7; border-left: 4px solid #2F4F3E; padding: 0.8em 1em; border-radius: 4px; overflow-x: auto; page-break-inside: avoid; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 4px solid #4F6F5C; background: #F4F6F4; margin: 1em 0; padding: 0.6em 1em; border-radius: 0 4px 4px 0; color: #3A5F4A; page-break-inside: avoid; }
+  blockquote p { margin: 0.3em 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.9em; page-break-inside: avoid; }
+  th { background: #2F4F3E; color: white; padding: 0.5em 0.8em; text-align: left; font-weight: 600; }
+  td { padding: 0.5em 0.8em; border-bottom: 1px solid #D6DBD7; }
+  tr:nth-child(even) td { background: #F4F6F4; }
+  strong { color: #2F4F3E; }
+  hr { border: none; border-top: 2px solid #D6DBD7; margin: 2em 0; }
+  li { margin-bottom: 0.3em; }
+  .cover { text-align: center; padding: 3in 0 2in 0; page-break-after: always; }
+  .cover img { width: 160px; height: 160px; }
+  .cover h1 { border-bottom: none; font-size: 2.8em; margin: 0.5em 0 0.1em 0; letter-spacing: 0.02em; }
+  .cover .tagline { color: #5C635F; font-size: 1.2em; font-style: italic; margin-top: 0.3em; }
+  .cover .version { color: #5C635F; font-size: 0.9em; margin-top: 2em; }
+  .tip { background: #E6EAE7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; page-break-inside: avoid; }
+  .tip strong { color: #2F4F3E; }
+  .section-number { color: #4F6F5C; font-weight: 400; }
+  .guide-nav { display: flex; justify-content: space-between; align-items: center; border: 1px solid #D6DBD7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; }
+  .guide-nav a { text-decoration: none; color: #2F4F3E; font-weight: 500; }
+  .guide-nav a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
+    <img src="prosponsive-icon.png" alt="Prosponsive" style="width: 120px; height: 120px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <svg style="position: absolute; inset: 0; width: 100%; height: 100%;" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" rx="8" ry="8" width="40" height="26" fill="#2F4F3E" />
+      <polygon points="30,26 38,36 32,26" fill="#2F4F3E" />
+      <line x1="8" y1="9" x2="32" y2="9" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="8" y1="17" x2="24" y2="17" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <rect x="72" y="86" rx="8" ry="8" width="40" height="26" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" />
+      <polygon points="82,86 74,76 84,86" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" stroke-linejoin="round" />
+      <line x1="81" y1="86" x2="85" y2="86" stroke="#F4F6F4" stroke-width="3" />
+      <line x1="80" y1="95" x2="104" y2="95" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="80" y1="103" x2="96" y2="103" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
+  </div>
+  <h1>Prosponsive</h1>
+  <div class="tagline">Basics</div>
+  <div class="version">Lead more. Manage less.</div>
+</div>
+
+<div class="guide-nav">
+  <a href="install-guide.html">&larr; Install Guide</a>
+  <a href="email-assistant-example.html">Email Assistant &rarr;</a>
+</div>
+
+<h1>Prosponsive Basics</h1>
+
+<p>This guide introduces the Prosponsive interface, agents, and core features. If you haven't installed Prosponsive yet, start with the <a href="install-guide.html">Install Guide</a>.</p>
+
+<hr>
+
+<h2><span class="section-number">1.</span> Tour the Interface</h2>
+
+<p>Once setup completes, you'll see the main Prosponsive interface. Here's what's on screen:</p>
+
+<h3>Sidebar (left)</h3>
+
+<p>The sidebar has five tabs, shown as icons when collapsed:</p>
+
+<table>
+  <thead>
+    <tr><th>Tab</th><th>Icon</th><th>What it does</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Chat</strong></td><td>Speech bubble</td><td>Your conversations and channels</td></tr>
+    <tr><td><strong>Agents</strong></td><td>Puzzle piece</td><td>View, edit, and create AI agents</td></tr>
+    <tr><td><strong>Settings</strong></td><td>Gear</td><td>App configuration, AI provider, tool approval rules</td></tr>
+    <tr><td><strong>System Health</strong></td><td>Heart</td><td>Service health dashboard (same as first-launch screen)</td></tr>
+    <tr><td><strong>n8n</strong></td><td>Plug icon</td><td>Workflow management, credentials, health check</td></tr>
+  </tbody>
+</table>
+
+<h3>Chat tab</h3>
+
+<p>This is where you'll spend most of your time. The Chat tab has two areas:</p>
+
+<ul>
+  <li><strong>Channel list</strong> (sidebar) — Shows your conversations, each with a message count. Click a channel to open it.</li>
+  <li><strong>Message area</strong> (main panel) — Shows the conversation thread. Type at the bottom to send messages.</li>
+</ul>
+
+<h3>Agents tab</h3>
+
+<p>Lists all available agents. Click one to open its definition in the editor. You can:</p>
+
+<ul>
+  <li>Read the agent's instructions and capabilities</li>
+  <li>Modify its allowed tools, routing rules, and behavior</li>
+  <li>Duplicate an agent to create a variant</li>
+  <li>See which channels the agent is shared to</li>
+</ul>
+
+<p>The default agent is <strong>Prosponsive</strong> — your general-purpose coordinator. Prosponsive will be in all channels, and can be delegated to by all agents.</p>
+
+<h3>n8n tab</h3>
+
+<p>Shows connection status and quick-access buttons:</p>
+
+<ul>
+  <li><strong>Workflows</strong> — Opens the n8n workflow editor in your browser</li>
+  <li><strong>Credentials</strong> — Opens n8n credential management</li>
+  <li><strong>Documentation</strong> — Links to n8n docs</li>
+</ul>
+
+<hr>
+
+<h2><span class="section-number">2.</span> Your First Conversation</h2>
+
+<p>Let's make sure everything is working.</p>
+
+<ol>
+  <li>Click the <strong>Chat</strong> tab in the sidebar.</li>
+  <li>You should see a default channel (or an empty channel list). If empty, just start typing — Prosponsive creates a channel automatically.</li>
+  <li>Type a message:
+    <blockquote><p>What can you help me with?</p></blockquote>
+  </li>
+  <li>Press <strong>Enter</strong> (or click Send).</li>
+</ol>
+
+<p>The <strong>Prosponsive</strong> agent responds. It will explain its capabilities — organizing conversations, moving threads, archiving content, and delegating to specialist agents.</p>
+
+<p>Try one more:</p>
+
+<blockquote><p>Create a channel called "Project Zen"</p></blockquote>
+
+<p>Prosponsive proposes a <strong>create-conversation</strong> tool card. You'll see the tool name, parameters, and a reason. Click <strong>Approve</strong> to execute it.</p>
+
+<p>A new "Project Zen" channel appears in your sidebar. You've just used your first tool.</p>
+
+<hr>
+
+<h2><span class="section-number">3.</span> Understanding Agents</h2>
+
+<p>Agents are AI assistants with specific roles, tools, and instructions. Prosponsive ships with three:</p>
+
+<h3>Prosponsive (default)</h3>
+
+<p>Your strategic coordinator. It can:</p>
+
+<ul>
+  <li>Create, move, and archive conversations and threads</li>
+  <li>Delegate to other agents when specialized help is needed</li>
+  <li>Organize your workspace</li>
+</ul>
+
+<p>Think of Prosponsive as your desk — it's where incoming work lands and where you decide what goes where.</p>
+
+<h3>Prosponsive Support</h3>
+
+<p>Collects bug reports and feature requests for the Prosponsive team to make things better for you. If something isn't working right, tell Prosponsive "I want to report a bug" and it will delegate to this agent.</p>
+
+<h3>Executive Assistant Email Agent</h3>
+
+<p>Handles email triage. When emails arrive, this agent:</p>
+
+<ul>
+  <li>Prioritizes by urgency (urgent, high, medium, low)</li>
+  <li>Routes emails to channels based on your rules</li>
+  <li>Archives low-value emails to keep your inbox focused</li>
+  <li>Cleans up tombstones left behind by moved threads</li>
+</ul>
+
+<p>The Executive Assistant Email Agent is an example agent to help you get started. You can delete it if it's not useful.</p>
+
+<h3>How delegation works</h3>
+
+<p>When you ask Prosponsive something that another agent handles better, Prosponsive proposes a <strong>delegate-agent</strong> tool card. You approve, and the specialist takes over the conversation thread. The specialist's messages show its name and a badge so you always know who's talking.</p>
+
+<h3>Sharing agents to channels</h3>
+
+<p>Agents must be <strong>shared</strong> to a channel before they can be automatically routed there. When an agent creates a channel (like the email agent creating "Email Inbox"), it's automatically shared. You can also manually share agents to channels via the channel settings.</p>
+
+<h3>Delegation and Sharing working together</h3>
+
+<p>Your prompts in a channel will only be routed to agents shared to that channel. They in turn can delegate to agents you've previously configured as allowed to accomplish work on their behalf. Delegated agents that are not shared to the channel will show as "guest" agents.</p>
+
+<hr>
+
+<h2><span class="section-number">4.</span> Report a Bug or Request a Feature</h2>
+
+<p>Prosponsive has a built-in feedback system. If you find something that isn't working right or have an idea for improvement:</p>
+
+<ol>
+  <li>In any channel, type:
+    <blockquote><p>I want to report a bug</p></blockquote>
+  </li>
+  <li>Prosponsive delegates to the <strong>Prosponsive Support</strong> agent.</li>
+  <li>The Support agent asks you to describe the issue — what happened, what you expected, and steps to reproduce.</li>
+  <li>Once it has enough detail, it submits a <strong>feedback</strong> tool card. Approve it to file the report.</li>
+</ol>
+
+<p>You can also:</p>
+
+<ul>
+  <li>Say "I'd like to request a feature" for feature requests.</li>
+  <li>Ask "What issues have I submitted?" to see your history.</li>
+  <li>Ask "What are the current engineering priorities?" to see what the team is focused on.</li>
+</ul>
+
+<hr>
+
+<h2><span class="section-number">5.</span> What's Next</h2>
+
+<p>You've covered the fundamentals. Here are some directions to explore:</p>
+
+<h3>Create your own agents</h3>
+
+<p>Open the <strong>Agents</strong> tab and click <strong>Create New Agent</strong>. An agent definition is a markdown file with YAML frontmatter. You define:</p>
+
+<ul>
+  <li><strong>System prompt</strong> — The agent's personality and instructions</li>
+  <li><strong>Allowed tools</strong> — What the agent can do</li>
+  <li><strong>Delegatable agents</strong> — Who the agent can hand off to</li>
+  <li><strong>Routing rules</strong> — Custom logic for the agent's domain</li>
+</ul>
+
+<h3>Build custom tools with n8n</h3>
+
+<p>Tools in Prosponsive are n8n workflows. To create one:</p>
+
+<ol>
+  <li>Open n8n and create a new workflow.</li>
+  <li>Add a <strong>Webhook</strong> trigger node — this becomes the tool's endpoint.</li>
+  <li>Build your automation (API calls, data transforms, notifications, etc.).</li>
+  <li>Publish the workflow — within a few minutes it will appear in agent tool lists.</li>
+</ol>
+
+<p>For details on naming conventions, parameter design, output formatting, Request Context mapping, and external app links, see the <a href="n8n-workflow-developer-guide.html">Building Tools with n8n</a> guide.</p>
+
+<hr>
+
+<h2>Quick Reference</h2>
+
+<table>
+  <thead>
+    <tr><th>Action</th><th>How</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Move a thread</td><td>Reply: "Move this to [channel name]"</td></tr>
+    <tr><td>Archive a thread</td><td>Reply: "Archive this thread"</td></tr>
+    <tr><td>Clean up a tombstone</td><td>Reply: "Remove that tombstone"</td></tr>
+    <tr><td>Create a channel</td><td>Say: "Create a channel called [name]"</td></tr>
+    <tr><td>Report a bug</td><td>Say: "I want to report a bug"</td></tr>
+    <tr><td>Edit an agent</td><td>Agents tab &gt; select agent &gt; edit in editor</td></tr>
+    <tr><td>Open n8n workflows</td><td>n8n tab &gt; Workflows</td></tr>
+    <tr><td>Manage credentials</td><td>n8n tab &gt; Credentials</td></tr>
+    <tr><td>Set auto-approval rules</td><td>Settings &gt; Tool Approval Rules</td></tr>
+    <tr><td>Check service health</td><td>System Health tab</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<div class="guide-nav">
+  <a href="install-guide.html">&larr; Install Guide</a>
+  <a href="email-assistant-example.html">Email Assistant &rarr;</a>
+</div>
+
+<div style="text-align: center; margin-top: 3em; padding-top: 1em; border-top: 2px solid #D6DBD7; color: #5C635F; font-size: 0.85em;">
+  <img src="prosponsive-icon.png" alt="Prosponsive" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 0.5em;">
+  <strong style="color: #2F4F3E;">Prosponsive</strong> — Lead more. Manage less.
+</div>
+
+</body>
+</html>
