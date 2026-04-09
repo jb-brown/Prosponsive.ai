@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prosponsive — Feedback &amp; Philosophy</title>
+  <style>
+  @page {
+    margin: 0.75in 1in;
+    size: letter;
+  }
+  body, .vscode-body, .markdown-body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    color: #1F2321 !important;
+    background-color: #F4F6F4 !important;
+    line-height: 1.6;
+    max-width: 7.5in;
+    margin: 0 auto;
+  }
+  h1 { color: #2F4F3E; font-size: 2em; border-bottom: 3px solid #2F4F3E; padding-bottom: 0.4em; margin-top: 0; }
+  h2 { color: #2F4F3E; font-size: 1.4em; border-bottom: 1px solid #D6DBD7; padding-bottom: 0.3em; margin-top: 2em; page-break-after: avoid; }
+  h3 { color: #3A5F4A; font-size: 1.1em; margin-top: 1.5em; page-break-after: avoid; }
+  a { color: #2F4F3E; text-decoration: underline; }
+  code { background: #E6EAE7; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace; }
+  pre { background: #E6EAE7; border-left: 4px solid #2F4F3E; padding: 0.8em 1em; border-radius: 4px; overflow-x: auto; page-break-inside: avoid; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 4px solid #4F6F5C; background: #F4F6F4; margin: 1em 0; padding: 0.6em 1em; border-radius: 0 4px 4px 0; color: #3A5F4A; page-break-inside: avoid; }
+  blockquote p { margin: 0.3em 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.9em; page-break-inside: avoid; }
+  th { background: #2F4F3E; color: white; padding: 0.5em 0.8em; text-align: left; font-weight: 600; }
+  td { padding: 0.5em 0.8em; border-bottom: 1px solid #D6DBD7; }
+  tr:nth-child(even) td { background: #F4F6F4; }
+  strong { color: #2F4F3E; }
+  hr { border: none; border-top: 2px solid #D6DBD7; margin: 2em 0; }
+  li { margin-bottom: 0.3em; }
+  .cover { text-align: center; padding: 3in 0 2in 0; page-break-after: always; }
+  .cover img { width: 160px; height: 160px; }
+  .cover h1 { border-bottom: none; font-size: 2.8em; margin: 0.5em 0 0.1em 0; letter-spacing: 0.02em; }
+  .cover .tagline { color: #5C635F; font-size: 1.2em; font-style: italic; margin-top: 0.3em; }
+  .cover .version { color: #5C635F; font-size: 0.9em; margin-top: 2em; }
+  .tip { background: #E6EAE7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; page-break-inside: avoid; }
+  .tip strong { color: #2F4F3E; }
+  .section-number { color: #4F6F5C; font-weight: 400; }
+  .guide-nav { display: flex; justify-content: space-between; align-items: center; border: 1px solid #D6DBD7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; }
+  .guide-nav a { text-decoration: none; color: #2F4F3E; font-weight: 500; }
+  .guide-nav a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
+    <img src="prosponsive-icon.png" alt="Prosponsive" style="width: 120px; height: 120px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <svg style="position: absolute; inset: 0; width: 100%; height: 100%;" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" rx="8" ry="8" width="40" height="26" fill="#2F4F3E" />
+      <polygon points="30,26 38,36 32,26" fill="#2F4F3E" />
+      <line x1="8" y1="9" x2="32" y2="9" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="8" y1="17" x2="24" y2="17" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <rect x="72" y="86" rx="8" ry="8" width="40" height="26" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" />
+      <polygon points="82,86 74,76 84,86" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" stroke-linejoin="round" />
+      <line x1="81" y1="86" x2="85" y2="86" stroke="#F4F6F4" stroke-width="3" />
+      <line x1="80" y1="95" x2="104" y2="95" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="80" y1="103" x2="96" y2="103" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
+  </div>
+  <h1>Prosponsive</h1>
+  <div class="tagline">Feedback &amp; Philosophy</div>
+  <div class="version">Lead more. Manage less.</div>
+</div>
+
+<div class="guide-nav">
+  <a href="email-assistant-example.html">&larr; Email Assistant</a>
+  <a href="n8n-workflow-developer-guide.html">Developer Guide &rarr;</a>
+</div>
+
+<h1>Feedback &amp; Philosophy</h1>
+
+<p>Submitting feedback in Prosponsive isn't just filing a ticket. It's part of something larger.</p>
+
+<p>Prosponsive is pioneering a new model of software development: <strong>Open Product, Closed Source</strong>. The short version: you have direct visibility into what we're building and direct influence over where it goes -- while the codebase stays proprietary to fund sustained, full-time development. Your feedback is the engine that makes this work, which is why we want you to understand the thinking behind it before we show you the buttons.</p>
+
+<p>This model is not just viable -- it's more valuable to both the people building the software and the people using it. AI is what makes that true.</p>
+
+<hr>
+
+<h2><span class="section-number">1.</span> Open Product, Closed Source</h2>
+
+<h3>What "open product" means for you</h3>
+
+<p>As a Prosponsive user, you have direct access to the development process in ways that most software -- open or closed -- does not offer:</p>
+
+<ul>
+  <li><strong>You can see what the team is building.</strong> Ask Prosponsive "What are the current engineering priorities?" and the Support agent will show you what's actively being worked on and what's coming next.</li>
+  <li><strong>Your feedback goes straight to engineering.</strong> Bug reports and feature requests submitted through Prosponsive land directly on the engineering board -- not in a support queue, not in a suggestion box. Every submission is reviewed and triaged by the people and agents building the product.</li>
+  <li><strong>You can track what you've submitted.</strong> Ask "What issues have I submitted?" to see the status of your reports and requests. You're never left wondering whether anyone read your feedback.</li>
+  <li><strong>The product is built with you, not just for you.</strong> User feedback directly shapes the roadmap. When multiple users report the same friction or request the same capability, it moves up in priority.</li>
+</ul>
+
+<h3>Toward just-in-time software delivery</h3>
+
+<p>The Prosponsive engineering team has a vision: just-in-time software delivery -- where the gap between a user's need and the working feature that meets it shrinks to nearly nothing. We're a long way from that today, but we work toward it every day. Every improvement to our AI-assisted development pipeline, every refinement to how feedback flows from users to working code, brings that vision closer. Your feedback isn't just heard -- it's fuel for a process that's actively getting faster.</p>
+
+<h3>Why closed source?</h3>
+
+<p>Closed source funds the sustained development that makes all of this possible. It means a dedicated team working on Prosponsive full-time -- not a side project that depends on volunteer contributors. The trade-off is straightforward: the code stays private, but the product stays transparent. The feedback loop is the mechanism that makes this contract work.</p>
+
+<h3>The open-source promise is under pressure</h3>
+
+<p>Open-source projects are being inundated with AI-generated contributions -- pull requests, feature proposals, and code of wildly uneven quality. Every possible feature that could be dreamt up is being dreamt up, submitted, and left for maintainers to evaluate. The contributor groups that organize around these projects can't maintain quality or keep up with the volume. They tighten their acceptance criteria, slow down reviews, and eventually the core promise of open source -- that anyone can contribute and the project evolves with its community -- goes unfulfilled. The project atrophies not from lack of interest, but from too much of the wrong kind.</p>
+
+<h3>AI changes the equation for closed-source products too</h3>
+
+<p>On the product side, informed and managed AI agents can architect, build, and test user requests with a speed and consistency that wasn't possible before. Each feature request doesn't need as much human screening or manual contribution to reduce the funnel, reshape the ask, or validate the result. More gets done. The bottleneck shifts from "how many engineers can we hire" to "how well can we direct the work."</p>
+
+<p>Prosponsive is innovating on the software development process itself to leverage this seismic shift. We use AI agents internally -- not just to write code, but to triage issues, draft specifications, review changes, and enforce quality. This means your feedback doesn't sit in a queue waiting for a human to pick it up. It enters a development pipeline designed to act on it.</p>
+
+<hr>
+
+<h2><span class="section-number">2.</span> How to Give Feedback</h2>
+
+<p>Prosponsive has a built-in feedback system powered by the <strong>Prosponsive Support</strong> agent. You don't need to leave the app, open a browser, or file a ticket somewhere else. Just talk to Prosponsive.</p>
+
+<h3>Report a bug</h3>
+
+<p>If something isn't working the way you expect, tell Prosponsive:</p>
+
+<blockquote><p>I want to report a bug</p></blockquote>
+
+<p>Prosponsive delegates to the <strong>Prosponsive Support</strong> agent, which will ask you to describe what happened, what you expected, and any steps to reproduce the issue. Once it has enough detail, it submits a <strong>feedback</strong> tool card. Approve it to file the report.</p>
+
+<p>Your bug report lands directly on the engineering board. No intermediaries, no support tiers.</p>
+
+<h3>Request a feature</h3>
+
+<p>Have an idea for something Prosponsive should do? Say:</p>
+
+<blockquote><p>I'd like to request a feature</p></blockquote>
+
+<p>The Support agent walks you through describing the feature -- what you want, why it matters, and how you'd use it. Same process: it composes a feedback submission, you approve the tool card, and the request goes to engineering.</p>
+
+<h3>Check your submission history</h3>
+
+<p>Want to see what you've already reported or requested? Ask:</p>
+
+<blockquote><p>What issues have I submitted?</p></blockquote>
+
+<p>The Support agent retrieves your submissions and shows their current status.</p>
+
+<h3>See current engineering priorities</h3>
+
+<p>Curious about what the team is focused on? Ask:</p>
+
+<blockquote><p>What are the current engineering priorities?</p></blockquote>
+
+<p>This is the "open product" in action -- you can see the team's focus areas and how your feedback fits into the bigger picture.</p>
+
+<div class="tip">
+  <strong>Tip:</strong> You don't need to use these exact phrases. The Prosponsive agent understands natural language, so "something's broken" or "I have an idea" will work just as well. Prosponsive will delegate to the Support agent when it recognizes a feedback conversation.
+</div>
+
+<hr>
+
+<div class="guide-nav">
+  <a href="email-assistant-example.html">&larr; Email Assistant</a>
+  <a href="n8n-workflow-developer-guide.html">Developer Guide &rarr;</a>
+</div>
+
+<div style="text-align: center; margin-top: 3em; padding-top: 1em; border-top: 2px solid #D6DBD7; color: #5C635F; font-size: 0.85em;">
+  <img src="prosponsive-icon.png" alt="Prosponsive" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 0.5em;">
+  <strong style="color: #2F4F3E;">Prosponsive</strong> &mdash; Lead more. Manage less.
+</div>
+
+</body>
+</html>
