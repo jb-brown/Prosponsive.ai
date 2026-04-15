@@ -151,7 +151,7 @@
 <p>During setup:</p>
 <ul>
   <li>A unique localhost SSL certificate is generated</li>
-  <li>On macOS, the certificate is silently installed to your login keychain — no password prompt and no administrator privileges required</li>
+  <li>On macOS, Prosponsive installs the certificate to your login keychain — you may be prompted for your password to authorize the trust</li>
   <li>All certificate generation inputs are securely deleted afterward</li>
 </ul>
 
@@ -185,7 +185,7 @@
 
 <h3>Phase 2: Security</h3>
 
-<p>Prosponsive generates a unique localhost SSL certificate so all local communication is encrypted. On macOS, the certificate is silently installed to your login keychain — no password prompt and no administrator privileges are needed. If the silent install fails for any reason, Prosponsive falls back to prompting you. No app restart is required — trust is established before any HTTPS connections are made. A <strong>Refresh</strong> button is available to re-check if needed.</p>
+<p>Prosponsive generates a unique localhost SSL certificate so all local communication is encrypted. On macOS, Prosponsive installs the certificate to your login keychain — you may be prompted for your password to authorize the trust. No app restart is required — trust is established before any HTTPS connections are made. A <strong>Refresh</strong> button is available to re-check if needed.</p>
 
 <h3>Phase 3: Container Runtime</h3>
 
