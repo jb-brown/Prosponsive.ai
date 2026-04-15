@@ -106,7 +106,6 @@
 <ul>
   <li>A stable internet connection</li>
   <li>Available disk space</li>
-  <li>Local administrator privileges</li>
   <li>Winget (Windows) or Homebrew (macOS)</li>
 </ul>
 
@@ -122,8 +121,8 @@
 
 <ul>
   <li><strong>Container engine</strong><br>
-    Prosponsive prefers Podman and will install it if neither Podman nor Docker is present.
-    If Docker is already installed, Prosponsive will use it.</li>
+    Prosponsive prefers Podman and will download it if neither Podman nor Docker is present.
+    If Docker Desktop is already installed, Prosponsive will use it and auto-start the daemon if it is stopped.</li>
   <li><strong>Database</strong><br>
     A PostgreSQL container is installed for persistent storage.</li>
   <li><strong>Workflow engine</strong><br>
@@ -149,10 +148,10 @@
 
 <p>Your trust is a top priority. Even though all communication between Prosponsive, PostgreSQL, and n8n stays on your machine, Prosponsive enforces encrypted connections.</p>
 
-<p>During installation:</p>
+<p>During setup:</p>
 <ul>
   <li>A unique localhost SSL certificate is generated</li>
-  <li>You'll be prompted to trust it at the OS level</li>
+  <li>On macOS, the certificate is silently installed to your login keychain — no password prompt and no administrator privileges required</li>
   <li>All certificate generation inputs are securely deleted afterward</li>
 </ul>
 
@@ -162,7 +161,7 @@
 
 <p>You can choose from popular cloud providers or run models locally.</p>
 
-<p>Cloud providers (Anthropic, OpenAI, Google, Groq, Mistral) deliver the most reliable experience. Local models via Ollama are also supported but may produce inconsistent results depending on model size and hardware.</p>
+<p>Cloud providers (Anthropic, OpenAI, Google, Groq, Mistral, AWS Bedrock) deliver the most reliable experience. Local models via Ollama are also supported but may produce inconsistent results depending on model size and hardware.</p>
 
 <hr>
 
@@ -176,17 +175,31 @@
 
 <h2><span class="section-number">2.</span> First Launch</h2>
 
-<p>When you open Prosponsive for the first time, you'll see the <strong>System Health</strong> screen. This is where Prosponsive checks that its services are running and attempts to install and repair them if not healthy.</p>
+<p>When you open Prosponsive for the first time, you'll see the <strong>Bamboo Journey</strong> — a guided timeline that walks you through setup one phase at a time. A zen garden background sets the scene, and a bamboo stalk grows alongside your progress as each phase completes. The footer shows how many of the seven steps are ready.</p>
 
-<h3>What you'll see</h3>
+<p>One phase card is active at a time. Complete it, and the next phase appears. Here's what to expect.</p>
 
-<p>A grid of service tiles showing health status. Hover over each to understand its purpose more. The services are checked, and repaired, in dependency order to ensure a working Prosponsive user experience when complete.</p>
+<h3>Phase 1: Consent</h3>
 
-<p>Each tile shows a green checkmark when healthy. If a service shows an error, click the <strong>Refresh</strong> button — Prosponsive will attempt to start it automatically.</p>
+<p>Prosponsive asks whether you'd like to opt in to anonymous analytics and instrumentation. Click <strong>Accept</strong> to opt in, or <strong>No thanks</strong> to decline. Either choice advances you to the next phase immediately.</p>
 
-<h3>Choose your AI provider</h3>
+<h3>Phase 2: Security</h3>
 
-<p>Once services are healthy, Prosponsive asks you to select an AI provider. Pick the one you have access to:</p>
+<p>Prosponsive generates a unique localhost SSL certificate so all local communication is encrypted. On macOS, the certificate is silently installed to your login keychain — no password prompt and no administrator privileges are needed. If the silent install fails for any reason, Prosponsive falls back to prompting you. No app restart is required — trust is established before any HTTPS connections are made. A <strong>Refresh</strong> button is available to re-check if needed.</p>
+
+<h3>Phase 3: Container Runtime</h3>
+
+<p>Prosponsive needs a container engine to run its infrastructure. It prefers Podman and will offer to download it (~150 MB). A progress bar with a byte counter tracks the download.</p>
+
+<p>Before the download begins, you must click <strong>Approve</strong> to acknowledge and authorize the installation. If Docker Desktop is already installed on your machine, Prosponsive uses it instead and auto-starts the Docker daemon if it is stopped.</p>
+
+<h3>Phase 4: Infrastructure</h3>
+
+<p>Prosponsive automatically pulls the n8n and PostgreSQL container images (~350 MB combined). A progress bar tracks the download. This phase is fully automatic — no user input is needed.</p>
+
+<h3>Phase 5: AI Provider</h3>
+
+<p>Choose the AI provider you want Prosponsive to use. Pick the one you have access to:</p>
 
 <ul>
   <li><strong>Anthropic</strong> — Claude models. Requires an API key. (Recommended)</li>
@@ -194,22 +207,30 @@
   <li><strong>Google</strong> — Gemini models. Requires an API key.</li>
   <li><strong>Groq</strong> — Fast inference. Requires an API key.</li>
   <li><strong>Mistral</strong> — Open-weight models. Requires an API key.</li>
+  <li><strong>AWS Bedrock</strong> — Claude and other models via AWS. Requires AWS credentials.</li>
   <li><strong>Ollama</strong> — Local models, no API key needed. Results vary by model and hardware.</li>
 </ul>
 
-<p>Enter your API key if prompted, then click <strong>Continue</strong>.</p>
+<p>Enter your credentials inline and continue.</p>
 
-<h3>Trust the SSL certificate authority</h3>
+<h3>Phase 6: Workflows</h3>
 
-<p>Prosponsive and its dependencies use only HTTPS with a self-signed certificate. You'll see a prompt to trust this certificate authority — click <strong>Trust Certificate</strong> and follow the instructions to allow Prosponsive to function. It will quickly restart after to use proper SSL authority verification.</p>
+<p>This phase has two manual sub-steps that connect Prosponsive to n8n:</p>
 
-<h3>Create your n8n Admin account</h3>
+<ol>
+  <li><strong>Create your n8n admin account.</strong> Click the <strong>Open Setup</strong> button — your browser opens to the n8n setup page. Create your account there, then return to the Prosponsive app and click <strong>Refresh</strong> so it detects the new account.</li>
+  <li><strong>Create an n8n API key.</strong> A password field and an <strong>Open API Settings</strong> button appear. Click the button to open n8n's API settings in your browser, copy the generated key, paste it into the field in Prosponsive, and click <strong>Save API Key</strong>.</li>
+</ol>
 
-<p>You'll be asked to create an n8n Admin account for the locally running n8n instance in your virtual environment. Fill in your details and click <strong>Save</strong>, then click the <strong>Refresh</strong> button in Prosponsive so it detects the new account.</p>
+<p>Prosponsive only communicates with n8n through its API — a critical, and very valuable, implementation detail because it means your Prosponsive agents <strong>never have access to credentials</strong> used by the tools you want them to use.</p>
 
-<h3>Create an n8n API key and give it to Prosponsive</h3>
+<h3>Phase 7: Project Selection</h3>
 
-<p>You'll then be asked to create an n8n API key and paste it into the Prosponsive UI, then click the <strong>Refresh</strong> button again. Prosponsive only communicates with n8n using its API; a critical, and very valuable, implementation detail because it means your Prosponsive agents <strong>never have access to credentials</strong> used by the tools you want them to use.</p>
+<p>Choose an existing project folder or create a new one. When you select a folder, Prosponsive initializes your project and the final phase completes.</p>
+
+<h3>Completion</h3>
+
+<p>When all seven phases are complete, a short countdown appears and the app automatically advances to the main Prosponsive interface. You're ready to go.</p>
 
 <hr>
 
