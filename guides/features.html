@@ -82,7 +82,7 @@
 
 <h2><span class="section-number">1.</span> Async Tool Use</h2>
 
-<p>Prosponsive is the only AI product with asynchronous tool execution. When an agent calls a tool, the work happens in the background. You do not sit and watch a chat window spin.</p>
+<p>Prosponsive executes tools asynchronously. When an agent calls a tool, the work happens in the background. You do not sit and watch a chat window spin.</p>
 
 <h3>How it works</h3>
 
@@ -90,7 +90,7 @@
 
 <h3>Why this matters</h3>
 
-<p>Every other AI tool forces you into a synchronous loop: you type, the AI responds, you watch it think, you wait for the tool to run, you read the result, you respond. Your attention is captured for the entire duration of every tool call. If a tool takes 30 seconds, you lose 30 seconds of focus. If a workflow chains five tools, you lose minutes sitting idle in a chat window.</p>
+<p>Most AI tools work synchronously: you type, the AI responds, you watch it think, you wait for the tool to run, you read the result, you respond. Your attention is captured for the entire duration of every tool call. If a tool takes 30 seconds, you lose 30 seconds of focus. If a workflow chains five tools, you lose minutes sitting idle in a chat window.</p>
 
 <p>Prosponsive eliminates that pattern. You send a task and walk away. The difference between synchronous and asynchronous tool use is the difference between standing at a fax machine waiting for each page and dropping a stack in the outbox. One demands your attention. The other respects it.</p>
 
@@ -108,7 +108,7 @@
 
 <p>A channel is a persistent workspace where one or more agents operate. Agents and their tools are scoped to channels — an agent assigned to a channel has access to specific tools relevant to that channel's purpose. An agent not assigned to a channel cannot see it, cannot participate in it, and does not consume tokens for it.</p>
 
-<p>This is the opposite of how other AI tools work. In most products, every conversation has access to every tool and every capability. The system prompt grows with every integration you add. Token costs increase linearly, and the AI model gets a bloated context full of irrelevant instructions.</p>
+<p>In most AI products, every conversation has access to every tool and every capability. The system prompt grows with every integration you add. Token costs increase linearly, and the AI model gets a bloated context full of irrelevant instructions. Channels solve this by scoping agents and tools to where they belong.</p>
 
 <h3>Scoped agents, lean prompts</h3>
 
@@ -116,7 +116,7 @@
 
 <h3>Group agent collaboration</h3>
 
-<p>Prosponsive has a group agent chat design that no other product offers. Multiple agents can participate in the same channel, each with their own tools and expertise. You can assign a research agent, a writing agent, and a review agent to the same channel. They share context through the channel's conversation history, but each brings its own specialized capabilities. This enables multi-agent workflows without custom orchestration code — you just assign the right agents to the right channel.</p>
+<p>Multiple agents can participate in the same channel, each with their own tools and expertise. You can assign a research agent, a writing agent, and a review agent to the same channel. They share context through the channel's conversation history, but each brings its own specialized capabilities. This enables multi-agent workflows without custom orchestration code — you just assign the right agents to the right channel.</p>
 
 <h3>Channel sharing</h3>
 
@@ -134,7 +134,7 @@
 
 <h3>Bulk approval</h3>
 
-<p>Once you have filtered and grouped actions, you can approve them in bulk. Review a set of related tool calls, confirm they look correct, and approve them all at once. This is not possible in products designed around sequential chat, because those products present one action at a time embedded in a conversation thread.</p>
+<p>Once you have filtered and grouped actions, you can approve them in bulk. Review a set of related tool calls, confirm they look correct, and approve them all at once. Sequential chat interfaces present one action at a time embedded in a conversation thread, making bulk review impractical.</p>
 
 <h3>Why this matters</h3>
 
@@ -144,7 +144,7 @@
 
 <h2><span class="section-number">4.</span> Auto-Approvals</h2>
 
-<p>Prosponsive is the only AI tool with condition-based auto-approvals. You define rules, and matching tool calls execute without interrupting you.</p>
+<p>Prosponsive supports condition-based auto-approvals. You define rules, and matching tool calls execute without interrupting you.</p>
 
 <h3>How auto-approvals work</h3>
 
@@ -415,13 +415,13 @@
     <tr><th>Feature</th><th>What it means for you</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>Async Tool Use</strong></td><td>Tools run in the background. You get results, not loading spinners. Only Prosponsive does this.</td></tr>
-    <tr><td><strong>Channels</strong></td><td>Agents and tools scoped to workspaces, not dumped into every conversation. Group agent collaboration no other product offers.</td></tr>
-    <tr><td><strong>Filtering &amp; Bulk Approval</strong></td><td>Review and approve many actions at once. Not possible in products built around sequential chat.</td></tr>
-    <tr><td><strong>Auto-Approvals</strong></td><td>Condition-based rules let trusted tools run without interrupting you. Only Prosponsive has this.</td></tr>
+    <tr><td><strong>Async Tool Use</strong></td><td>Tools run in the background. You get results, not loading spinners.</td></tr>
+    <tr><td><strong>Channels</strong></td><td>Agents and tools scoped to workspaces. Lean prompts, lower token cost, group agent collaboration.</td></tr>
+    <tr><td><strong>Filtering &amp; Bulk Approval</strong></td><td>Review and approve many actions at once. Review and approve many actions at once — built for task management, not sequential chat.</td></tr>
+    <tr><td><strong>Auto-Approvals</strong></td><td>Condition-based rules let trusted tools run without interrupting you.</td></tr>
     <tr><td><strong>Agent Autonomy</strong></td><td>Agents manage threads, archive completed work, and organize your channels. Performance visibility shows you where to optimize.</td></tr>
     <tr><td><strong>Notifications &amp; Definitions</strong></td><td>Actionable notifications, editable agent definitions, and scheduled prompts form a complete always-on control layer.</td></tr>
-    <tr><td><strong>Higher-Value Tools</strong></td><td>n8n workflows that orchestrate multiple systems per tool call. One tool does what multiple MCPs cannot.</td></tr>
+    <tr><td><strong>Higher-Value Tools</strong></td><td>n8n workflows that orchestrate multiple systems per tool call. One tool orchestrates what would otherwise take multiple separate calls.</td></tr>
     <tr><td><strong>Provider Agnostic</strong></td><td>7+ providers, switch anytime. Design that minimizes token cost instead of maximizing it.</td></tr>
     <tr><td><strong>Privacy &amp; Security</strong></td><td>Local execution. Encrypted connections. Your work stays on your machine.</td></tr>
     <tr><td><strong>Extensibility</strong></td><td>Custom agents, custom workflows, 1000+ integrations via n8n.</td></tr>
