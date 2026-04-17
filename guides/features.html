@@ -100,15 +100,21 @@
 
 <hr>
 
-<h2><span class="section-number">2.</span> Channels</h2>
+<h2><span class="section-number">2.</span> Channels and Threads</h2>
 
-<p>Prosponsive organizes work into <strong>channels</strong>, not conversations. This is a fundamental design difference that affects token cost, prompt quality, and how agents collaborate.</p>
+<p>Prosponsive organizes work into <strong>channels</strong> and <strong>threads</strong>, not flat conversations. This structure affects token cost, prompt quality, how agents collaborate, and how you stay organized as work scales.</p>
 
-<h3>What channels are</h3>
+<h3>Channels</h3>
 
 <p>A channel is a persistent workspace where one or more agents operate. Agents and their tools are scoped to channels — an agent assigned to a channel has access to specific tools relevant to that channel's purpose. An agent not assigned to a channel cannot see it, cannot participate in it, and does not consume tokens for it.</p>
 
 <p>In most AI products, every conversation has access to every tool and every capability. The system prompt grows with every integration you add. Token costs increase linearly, and the AI model gets a bloated context full of irrelevant instructions. Channels solve this by scoping agents and tools to where they belong.</p>
+
+<h3>Threads</h3>
+
+<p>Within a channel, individual tasks and topics live in threads. Threads keep related messages together without polluting the channel's main flow. When an agent processes a scheduled prompt, the result is a thread. When a tool call produces a detailed result, it lives in a thread. When a conversation branches into a subtopic, it becomes a thread.</p>
+
+<p>Threads are what make channels usable at scale. Without them, a busy channel would be a wall of interleaved messages from different tasks and agents. With threads, each task has its own contained context. You can collapse threads you've reviewed, expand the ones that need attention, and keep a clear view of what's active. Agents can also move threads between channels — when a conversation surfaces a topic that belongs elsewhere, the thread moves to the right place without losing its history.</p>
 
 <h3>Scoped agents, lean prompts</h3>
 
@@ -416,7 +422,7 @@
   </thead>
   <tbody>
     <tr><td><strong>Async Tool Use</strong></td><td>Tools run in the background. You get results, not loading spinners.</td></tr>
-    <tr><td><strong>Channels</strong></td><td>Agents and tools scoped to workspaces. Lean prompts, lower token cost, group agent collaboration.</td></tr>
+    <tr><td><strong>Channels &amp; Threads</strong></td><td>Agents and tools scoped to workspaces. Threads keep tasks contained, collapsible, and movable between channels.</td></tr>
     <tr><td><strong>Filtering &amp; Bulk Approval</strong></td><td>Review and approve many actions at once. Review and approve many actions at once — built for task management, not sequential chat.</td></tr>
     <tr><td><strong>Auto-Approvals</strong></td><td>Condition-based rules let trusted tools run without interrupting you.</td></tr>
     <tr><td><strong>Agent Autonomy</strong></td><td>Agents manage threads, archive completed work, and organize your channels. Performance visibility shows you where to optimize.</td></tr>
