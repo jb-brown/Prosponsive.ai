@@ -341,7 +341,7 @@
 
 <h3>Inbound data — webhooks and batch processes</h3>
 
-<p>Prosponsive is not limited to tools that reach out to external systems. Any system that can make an API call to your machine can send data into Prosponsive. Webhooks from GitHub, Stripe, your CRM, monitoring systems, CI/CD pipelines — anything with an outbound webhook or a batch process can push data to your local n8n instance, where your agents act on it.</p>
+<p>Prosponsive is not limited to tools that reach out to external systems. Any system that can make an API call to your machine can send data to your Prosponsive agents. A webhook from GitHub, Stripe, your CRM, or a monitoring system can call the Prosponsive API directly, or trigger an n8n workflow that processes the data and then hands it to an agent. Either way, external events become agent tasks automatically.</p>
 
 <p>Your agents filter out what doesn't matter, take action on what does, and only involve you when needed. A webhook fires when a customer submits a support ticket — your agent triages it, pulls context from your CRM, drafts a response, and notifies you only if escalation is required. A batch process dumps daily sales data — your agent summarizes it and posts the digest to your reporting channel. The data flows in, agents handle it, and you see only the outcomes that need your attention.</p>
 
