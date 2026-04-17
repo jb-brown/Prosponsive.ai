@@ -115,9 +115,11 @@
 
 <p>Cowork activity is not captured in Anthropic's Audit Logs, Compliance API, or Data Exports. For regulated industries that require complete activity trails, this is a significant gap. Prosponsive runs locally with full control over logging, data retention, and audit trails.</p>
 
-<h3>Tool transparency</h3>
+<h3>Generic plugins vs. custom tools</h3>
 
-<p>Cowork plugins are provided by Anthropic or built through their plugin system. Prosponsive tools are n8n workflows — visual, inspectable, editable, and debuggable. You can see exactly what every tool does, step by step. Nothing is a black box. For more detail, see <a href="../features.html">Higher-Value Tools</a> in the Feature Guide.</p>
+<p>Cowork's plugins are industry-generic — a "sales" plugin, a "legal" plugin, a "finance" plugin. They cover broad categories but handle tasks the way Anthropic decided they should be handled. They are heavy, opaque, and the same for everyone.</p>
+
+<p>Prosponsive tools are n8n workflows that you build for your specific tasks. They connect to your systems, follow your processes, and produce the outcomes you need — not a generic approximation. They are visual, inspectable, editable, and debuggable. You can see exactly what every tool does, step by step. Nothing is a black box. For more detail, see <a href="../features.html">Higher-Value Tools</a> in the Feature Guide.</p>
 
 <hr>
 
@@ -165,9 +167,9 @@
     <td><strong>Architecturally isolated via n8n vault</strong></td>
   </tr>
   <tr>
-    <td>Tool transparency</td>
-    <td>Plugin system</td>
-    <td><strong>Visual n8n workflows — fully inspectable</strong></td>
+    <td>Tools</td>
+    <td>Generic industry plugins</td>
+    <td><strong>Custom n8n workflows built for your tasks</strong></td>
   </tr>
   <tr>
     <td>Inbound webhooks</td>
