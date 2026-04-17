@@ -70,7 +70,7 @@
 
 <div class="guide-nav">
   <a href="vs-local-models.html">&larr; vs. Local Model Runners</a>
-  <a href="index.html">All Comparisons &rarr;</a>
+  <a href="vs-openclaw.html">vs. OpenClaw &rarr;</a>
 </div>
 
 <h1>Prosponsive vs. Custom GPTs and OpenAI Assistants</h1>
@@ -106,13 +106,13 @@
 
 <p>When a Custom GPT calls an action, the credentials for that action (API keys, OAuth tokens) must be configured in the GPT's action settings and are transmitted with each request through OpenAI's infrastructure. The Assistants API's function calling relies on your application code to handle credentials, which is more secure but requires custom development.</p>
 
-<p>Prosponsive's architecture is different by design. Credentials are stored in n8n's encrypted vault on your machine. When the AI agent triggers a workflow, n8n resolves the credentials at execution time. The AI model never sees the credentials — not in the prompt, not in the function call, not in the response. This is not a policy decision; it is an architectural guarantee.</p>
+<p>Prosponsive's architecture is different by design. Credentials are stored in n8n's encrypted vault on your machine. When the AI agent triggers a workflow, n8n resolves the credentials at execution time. The AI model never sees the credentials — not in the prompt, not in the function call, not in the response. This is not a policy decision; it is an architectural guarantee. For more detail, see <a href="../features.html">Credential Isolation</a> in the Feature Guide.</p>
 
 <h3>Provider independence</h3>
 
 <p>Custom GPTs and the Assistants API are OpenAI products. Your agents, your knowledge files, your conversation history, and your tool configurations all live on OpenAI's platform. If you want to use Anthropic's Claude or Google's Gemini instead, you start over with a different platform.</p>
 
-<p>Prosponsive agents are provider-agnostic. Build your tools and workflows once, then use them with any supported AI provider. Switch from OpenAI to Anthropic to a local model without rebuilding your agent or losing your tool integrations.</p>
+<p>Prosponsive agents are provider-agnostic. Build your tools and workflows once, then use them with any supported AI provider. Switch from OpenAI to Anthropic to a local model without rebuilding your agent or losing your tool integrations. For more detail, see <a href="../features.html">Provider Flexibility</a> in the Feature Guide.</p>
 
 <h3>Data sovereignty</h3>
 
@@ -124,7 +124,7 @@
 
 <p>When a Custom GPT calls an action, you see the result. You do not see the intermediate steps, the data transformations, the conditional logic, or the error handling. It is a black box between input and output.</p>
 
-<p>Prosponsive tools are n8n workflows — visual, inspectable, debuggable. You can see every node, every data transformation, every conditional branch. When something goes wrong, you can trace exactly what happened and fix it.</p>
+<p>Prosponsive tools are n8n workflows — visual, inspectable, debuggable. You can see every node, every data transformation, every conditional branch. When something goes wrong, you can trace exactly what happened and fix it. For more detail, see <a href="../features.html">Tools and Workflows</a> in the Feature Guide.</p>
 
 <hr>
 
@@ -244,7 +244,7 @@
 
 <div class="guide-nav">
   <a href="vs-local-models.html">&larr; vs. Local Model Runners</a>
-  <a href="index.html">All Comparisons &rarr;</a>
+  <a href="vs-openclaw.html">vs. OpenClaw &rarr;</a>
 </div>
 
 <div style="text-align: center; margin-top: 3em; padding-top: 1em; border-top: 2px solid #D6DBD7; color: #5C635F; font-size: 0.85em;">

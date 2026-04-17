@@ -99,7 +99,7 @@
 
 <p>Automation platforms execute workflows based on triggers — a new email arrives, a form is submitted, a schedule fires. The workflow logic is fixed: if X happens, do Y.</p>
 
-<p>Prosponsive adds an AI layer on top. Instead of defining every condition and branch in advance, you describe what you want in natural language. The AI decides which tools to use, in what order, and how to handle edge cases. You can still build structured n8n workflows for predictable tasks, but you can also let the AI compose tool calls dynamically based on context.</p>
+<p>Prosponsive adds an AI layer on top. Instead of defining every condition and branch in advance, you describe what you want in natural language. The AI decides which tools to use, in what order, and how to handle edge cases. You can still build structured n8n workflows for predictable tasks, but you can also let the AI compose tool calls dynamically based on context. For more detail, see <a href="../features.html">Tools and Workflows</a> in the Feature Guide.</p>
 
 <h3>Prosponsive uses n8n — it does not replace it</h3>
 
@@ -118,7 +118,7 @@
 
 <p>In standalone automation platforms, credentials are stored within the platform and used directly by workflow executions. The platform has access to your credentials by design.</p>
 
-<p>In Prosponsive, credentials are stored in n8n's encrypted vault. The AI agent never sees them. When the agent calls a tool, it triggers a workflow execution through n8n's API — the credentials are resolved by n8n at runtime. This architecture means that even if the AI model were compromised or misbehaved, it could not extract your credentials.</p>
+<p>In Prosponsive, credentials are stored in n8n's encrypted vault. The AI agent never sees them. When the agent calls a tool, it triggers a workflow execution through n8n's API — the credentials are resolved by n8n at runtime. This architecture means that even if the AI model were compromised or misbehaved, it could not extract your credentials. For more detail, see <a href="../features.html">Credential Isolation</a> in the Feature Guide.</p>
 
 <h3>Local-first execution</h3>
 

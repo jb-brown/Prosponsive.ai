@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prosponsive vs. Claude Cowork</title>
+  <style>
+  @page {
+    margin: 0.75in 1in;
+    size: letter;
+  }
+  body, .vscode-body, .markdown-body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    color: #1F2321 !important;
+    background-color: #F4F6F4 !important;
+    line-height: 1.6;
+    max-width: 7.5in;
+    margin: 0 auto;
+  }
+  h1 { color: #2F4F3E; font-size: 2em; border-bottom: 3px solid #2F4F3E; padding-bottom: 0.4em; margin-top: 0; }
+  h2 { color: #2F4F3E; font-size: 1.4em; border-bottom: 1px solid #D6DBD7; padding-bottom: 0.3em; margin-top: 2em; page-break-after: avoid; }
+  h3 { color: #3A5F4A; font-size: 1.1em; margin-top: 1.5em; page-break-after: avoid; }
+  a { color: #2F4F3E; text-decoration: underline; }
+  code { background: #E6EAE7; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace; }
+  pre { background: #E6EAE7; border-left: 4px solid #2F4F3E; padding: 0.8em 1em; border-radius: 4px; overflow-x: auto; page-break-inside: avoid; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 4px solid #4F6F5C; background: #F4F6F4; margin: 1em 0; padding: 0.6em 1em; border-radius: 0 4px 4px 0; color: #3A5F4A; page-break-inside: avoid; }
+  blockquote p { margin: 0.3em 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.9em; page-break-inside: avoid; }
+  th { background: #2F4F3E; color: white; padding: 0.5em 0.8em; text-align: left; font-weight: 600; }
+  td { padding: 0.5em 0.8em; border-bottom: 1px solid #D6DBD7; }
+  tr:nth-child(even) td { background: #F4F6F4; }
+  strong { color: #2F4F3E; }
+  hr { border: none; border-top: 2px solid #D6DBD7; margin: 2em 0; }
+  li { margin-bottom: 0.3em; }
+  .cover { text-align: center; padding: 3in 0 2in 0; page-break-after: always; }
+  .cover img { width: 160px; height: 160px; }
+  .cover h1 { border-bottom: none; font-size: 2.8em; margin: 0.5em 0 0.1em 0; letter-spacing: 0.02em; }
+  .cover .tagline { color: #5C635F; font-size: 1.2em; font-style: italic; margin-top: 0.3em; }
+  .cover .version { color: #5C635F; font-size: 0.9em; margin-top: 2em; }
+  .tip { background: #E6EAE7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; page-break-inside: avoid; }
+  .tip strong { color: #2F4F3E; }
+  .section-number { color: #4F6F5C; font-weight: 400; }
+  .guide-nav { display: flex; justify-content: space-between; align-items: center; border: 1px solid #D6DBD7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; }
+  .guide-nav a { text-decoration: none; color: #2F4F3E; font-weight: 500; }
+  .guide-nav a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
+    <img src="../prosponsive-icon.png" alt="Prosponsive" style="width: 120px; height: 120px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <svg style="position: absolute; inset: 0; width: 100%; height: 100%;" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" rx="8" ry="8" width="40" height="26" fill="#2F4F3E" />
+      <polygon points="30,26 38,36 32,26" fill="#2F4F3E" />
+      <line x1="8" y1="9" x2="32" y2="9" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="8" y1="17" x2="24" y2="17" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <rect x="72" y="86" rx="8" ry="8" width="40" height="26" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" />
+      <polygon points="82,86 74,76 84,86" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" stroke-linejoin="round" />
+      <line x1="81" y1="86" x2="85" y2="86" stroke="#F4F6F4" stroke-width="3" />
+      <line x1="80" y1="95" x2="104" y2="95" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="80" y1="103" x2="96" y2="103" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
+  </div>
+  <h1>Prosponsive</h1>
+  <div class="tagline">vs. Claude Cowork</div>
+  <div class="version">Lead more. Manage less.</div>
+</div>
+
+<div class="guide-nav">
+  <a href="vs-openclaw.html">&larr; vs. OpenClaw</a>
+  <a href="index.html">All Comparisons &rarr;</a>
+</div>
+
+<h1>Prosponsive vs. Claude Cowork</h1>
+
+<p>Claude Cowork is Anthropic's autonomous desktop agent for knowledge workers. It handles multi-step tasks like organizing files, synthesizing documents, extracting data, and creating presentations. It is the closest product to Prosponsive in terms of audience and ambition — both target knowledge workers who want to delegate real tasks to AI.</p>
+
+<p>The differences are architectural, and they matter.</p>
+
+<hr>
+
+<h2><span class="section-number">1.</span> What Claude Cowork Does Well</h2>
+
+<ul>
+  <li><strong>Task delegation.</strong> You describe an outcome, Cowork plans the work, spins up parallel agents, and executes multi-step tasks. No step-by-step prompting required.</li>
+  <li><strong>Desktop integration.</strong> Cowork accesses local files, folders, and applications directly. It works within your existing environment rather than requiring you to move to a new interface.</li>
+  <li><strong>Plugin ecosystem.</strong> Anthropic offers 11 official plugins (sales, legal, finance, marketing) and supports custom plugins that users can build and share.</li>
+  <li><strong>Powerful reasoning.</strong> Powered by Claude, one of the strongest reasoning models available. Complex multi-step tasks benefit from Claude's ability to plan and execute sophisticated workflows.</li>
+  <li><strong>Low barrier to entry.</strong> No technical background required. Included in Anthropic's paid plans starting at $20/month.</li>
+</ul>
+
+<hr>
+
+<h2><span class="section-number">2.</span> Where Prosponsive Differs</h2>
+
+<h3>Provider lock-in vs. provider choice</h3>
+
+<p>Cowork runs on Anthropic's Claude models exclusively. If Claude has an outage or you hit a rate limit, your work stops. Prosponsive supports 7+ providers with automatic failover — if your primary provider goes down, Prosponsive switches to the next one and your agents keep working. For more detail, see <a href="../features.html">Provider Agnostic</a> in the Feature Guide.</p>
+
+<h3>Usage caps vs. your own API keys</h3>
+
+<p>Cowork usage counts against your Claude plan's message limits. Heavy Cowork sessions on the Pro plan ($20/mo) can hit caps quickly. The Max plan ($100-200/mo) raises the ceiling but the ceiling still exists. Prosponsive uses your own API keys with each provider — you pay for exactly what you use, with no artificial caps on how much work your agents can do.</p>
+
+<h3>Synchronous vs. asynchronous</h3>
+
+<p>Cowork executes tasks while you watch. You describe the outcome, Cowork works, you see the results. Prosponsive executes tools asynchronously in the background. You queue tasks, agents work, and you get notified when results are ready or when something needs your attention. For more detail, see <a href="../features.html">Async Tool Use</a> in the Feature Guide.</p>
+
+<h3>Flat tasks vs. channels and threads</h3>
+
+<p>Cowork handles individual tasks in individual sessions. There is no persistent organizational structure for ongoing work across multiple projects and agents. Prosponsive organizes work into channels and threads — agents are scoped to channels, threads keep tasks contained, and the structure persists across sessions. For more detail, see <a href="../features.html">Channels and Threads</a> in the Feature Guide.</p>
+
+<h3>Desktop access vs. credential isolation</h3>
+
+<p>Cowork accesses your desktop directly — files, folders, applications. This is powerful but means the AI has broad access to your local environment. Prosponsive architecturally isolates credentials. Your API keys, passwords, and tokens live in n8n's encrypted vault. Agents call tools through n8n workflows and receive only results — they never see your credentials. For more detail, see <a href="../features.html">Privacy and Security</a> in the Feature Guide.</p>
+
+<h3>Enterprise audit gap</h3>
+
+<p>Cowork activity is not captured in Anthropic's Audit Logs, Compliance API, or Data Exports. For regulated industries that require complete activity trails, this is a significant gap. Prosponsive runs locally with full control over logging, data retention, and audit trails.</p>
+
+<h3>Tool transparency</h3>
+
+<p>Cowork plugins are provided by Anthropic or built through their plugin system. Prosponsive tools are n8n workflows — visual, inspectable, editable, and debuggable. You can see exactly what every tool does, step by step. Nothing is a black box. For more detail, see <a href="../features.html">Higher-Value Tools</a> in the Feature Guide.</p>
+
+<hr>
+
+<h2><span class="section-number">3.</span> Side-by-Side Comparison</h2>
+
+<table>
+  <tr>
+    <th>Factor</th>
+    <th>Claude Cowork</th>
+    <th>Prosponsive</th>
+  </tr>
+  <tr>
+    <td>AI provider</td>
+    <td>Anthropic only</td>
+    <td><strong>7+ providers with auto-failover</strong></td>
+  </tr>
+  <tr>
+    <td>Pricing model</td>
+    <td>Subscription with usage caps ($20-200/mo)</td>
+    <td><strong>Your own API keys, pay for what you use</strong></td>
+  </tr>
+  <tr>
+    <td>Execution model</td>
+    <td>Synchronous</td>
+    <td><strong>Asynchronous</strong></td>
+  </tr>
+  <tr>
+    <td>Work organization</td>
+    <td>Individual task sessions</td>
+    <td><strong>Persistent channels and threads</strong></td>
+  </tr>
+  <tr>
+    <td>Auto-approvals</td>
+    <td>No</td>
+    <td><strong>Condition-based rules</strong></td>
+  </tr>
+  <tr>
+    <td>Bulk approval</td>
+    <td>No</td>
+    <td><strong>Yes — filter, group, approve in batch</strong></td>
+  </tr>
+  <tr>
+    <td>Scheduled prompts</td>
+    <td>No</td>
+    <td><strong>Yes</strong></td>
+  </tr>
+  <tr>
+    <td>Credential handling</td>
+    <td>Direct desktop access</td>
+    <td><strong>Architecturally isolated via n8n vault</strong></td>
+  </tr>
+  <tr>
+    <td>Tool transparency</td>
+    <td>Plugin system</td>
+    <td><strong>Visual n8n workflows — fully inspectable</strong></td>
+  </tr>
+  <tr>
+    <td>Inbound webhooks</td>
+    <td>No</td>
+    <td><strong>Yes — external systems push data to agents</strong></td>
+  </tr>
+  <tr>
+    <td>Notifications</td>
+    <td>Desktop notifications (system-controlled)</td>
+    <td><strong>User-defined, 100% signal</strong></td>
+  </tr>
+  <tr>
+    <td>Enterprise audit</td>
+    <td>Not captured in audit logs</td>
+    <td><strong>Full local control over logging and data</strong></td>
+  </tr>
+  <tr>
+    <td>Offline capable</td>
+    <td>No</td>
+    <td>Yes (with local models)</td>
+  </tr>
+</table>
+
+<hr>
+
+<h2><span class="section-number">4.</span> Key Decision Factors</h2>
+
+<h3>How do you want to pay?</h3>
+
+<p>Cowork is a subscription with usage caps. Prosponsive is a one-time purchase where you use your own API keys. For light usage, Cowork's $20/month Pro plan may be more convenient. For heavy usage or always-on agents, Prosponsive's model avoids the cap problem entirely.</p>
+
+<h3>Do you need always-on operation?</h3>
+
+<p>If your agents need to run scheduled tasks, respond to inbound webhooks, and operate continuously with auto-approvals, Prosponsive is designed for this. Cowork is designed for interactive task delegation — you describe the task, it executes, you review the result.</p>
+
+<h3>How important is provider flexibility?</h3>
+
+<p>If you are comfortable with Anthropic as your sole provider and their usage caps fit your needs, Cowork's deep Claude integration is a strength. If you want the ability to switch providers, use your own API keys, or have automatic failover when a provider goes down, Prosponsive's architecture serves that need.</p>
+
+<h3>What does your security posture require?</h3>
+
+<p>Cowork's direct desktop access and lack of enterprise audit logging may be a concern for regulated industries. Prosponsive's credential isolation, local execution, and full logging control address these requirements by design.</p>
+
+<hr>
+
+<h2><span class="section-number">5.</span> Who Should Choose Which</h2>
+
+<h3>Claude Cowork is the better choice if you:</h3>
+
+<ul>
+  <li>Want a simple subscription with no setup — install and start delegating tasks</li>
+  <li>Are comfortable with Anthropic as your sole provider</li>
+  <li>Need desktop-level access to files and applications for document-heavy tasks</li>
+  <li>Prefer interactive, synchronous task execution</li>
+  <li>Work primarily with local files and documents rather than external systems</li>
+</ul>
+
+<h3>Prosponsive is the better choice if you:</h3>
+
+<ul>
+  <li>Need agents that work in the background across multiple channels and projects</li>
+  <li>Want provider flexibility and automatic failover — your work should not stop when one provider goes down</li>
+  <li>Need to connect AI to external systems through transparent, inspectable tools</li>
+  <li>Require credential isolation — the AI should never see your API keys and passwords</li>
+  <li>Want always-on operation with scheduled prompts, auto-approvals, and inbound webhooks</li>
+  <li>Need full control over logging, data retention, and audit trails</li>
+</ul>
+
+<hr>
+
+<div class="guide-nav">
+  <a href="vs-openclaw.html">&larr; vs. OpenClaw</a>
+  <a href="index.html">All Comparisons &rarr;</a>
+</div>
+
+<div style="text-align: center; margin-top: 3em; padding-top: 1em; border-top: 2px solid #D6DBD7; color: #5C635F; font-size: 0.85em;">
+  <img src="../prosponsive-icon.png" alt="Prosponsive" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 0.5em;">
+  <strong style="color: #2F4F3E;">Prosponsive</strong> — Lead more. Manage less.
+</div>
+
+</body>
+</html>
