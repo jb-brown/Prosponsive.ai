@@ -236,15 +236,15 @@
 
 <h2><span class="section-number">7.</span> Privacy and Security</h2>
 
-<p>Prosponsive is local-first software. Your data stays on your machine, your connections are encrypted, and there is no cloud service between you and your work.</p>
+<p>Prosponsive keeps your work private during execution. Your conversations, your data, and your tool activity all stay on your machine — not on someone else's server.</p>
 
-<h3>Local-first architecture</h3>
+<h3>Local execution</h3>
 
-<p>Prosponsive runs entirely on your computer. There is no Prosponsive cloud service, no Prosponsive account, no telemetry, and no data collection. The application, the database, the workflow engine, and your conversations all live on your machine. You own your data completely.</p>
+<p>When Prosponsive runs your tools, processes your conversations, and stores your data, everything happens on your computer. The database, the workflow engine, and your conversation history all live locally. Your work product never passes through a Prosponsive server.</p>
 
 <h3>What leaves your machine</h3>
 
-<p>The only data that leaves your computer is what you explicitly send to a cloud AI provider when you have a conversation. If you use Ollama, nothing leaves your machine at all — the AI model runs locally too. There is no analytics, no usage reporting, and no phone-home behavior of any kind.</p>
+<p>The data that leaves your computer is what you explicitly choose to send: conversations with a cloud AI provider, and whatever external services your n8n workflows connect to — both entirely under your control. If you use Ollama and keep your workflows local, nothing leaves your machine at all. Prosponsive also offers optional, opt-in analytics to help improve the product — you choose during setup whether to participate.</p>
 
 <h3>Encrypted connections</h3>
 
@@ -254,9 +254,9 @@
 
 <p>Sensitive data — API keys, provider credentials, and secure settings — is encrypted at rest using a machine-specific encryption key. Your credentials are never stored in plain text.</p>
 
-<h3>No cloud dependency</h3>
+<h3>Works offline</h3>
 
-<p>Prosponsive does not require an internet connection to function (assuming you use a local AI provider like Ollama). There is no license server, no activation check, and no feature gating tied to a remote service. If your internet goes down, Prosponsive keeps working.</p>
+<p>Prosponsive does not require an internet connection to function (assuming you use a local AI provider like Ollama). If your internet goes down, Prosponsive keeps working.</p>
 
 <hr>
 
@@ -375,7 +375,7 @@
     <tr><td><strong>Auto-Approvals</strong></td><td>Condition-based rules let trusted tools run without interrupting you. Only Prosponsive has this.</td></tr>
     <tr><td><strong>Higher-Value Tools</strong></td><td>n8n workflows that orchestrate multiple systems per tool call. One tool does what multiple MCPs cannot.</td></tr>
     <tr><td><strong>Provider Agnostic</strong></td><td>7+ providers, switch anytime. Design that minimizes token cost instead of maximizing it.</td></tr>
-    <tr><td><strong>Privacy &amp; Security</strong></td><td>Local-first. Encrypted. No cloud service, no telemetry, no data collection.</td></tr>
+    <tr><td><strong>Privacy &amp; Security</strong></td><td>Local execution. Encrypted connections. Your work stays on your machine.</td></tr>
     <tr><td><strong>Extensibility</strong></td><td>Custom agents, custom workflows, 1000+ integrations via n8n.</td></tr>
     <tr><td><strong>Multi-Language</strong></td><td>12 languages across the full interface.</td></tr>
     <tr><td><strong>Scheduled Prompts</strong></td><td>Automated recurring tasks. Combined with auto-approvals, Prosponsive works while you don't.</td></tr>
