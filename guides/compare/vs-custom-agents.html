@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prosponsive vs. Custom GPTs and OpenAI Assistants</title>
+  <style>
+  @page {
+    margin: 0.75in 1in;
+    size: letter;
+  }
+  body, .vscode-body, .markdown-body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    color: #1F2321 !important;
+    background-color: #F4F6F4 !important;
+    line-height: 1.6;
+    max-width: 7.5in;
+    margin: 0 auto;
+  }
+  h1 { color: #2F4F3E; font-size: 2em; border-bottom: 3px solid #2F4F3E; padding-bottom: 0.4em; margin-top: 0; }
+  h2 { color: #2F4F3E; font-size: 1.4em; border-bottom: 1px solid #D6DBD7; padding-bottom: 0.3em; margin-top: 2em; page-break-after: avoid; }
+  h3 { color: #3A5F4A; font-size: 1.1em; margin-top: 1.5em; page-break-after: avoid; }
+  a { color: #2F4F3E; text-decoration: underline; }
+  code { background: #E6EAE7; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace; }
+  pre { background: #E6EAE7; border-left: 4px solid #2F4F3E; padding: 0.8em 1em; border-radius: 4px; overflow-x: auto; page-break-inside: avoid; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 4px solid #4F6F5C; background: #F4F6F4; margin: 1em 0; padding: 0.6em 1em; border-radius: 0 4px 4px 0; color: #3A5F4A; page-break-inside: avoid; }
+  blockquote p { margin: 0.3em 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.9em; page-break-inside: avoid; }
+  th { background: #2F4F3E; color: white; padding: 0.5em 0.8em; text-align: left; font-weight: 600; }
+  td { padding: 0.5em 0.8em; border-bottom: 1px solid #D6DBD7; }
+  tr:nth-child(even) td { background: #F4F6F4; }
+  strong { color: #2F4F3E; }
+  hr { border: none; border-top: 2px solid #D6DBD7; margin: 2em 0; }
+  li { margin-bottom: 0.3em; }
+  .cover { text-align: center; padding: 3in 0 2in 0; page-break-after: always; }
+  .cover img { width: 160px; height: 160px; }
+  .cover h1 { border-bottom: none; font-size: 2.8em; margin: 0.5em 0 0.1em 0; letter-spacing: 0.02em; }
+  .cover .tagline { color: #5C635F; font-size: 1.2em; font-style: italic; margin-top: 0.3em; }
+  .cover .version { color: #5C635F; font-size: 0.9em; margin-top: 2em; }
+  .tip { background: #E6EAE7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; page-break-inside: avoid; }
+  .tip strong { color: #2F4F3E; }
+  .section-number { color: #4F6F5C; font-weight: 400; }
+  .guide-nav { display: flex; justify-content: space-between; align-items: center; border: 1px solid #D6DBD7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; }
+  .guide-nav a { text-decoration: none; color: #2F4F3E; font-weight: 500; }
+  .guide-nav a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
+    <img src="../prosponsive-icon.png" alt="Prosponsive" style="width: 120px; height: 120px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <svg style="position: absolute; inset: 0; width: 100%; height: 100%;" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" rx="8" ry="8" width="40" height="26" fill="#2F4F3E" />
+      <polygon points="30,26 38,36 32,26" fill="#2F4F3E" />
+      <line x1="8" y1="9" x2="32" y2="9" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="8" y1="17" x2="24" y2="17" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <rect x="72" y="86" rx="8" ry="8" width="40" height="26" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" />
+      <polygon points="82,86 74,76 84,86" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" stroke-linejoin="round" />
+      <line x1="81" y1="86" x2="85" y2="86" stroke="#F4F6F4" stroke-width="3" />
+      <line x1="80" y1="95" x2="104" y2="95" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="80" y1="103" x2="96" y2="103" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
+  </div>
+  <h1>Prosponsive</h1>
+  <div class="tagline">vs. Custom GPTs and OpenAI Assistants</div>
+  <div class="version">Lead more. Manage less.</div>
+</div>
+
+<div class="guide-nav">
+  <a href="vs-local-models.html">&larr; vs. Local Model Runners</a>
+  <a href="index.html">All Comparisons &rarr;</a>
+</div>
+
+<h1>Prosponsive vs. Custom GPTs and OpenAI Assistants</h1>
+
+<p>Custom GPTs and OpenAI's Assistants API represent the cloud-hosted agent approach — specialized AI agents that can be customized with instructions, knowledge files, and tool integrations, all running on OpenAI's infrastructure. They have lowered the barrier to creating purpose-built AI agents dramatically.</p>
+
+<p>Prosponsive agents take a different approach: they run locally, use any AI provider, connect to real tools through n8n workflows, and keep credentials isolated from the AI model. This guide compares the two paradigms.</p>
+
+<hr>
+
+<h2><span class="section-number">1.</span> What Custom GPTs and Assistants Do Well</h2>
+
+<ul>
+  <li><strong>Easy to create.</strong> Building a Custom GPT takes minutes — write instructions, upload knowledge files, enable built-in tools, and publish. No infrastructure, no deployment, no maintenance.</li>
+  <li><strong>Shareable.</strong> Custom GPTs can be published to OpenAI's GPT Store and shared with anyone who has a ChatGPT subscription. Assistants can be embedded in applications via API. Distribution is effortless.</li>
+  <li><strong>Built-in capabilities.</strong> Code Interpreter runs Python in a sandbox. File Search indexes uploaded documents with retrieval-augmented generation. Web browsing accesses current information. These features work out of the box.</li>
+  <li><strong>OpenAI's model ecosystem.</strong> Access to GPT-4o, GPT-4, and specialized models with automatic upgrades. Fine-tuning options for the Assistants API.</li>
+  <li><strong>Function calling.</strong> The Assistants API supports structured function calling, allowing agents to interact with external APIs through well-defined schemas. This is a powerful pattern for building integrations.</li>
+  <li><strong>Managed infrastructure.</strong> No servers to run, no databases to manage, no updates to install. OpenAI handles compute, storage, and availability.</li>
+</ul>
+
+<hr>
+
+<h2><span class="section-number">2.</span> Where Prosponsive Differs</h2>
+
+<h3>Real tools, not simulated actions</h3>
+
+<p>Custom GPTs can call "actions" — HTTP endpoints that you configure. But those endpoints must be publicly accessible, HTTPS, and hosted somewhere. For an individual user who wants their AI to interact with local services, internal APIs, or desktop applications, this model does not work without significant infrastructure.</p>
+
+<p>Prosponsive agents call n8n workflows running on your machine. No public endpoints needed. No hosting required. Your tools can interact with anything your machine can reach — local files, internal services, databases, desktop applications, and external APIs alike.</p>
+
+<h3>Credential isolation</h3>
+
+<p>When a Custom GPT calls an action, the credentials for that action (API keys, OAuth tokens) must be configured in the GPT's action settings and are transmitted with each request through OpenAI's infrastructure. The Assistants API's function calling relies on your application code to handle credentials, which is more secure but requires custom development.</p>
+
+<p>Prosponsive's architecture is different by design. Credentials are stored in n8n's encrypted vault on your machine. When the AI agent triggers a workflow, n8n resolves the credentials at execution time. The AI model never sees the credentials — not in the prompt, not in the function call, not in the response. This is not a policy decision; it is an architectural guarantee.</p>
+
+<h3>Provider independence</h3>
+
+<p>Custom GPTs and the Assistants API are OpenAI products. Your agents, your knowledge files, your conversation history, and your tool configurations all live on OpenAI's platform. If you want to use Anthropic's Claude or Google's Gemini instead, you start over with a different platform.</p>
+
+<p>Prosponsive agents are provider-agnostic. Build your tools and workflows once, then use them with any supported AI provider. Switch from OpenAI to Anthropic to a local model without rebuilding your agent or losing your tool integrations.</p>
+
+<h3>Data sovereignty</h3>
+
+<p>Custom GPTs process all data on OpenAI's servers. Your knowledge files are stored and indexed on their infrastructure. Your conversations pass through their systems. Even with data privacy commitments, your data leaves your machine.</p>
+
+<p>Prosponsive keeps everything local. Knowledge files, conversation history, workflow data, and execution logs stay on your machine. With a local model, no data leaves your machine at all.</p>
+
+<h3>Full workflow visibility</h3>
+
+<p>When a Custom GPT calls an action, you see the result. You do not see the intermediate steps, the data transformations, the conditional logic, or the error handling. It is a black box between input and output.</p>
+
+<p>Prosponsive tools are n8n workflows — visual, inspectable, debuggable. You can see every node, every data transformation, every conditional branch. When something goes wrong, you can trace exactly what happened and fix it.</p>
+
+<hr>
+
+<h2><span class="section-number">3.</span> Side-by-Side Comparison</h2>
+
+<table>
+  <tr>
+    <th>Factor</th>
+    <th>Custom GPTs / Assistants</th>
+    <th>Prosponsive</th>
+  </tr>
+  <tr>
+    <td>Agent creation</td>
+    <td>Minutes (web UI or API)</td>
+    <td>Build n8n workflows + configure</td>
+  </tr>
+  <tr>
+    <td>Tool integration</td>
+    <td>HTTP actions / function calling</td>
+    <td><strong>Full n8n workflows (local)</strong></td>
+  </tr>
+  <tr>
+    <td>Credential security</td>
+    <td>Configured in GPT / app code</td>
+    <td><strong>Architecturally isolated</strong></td>
+  </tr>
+  <tr>
+    <td>AI provider</td>
+    <td>OpenAI only</td>
+    <td>7+ providers</td>
+  </tr>
+  <tr>
+    <td>Data residency</td>
+    <td>OpenAI servers</td>
+    <td>Your machine</td>
+  </tr>
+  <tr>
+    <td>Sharing / distribution</td>
+    <td><strong>GPT Store / API</strong></td>
+    <td>Local only</td>
+  </tr>
+  <tr>
+    <td>Tool visibility</td>
+    <td>Input/output only</td>
+    <td><strong>Full workflow inspection</strong></td>
+  </tr>
+  <tr>
+    <td>Offline capable</td>
+    <td>No</td>
+    <td>Yes (with local models)</td>
+  </tr>
+  <tr>
+    <td>Built-in code execution</td>
+    <td><strong>Yes (Code Interpreter)</strong></td>
+    <td>Via n8n code nodes</td>
+  </tr>
+  <tr>
+    <td>Infrastructure</td>
+    <td>Fully managed</td>
+    <td>Local (auto-managed)</td>
+  </tr>
+</table>
+
+<hr>
+
+<h2><span class="section-number">4.</span> Key Decision Factors</h2>
+
+<h3>Privacy</h3>
+
+<p>If your agent processes sensitive data — customer records, legal documents, financial information, proprietary business logic — the question is whether that data should pass through a third-party cloud service. Custom GPTs require it. Prosponsive does not.</p>
+
+<h3>Cost</h3>
+
+<p>Custom GPTs require a ChatGPT Plus subscription ($20/month) or a Team/Enterprise plan. The Assistants API charges per-token and per-tool-call, with costs for file storage and retrieval. Prosponsive is free, with optional API costs if you use cloud providers. For agents with heavy tool use, Prosponsive's architecture can be significantly cheaper since workflow execution is local and free.</p>
+
+<h3>Extensibility</h3>
+
+<p>Custom GPTs are extensible through actions (HTTP endpoints), knowledge files, and instructions. The Assistants API adds function calling and thread management. Both are powerful but constrained to what OpenAI's platform supports.</p>
+
+<p>Prosponsive agents can do anything an n8n workflow can do — which includes hundreds of pre-built integrations, custom code execution, database queries, file operations, and HTTP calls to any endpoint. The extensibility ceiling is much higher, though the floor is also higher (you need to build workflows, not just configure settings).</p>
+
+<h3>Distribution</h3>
+
+<p>If you want to share your agent with others — publish it for a team, embed it in an application, or list it in a marketplace — Custom GPTs and the Assistants API are designed for this. Prosponsive agents are personal productivity tools running on individual machines. Distribution is not a design goal.</p>
+
+<hr>
+
+<h2><span class="section-number">5.</span> Who Should Choose Which</h2>
+
+<h3>Custom GPTs / Assistants are the better choice if you:</h3>
+
+<ul>
+  <li>Want to build and share agents quickly with minimal infrastructure</li>
+  <li>Need to distribute agents to users or embed them in applications</li>
+  <li>Are comfortable with OpenAI handling your data</li>
+  <li>Want built-in capabilities (Code Interpreter, File Search) without configuration</li>
+  <li>Need a managed service with no local infrastructure</li>
+  <li>Are building for a team or product, not personal productivity</li>
+</ul>
+
+<h3>Prosponsive is the better choice if you:</h3>
+
+<ul>
+  <li>Need agents with real tool access — not just HTTP endpoints, but local services, files, and databases</li>
+  <li>Require credential isolation — the AI model should never see your API keys</li>
+  <li>Want to choose the best AI provider for each use case</li>
+  <li>Need to keep all data on your machine</li>
+  <li>Want full visibility into what your agent does — inspectable, debuggable workflows</li>
+  <li>Are building personal productivity agents, not shareable products</li>
+</ul>
+
+<blockquote>
+  <p><strong>Different design goals.</strong> Custom GPTs and Assistants are designed for building and distributing specialized AI agents at scale. Prosponsive is designed for personal AI productivity with deep tool integration and strong privacy. If you need to build an agent that thousands of people use, Custom GPTs win. If you need a personal AI assistant that actually does things with your data safely, Prosponsive wins.</p>
+</blockquote>
+
+<hr>
+
+<div class="guide-nav">
+  <a href="vs-local-models.html">&larr; vs. Local Model Runners</a>
+  <a href="index.html">All Comparisons &rarr;</a>
+</div>
+
+<div style="text-align: center; margin-top: 3em; padding-top: 1em; border-top: 2px solid #D6DBD7; color: #5C635F; font-size: 0.85em;">
+  <img src="../prosponsive-icon.png" alt="Prosponsive" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 0.5em;">
+  <strong style="color: #2F4F3E;">Prosponsive</strong> — Lead more. Manage less.
+</div>
+
+</body>
+</html>
