@@ -71,7 +71,7 @@
 
 <h1>Prosponsive vs. Claude Cowork</h1>
 
-<p>Claude Cowork is Anthropic's autonomous desktop agent for knowledge workers. It handles multi-step tasks like organizing files, synthesizing documents, extracting data, and creating presentations. It is the closest product to Prosponsive in terms of audience and ambition — both target knowledge workers who want to delegate real tasks to AI.</p>
+<p>Claude Cowork is Anthropic's autonomous desktop agent for knowledge workers. It handles multi-step tasks — organizing files, synthesizing documents, browser automation, and interacting with 38+ connected services. It is the closest product to Prosponsive in terms of audience and ambition — both target knowledge workers who want to delegate real tasks to AI.</p>
 
 <p>The differences are architectural, and the security and usefulness of that matters.</p>
 
@@ -80,9 +80,9 @@
 <h2><span class="section-number">1.</span> What Claude Cowork Does Well</h2>
 
 <ul>
-  <li><strong>Document-oriented task delegation.</strong> Cowork handles file and document tasks well — organizing folders, renaming files, assembling drafts from multiple sources, extracting data from PDFs, and creating presentations. You describe the outcome and it executes without step-by-step prompting.</li>
-  <li><strong>Desktop integration.</strong> Cowork accesses local files, folders, and applications directly. It works within your existing environment rather than requiring you to move to a new interface.</li>
-  <li><strong>Plugin ecosystem.</strong> Anthropic offers 11 official plugins (sales, legal, finance, marketing) and supports custom plugins that users can build and share.</li>
+  <li><strong>Multi-step task delegation.</strong> Cowork handles a range of tasks — organizing files, synthesizing documents, browser automation via Computer Use, and interacting with connected services. You describe the outcome and it executes without step-by-step prompting.</li>
+  <li><strong>Desktop integration.</strong> Cowork accesses local files, folders, and applications directly, including browser control through its Computer Use feature.</li>
+  <li><strong>Connector ecosystem.</strong> 38+ connectors to services like Google Workspace, Slack, HubSpot, and others. Anthropic also offers official plugins for sales, legal, finance, and marketing use cases, and supports custom plugins.</li>
   <li><strong>Powerful reasoning.</strong> Powered by Claude, one of the strongest reasoning models available. Complex multi-step tasks benefit from Claude's ability to plan and execute sophisticated workflows.</li>
   <li><strong>Low barrier to entry.</strong> No technical background required. Included in Anthropic's paid plans.</li>
 </ul>
@@ -99,9 +99,11 @@
 
 <p>Cowork executes tasks while you watch. You describe the outcome, Cowork works, you see the results. Prosponsive executes tools asynchronously in the background. You queue tasks, agents work, and you get notified when results are ready or when something needs your attention. For more detail, see <a href="../features.html">Async Tool Use</a> in the Feature Guide.</p>
 
-<h3>Flat tasks vs. channels and threads</h3>
+<h3>Project folders vs. channels and threads</h3>
 
-<p>Cowork handles individual tasks in individual sessions. There is no persistent organizational structure for ongoing work across multiple projects and agents. Prosponsive organizes work into channels and threads — agents are scoped to channels, threads keep tasks contained, and the structure persists across sessions. For more detail, see <a href="../features.html">Channels and Threads</a> in the Feature Guide.</p>
+<p>Cowork organizes work into Projects — dedicated folders with their own context files and conversation history. This prevents context bleeding between different work streams, but each Project is still a single-agent workspace tied to Claude.</p>
+
+<p>Prosponsive organizes work into channels and threads with a different model: multiple agents can participate in the same channel, threads keep individual tasks contained and movable, and agents are scoped to specific channels with specific tools. The organizational structure is designed for multi-agent collaboration, not single-agent task isolation. For more detail, see <a href="../features.html">Channels and Threads</a> in the Feature Guide.</p>
 
 <h3>Desktop access vs. credential isolation</h3>
 
@@ -139,8 +141,8 @@
   </tr>
   <tr>
     <td>Work organization</td>
-    <td>Individual task sessions</td>
-    <td><strong>Persistent channels and threads</strong></td>
+    <td>Project folders (single-agent)</td>
+    <td><strong>Multi-agent channels and threads</strong></td>
   </tr>
   <tr>
     <td>Auto-approvals</td>
@@ -154,7 +156,7 @@
   </tr>
   <tr>
     <td>Scheduled prompts</td>
-    <td>No</td>
+    <td>Yes (requires app open)</td>
     <td><strong>Yes</strong></td>
   </tr>
   <tr>
@@ -212,11 +214,11 @@
 <h3>Cowork may be enough if you:</h3>
 
 <ul>
-  <li>Just need to reorganize some documents on your drive or synthesize a few files into a report</li>
   <li>Are willing to watch your agents while they work and be available when they need you</li>
   <li>Only need Anthropic's Claude models and are comfortable with a single provider</li>
-  <li>Work primarily with local files and don't need to connect to external systems</li>
-  <li>Don't need your agents to run when you're not sitting in front of them</li>
+  <li>Are comfortable with Anthropic's connector ecosystem for your external integrations</li>
+  <li>Don't need auto-approvals or bulk approval for tool actions</li>
+  <li>Don't need external systems to push data to your agents via webhooks</li>
 </ul>
 
 <h3>Choose Prosponsive when you need more:</h3>
