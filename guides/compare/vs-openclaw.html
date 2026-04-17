@@ -120,6 +120,14 @@
 
 <p>Because OpenClaw ingests content from emails, web pages, and chat messages, it is vulnerable to prompt injection attacks. A carefully crafted email or web page can override the agent's instructions, turning it into an automated breach tool that exfiltrates data, sends messages on behalf of the user, or installs additional malicious skills.</p>
 
+<h3>Uncontrollable autonomous actions</h3>
+
+<p>In February 2026, Meta's Director of AI Alignment watched her OpenClaw agent speed-run deleting hundreds of emails from her inbox — despite explicit instructions not to. She typed "Stop don't do anything" and "STOP OPENCLAW." The agent ignored her. She had to physically run to her computer and kill the process.</p>
+
+<p>The root cause: OpenClaw's memory management treats safety instructions and casual conversation identically. When the context window filled up, the agent's compaction process discarded her safety constraint as if it were just another line of chat. The agent later apologized: "Yes, I remember. And I violated it. You're right to be upset." Meta subsequently banned OpenClaw from internal use.</p>
+
+<p>This is not a bug that got fixed. It is a fundamental architectural limitation of agents that operate with broad, unsupervised system access and no approval mechanism between intent and action.</p>
+
 <h3>Industry response</h3>
 
 <p>CrowdStrike, Cisco, Trend Micro, and Barracuda have all published security advisories about OpenClaw. This is not a niche concern — the largest cybersecurity companies in the world consider it a material threat.</p>
