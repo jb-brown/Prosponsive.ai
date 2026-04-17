@@ -101,6 +101,12 @@
 
 <p>Prosponsive adds an AI layer on top. Instead of defining every condition and branch in advance, you describe what you want in natural language. The AI decides which tools to use, in what order, and how to handle edge cases. You can still build structured n8n workflows for predictable tasks, but you can also let the AI compose tool calls dynamically based on context. That AI layer supports 7+ providers with automatic failover — you define a priority list of providers and models, and if one goes down or you hit a rate limit, Prosponsive switches to the next one without interruption. For more detail, see <a href="../features.html">Tools and Workflows</a> in the Feature Guide.</p>
 
+<h3>Workflow results drive continued work</h3>
+
+<p>In Zapier and Make, a completed workflow is a "done" notification sitting in a log that you only see when you're logged into that platform's interface. The result doesn't go anywhere — it's an endpoint.</p>
+
+<p>In Prosponsive, a completed workflow is an input. The result flows back to your AI agent, which uses it to decide what to do next — take another action, update a different system, notify you, or continue a multi-step task. Workflows are not standalone automations that terminate. They are tools in your agent's hands, and their outputs contribute to the continued execution of your work.</p>
+
 <h3>Powered by n8n — the best workflow engine available</h3>
 
 <p>Prosponsive leverages a local <a href="https://n8n.io">n8n</a> instance as its tool layer and helps you set it up and manage it. Every tool your agent calls is an n8n workflow. You get n8n's full visual workflow builder, its integration library, and its debugging tools. Workflows you build are directly available to your AI agents, and every execution is visible and inspectable.</p>
