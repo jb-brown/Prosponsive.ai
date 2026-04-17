@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prosponsive vs. n8n, Zapier, and Make</title>
+  <title>Prosponsive vs. Zapier and Make</title>
   <style>
   @page {
     margin: 0.75in 1in;
@@ -64,7 +64,7 @@
     </svg>
   </div>
   <h1>Prosponsive</h1>
-  <div class="tagline">vs. n8n, Zapier, and Make</div>
+  <div class="tagline">vs. Zapier and Make</div>
   <div class="version">Lead more. Manage less.</div>
 </div>
 
@@ -73,19 +73,19 @@
   <a href="vs-local-models.html">vs. Local Model Runners &rarr;</a>
 </div>
 
-<h1>Prosponsive vs. n8n, Zapier, and Make</h1>
+<h1>Prosponsive vs. Zapier and Make</h1>
 
-<p>n8n, Zapier, and Make are workflow automation platforms. They let you connect services, move data between systems, and automate repetitive tasks — often without writing code. They are excellent at what they do, and millions of workflows run on them every day.</p>
+<p>Zapier and Make are workflow automation platforms. They let you connect services, move data between systems, and automate repetitive tasks — often without writing code. They are excellent at what they do, and millions of workflows run on them every day.</p>
 
-<p>Prosponsive is not an automation platform. It is an AI assistant that happens to include one. Prosponsive bundles a local instance of n8n as its tool layer, which means it shares DNA with n8n but serves a fundamentally different purpose. This guide explains the relationship and the differences.</p>
+<p>Prosponsive is not an automation platform. It is an AI productivity platform that leverages <a href="https://n8n.io">n8n</a> — the most capable visual workflow engine available — as its tool layer. Prosponsive helps you set up and manage n8n locally so your AI agents have access to powerful, transparent, multi-system tools. The difference from standalone automation: those platforms execute predefined workflows on triggers. Prosponsive's AI agents decide which tools to use based on what you need.</p>
 
 <hr>
 
 <h2><span class="section-number">1.</span> What Automation Platforms Do Well</h2>
 
 <ul>
-  <li><strong>Visual workflow building.</strong> Drag-and-drop interfaces that make complex integrations accessible to non-developers. Zapier's simplicity is legendary; Make's visual flows are powerful; n8n combines both with code-level extensibility.</li>
-  <li><strong>Massive integration libraries.</strong> Zapier connects to 6,000+ apps. Make and n8n each support hundreds of built-in integrations. Pre-built templates mean you can automate common patterns in minutes.</li>
+  <li><strong>Visual workflow building.</strong> Drag-and-drop interfaces that make complex integrations accessible to non-developers. Zapier's simplicity is legendary; Make's visual flows are powerful.</li>
+  <li><strong>Massive integration libraries.</strong> Zapier connects to 6,000+ apps. Make supports hundreds of built-in integrations. Pre-built templates mean you can automate common patterns in minutes.</li>
   <li><strong>Reliable scheduling.</strong> Cron-based triggers, webhook listeners, event-driven execution. These platforms are built to run workflows reliably, at scale, 24/7.</li>
   <li><strong>Team collaboration.</strong> Shared workspaces, version history, and access controls for managing workflows across teams.</li>
   <li><strong>Battle-tested in production.</strong> Zapier and Make run billions of tasks per month. Their infrastructure is built for reliability and scale in ways that individual deployments cannot match.</li>
@@ -101,18 +101,9 @@
 
 <p>Prosponsive adds an AI layer on top. Instead of defining every condition and branch in advance, you describe what you want in natural language. The AI decides which tools to use, in what order, and how to handle edge cases. You can still build structured n8n workflows for predictable tasks, but you can also let the AI compose tool calls dynamically based on context. That AI layer supports 7+ providers with automatic failover — you define a priority list of providers and models, and if one goes down or you hit a rate limit, Prosponsive switches to the next one without interruption. For more detail, see <a href="../features.html">Tools and Workflows</a> in the Feature Guide.</p>
 
-<h3>Prosponsive uses n8n — it does not replace it</h3>
+<h3>Powered by n8n — the best workflow engine available</h3>
 
-<p>This is a critical distinction. Prosponsive bundles a local n8n instance and uses it as its tool layer. Every tool your Prosponsive agent calls is an n8n workflow running on your machine. This means:</p>
-
-<ul>
-  <li>You get n8n's full workflow builder, its integration library, and its visual debugging tools</li>
-  <li>Workflows you build in n8n are directly available to your AI agent</li>
-  <li>You can inspect exactly what your agent does — every workflow execution is visible in n8n's interface</li>
-  <li>The AI agent interacts through n8n's API, never through credentials directly</li>
-</ul>
-
-<p>If you already use and love n8n, Prosponsive adds an AI conversation layer on top. If you are new to n8n, you get it bundled and managed automatically.</p>
+<p>Prosponsive leverages a local <a href="https://n8n.io">n8n</a> instance as its tool layer and helps you set it up and manage it. Every tool your agent calls is an n8n workflow. You get n8n's full visual workflow builder, its integration library, and its debugging tools. Workflows you build are directly available to your AI agents, and every execution is visible and inspectable.</p>
 
 <h3>Credential isolation</h3>
 
@@ -122,9 +113,9 @@
 
 <h3>Local-first execution</h3>
 
-<p>Zapier and Make run entirely in the cloud. Your workflow definitions, credentials, and execution data live on their servers. n8n offers both cloud and self-hosted options.</p>
+<p>Zapier and Make run entirely in the cloud. Your workflow definitions, credentials, and execution data live on their servers.</p>
 
-<p>Prosponsive runs n8n locally on your machine. Workflow definitions, credentials, execution logs, and data stay on your computer. There is no cloud service to depend on, no data to transmit, and no subscription for workflow executions.</p>
+<p>Prosponsive runs everything locally on your machine. Workflow definitions, credentials, execution logs, and data stay on your computer.</p>
 
 <hr>
 
@@ -134,49 +125,41 @@
   <tr>
     <th>Factor</th>
     <th>Zapier / Make</th>
-    <th>n8n (standalone)</th>
-    <th>Prosponsive (with n8n)</th>
+    <th>Prosponsive</th>
   </tr>
   <tr>
     <td>AI-driven tool use</td>
-    <td>No (trigger-based)</td>
     <td>No (trigger-based)</td>
     <td><strong>Yes</strong></td>
   </tr>
   <tr>
     <td>Visual workflow builder</td>
     <td><strong>Yes</strong></td>
-    <td><strong>Yes</strong></td>
     <td><strong>Yes</strong> (via n8n)</td>
   </tr>
   <tr>
     <td>Integration count</td>
     <td>6,000+ (Zapier)</td>
-    <td>400+</td>
     <td>400+ (via n8n)</td>
   </tr>
   <tr>
     <td>Data residency</td>
     <td>Cloud</td>
-    <td>Self-hosted or cloud</td>
     <td>Your machine</td>
   </tr>
   <tr>
     <td>Credential handling</td>
-    <td>Platform access</td>
     <td>Platform access</td>
     <td><strong>Isolated from AI</strong></td>
   </tr>
   <tr>
     <td>Natural language interface</td>
     <td>Limited (AI features)</td>
-    <td>No</td>
     <td><strong>Yes</strong></td>
   </tr>
   <tr>
     <td>Scaling</td>
     <td><strong>Cloud-scale</strong></td>
-    <td>Self-managed</td>
     <td>Single machine</td>
   </tr>
 </table>
@@ -191,7 +174,7 @@
 
 <h3>Extensibility</h3>
 
-<p>Zapier has the largest integration library but limited customization per integration. Make offers more complex logic but within its visual paradigm. n8n (and therefore Prosponsive) offers full code-level extensibility — you can write JavaScript or Python within workflow nodes, call arbitrary HTTP endpoints, and build completely custom integrations.</p>
+<p>Zapier has the largest integration library but limited customization per integration. Make offers more complex logic but within its visual paradigm. Prosponsive, through n8n, offers full code-level extensibility — you can write JavaScript or Python within workflow nodes, call arbitrary HTTP endpoints, and build completely custom integrations.</p>
 
 <h3>Scale</h3>
 
@@ -201,7 +184,7 @@
 
 <h2><span class="section-number">5.</span> Making the Choice</h2>
 
-<h3>n8n, Zapier, or Make may be enough if you:</h3>
+<h3>Zapier or Make may be enough if you:</h3>
 
 <ul>
   <li>Only need trigger-action automations without AI reasoning</li>
@@ -216,7 +199,7 @@
   <li>Need credential isolation — the AI should never see your passwords and API keys</li>
   <li>Want workflows and data to stay on your machine</li>
   <li>Are building personal productivity automation, not enterprise-scale pipelines</li>
-  <li>Want the power of n8n with an AI conversation layer on top</li>
+  <li>Want the power of n8n's workflow engine with AI agents that know when and how to use your tools</li>
 </ul>
 
 <hr>
