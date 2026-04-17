@@ -270,6 +270,10 @@
 
 <p>Changing your AI provider is a single setting change. Your conversations, agents, tools, and workflows are completely independent of which provider you use. Switch from OpenAI to Anthropic to Ollama and back — nothing else changes. You use your own API keys with each provider. Prosponsive never proxies your requests through a third-party service.</p>
 
+<h3>Automatic failover</h3>
+
+<p>When your AI provider goes down or you hit a rate limit, your work stops. If you depend on a single provider, an outage means your agents can't function, your scheduled prompts don't run, and your tools sit idle. Prosponsive solves this with automatic failover — you define a priority list of providers and models, and if the primary fails, Prosponsive switches to the next one without interruption. Your agents keep working, your tasks keep running, and you may not even notice the outage happened.</p>
+
 <h3>Design that minimizes token usage</h3>
 
 <p>Most AI products are built by AI providers or depend on a single provider's revenue. Their incentive is to maximize your token consumption. Prosponsive's incentive is the opposite.</p>
