@@ -76,112 +76,132 @@
 
 <h1>Prosponsive Features</h1>
 
-<p>This guide covers what Prosponsive can do. It walks through each major capability so you can understand the full scope of the platform before diving into specific workflows. If you haven't used Prosponsive yet, start with the <a href="install-guide.html">Install Guide</a> and <a href="basics.html">Basics</a>.</p>
+<p>This guide covers what Prosponsive can do and why each capability matters. Every feature described here exists because existing AI tools force you into a pattern that wastes your time, leaks your data, or locks you into a vendor. Prosponsive was built to fix that. If you haven't used Prosponsive yet, start with the <a href="install-guide.html">Install Guide</a> and <a href="basics.html">Basics</a>.</p>
 
 <hr>
 
-<h2><span class="section-number">1.</span> AI-Powered Conversations</h2>
+<h2><span class="section-number">1.</span> Async Tool Use</h2>
 
-<p>Prosponsive gives you a conversational interface to AI that works the way you think — not the way a single provider's API happens to work.</p>
+<p>Prosponsive is the only AI product with asynchronous tool execution. When an agent calls a tool, the work happens in the background. You do not sit and watch a chat window spin.</p>
 
-<h3>Multi-provider support</h3>
+<h3>How it works</h3>
 
-<p>Prosponsive connects to multiple AI providers simultaneously. You're never locked in to one vendor. Supported providers include:</p>
+<p>When you give an agent a task that involves tools, the agent submits tool calls and they execute independently. You can close the conversation, switch to another channel, or leave your desk entirely. When the tools finish, results are waiting for you. The agent has already incorporated them and moved on to the next step, or is ready for your input.</p>
+
+<h3>Why this matters</h3>
+
+<p>Every other AI tool forces you into a synchronous loop: you type, the AI responds, you watch it think, you wait for the tool to run, you read the result, you respond. Your attention is captured for the entire duration of every tool call. If a tool takes 30 seconds, you lose 30 seconds of focus. If a workflow chains five tools, you lose minutes sitting idle in a chat window.</p>
+
+<p>Prosponsive eliminates that pattern. You send a task and walk away. The difference between synchronous and asynchronous tool use is the difference between standing at a fax machine waiting for each page and dropping a stack in the outbox. One demands your attention. The other respects it.</p>
+
+<h3>What this enables</h3>
+
+<p>Async tool use changes what you can ask an agent to do. When tools run in the background, it becomes practical to assign tasks that take minutes to complete — pulling data from multiple systems, generating reports, processing documents. These are tasks you would never assign through a synchronous chat interface because you would have to sit and watch the entire time.</p>
+
+<hr>
+
+<h2><span class="section-number">2.</span> Channels</h2>
+
+<p>Prosponsive organizes work into <strong>channels</strong>, not conversations. This is a fundamental design difference that affects token cost, prompt quality, and how agents collaborate.</p>
+
+<h3>What channels are</h3>
+
+<p>A channel is a persistent workspace where one or more agents operate. Agents and their tools are scoped to channels — an agent assigned to a channel has access to specific tools relevant to that channel's purpose. An agent not assigned to a channel cannot see it, cannot participate in it, and does not consume tokens for it.</p>
+
+<p>This is the opposite of how other AI tools work. In most products, every conversation has access to every tool and every capability. The system prompt grows with every integration you add. Token costs increase linearly, and the AI model gets a bloated context full of irrelevant instructions.</p>
+
+<h3>Scoped agents, lean prompts</h3>
+
+<p>Because agents and tools are scoped to channels, each conversation carries only the context it needs. An agent managing your email does not receive instructions about your database queries. An agent that handles calendar scheduling does not see your code review tools. This keeps prompts lean, reduces token usage, and produces better results because the model is not sorting through irrelevant context to find what matters.</p>
+
+<h3>Group agent collaboration</h3>
+
+<p>Prosponsive has a group agent chat design that no other product offers. Multiple agents can participate in the same channel, each with their own tools and expertise. You can assign a research agent, a writing agent, and a review agent to the same channel. They share context through the channel's conversation history, but each brings its own specialized capabilities. This enables multi-agent workflows without custom orchestration code — you just assign the right agents to the right channel.</p>
+
+<h3>Channel sharing</h3>
+
+<p>When you create an agent, you define which channels it can participate in. This means you control exactly which agents can see and respond in each workspace. You can share a channel across multiple agents for collaboration, or restrict it to a single specialist agent for focused work.</p>
+
+<hr>
+
+<h2><span class="section-number">3.</span> Filtering, Grouping, and Bulk Approval</h2>
+
+<p>Prosponsive is built for tasks, not talk. When agents use tools, they generate actions that need your review. In a typical AI chat product, you see these one at a time in a linear conversation. Prosponsive gives you filtering, grouping, and bulk approval instead.</p>
+
+<h3>Filtering and grouping</h3>
+
+<p>When multiple tool actions are pending, Prosponsive lets you filter them by agent, by tool, by channel, or by status. You can group related actions together — all the file operations in one group, all the API calls in another. This gives you a structured view of what your agents want to do, rather than a scroll of interleaved chat messages.</p>
+
+<h3>Bulk approval</h3>
+
+<p>Once you have filtered and grouped actions, you can approve them in bulk. Review a set of related tool calls, confirm they look correct, and approve them all at once. This is not possible in products designed around sequential chat, because those products present one action at a time embedded in a conversation thread.</p>
+
+<h3>Why this matters</h3>
+
+<p>When you have multiple agents working across multiple channels with multiple tools, the volume of pending actions can grow quickly. Without filtering and bulk approval, you become a bottleneck — clicking "approve" one action at a time, scrolling through conversations to find what needs attention. Prosponsive's task-oriented design means you can review and approve a batch of actions in seconds instead of minutes.</p>
+
+<hr>
+
+<h2><span class="section-number">4.</span> Auto-Approvals</h2>
+
+<p>Prosponsive is the only AI tool with condition-based auto-approvals. You define rules, and matching tool calls execute without interrupting you.</p>
+
+<h3>How auto-approvals work</h3>
+
+<p>An auto-approval rule specifies conditions under which a tool call should be approved automatically. You can set conditions based on:</p>
 
 <ul>
-  <li><strong>Ollama</strong> — Run models locally on your own hardware, completely offline</li>
-  <li><strong>Anthropic</strong> — Claude models via direct API</li>
-  <li><strong>OpenAI</strong> — GPT models via direct API</li>
-  <li><strong>Google</strong> — Gemini models via direct API</li>
-  <li><strong>Groq</strong> — Fast inference for open models</li>
-  <li><strong>Mistral</strong> — Mistral models via direct API</li>
-  <li><strong>AWS Bedrock</strong> — Enterprise-grade access to multiple model families through your AWS account</li>
+  <li><strong>Tool</strong> — Auto-approve specific tools you trust (e.g., always approve the "check weather" tool)</li>
+  <li><strong>Agent</strong> — Auto-approve all tool calls from a specific agent</li>
+  <li><strong>Channel</strong> — Auto-approve tool calls within a specific channel</li>
+  <li><strong>Combinations</strong> — Auto-approve a specific tool only when called by a specific agent in a specific channel</li>
 </ul>
 
-<h3>Model selection</h3>
+<p>When a tool call matches an auto-approval rule, it executes immediately. When it does not match, it queues for your manual review like normal.</p>
 
-<p>Choose the right model for the job. Each provider offers different models with different strengths — some are faster, some are more capable, some are more cost-effective. You can switch models at any time from Settings without changing anything else about your setup.</p>
+<h3>Always-on operation</h3>
 
-<h3>Automatic failover</h3>
+<p>Auto-approvals are what turn Prosponsive from an interactive tool into an always-on system. Without them, every tool call blocks until you manually approve it. With them, trusted operations run continuously. An agent checking your inbox every 15 minutes via a scheduled prompt does not need you to click "approve" every time it calls the email-reading tool. You set the auto-approval rule once, and the agent operates independently from that point forward.</p>
 
-<p>If your selected provider is unavailable, Prosponsive can fall back to another configured provider. This means your workflow doesn't stop because one API is having a bad day.</p>
+<h3>Granular control</h3>
 
-<h3>Agents and delegation</h3>
-
-<p>Conversations are managed by <strong>agents</strong> — AI assistants with specific roles, tools, and instructions. The default <strong>Prosponsive</strong> agent coordinates your workspace and delegates to specialist agents when needed. You can create as many custom agents as you want, each tailored to a specific domain.</p>
-
-<p>For details on how agents work, see the <a href="basics.html">Basics</a> guide.</p>
+<p>Auto-approvals are not all-or-nothing. You can auto-approve low-risk read operations while requiring manual approval for actions that modify data. You can auto-approve tools in a monitoring channel while keeping approval requirements in a channel that manages production systems. The rule system is granular enough to match your actual trust boundaries.</p>
 
 <hr>
 
-<h2><span class="section-number">2.</span> Tool System</h2>
+<h2><span class="section-number">5.</span> Higher-Value Tools</h2>
 
-<p>Tools are what make Prosponsive more than a chatbot. They let agents take real actions — read files, call APIs, send notifications, query databases, and anything else you can wire up.</p>
+<p>Prosponsive tools are not MCP servers. They are fundamentally different in scope and design. Understanding this difference is key to understanding why Prosponsive exists.</p>
+
+<h3>MCPs vs. Prosponsive tools</h3>
+
+<p>An MCP (Model Context Protocol) server gives an AI model access to a single system — read from a database, post to Slack, create a GitHub issue. Each MCP is a thin wrapper around one API. To accomplish anything meaningful, you have to orchestrate multiple MCP calls yourself, or hope the AI model figures out the right sequence.</p>
+
+<p>A Prosponsive tool is an <a href="https://n8n.io">n8n</a> workflow. A single tool can connect to multiple systems, apply business logic, transform data between steps, handle errors, and produce a finished outcome. One Prosponsive tool does what would require multiple MCP calls plus manual coordination to achieve.</p>
+
+<h3>Example: the difference in practice</h3>
+
+<p>Consider a tool that processes a customer support ticket. With MCPs, the AI would need separate calls to: read the ticket from your helpdesk, look up the customer in your CRM, check their subscription status in your billing system, draft a response, and post it back. That is five separate tool calls across five systems, with the AI model responsible for sequencing and data passing.</p>
+
+<p>In Prosponsive, this is one tool. The n8n workflow handles the entire sequence: it reads the ticket, looks up the customer, checks billing, and returns a structured result to the agent. The agent makes one tool call and gets a complete picture.</p>
 
 <h3>Powered by n8n</h3>
 
-<p>Every tool in Prosponsive is an <a href="https://n8n.io">n8n</a> workflow. n8n is a visual workflow automation platform that runs locally alongside Prosponsive. This means:</p>
-
-<ul>
-  <li><strong>Visual workflow designer</strong> — Build tools by connecting nodes in a drag-and-drop editor, not by writing code</li>
-  <li><strong>1000+ integrations</strong> — n8n has pre-built nodes for Slack, Gmail, Google Sheets, Notion, GitHub, Jira, databases, HTTP APIs, and hundreds more</li>
-  <li><strong>Full control</strong> — You can inspect, modify, and debug every tool. Nothing is a black box</li>
-</ul>
+<p>Every Prosponsive tool is built in <a href="https://n8n.io">n8n</a>, a visual workflow automation platform that runs locally alongside Prosponsive. You build tools by connecting nodes in a drag-and-drop editor. n8n has pre-built nodes for over a thousand services — Slack, Gmail, Google Sheets, Notion, GitHub, Jira, databases, HTTP APIs, and more. You can inspect, modify, and debug every tool. Nothing is a black box.</p>
 
 <h3>Credential isolation</h3>
 
-<p>This is a critical security feature. When an agent uses a tool, it never sees your credentials. Here's how it works:</p>
+<p>When an agent calls a tool, it never sees your credentials. Your API keys, passwords, and tokens are stored in n8n's encrypted credential manager. The agent sends a request to the n8n workflow, n8n executes using its stored credentials, and the agent receives only the result. The AI model never has access to your secrets — not in the prompt, not in the tool call, not anywhere in the conversation.</p>
 
-<ol>
-  <li>You store credentials in n8n's credential manager (encrypted at rest)</li>
-  <li>When an agent calls a tool, it sends a request to the n8n workflow</li>
-  <li>n8n executes the workflow using its stored credentials</li>
-  <li>The agent only sees the result — never the API keys, passwords, or tokens</li>
-</ol>
+<p>This is a meaningful security boundary. You can give agents access to powerful tools that interact with production systems, and your credentials remain completely isolated from the AI provider.</p>
 
-<p>This means you can give agents access to powerful tools without ever exposing your secrets to the AI model.</p>
-
-<h3>Tool approval</h3>
-
-<p>Every tool call requires your approval before it executes. You see exactly what the agent wants to do, with what parameters, and why. You can also set up <strong>auto-approval rules</strong> for tools you trust, so routine actions don't require manual confirmation.</p>
-
-<p>For details on building custom tools, see the <a href="n8n-workflow-developer-guide.html">Developer Guide</a>.</p>
+<p>For a hands-on guide to building tools, see the <a href="n8n-workflow-developer-guide.html">Developer Guide</a>.</p>
 
 <hr>
 
-<h2><span class="section-number">3.</span> Privacy and Security</h2>
+<h2><span class="section-number">6.</span> Provider Agnostic</h2>
 
-<p>Prosponsive is designed around a simple principle: <strong>your data stays on your machine</strong>.</p>
-
-<h3>Local-first architecture</h3>
-
-<p>Prosponsive runs entirely on your computer. There is no Prosponsive cloud service, no Prosponsive account, no telemetry, and no data collection. The application, the database, the workflow engine, and your conversations all live on your machine.</p>
-
-<h3>What leaves your machine</h3>
-
-<p>The only data that leaves your computer is what you explicitly send to an AI provider when you have a conversation. If you use Ollama, nothing leaves your machine at all — the AI model runs locally too.</p>
-
-<h3>Encrypted connections</h3>
-
-<p>All local services communicate over encrypted connections using SSL certificates generated during setup. This includes the connection between Prosponsive and n8n, and between n8n and the local database. Even though everything is on your machine, connections are encrypted as if they were crossing the internet.</p>
-
-<h3>No cloud dependency</h3>
-
-<p>Prosponsive does not require an internet connection to function (assuming you use a local AI provider like Ollama). There is no license server, no activation check, and no feature gating tied to a remote service. If your internet goes down, Prosponsive keeps working.</p>
-
-<h3>Encrypted storage</h3>
-
-<p>Sensitive data — API keys, provider credentials, and secure settings — is encrypted at rest using a machine-specific encryption key. Your credentials are never stored in plain text.</p>
-
-<hr>
-
-<h2><span class="section-number">4.</span> Provider Agnostic</h2>
-
-<p>You are not locked in to any AI provider. Prosponsive treats providers as interchangeable backends.</p>
-
-<h3>Switch anytime</h3>
-
-<p>Changing your AI provider is a single setting change. Your conversations, agents, tools, and workflows are completely independent of which provider you use. Switch from OpenAI to Anthropic to Ollama and back — nothing else changes.</p>
+<p>Prosponsive supports 7+ AI providers, and you can switch between them at any time. But provider independence is not just about avoiding lock-in — it is about aligning incentives.</p>
 
 <h3>Supported providers</h3>
 
@@ -200,15 +220,49 @@
   </tbody>
 </table>
 
-<h3>Bring your own keys</h3>
+<h3>Switch anytime</h3>
 
-<p>You use your own API keys with each provider. Prosponsive never proxies your requests through a third-party service. Your API usage is between you and your provider — Prosponsive is just the interface.</p>
+<p>Changing your AI provider is a single setting change. Your conversations, agents, tools, and workflows are completely independent of which provider you use. Switch from OpenAI to Anthropic to Ollama and back — nothing else changes. You use your own API keys with each provider. Prosponsive never proxies your requests through a third-party service.</p>
+
+<h3>Design that minimizes token usage</h3>
+
+<p>Most AI products are built by AI providers or depend on a single provider's revenue. Their incentive is to maximize your token consumption. Prosponsive's incentive is the opposite.</p>
+
+<p>Every design choice in Prosponsive works to keep your token usage low. Channels scope agents and tools so prompts carry only relevant context. Agents receive only the instructions and tool definitions they need for the current channel, not a bloated system prompt containing everything. Group agent collaboration means specialist agents with small, focused prompts rather than one general agent with a massive context window.</p>
+
+<p>The result: you get better outputs at lower cost because the AI model processes focused, relevant context instead of sorting through noise. Prosponsive serves you, not your token bill.</p>
 
 <hr>
 
-<h2><span class="section-number">5.</span> Extensibility</h2>
+<h2><span class="section-number">7.</span> Privacy and Security</h2>
 
-<p>Prosponsive is designed to be extended, not just configured.</p>
+<p>Prosponsive is local-first software. Your data stays on your machine, your connections are encrypted, and there is no cloud service between you and your work.</p>
+
+<h3>Local-first architecture</h3>
+
+<p>Prosponsive runs entirely on your computer. There is no Prosponsive cloud service, no Prosponsive account, no telemetry, and no data collection. The application, the database, the workflow engine, and your conversations all live on your machine. You own your data completely.</p>
+
+<h3>What leaves your machine</h3>
+
+<p>The only data that leaves your computer is what you explicitly send to a cloud AI provider when you have a conversation. If you use Ollama, nothing leaves your machine at all — the AI model runs locally too. There is no analytics, no usage reporting, and no phone-home behavior of any kind.</p>
+
+<h3>Encrypted connections</h3>
+
+<p>All local services communicate over encrypted connections using SSL certificates generated during setup. The connection between Prosponsive and n8n, between n8n and the local database, and between you and the Prosponsive interface are all encrypted. Even though everything runs on your machine, connections are secured as if they were crossing the internet.</p>
+
+<h3>Encrypted storage</h3>
+
+<p>Sensitive data — API keys, provider credentials, and secure settings — is encrypted at rest using a machine-specific encryption key. Your credentials are never stored in plain text.</p>
+
+<h3>No cloud dependency</h3>
+
+<p>Prosponsive does not require an internet connection to function (assuming you use a local AI provider like Ollama). There is no license server, no activation check, and no feature gating tied to a remote service. If your internet goes down, Prosponsive keeps working.</p>
+
+<hr>
+
+<h2><span class="section-number">8.</span> Extensibility</h2>
+
+<p>Prosponsive is designed to be extended, not just configured. You can create custom agents, build custom tools, and connect to thousands of external services.</p>
 
 <h3>Custom agents</h3>
 
@@ -218,10 +272,10 @@
   <li><strong>System prompt</strong> — The agent's personality, expertise, and instructions</li>
   <li><strong>Allowed tools</strong> — Which n8n workflows the agent can invoke</li>
   <li><strong>Delegation rules</strong> — Which other agents it can hand off to</li>
-  <li><strong>Channel sharing</strong> — Which conversations the agent participates in</li>
+  <li><strong>Channel assignments</strong> — Which channels the agent participates in</li>
 </ul>
 
-<p>Agents are defined in markdown with YAML frontmatter — readable, version-controllable, and easy to duplicate.</p>
+<p>Agents are defined in markdown with YAML frontmatter — readable, version-controllable, and easy to duplicate. You can build a team of specialist agents that mirror how your actual work is organized: one for email, one for project management, one for research, one for reporting.</p>
 
 <h3>Custom n8n workflows</h3>
 
@@ -232,18 +286,18 @@
   <li>Querying and updating databases</li>
   <li>Processing files and documents</li>
   <li>Sending notifications (Slack, email, SMS)</li>
-  <li>Orchestrating multi-step business processes</li>
+  <li>Orchestrating multi-step business processes across systems</li>
 </ul>
 
 <h3>Thousands of integrations</h3>
 
-<p>Through n8n, Prosponsive can connect to over a thousand external services out of the box. If a service has an API, you can build a tool for it — often without writing a single line of code.</p>
+<p>Through n8n, Prosponsive can connect to over a thousand external services out of the box. If a service has an API, you can build a tool for it — often without writing a single line of code. And because each tool is a workflow, not a single API call, you can combine multiple integrations into one tool that produces a complete outcome.</p>
 
 <p>For a hands-on guide to building tools, see the <a href="n8n-workflow-developer-guide.html">Developer Guide</a>.</p>
 
 <hr>
 
-<h2><span class="section-number">6.</span> Multi-Language Support</h2>
+<h2><span class="section-number">9.</span> Multi-Language Support</h2>
 
 <p>Prosponsive supports 12 languages across its interface, so you can work in the language most natural to you.</p>
 
@@ -275,21 +329,22 @@
 
 <hr>
 
-<h2><span class="section-number">7.</span> Scheduled Prompts</h2>
+<h2><span class="section-number">10.</span> Scheduled Prompts</h2>
 
-<p>Scheduled prompts let you automate recurring AI tasks so they run on a regular cadence without manual intervention.</p>
+<p>Scheduled prompts let you automate recurring AI tasks. Combined with async tool use and auto-approvals, they make Prosponsive an always-on system that works while you do not.</p>
 
 <h3>What they do</h3>
 
-<p>A scheduled prompt sends a message to a specific agent at a set time — daily, weekly, or on whatever schedule you define. The agent processes the prompt using its tools and posts the result to the designated channel, just as if you had typed the message yourself.</p>
+<p>A scheduled prompt sends a message to a specific agent at a set time — daily, weekly, or on whatever schedule you define. The agent processes the prompt using its tools and posts the result to the designated channel, just as if you had typed the message yourself. If the tools involved have auto-approval rules, the entire task runs without any human interaction.</p>
 
 <h3>Use cases</h3>
 
 <ul>
-  <li><strong>Morning briefings</strong> — Have an agent compile a daily summary from your data sources every morning</li>
+  <li><strong>Morning briefings</strong> — Have an agent compile a daily summary from your data sources every morning before you start work</li>
   <li><strong>Periodic reports</strong> — Generate weekly metrics, status updates, or digests automatically</li>
   <li><strong>Data monitoring</strong> — Check for changes in external systems and surface anything that needs attention</li>
   <li><strong>Recurring maintenance</strong> — Run cleanup, archival, or organization tasks on a schedule</li>
+  <li><strong>Proactive notifications</strong> — Monitor systems and alert you only when something requires action</li>
 </ul>
 
 <h3>How to set them up</h3>
@@ -303,7 +358,7 @@
   <li><strong>Schedule</strong> — When and how often it runs (cron-style scheduling)</li>
 </ul>
 
-<p>Scheduled prompts run locally on your machine — they don't depend on any cloud service. If your machine is off at the scheduled time, the prompt will run the next time Prosponsive starts.</p>
+<p>Scheduled prompts run locally on your machine — they do not depend on any cloud service. If your machine is off at the scheduled time, the prompt will run the next time Prosponsive starts.</p>
 
 <hr>
 
@@ -314,13 +369,16 @@
     <tr><th>Feature</th><th>What it means for you</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>AI Conversations</strong></td><td>Multi-provider, multi-model, with failover — your AI works even when one provider doesn't</td></tr>
-    <tr><td><strong>Tool System</strong></td><td>Visual workflow builder with 1000+ integrations and full credential isolation</td></tr>
-    <tr><td><strong>Privacy</strong></td><td>Everything runs locally. No cloud dependency, no telemetry, no data collection</td></tr>
-    <tr><td><strong>Provider Agnostic</strong></td><td>Seven providers supported. Switch anytime. No lock-in</td></tr>
-    <tr><td><strong>Extensibility</strong></td><td>Custom agents, custom tools, custom workflows — build what you need</td></tr>
-    <tr><td><strong>Multi-Language</strong></td><td>12 languages across the full interface</td></tr>
-    <tr><td><strong>Scheduled Prompts</strong></td><td>Automated recurring AI tasks on your schedule</td></tr>
+    <tr><td><strong>Async Tool Use</strong></td><td>Tools run in the background. You get results, not loading spinners. Only Prosponsive does this.</td></tr>
+    <tr><td><strong>Channels</strong></td><td>Agents and tools scoped to workspaces, not dumped into every conversation. Group agent collaboration no other product offers.</td></tr>
+    <tr><td><strong>Filtering &amp; Bulk Approval</strong></td><td>Review and approve many actions at once. Not possible in products built around sequential chat.</td></tr>
+    <tr><td><strong>Auto-Approvals</strong></td><td>Condition-based rules let trusted tools run without interrupting you. Only Prosponsive has this.</td></tr>
+    <tr><td><strong>Higher-Value Tools</strong></td><td>n8n workflows that orchestrate multiple systems per tool call. One tool does what multiple MCPs cannot.</td></tr>
+    <tr><td><strong>Provider Agnostic</strong></td><td>7+ providers, switch anytime. Design that minimizes token cost instead of maximizing it.</td></tr>
+    <tr><td><strong>Privacy &amp; Security</strong></td><td>Local-first. Encrypted. No cloud service, no telemetry, no data collection.</td></tr>
+    <tr><td><strong>Extensibility</strong></td><td>Custom agents, custom workflows, 1000+ integrations via n8n.</td></tr>
+    <tr><td><strong>Multi-Language</strong></td><td>12 languages across the full interface.</td></tr>
+    <tr><td><strong>Scheduled Prompts</strong></td><td>Automated recurring tasks. Combined with auto-approvals, Prosponsive works while you don't.</td></tr>
   </tbody>
 </table>
 
