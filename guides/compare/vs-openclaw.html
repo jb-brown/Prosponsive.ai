@@ -221,39 +221,17 @@
 
 <hr>
 
-<h2><span class="section-number">5.</span> Key Decision Factors</h2>
+<h2><span class="section-number">5.</span> Making the Choice</h2>
 
-<h3>Security</h3>
-
-<p>This is the central question. OpenClaw's security track record — a critical RCE vulnerability, a compromised skill registry, tens of thousands of exposed instances, and advisories from major cybersecurity firms — is a matter of public record. If you are in an organization with security requirements, compliance obligations, or sensitive data, OpenClaw's architecture presents documented risks that Prosponsive's architecture was designed to prevent.</p>
-
-<h3>Capabilities</h3>
-
-<p>OpenClaw offers capabilities that Prosponsive deliberately does not — browser control, arbitrary file system access, shell execution, and native chat app integration. If you need an AI that can control your browser or execute shell commands, OpenClaw provides that. Prosponsive's position is that those capabilities create unacceptable security risk for a tool with AI-driven autonomy.</p>
-
-<h3>Extensibility</h3>
-
-<p>OpenClaw's ClawHub provides a large library of community skills. Prosponsive's tools are n8n workflows you build yourself. OpenClaw is faster to extend; Prosponsive is safer to extend. The tradeoff is real — but given ClawHub's compromise rate, the speed advantage comes with significant risk.</p>
-
-<h3>Trust model</h3>
-
-<p>OpenClaw trusts the agent broadly and trusts the community to vet skills. Prosponsive trusts neither — credentials are isolated architecturally, tools have defined boundaries, and auto-approvals are explicit. This is a philosophical difference in how to build AI agent systems, and it leads to fundamentally different security outcomes.</p>
-
-<hr>
-
-<h2><span class="section-number">6.</span> Who Should Choose Which</h2>
-
-<h3>OpenClaw may be the right choice if you:</h3>
+<h3>OpenClaw may be enough if you:</h3>
 
 <ul>
-  <li>Need browser control or system-level automation</li>
-  <li>Want native chat app integration (WhatsApp, Telegram, Slack)</li>
-  <li>Are comfortable managing the security implications yourself</li>
-  <li>Want a large library of community-built skills</li>
-  <li>Are running on an isolated or disposable system</li>
+  <li>Are comfortable giving an AI agent broad, unsupervised access to your system</li>
+  <li>Don't work in a regulated industry or handle sensitive data</li>
+  <li>Are willing to manage security yourself including vetting community skills for malware</li>
 </ul>
 
-<h3>Prosponsive is the better choice if you:</h3>
+<h3>Choose Prosponsive when you need more:</h3>
 
 <ul>
   <li>Handle sensitive data that cannot be exposed through agent compromise</li>
@@ -263,10 +241,6 @@
   <li>Prefer inspectable, auditable workflows over opaque skill execution</li>
   <li>Want controlled autonomy through explicit auto-approvals, not blanket permissions</li>
 </ul>
-
-<blockquote>
-  <p><strong>Different philosophies, different outcomes.</strong> OpenClaw and Prosponsive both believe in local-first AI that takes real actions. They disagree fundamentally on how to make that safe. OpenClaw prioritizes breadth of capability. Prosponsive prioritizes security of capability. The security incidents documented above are not bugs to be fixed — they are consequences of an architecture that gives AI agents broad, direct access to systems and credentials. Prosponsive was designed to make those incidents structurally impossible. For more detail on Prosponsive's security architecture, see <a href="../features.html">Privacy and Security</a> in the Feature Guide.</p>
-</blockquote>
 
 <hr>
 
