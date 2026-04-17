@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prosponsive Comparisons</title>
+  <style>
+  @page {
+    margin: 0.75in 1in;
+    size: letter;
+  }
+  body, .vscode-body, .markdown-body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    color: #1F2321 !important;
+    background-color: #F4F6F4 !important;
+    line-height: 1.6;
+    max-width: 7.5in;
+    margin: 0 auto;
+  }
+  h1 { color: #2F4F3E; font-size: 2em; border-bottom: 3px solid #2F4F3E; padding-bottom: 0.4em; margin-top: 0; }
+  h2 { color: #2F4F3E; font-size: 1.4em; border-bottom: 1px solid #D6DBD7; padding-bottom: 0.3em; margin-top: 2em; page-break-after: avoid; }
+  h3 { color: #3A5F4A; font-size: 1.1em; margin-top: 1.5em; page-break-after: avoid; }
+  a { color: #2F4F3E; text-decoration: underline; }
+  code { background: #E6EAE7; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace; }
+  pre { background: #E6EAE7; border-left: 4px solid #2F4F3E; padding: 0.8em 1em; border-radius: 4px; overflow-x: auto; page-break-inside: avoid; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 4px solid #4F6F5C; background: #F4F6F4; margin: 1em 0; padding: 0.6em 1em; border-radius: 0 4px 4px 0; color: #3A5F4A; page-break-inside: avoid; }
+  blockquote p { margin: 0.3em 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.9em; page-break-inside: avoid; }
+  th { background: #2F4F3E; color: white; padding: 0.5em 0.8em; text-align: left; font-weight: 600; }
+  td { padding: 0.5em 0.8em; border-bottom: 1px solid #D6DBD7; }
+  tr:nth-child(even) td { background: #F4F6F4; }
+  strong { color: #2F4F3E; }
+  hr { border: none; border-top: 2px solid #D6DBD7; margin: 2em 0; }
+  li { margin-bottom: 0.3em; }
+  .cover { text-align: center; padding: 3in 0 2in 0; page-break-after: always; }
+  .cover img { width: 160px; height: 160px; }
+  .cover h1 { border-bottom: none; font-size: 2.8em; margin: 0.5em 0 0.1em 0; letter-spacing: 0.02em; }
+  .cover .tagline { color: #5C635F; font-size: 1.2em; font-style: italic; margin-top: 0.3em; }
+  .cover .version { color: #5C635F; font-size: 0.9em; margin-top: 2em; }
+  .tip { background: #E6EAE7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; page-break-inside: avoid; }
+  .tip strong { color: #2F4F3E; }
+  .section-number { color: #4F6F5C; font-weight: 400; }
+  .guide-nav { display: flex; justify-content: space-between; align-items: center; border: 1px solid #D6DBD7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; }
+  .guide-nav a { text-decoration: none; color: #2F4F3E; font-weight: 500; }
+  .guide-nav a:hover { text-decoration: underline; }
+  .compare-card { border: 1px solid #D6DBD7; border-left: 4px solid #2F4F3E; border-radius: 0 4px 4px 0; padding: 1em 1.2em; margin: 1em 0; }
+  .compare-card h3 { margin-top: 0; }
+  .compare-card p { margin: 0.4em 0; color: #5C635F; font-size: 0.95em; }
+  .compare-card a { font-weight: 500; }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
+    <img src="../prosponsive-icon.png" alt="Prosponsive" style="width: 120px; height: 120px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <svg style="position: absolute; inset: 0; width: 100%; height: 100%;" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" rx="8" ry="8" width="40" height="26" fill="#2F4F3E" />
+      <polygon points="30,26 38,36 32,26" fill="#2F4F3E" />
+      <line x1="8" y1="9" x2="32" y2="9" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="8" y1="17" x2="24" y2="17" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <rect x="72" y="86" rx="8" ry="8" width="40" height="26" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" />
+      <polygon points="82,86 74,76 84,86" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" stroke-linejoin="round" />
+      <line x1="81" y1="86" x2="85" y2="86" stroke="#F4F6F4" stroke-width="3" />
+      <line x1="80" y1="95" x2="104" y2="95" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="80" y1="103" x2="96" y2="103" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
+  </div>
+  <h1>Prosponsive</h1>
+  <div class="tagline">Comparison Guides</div>
+  <div class="version">Lead more. Manage less.</div>
+</div>
+
+<div class="guide-nav">
+  <a href="../basics.html">&larr; Prosponsive Basics</a>
+  <span></span>
+</div>
+
+<h1>How Prosponsive Compares</h1>
+
+<p>Prosponsive occupies a unique position in the AI tooling landscape. It combines a local-first AI assistant with real tool integration, provider flexibility, and full data privacy — a combination that no single competitor offers today.</p>
+
+<p>These guides provide honest, side-by-side comparisons to help you decide whether Prosponsive is the right fit for your workflow. Each guide acknowledges competitor strengths and focuses on genuine architectural differences rather than marketing claims.</p>
+
+<hr>
+
+<div class="compare-card">
+  <h3><a href="vs-openclaw.html">Prosponsive vs. OpenClaw</a></h3>
+  <p>Two local-first AI assistants with very different security architectures. OpenClaw offers broad system access with documented security incidents. Prosponsive offers credential isolation and defined tool boundaries by design.</p>
+</div>
+
+<div class="compare-card">
+  <h3><a href="vs-claude-cowork.html">Prosponsive vs. Claude Cowork</a></h3>
+  <p>Anthropic's autonomous desktop agent for knowledge workers versus Prosponsive's always-on productivity platform. Similar audiences, fundamentally different architectures.</p>
+</div>
+
+<div class="compare-card">
+  <h3><a href="vs-cloud-chat.html">Prosponsive vs. ChatGPT, Claude.ai, and Gemini</a></h3>
+  <p>Cloud-only AI chat versus a local-first assistant with real tool integration. If you need more than conversation — file access, workflow automation, data privacy — this comparison explains the tradeoffs.</p>
+</div>
+
+<div class="compare-card">
+  <h3><a href="vs-copilot-workspace.html">Prosponsive vs. Microsoft Copilot and Google Workspace AI</a></h3>
+  <p>Suite-embedded AI versus a provider-agnostic platform. If vendor lock-in, model choice, or cross-suite flexibility matters to you, start here.</p>
+</div>
+
+<div class="compare-card">
+  <h3><a href="vs-automation.html">Prosponsive vs. Zapier and Make</a></h3>
+  <p>Standalone automation platforms versus AI-driven automation. Prosponsive leverages n8n as its tool layer — this guide explains why AI agents with visual workflow tools are more than trigger-action automations.</p>
+</div>
+
+<div class="compare-card">
+  <h3><a href="vs-local-models.html">Prosponsive vs. Ollama, LM Studio, and GPT4All</a></h3>
+  <p>Raw local model runners versus a full productivity platform. If you want local AI that actually does things — not just generates text — this comparison is for you.</p>
+</div>
+
+<div class="compare-card">
+  <h3><a href="vs-custom-agents.html">Prosponsive vs. Custom GPTs and OpenAI Assistants</a></h3>
+  <p>Cloud-hosted agents versus local agents with real tools. If you want agents that access your files, run workflows, and keep your data on your machine, read this guide.</p>
+</div>
+
+<hr>
+
+<h2>At a Glance</h2>
+
+<table>
+  <tr>
+    <th>Capability</th>
+    <th>Cloud Chat</th>
+    <th>Suite AI</th>
+    <th>Automation</th>
+    <th>Local Models</th>
+    <th>Custom Agents</th>
+    <th>OpenClaw</th>
+    <th>Claude Cowork</th>
+    <th>Prosponsive</th>
+  </tr>
+  <tr>
+    <td>Data stays on your machine</td>
+    <td>No</td>
+    <td>No</td>
+    <td>Varies</td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td><strong>Yes</strong></td>
+  </tr>
+  <tr>
+    <td>Choose any AI provider</td>
+    <td>No</td>
+    <td>No</td>
+    <td>N/A</td>
+    <td>Local only</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>No</td>
+    <td><strong>Yes</strong></td>
+  </tr>
+  <tr>
+    <td>Real tool integration</td>
+    <td>Limited</td>
+    <td>Suite only</td>
+    <td><strong>Yes</strong></td>
+    <td>No</td>
+    <td>Limited</td>
+    <td><strong>Yes</strong></td>
+    <td>Dev tools</td>
+    <td><strong>Yes</strong></td>
+  </tr>
+  <tr>
+    <td>Works offline</td>
+    <td>No</td>
+    <td>No</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>No</td>
+    <td>No</td>
+    <td><strong>With local models</strong></td>
+  </tr>
+  <tr>
+    <td>No vendor lock-in</td>
+    <td>No</td>
+    <td>No</td>
+    <td>Varies</td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>No</td>
+    <td><strong>Yes</strong></td>
+  </tr>
+  <tr>
+    <td>Visual workflow builder</td>
+    <td>No</td>
+    <td>No</td>
+    <td><strong>Yes</strong></td>
+    <td>No</td>
+    <td>No</td>
+    <td>No</td>
+    <td>No</td>
+    <td><strong>Yes</strong></td>
+  </tr>
+  <tr>
+    <td>Credential isolation</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>Varies</td>
+    <td>N/A</td>
+    <td>No</td>
+    <td>No</td>
+    <td>N/A</td>
+    <td><strong>Yes</strong></td>
+  </tr>
+</table>
+
+<hr>
+
+<div style="text-align: center; margin-top: 3em; padding-top: 1em; border-top: 2px solid #D6DBD7; color: #5C635F; font-size: 0.85em;">
+  <img src="../prosponsive-icon.png" alt="Prosponsive" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 0.5em;">
+  <strong style="color: #2F4F3E;">Prosponsive</strong> — Lead more. Manage less.
+</div>
+
+</body>
+</html>

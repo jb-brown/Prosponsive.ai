@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prosponsive vs. Ollama, LM Studio, and GPT4All</title>
+  <style>
+  @page {
+    margin: 0.75in 1in;
+    size: letter;
+  }
+  body, .vscode-body, .markdown-body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    color: #1F2321 !important;
+    background-color: #F4F6F4 !important;
+    line-height: 1.6;
+    max-width: 7.5in;
+    margin: 0 auto;
+  }
+  h1 { color: #2F4F3E; font-size: 2em; border-bottom: 3px solid #2F4F3E; padding-bottom: 0.4em; margin-top: 0; }
+  h2 { color: #2F4F3E; font-size: 1.4em; border-bottom: 1px solid #D6DBD7; padding-bottom: 0.3em; margin-top: 2em; page-break-after: avoid; }
+  h3 { color: #3A5F4A; font-size: 1.1em; margin-top: 1.5em; page-break-after: avoid; }
+  a { color: #2F4F3E; text-decoration: underline; }
+  code { background: #E6EAE7; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace; }
+  pre { background: #E6EAE7; border-left: 4px solid #2F4F3E; padding: 0.8em 1em; border-radius: 4px; overflow-x: auto; page-break-inside: avoid; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 4px solid #4F6F5C; background: #F4F6F4; margin: 1em 0; padding: 0.6em 1em; border-radius: 0 4px 4px 0; color: #3A5F4A; page-break-inside: avoid; }
+  blockquote p { margin: 0.3em 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.9em; page-break-inside: avoid; }
+  th { background: #2F4F3E; color: white; padding: 0.5em 0.8em; text-align: left; font-weight: 600; }
+  td { padding: 0.5em 0.8em; border-bottom: 1px solid #D6DBD7; }
+  tr:nth-child(even) td { background: #F4F6F4; }
+  strong { color: #2F4F3E; }
+  hr { border: none; border-top: 2px solid #D6DBD7; margin: 2em 0; }
+  li { margin-bottom: 0.3em; }
+  .cover { text-align: center; padding: 3in 0 2in 0; page-break-after: always; }
+  .cover img { width: 160px; height: 160px; }
+  .cover h1 { border-bottom: none; font-size: 2.8em; margin: 0.5em 0 0.1em 0; letter-spacing: 0.02em; }
+  .cover .tagline { color: #5C635F; font-size: 1.2em; font-style: italic; margin-top: 0.3em; }
+  .cover .version { color: #5C635F; font-size: 0.9em; margin-top: 2em; }
+  .tip { background: #E6EAE7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; page-break-inside: avoid; }
+  .tip strong { color: #2F4F3E; }
+  .section-number { color: #4F6F5C; font-weight: 400; }
+  .guide-nav { display: flex; justify-content: space-between; align-items: center; border: 1px solid #D6DBD7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; }
+  .guide-nav a { text-decoration: none; color: #2F4F3E; font-weight: 500; }
+  .guide-nav a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
+    <img src="../prosponsive-icon.png" alt="Prosponsive" style="width: 120px; height: 120px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <svg style="position: absolute; inset: 0; width: 100%; height: 100%;" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" rx="8" ry="8" width="40" height="26" fill="#2F4F3E" />
+      <polygon points="30,26 38,36 32,26" fill="#2F4F3E" />
+      <line x1="8" y1="9" x2="32" y2="9" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="8" y1="17" x2="24" y2="17" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <rect x="72" y="86" rx="8" ry="8" width="40" height="26" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" />
+      <polygon points="82,86 74,76 84,86" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" stroke-linejoin="round" />
+      <line x1="81" y1="86" x2="85" y2="86" stroke="#F4F6F4" stroke-width="3" />
+      <line x1="80" y1="95" x2="104" y2="95" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="80" y1="103" x2="96" y2="103" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
+  </div>
+  <h1>Prosponsive</h1>
+  <div class="tagline">vs. Ollama, LM Studio, and GPT4All</div>
+  <div class="version">Lead more. Manage less.</div>
+</div>
+
+<div class="guide-nav">
+  <a href="vs-automation.html">&larr; vs. Automation Platforms</a>
+  <a href="vs-custom-agents.html">vs. Custom GPTs &amp; Assistants &rarr;</a>
+</div>
+
+<h1>Prosponsive vs. Ollama, LM Studio, and GPT4All</h1>
+
+<p>Ollama, LM Studio, and GPT4All are local model runners — tools that let you download and run open-weight language models on your own hardware. They are the foundation of the local AI movement, and they do their job exceptionally well.</p>
+
+<p>Prosponsive is not a model runner. It is a productivity platform that can use local models (via Ollama) as one of many provider options. This guide explains the difference between running a model and having a platform built around it.</p>
+
+<hr>
+
+<h2><span class="section-number">1.</span> What Local Model Runners Do Well</h2>
+
+<ul>
+  <li><strong>Complete privacy.</strong> Nothing leaves your machine. No API calls, no telemetry, no cloud dependency. This is the gold standard for data sovereignty.</li>
+  <li><strong>Zero ongoing cost.</strong> After downloading a model, running it costs only electricity. No API fees, no subscriptions, no usage limits.</li>
+  <li><strong>Model exploration.</strong> LM Studio and Ollama make it trivially easy to download and try dozens of models — Llama, Mistral, Phi, Gemma, CodeLlama, and many more. Switch models in seconds.</li>
+  <li><strong>Developer-friendly.</strong> Ollama's API is OpenAI-compatible, making it easy to integrate with other tools. LM Studio offers a similar local server. GPT4All has a clean desktop interface.</li>
+  <li><strong>Hardware optimization.</strong> These tools are optimized for consumer hardware — quantized models, GPU acceleration, memory management. They make large models practical on laptops.</li>
+  <li><strong>Open source and community-driven.</strong> All three have active communities, regular updates, and transparent development.</li>
+</ul>
+
+<hr>
+
+<h2><span class="section-number">2.</span> Where Prosponsive Differs</h2>
+
+<h3>From text generation to tool execution</h3>
+
+<p>Local model runners give you a model that generates text. You ask a question, you get an answer. The model cannot send an email, check your calendar, query a database, or create a Jira ticket. It can write text that describes those actions, but it cannot perform them.</p>
+
+<p>Prosponsive connects the model to real tools. When you ask your Prosponsive agent to send an email, it triggers an n8n workflow that actually sends the email. The model's intelligence drives the action; n8n's workflows execute it. This is the difference between a brain that can think and a brain connected to hands. For more detail, see <a href="../features.html">Tools and Workflows</a> in the Feature Guide.</p>
+
+<h3>Cloud and local models, together</h3>
+
+<p>Local model runners are, by definition, local-only. If you want the reasoning power of Claude, GPT-4, or Gemini, you need a separate tool.</p>
+
+<p>Prosponsive lets you use local models via Ollama and cloud models from Anthropic, OpenAI, Google, Groq, Mistral, and AWS Bedrock — all through the same interface. Use a local model for privacy-sensitive tasks and a cloud model for complex reasoning, without switching applications. You define a priority list of providers and models, and Prosponsive automatically fails over between them — if your cloud provider goes down, it can fall back to a local model (or vice versa), keeping your agents working without interruption. For more detail, see <a href="../features.html">Provider Flexibility</a> in the Feature Guide.</p>
+
+<h3>Managed infrastructure</h3>
+
+<p>Running Ollama or LM Studio is straightforward, but integrating them into a productive workflow requires additional infrastructure — a database for persistence, a workflow engine for tool integration, credential management, a user interface beyond a chat box.</p>
+
+<p>Prosponsive manages all of this automatically. On first launch, it sets up a PostgreSQL database, an n8n workflow engine, SSL certificates, and a full desktop application — all containerized and locally managed. You get a complete platform, not just a model.</p>
+
+<h3>Structured project context</h3>
+
+<p>Model runners provide a chat interface. Your context is the current conversation — when you start a new chat, you start from scratch.</p>
+
+<p>Prosponsive organizes work into projects with persistent context. Your agent knows about your project, your tools, and your workflows. This is not just conversation history — it is structured context that makes the AI more useful over time.</p>
+
+<hr>
+
+<h2><span class="section-number">3.</span> Side-by-Side Comparison</h2>
+
+<table>
+  <tr>
+    <th>Factor</th>
+    <th>Local Model Runners</th>
+    <th>Prosponsive</th>
+  </tr>
+  <tr>
+    <td>Primary purpose</td>
+    <td>Run local AI models</td>
+    <td>AI-driven productivity with tools</td>
+  </tr>
+  <tr>
+    <td>Tool integration</td>
+    <td>None (text only)</td>
+    <td><strong>Full (via n8n workflows)</strong></td>
+  </tr>
+  <tr>
+    <td>Model support</td>
+    <td>Local models only</td>
+    <td>Local + 6 cloud providers</td>
+  </tr>
+  <tr>
+    <td>Privacy</td>
+    <td><strong>Complete (always local)</strong></td>
+    <td>Complete with local models; prompt-only with cloud</td>
+  </tr>
+  <tr>
+    <td>Setup</td>
+    <td>Download and run</td>
+    <td>5-30 minute guided install</td>
+  </tr>
+  <tr>
+    <td>Infrastructure</td>
+    <td>Model server only</td>
+    <td>Database, workflow engine, SSL, app</td>
+  </tr>
+  <tr>
+    <td>Credential management</td>
+    <td>N/A</td>
+    <td><strong>Encrypted, isolated from AI</strong></td>
+  </tr>
+  <tr>
+    <td>Model exploration</td>
+    <td><strong>Excellent</strong></td>
+    <td>Via Ollama integration</td>
+  </tr>
+</table>
+
+<hr>
+
+<h2><span class="section-number">4.</span> Key Decision Factors</h2>
+
+<h3>Privacy</h3>
+
+<p>If absolute privacy — nothing ever leaving your machine under any circumstances — is your primary requirement, local model runners deliver that unambiguously. Prosponsive can match this with Ollama as the provider, but if you use a cloud provider through Prosponsive, prompts are sent to that provider's API.</p>
+
+<h3>Extensibility</h3>
+
+<p>Local model runners are extensible in the developer sense — you can build applications on top of their APIs. But out of the box, they are chat interfaces. Prosponsive is extensible in the end-user sense — you build workflows in a visual editor, and those workflows become tools your AI can use. No coding required for basic automation.</p>
+
+<h3>Hardware requirements</h3>
+
+<p>Local model runners are optimized to run models efficiently on consumer hardware. Prosponsive adds overhead — a PostgreSQL database, an n8n instance, and the Electron application all consume additional memory and CPU. On a machine with limited resources, a standalone model runner will leave more room for the model itself.</p>
+
+<hr>
+
+<h2><span class="section-number">5.</span> Making the Choice</h2>
+
+<h3>Ollama, LM Studio, or GPT4All may be enough if you:</h3>
+
+<ul>
+  <li>Just want to chat with a local model and don't need tools or integrations</li>
+  <li>Are comfortable managing models and configurations yourself</li>
+  <li>Only need a chat interface without channels, agents, or automation</li>
+</ul>
+
+<h3>Choose Prosponsive when you need more:</h3>
+
+<ul>
+  <li>Want AI that takes real actions, not just generates text</li>
+  <li>Need both local and cloud models in a single interface</li>
+  <li>Want a productivity platform with project management and tool integration</li>
+  <li>Need credential isolation — tools should work without exposing secrets to the AI</li>
+  <li>Prefer a managed setup over assembling components yourself</li>
+</ul>
+
+<hr>
+
+<div class="guide-nav">
+  <a href="vs-automation.html">&larr; vs. Automation Platforms</a>
+  <a href="vs-custom-agents.html">vs. Custom GPTs &amp; Assistants &rarr;</a>
+</div>
+
+<div style="text-align: center; margin-top: 3em; padding-top: 1em; border-top: 2px solid #D6DBD7; color: #5C635F; font-size: 0.85em;">
+  <img src="../prosponsive-icon.png" alt="Prosponsive" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 0.5em;">
+  <strong style="color: #2F4F3E;">Prosponsive</strong> — Lead more. Manage less.
+</div>
+
+</body>
+</html>

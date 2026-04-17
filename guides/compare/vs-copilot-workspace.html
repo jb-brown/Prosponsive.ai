@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prosponsive vs. Microsoft Copilot and Google Workspace AI</title>
+  <style>
+  @page {
+    margin: 0.75in 1in;
+    size: letter;
+  }
+  body, .vscode-body, .markdown-body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    color: #1F2321 !important;
+    background-color: #F4F6F4 !important;
+    line-height: 1.6;
+    max-width: 7.5in;
+    margin: 0 auto;
+  }
+  h1 { color: #2F4F3E; font-size: 2em; border-bottom: 3px solid #2F4F3E; padding-bottom: 0.4em; margin-top: 0; }
+  h2 { color: #2F4F3E; font-size: 1.4em; border-bottom: 1px solid #D6DBD7; padding-bottom: 0.3em; margin-top: 2em; page-break-after: avoid; }
+  h3 { color: #3A5F4A; font-size: 1.1em; margin-top: 1.5em; page-break-after: avoid; }
+  a { color: #2F4F3E; text-decoration: underline; }
+  code { background: #E6EAE7; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace; }
+  pre { background: #E6EAE7; border-left: 4px solid #2F4F3E; padding: 0.8em 1em; border-radius: 4px; overflow-x: auto; page-break-inside: avoid; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 4px solid #4F6F5C; background: #F4F6F4; margin: 1em 0; padding: 0.6em 1em; border-radius: 0 4px 4px 0; color: #3A5F4A; page-break-inside: avoid; }
+  blockquote p { margin: 0.3em 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.9em; page-break-inside: avoid; }
+  th { background: #2F4F3E; color: white; padding: 0.5em 0.8em; text-align: left; font-weight: 600; }
+  td { padding: 0.5em 0.8em; border-bottom: 1px solid #D6DBD7; }
+  tr:nth-child(even) td { background: #F4F6F4; }
+  strong { color: #2F4F3E; }
+  hr { border: none; border-top: 2px solid #D6DBD7; margin: 2em 0; }
+  li { margin-bottom: 0.3em; }
+  .cover { text-align: center; padding: 3in 0 2in 0; page-break-after: always; }
+  .cover img { width: 160px; height: 160px; }
+  .cover h1 { border-bottom: none; font-size: 2.8em; margin: 0.5em 0 0.1em 0; letter-spacing: 0.02em; }
+  .cover .tagline { color: #5C635F; font-size: 1.2em; font-style: italic; margin-top: 0.3em; }
+  .cover .version { color: #5C635F; font-size: 0.9em; margin-top: 2em; }
+  .tip { background: #E6EAE7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; page-break-inside: avoid; }
+  .tip strong { color: #2F4F3E; }
+  .section-number { color: #4F6F5C; font-weight: 400; }
+  .guide-nav { display: flex; justify-content: space-between; align-items: center; border: 1px solid #D6DBD7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; }
+  .guide-nav a { text-decoration: none; color: #2F4F3E; font-weight: 500; }
+  .guide-nav a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
+    <img src="../prosponsive-icon.png" alt="Prosponsive" style="width: 120px; height: 120px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <svg style="position: absolute; inset: 0; width: 100%; height: 100%;" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" rx="8" ry="8" width="40" height="26" fill="#2F4F3E" />
+      <polygon points="30,26 38,36 32,26" fill="#2F4F3E" />
+      <line x1="8" y1="9" x2="32" y2="9" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="8" y1="17" x2="24" y2="17" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <rect x="72" y="86" rx="8" ry="8" width="40" height="26" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" />
+      <polygon points="82,86 74,76 84,86" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" stroke-linejoin="round" />
+      <line x1="81" y1="86" x2="85" y2="86" stroke="#F4F6F4" stroke-width="3" />
+      <line x1="80" y1="95" x2="104" y2="95" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="80" y1="103" x2="96" y2="103" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
+  </div>
+  <h1>Prosponsive</h1>
+  <div class="tagline">vs. Microsoft Copilot and Google Workspace AI</div>
+  <div class="version">Lead more. Manage less.</div>
+</div>
+
+<div class="guide-nav">
+  <a href="vs-cloud-chat.html">&larr; vs. ChatGPT, Claude.ai &amp; Gemini</a>
+  <a href="vs-automation.html">vs. Automation Platforms &rarr;</a>
+</div>
+
+<h1>Prosponsive vs. Microsoft Copilot and Google Workspace AI</h1>
+
+<p>Microsoft Copilot (embedded in Microsoft 365) and Google Workspace AI (Gemini in Google Workspace) represent the suite-integrated approach to AI — intelligence woven directly into the productivity tools you already use. They are powerful, well-funded, and deeply embedded in the enterprise.</p>
+
+<p>Prosponsive takes the opposite approach: a standalone, provider-agnostic platform that connects to any tool rather than being embedded in one suite. This guide explores the tradeoffs.</p>
+
+<hr>
+
+<h2><span class="section-number">1.</span> What Suite AI Does Well</h2>
+
+<ul>
+  <li><strong>Deep integration with a subset of your existing tools.</strong> Copilot lives inside Word, Excel, PowerPoint, Outlook, and Teams. Gemini lives inside Docs, Sheets, Slides, and Gmail. When you are in this subset of your tools, AI assistance appears inline.</li>
+  <li><strong>Enterprise-grade compliance.</strong> Both Microsoft and Google offer comprehensive compliance certifications (SOC 2, HIPAA, GDPR, FedRAMP) and enterprise admin controls that satisfy procurement teams and legal departments.</li>
+  <li><strong>Organizational data access.</strong> Copilot can search across your organization's Microsoft Graph — emails, files, calendars, Teams messages — to provide contextually relevant answers. Workspace AI can reference information across your Google Workspace.</li>
+  <li><strong>Familiar interfaces to some.</strong> If you are predominantly in this suite of tools, AI features appear as natural extensions of applications you already know.</li>
+  <li><strong>IT management.</strong> Centralized admin controls, user provisioning, data loss prevention policies, and audit logging that IT teams expect.</li>
+</ul>
+
+<hr>
+
+<h2><span class="section-number">2.</span> Where Prosponsive Differs</h2>
+
+<h3>No vendor lock-in</h3>
+
+<p>Microsoft Copilot requires Microsoft 365. Google Workspace AI requires Google Workspace. If you use both suites — or neither — you are either paying twice or locked out.</p>
+
+<p>Prosponsive does not care which productivity suite you use. It connects to tools through n8n workflows, which can interact with Microsoft, Google, Slack, Notion, Salesforce, or any service with an API. Switch suites without switching AI platforms.</p>
+
+<h3>Choose your AI model</h3>
+
+<p>Microsoft Copilot uses OpenAI models exclusively. Google Workspace AI uses Gemini exclusively. You cannot choose a different model, even if another model performs better for your specific use case.</p>
+
+<p>Prosponsive supports seven provider families — Anthropic, OpenAI, Google, Groq, Mistral, AWS Bedrock, and Ollama. If Anthropic's Claude handles your reasoning tasks better than GPT, use Claude. If you need to run sensitive queries through a local model, switch to Ollama. The choice is always yours. Better yet, you define a priority list — if your primary provider goes down or you hit a rate limit, Prosponsive automatically fails over to the next one. Your AI-powered workflows never stop because one provider has a bad day. For more detail, see <a href="../features.html">Provider Flexibility</a> in the Feature Guide.</p>
+
+<h3>Cross-suite flexibility</h3>
+
+<p>Suite AI products only work within their own ecosystem. Copilot cannot help you with a Google Doc. Workspace AI cannot help you with an Excel spreadsheet. Real work often spans multiple tools and platforms.</p>
+
+<p>Prosponsive workflows can span any combination of services. A single workflow could read from a Google Sheet, process the data, update a Microsoft Teams channel, and log results to a Notion database. No suite boundary limits what the AI can do.</p>
+
+<h3>Tool transparency</h3>
+
+<p>When Copilot or Workspace AI takes an action, the mechanism is opaque. You see the result but not the logic, the data flow, or the decision points.</p>
+
+<p>Prosponsive tools are n8n workflows — visual, inspectable, editable. You can see exactly what data flows where, what conditions are evaluated, and what actions are taken. If something goes wrong, you can debug it. If you want to change the behavior, you edit the workflow. For more detail, see <a href="../features.html">Tools and Workflows</a> in the Feature Guide.</p>
+
+<h3>Data stays local</h3>
+
+<p>Both Copilot and Workspace AI process your data on Microsoft's or Google's cloud infrastructure. Even with strong privacy commitments, your prompts, documents, and organizational data are transmitted to and processed on remote servers.</p>
+
+<p>With Prosponsive, your data stays on your machine. Conversations, project files, and workflow outputs are local. When using a cloud AI provider, only the current prompt is sent — not your files, not your workflow data, not your organizational context. For more detail, see <a href="../features.html">Privacy and Security</a> in the Feature Guide.</p>
+
+<hr>
+
+<h2><span class="section-number">3.</span> Side-by-Side Comparison</h2>
+
+<table>
+  <tr>
+    <th>Factor</th>
+    <th>Suite AI (Copilot / Workspace AI)</th>
+    <th>Prosponsive</th>
+  </tr>
+  <tr>
+    <td>Works with</td>
+    <td>Own suite only</td>
+    <td>Any service with an API</td>
+  </tr>
+  <tr>
+    <td>AI model</td>
+    <td>Fixed (GPT or Gemini)</td>
+    <td>7+ providers, your choice</td>
+  </tr>
+  <tr>
+    <td>Data residency</td>
+    <td>Provider cloud</td>
+    <td>Your machine</td>
+  </tr>
+  <tr>
+    <td>Tool transparency</td>
+    <td>Opaque</td>
+    <td>Visual workflow builder</td>
+  </tr>
+  <tr>
+    <td>Cross-suite workflows</td>
+    <td>Limited</td>
+    <td>Full</td>
+  </tr>
+  <tr>
+    <td>Enterprise compliance</td>
+    <td>Comprehensive</td>
+    <td>Local by design (no cloud to audit)</td>
+  </tr>
+  <tr>
+    <td>Setup</td>
+    <td>Admin enables, appears in suite</td>
+    <td>5-30 minute local install</td>
+  </tr>
+  <tr>
+    <td>Offline capable</td>
+    <td>No</td>
+    <td>Yes (with local models)</td>
+  </tr>
+</table>
+
+<hr>
+
+<h2><span class="section-number">4.</span> Key Decision Factors</h2>
+
+<h3>Privacy</h3>
+
+<p>Suite AI products process data in their cloud. For many organizations, this is acceptable because they already trust Microsoft or Google with their data. But if your privacy requirements demand that data never leave your machine — or if you work in a regulated industry where cloud processing requires additional compliance work — Prosponsive's local-first architecture eliminates that concern entirely.</p>
+
+<h3>Extensibility</h3>
+
+<p>Suite AI extensibility is limited to what the platform allows — Copilot plugins, Power Automate connectors, or Workspace add-ons. Building custom integrations requires working within each platform's framework and approval processes.</p>
+
+<p>Prosponsive extensibility is limited only by what n8n supports, which includes hundreds of pre-built integrations and the ability to call any HTTP endpoint, run custom code, or connect to databases directly. No marketplace approval required.</p>
+
+<h3>Ecosystem</h3>
+
+<p>If you need a specialized consultant to connect these locked ecosystems to the rest of your environment, there are many available. Prosponsive takes a different approach — n8n's visual drag-and-drop workflow designer lets you build integrations yourself, connecting to over a thousand services without writing code or hiring a consultant.</p>
+
+<hr>
+
+<h2><span class="section-number">5.</span> Making the Choice</h2>
+
+<h3>Copilot or Workspace AI may be enough if you:</h3>
+
+<ul>
+  <li>Only work within one vendor's ecosystem and don't need to connect outside it</li>
+  <li>Are comfortable with your AI being limited to the tools your vendor chooses to offer</li>
+  <li>Don't need agents that work independently</li>
+</ul>
+
+<h3>Choose Prosponsive when you need more:</h3>
+
+<ul>
+  <li>Use tools from multiple vendors (some Microsoft, some Google, some neither)</li>
+  <li>Want to choose the best AI model for each task, not be locked to one</li>
+  <li>Need to keep data on your machine for privacy or regulatory reasons</li>
+  <li>Want to build custom tool integrations without platform approval</li>
+  <li>Prefer a transparent, inspectable AI tool layer</li>
+</ul>
+
+<hr>
+
+<div class="guide-nav">
+  <a href="vs-cloud-chat.html">&larr; vs. ChatGPT, Claude.ai &amp; Gemini</a>
+  <a href="vs-automation.html">vs. Automation Platforms &rarr;</a>
+</div>
+
+<div style="text-align: center; margin-top: 3em; padding-top: 1em; border-top: 2px solid #D6DBD7; color: #5C635F; font-size: 0.85em;">
+  <img src="../prosponsive-icon.png" alt="Prosponsive" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 0.5em;">
+  <strong style="color: #2F4F3E;">Prosponsive</strong> — Lead more. Manage less.
+</div>
+
+</body>
+</html>

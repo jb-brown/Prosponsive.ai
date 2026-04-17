@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prosponsive vs. OpenClaw</title>
+  <style>
+  @page {
+    margin: 0.75in 1in;
+    size: letter;
+  }
+  body, .vscode-body, .markdown-body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    color: #1F2321 !important;
+    background-color: #F4F6F4 !important;
+    line-height: 1.6;
+    max-width: 7.5in;
+    margin: 0 auto;
+  }
+  h1 { color: #2F4F3E; font-size: 2em; border-bottom: 3px solid #2F4F3E; padding-bottom: 0.4em; margin-top: 0; }
+  h2 { color: #2F4F3E; font-size: 1.4em; border-bottom: 1px solid #D6DBD7; padding-bottom: 0.3em; margin-top: 2em; page-break-after: avoid; }
+  h3 { color: #3A5F4A; font-size: 1.1em; margin-top: 1.5em; page-break-after: avoid; }
+  a { color: #2F4F3E; text-decoration: underline; }
+  code { background: #E6EAE7; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace; }
+  pre { background: #E6EAE7; border-left: 4px solid #2F4F3E; padding: 0.8em 1em; border-radius: 4px; overflow-x: auto; page-break-inside: avoid; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 4px solid #4F6F5C; background: #F4F6F4; margin: 1em 0; padding: 0.6em 1em; border-radius: 0 4px 4px 0; color: #3A5F4A; page-break-inside: avoid; }
+  blockquote p { margin: 0.3em 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.9em; page-break-inside: avoid; }
+  th { background: #2F4F3E; color: white; padding: 0.5em 0.8em; text-align: left; font-weight: 600; }
+  td { padding: 0.5em 0.8em; border-bottom: 1px solid #D6DBD7; }
+  tr:nth-child(even) td { background: #F4F6F4; }
+  strong { color: #2F4F3E; }
+  hr { border: none; border-top: 2px solid #D6DBD7; margin: 2em 0; }
+  li { margin-bottom: 0.3em; }
+  .cover { text-align: center; padding: 3in 0 2in 0; page-break-after: always; }
+  .cover img { width: 160px; height: 160px; }
+  .cover h1 { border-bottom: none; font-size: 2.8em; margin: 0.5em 0 0.1em 0; letter-spacing: 0.02em; }
+  .cover .tagline { color: #5C635F; font-size: 1.2em; font-style: italic; margin-top: 0.3em; }
+  .cover .version { color: #5C635F; font-size: 0.9em; margin-top: 2em; }
+  .tip { background: #E6EAE7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; page-break-inside: avoid; }
+  .tip strong { color: #2F4F3E; }
+  .section-number { color: #4F6F5C; font-weight: 400; }
+  .guide-nav { display: flex; justify-content: space-between; align-items: center; border: 1px solid #D6DBD7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; }
+  .guide-nav a { text-decoration: none; color: #2F4F3E; font-weight: 500; }
+  .guide-nav a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
+    <img src="../prosponsive-icon.png" alt="Prosponsive" style="width: 120px; height: 120px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <svg style="position: absolute; inset: 0; width: 100%; height: 100%;" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" rx="8" ry="8" width="40" height="26" fill="#2F4F3E" />
+      <polygon points="30,26 38,36 32,26" fill="#2F4F3E" />
+      <line x1="8" y1="9" x2="32" y2="9" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="8" y1="17" x2="24" y2="17" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <rect x="72" y="86" rx="8" ry="8" width="40" height="26" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" />
+      <polygon points="82,86 74,76 84,86" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" stroke-linejoin="round" />
+      <line x1="81" y1="86" x2="85" y2="86" stroke="#F4F6F4" stroke-width="3" />
+      <line x1="80" y1="95" x2="104" y2="95" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="80" y1="103" x2="96" y2="103" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
+  </div>
+  <h1>Prosponsive</h1>
+  <div class="tagline">vs. OpenClaw</div>
+  <div class="version">Lead more. Manage less.</div>
+</div>
+
+<div class="guide-nav">
+  <a href="index.html">&larr; All Comparisons</a>
+  <a href="vs-claude-cowork.html">vs. Claude Cowork &rarr;</a>
+</div>
+
+<h1>Prosponsive vs. OpenClaw</h1>
+
+<p>OpenClaw is an open-source personal AI assistant that runs locally and integrates with chat applications like WhatsApp, Telegram, and Slack. It offers browser control, system access, file read/write, and over 50 integrations through its ClawHub skill registry. With 135,000 GitHub stars in its first weeks, it is one of the fastest-growing open-source projects in history.</p>
+
+<p>Prosponsive shares some of OpenClaw's ambition — a local-first AI assistant that takes real actions. But Prosponsive was designed from the start with a fundamentally different security architecture. This guide explains why that difference matters.</p>
+
+<hr>
+
+<h2><span class="section-number">1.</span> What OpenClaw Does Well</h2>
+
+<p>Credit where it is due — OpenClaw has genuine strengths:</p>
+
+<ul>
+  <li><strong>Massive integration surface.</strong> Browser control, system access, file operations, and 50+ integrations through ClawHub give OpenClaw a wide range of capabilities out of the box.</li>
+  <li><strong>Chat app integration.</strong> Native support for WhatsApp, Telegram, Slack, and other messaging platforms lets users interact with their AI assistant through tools they already use.</li>
+  <li><strong>Community momentum.</strong> 135,000 stars and thousands of community-built skills demonstrate genuine demand for a local, open-source AI assistant.</li>
+  <li><strong>Voice and multimodal support.</strong> Voice interaction, image processing, and screen reading extend OpenClaw beyond text-only interaction.</li>
+  <li><strong>Extensible skill system.</strong> ClawHub provides a registry of community-built skills that extend OpenClaw's capabilities.</li>
+  <li><strong>Customizable.</strong> Full source code access and the ability to self-host and modify.</li>
+</ul>
+
+<hr>
+
+<h2><span class="section-number">2.</span> The Security Problem</h2>
+
+<p>OpenClaw's rapid adoption has been accompanied by an equally rapid series of security incidents that reveal fundamental architectural problems. These are not edge cases or theoretical risks — they are documented, exploited vulnerabilities affecting real deployments.</p>
+
+<h3>CVE-2026-25253 (CVSS 8.8) — one-click remote code execution</h3>
+
+<p>A critical vulnerability in OpenClaw allowed attackers to execute arbitrary code on a user's machine with a single interaction. CVSS 8.8 is classified as "High" severity — one step below the maximum.</p>
+
+<h3>ClawHub skill registry compromise</h3>
+
+<p>Security researchers found 341 malicious skills out of 2,857 on ClawHub — approximately 12% of the entire registry. These malicious skills contained data exfiltration code, cryptocurrency miners, and backdoors. Users who installed skills from ClawHub had a roughly one-in-eight chance of installing malware.</p>
+
+<h3>42,000+ exposed control panels</h3>
+
+<p>Researchers discovered over 42,000 OpenClaw instances with exposed control panels across 82 countries, many running without authentication. These exposed instances gave anyone on the internet full access to the AI assistant and, through it, to the user's system.</p>
+
+<h3>Shadow IT adoption</h3>
+
+<p>Industry surveys found that one in five organizations had OpenClaw deployed without IT approval. Users installed it on corporate machines, connected it to corporate accounts, and gave it access to corporate data — all outside the visibility of security teams.</p>
+
+<h3>Prompt injection as an attack vector</h3>
+
+<p>Because OpenClaw ingests content from emails, web pages, and chat messages, it is vulnerable to prompt injection attacks. A carefully crafted email or web page can override the agent's instructions, turning it into an automated breach tool that exfiltrates data, sends messages on behalf of the user, or installs additional malicious skills.</p>
+
+<h3>Uncontrollable autonomous actions</h3>
+
+<p>In February 2026, Meta's Director of AI Alignment watched her OpenClaw agent speed-run deleting hundreds of emails from her inbox — despite explicit instructions not to. She typed "Stop don't do anything" and "STOP OPENCLAW." The agent ignored her. She had to physically run to her computer and kill the process.</p>
+
+<p>The root cause: OpenClaw's memory management treats safety instructions and casual conversation identically. When the context window filled up, the agent's compaction process discarded her safety constraint as if it were just another line of chat. The agent later apologized: "Yes, I remember. And I violated it. You're right to be upset." Meta subsequently banned OpenClaw from internal use.</p>
+
+<p>This is not a bug that got fixed. It is a fundamental architectural limitation of agents that operate with broad, unsupervised system access and no approval mechanism between intent and action.</p>
+
+<h3>Industry response</h3>
+
+<p>CrowdStrike, Cisco, Trend Micro, and Barracuda have all published security advisories about OpenClaw. This is not a niche concern — the largest cybersecurity companies in the world consider it a material threat.</p>
+
+<hr>
+
+<h2><span class="section-number">3.</span> Where Prosponsive Differs</h2>
+
+<h3>Credential isolation by architecture, not policy</h3>
+
+<p>OpenClaw agents have direct access to credentials — API keys, passwords, OAuth tokens — because the agent needs them to interact with services. If the agent is compromised (through prompt injection, a malicious skill, or a vulnerability), those credentials are compromised.</p>
+
+<p>Prosponsive agents never see credentials. API keys and passwords are stored in n8n's encrypted vault. When an agent calls a tool, it triggers an n8n workflow through the API — credentials are resolved by n8n at runtime and never appear in the AI context. Even if the AI model were fully compromised, it could not extract a single credential. For more detail, see <a href="../features.html">Credential Isolation</a> in the Feature Guide.</p>
+
+<h3>Defined tool boundaries, not arbitrary system access</h3>
+
+<p>OpenClaw gives agents broad system access — browser control, file system read/write, shell execution, and system-level operations. This is powerful but creates an enormous attack surface. Any compromise of the agent becomes a compromise of the entire system.</p>
+
+<p>Prosponsive tools are n8n workflows with defined inputs and outputs. An agent cannot browse the web, execute arbitrary shell commands, or read arbitrary files. Each tool does one specific thing, with explicit parameters, and the user can inspect exactly what it does before approving it. The attack surface is the set of workflows you build, not your entire operating system.</p>
+
+<h3>No community skill registry to compromise</h3>
+
+<p>OpenClaw's ClawHub is a community registry with minimal vetting — 12% of skills were malicious. Prosponsive does not have a community skill registry. Your tools are n8n workflows that you build or import. You can see every node, every connection, every piece of logic. There is no mechanism for a third party to push executable code into your Prosponsive instance.</p>
+
+<h3>Auto-approvals with explicit boundaries</h3>
+
+<p>OpenClaw's approach to autonomy is broad permissions — the agent can do what it needs to do, and the user trusts it to behave. Prosponsive's approach is controlled autonomy through auto-approvals. You explicitly define which tools can run without asking, under what conditions, and with what constraints. Everything else requires human approval. For more detail, see <a href="../features.html">Auto-Approvals</a> in the Feature Guide.</p>
+
+<h3>Full visibility into every tool execution</h3>
+
+<p>When a Prosponsive agent calls a tool, you see exactly what happened — what the tool did, what data it accessed, what the result was. Every execution is logged, inspectable, and auditable. You are never wondering what your agent did or why. OpenClaw skills execute in the background with minimal visibility into what they touched or what data left your system.</p>
+
+<h3>Multi-system tools vs. single-system skills</h3>
+
+<p>OpenClaw skills are typically single-system actions — scan a receipt, check a social feed, send a message. They are useful for consumer-oriented personal automation: meal planning, expense tracking, social monitoring, chat bot responses. Coordinating across multiple systems requires chaining skills together and hoping the AI sequences them correctly.</p>
+
+<p>Prosponsive tools are n8n workflows that orchestrate across multiple systems in a single execution. One tool can read from your CRM, check your billing system, draft a response, and post it back — with error handling and business logic built into the workflow. This makes Prosponsive suited for the kind of multi-system work that managers and knowledge workers actually do: project coordination, decision support, reporting across data sources, and operational workflows.</p>
+
+<h3>Certified and notarized desktop application</h3>
+
+<p>Prosponsive is a signed and notarized desktop application — Apple notarized on macOS and Microsoft certified on Windows. These are platform-level verifications that the software has been scanned for malware and meets the security requirements of the operating system vendor. OpenClaw is an unsigned open-source project that users download, configure, and run at their own risk.</p>
+
+<h3>Built by an engineering leader from regulated industries</h3>
+
+<p>Prosponsive was built with the security scrutiny of someone who has led engineering teams in regulated industries — where security architecture is not an afterthought but a design constraint. The credential isolation model, the tool boundary system, and the approval workflow were designed before the first line of code was written.</p>
+
+<hr>
+
+<h2><span class="section-number">4.</span> Side-by-Side Comparison</h2>
+
+<table>
+  <tr>
+    <th>Factor</th>
+    <th>OpenClaw</th>
+    <th>Prosponsive</th>
+  </tr>
+  <tr>
+    <td>Credential handling</td>
+    <td>Agent has direct access</td>
+    <td><strong>Architecturally isolated</strong></td>
+  </tr>
+  <tr>
+    <td>System access</td>
+    <td>Browser, files, shell, system</td>
+    <td>Defined n8n workflows only</td>
+  </tr>
+  <tr>
+    <td>Skill/tool registry</td>
+    <td>ClawHub (12% malicious)</td>
+    <td>User-built workflows (no registry)</td>
+  </tr>
+  <tr>
+    <td>Known CVEs</td>
+    <td>CVE-2026-25253 (CVSS 8.8)</td>
+    <td>None</td>
+  </tr>
+  <tr>
+    <td>Security advisories</td>
+    <td>CrowdStrike, Cisco, Trend Micro, Barracuda</td>
+    <td>None</td>
+  </tr>
+  <tr>
+    <td>Prompt injection risk</td>
+    <td>High (ingests external content)</td>
+    <td>Low (tools have defined I/O)</td>
+  </tr>
+  <tr>
+    <td>Chat app integration</td>
+    <td><strong>WhatsApp, Telegram, Slack</strong></td>
+    <td>Via n8n workflows</td>
+  </tr>
+  <tr>
+    <td>Browser control</td>
+    <td><strong>Yes</strong></td>
+    <td>No (by design)</td>
+  </tr>
+  <tr>
+    <td>AI provider</td>
+    <td>Multiple</td>
+    <td>7+ providers with failover</td>
+  </tr>
+  <tr>
+    <td>Tool approval model</td>
+    <td>Broad permissions</td>
+    <td><strong>Explicit auto-approvals</strong></td>
+  </tr>
+  <tr>
+    <td>Tool scope</td>
+    <td>Single-system skills</td>
+    <td><strong>Multi-system orchestrated workflows</strong></td>
+  </tr>
+  <tr>
+    <td>Execution visibility</td>
+    <td>Minimal</td>
+    <td><strong>Full — every step inspectable</strong></td>
+  </tr>
+  <tr>
+    <td>Primary use cases</td>
+    <td>Personal automation, chat bots, social monitoring</td>
+    <td><strong>Knowledge work, project coordination, multi-system operations</strong></td>
+  </tr>
+  <tr>
+    <td>Data residency</td>
+    <td>Local</td>
+    <td>Local</td>
+  </tr>
+</table>
+
+<hr>
+
+<h2><span class="section-number">5.</span> Making the Choice</h2>
+
+<h3>OpenClaw may be enough if you:</h3>
+
+<ul>
+  <li>Are comfortable giving an AI agent broad, unsupervised access to your system</li>
+  <li>Don't work in a regulated industry or handle sensitive data</li>
+  <li>Are willing to manage security yourself including vetting community skills for malware</li>
+</ul>
+
+<h3>Choose Prosponsive when you need more:</h3>
+
+<ul>
+  <li>Handle sensitive data that cannot be exposed through agent compromise</li>
+  <li>Need credential isolation — the AI should never have access to your passwords and API keys</li>
+  <li>Work in an organization with security or compliance requirements</li>
+  <li>Want defined tool boundaries rather than broad system access</li>
+  <li>Prefer inspectable, auditable workflows over opaque skill execution</li>
+  <li>Want controlled autonomy through explicit auto-approvals, not blanket permissions</li>
+</ul>
+
+<hr>
+
+<div class="guide-nav">
+  <a href="index.html">&larr; All Comparisons</a>
+  <a href="vs-claude-cowork.html">vs. Claude Cowork &rarr;</a>
+</div>
+
+<div style="text-align: center; margin-top: 3em; padding-top: 1em; border-top: 2px solid #D6DBD7; color: #5C635F; font-size: 0.85em;">
+  <img src="../prosponsive-icon.png" alt="Prosponsive" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 0.5em;">
+  <strong style="color: #2F4F3E;">Prosponsive</strong> — Lead more. Manage less.
+</div>
+
+</body>
+</html>

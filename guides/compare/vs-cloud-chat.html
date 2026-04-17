@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prosponsive vs. ChatGPT, Claude.ai, and Gemini</title>
+  <style>
+  @page {
+    margin: 0.75in 1in;
+    size: letter;
+  }
+  body, .vscode-body, .markdown-body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    color: #1F2321 !important;
+    background-color: #F4F6F4 !important;
+    line-height: 1.6;
+    max-width: 7.5in;
+    margin: 0 auto;
+  }
+  h1 { color: #2F4F3E; font-size: 2em; border-bottom: 3px solid #2F4F3E; padding-bottom: 0.4em; margin-top: 0; }
+  h2 { color: #2F4F3E; font-size: 1.4em; border-bottom: 1px solid #D6DBD7; padding-bottom: 0.3em; margin-top: 2em; page-break-after: avoid; }
+  h3 { color: #3A5F4A; font-size: 1.1em; margin-top: 1.5em; page-break-after: avoid; }
+  a { color: #2F4F3E; text-decoration: underline; }
+  code { background: #E6EAE7; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace; }
+  pre { background: #E6EAE7; border-left: 4px solid #2F4F3E; padding: 0.8em 1em; border-radius: 4px; overflow-x: auto; page-break-inside: avoid; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 4px solid #4F6F5C; background: #F4F6F4; margin: 1em 0; padding: 0.6em 1em; border-radius: 0 4px 4px 0; color: #3A5F4A; page-break-inside: avoid; }
+  blockquote p { margin: 0.3em 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.9em; page-break-inside: avoid; }
+  th { background: #2F4F3E; color: white; padding: 0.5em 0.8em; text-align: left; font-weight: 600; }
+  td { padding: 0.5em 0.8em; border-bottom: 1px solid #D6DBD7; }
+  tr:nth-child(even) td { background: #F4F6F4; }
+  strong { color: #2F4F3E; }
+  hr { border: none; border-top: 2px solid #D6DBD7; margin: 2em 0; }
+  li { margin-bottom: 0.3em; }
+  .cover { text-align: center; padding: 3in 0 2in 0; page-break-after: always; }
+  .cover img { width: 160px; height: 160px; }
+  .cover h1 { border-bottom: none; font-size: 2.8em; margin: 0.5em 0 0.1em 0; letter-spacing: 0.02em; }
+  .cover .tagline { color: #5C635F; font-size: 1.2em; font-style: italic; margin-top: 0.3em; }
+  .cover .version { color: #5C635F; font-size: 0.9em; margin-top: 2em; }
+  .tip { background: #E6EAE7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; page-break-inside: avoid; }
+  .tip strong { color: #2F4F3E; }
+  .section-number { color: #4F6F5C; font-weight: 400; }
+  .guide-nav { display: flex; justify-content: space-between; align-items: center; border: 1px solid #D6DBD7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; }
+  .guide-nav a { text-decoration: none; color: #2F4F3E; font-weight: 500; }
+  .guide-nav a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
+    <img src="../prosponsive-icon.png" alt="Prosponsive" style="width: 120px; height: 120px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <svg style="position: absolute; inset: 0; width: 100%; height: 100%;" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" rx="8" ry="8" width="40" height="26" fill="#2F4F3E" />
+      <polygon points="30,26 38,36 32,26" fill="#2F4F3E" />
+      <line x1="8" y1="9" x2="32" y2="9" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="8" y1="17" x2="24" y2="17" stroke="#F4F6F4" stroke-width="2.5" stroke-linecap="round" />
+      <rect x="72" y="86" rx="8" ry="8" width="40" height="26" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" />
+      <polygon points="82,86 74,76 84,86" fill="#F4F6F4" stroke="#2F4F3E" stroke-width="2" stroke-linejoin="round" />
+      <line x1="81" y1="86" x2="85" y2="86" stroke="#F4F6F4" stroke-width="3" />
+      <line x1="80" y1="95" x2="104" y2="95" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="80" y1="103" x2="96" y2="103" stroke="#2F4F3E" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
+  </div>
+  <h1>Prosponsive</h1>
+  <div class="tagline">vs. ChatGPT, Claude.ai, and Gemini</div>
+  <div class="version">Lead more. Manage less.</div>
+</div>
+
+<div class="guide-nav">
+  <a href="vs-claude-cowork.html">&larr; vs. Claude Cowork</a>
+  <a href="vs-copilot-workspace.html">vs. Copilot &amp; Workspace AI &rarr;</a>
+</div>
+
+<h1>Prosponsive vs. ChatGPT, Claude.ai, and Gemini</h1>
+
+<p>ChatGPT, Claude.ai, and Gemini are the most popular AI chat interfaces in the world. They are excellent at what they do — conversational AI that can answer questions, write content, analyze documents, and reason through complex problems. Millions of people use them daily for good reason.</p>
+
+<p>The key difference: cloud chat products are built for synchronous, long-running dialog — with minimal or no access to the ecosystem of systems and touchpoints you need to coordinate in your actual work. Prosponsive is designed for trusted, asynchronous, repeatable tasks that connect to your real tools and produce outcomes without requiring your constant attention.</p>
+
+<hr>
+
+<h2><span class="section-number">1.</span> What Cloud Chat Does Well</h2>
+
+<p>Credit where it is due — cloud chat products have real strengths:</p>
+
+<ul>
+  <li><strong>Zero setup.</strong> Open a browser, sign in, start chatting. No installation, no configuration, no infrastructure to manage.</li>
+  <li><strong>Cutting-edge models.</strong> OpenAI, Anthropic, and Google each run their latest and most capable models on their own infrastructure, often before those models are available via API.</li>
+  <li><strong>Massive context windows.</strong> Cloud services can handle very long conversations and large document uploads because they manage the compute.</li>
+  <li><strong>Built-in features.</strong> Image generation (DALL-E, Imagen), web browsing, code execution sandboxes, and file analysis come built in with no configuration.</li>
+  <li><strong>Team and enterprise tiers.</strong> Shared workspaces, admin controls, and compliance certifications for organizational use.</li>
+  <li><strong>Continuous improvement.</strong> Models improve transparently — you get better results over time without doing anything.</li>
+</ul>
+
+<hr>
+
+<h2><span class="section-number">2.</span> Where Prosponsive Differs</h2>
+
+<h3>Your data is stored locally</h3>
+
+<p>When you use ChatGPT, Claude.ai, or Gemini, your conversations, documents, and usage patterns are stored and indexed on their servers as part of the product. Your data lives on their infrastructure.</p>
+
+<p>Prosponsive stores your conversation history, workflow data, and execution logs locally on your machine. When you use a cloud AI provider through Prosponsive, the current prompt is sent to that provider's API during execution — but your historical data, project files, and workflow outputs are not stored on any external server. With a local model like Ollama, nothing is sent externally at all. For more detail, see <a href="../features.html">Privacy and Security</a> in the Feature Guide.</p>
+
+<h3>Real tool integration, not simulated actions</h3>
+
+<p>Cloud chat products can talk about sending an email, creating a calendar event, or querying a database. Some offer plugins or integrations, but these are sandboxed and limited.</p>
+
+<p>Prosponsive agents call real workflows built in n8n — a visual workflow engine running locally on your machine. When your agent "sends an email," it actually sends an email through a workflow you built and can inspect. When it "queries a database," it runs a real query against a real connection. The key difference: <strong>agents never have access to the credentials used by those tools</strong>. Credentials are stored in n8n's encrypted vault, and agents only interact through the API layer. For more detail, see <a href="../features.html">Credential Isolation</a> in the Feature Guide.</p>
+
+<h3>Choose your model, change your mind</h3>
+
+<p>With ChatGPT, you use OpenAI models. With Claude.ai, Anthropic models. With Gemini, Google models. Switching means switching products, losing your history, and re-learning an interface.</p>
+
+<p>Prosponsive supports Anthropic, OpenAI, Google, Groq, Mistral, AWS Bedrock, and local models via Ollama — all through the same interface. Switch providers in settings without losing your project context. Use Claude for complex reasoning, a fast Groq model for quick tasks, and Ollama for offline work. And because you define a priority list of providers and models, Prosponsive automatically fails over to the next one if your primary provider goes down or you hit a rate limit — your agents keep working without interruption. For more detail, see <a href="../features.html">Provider Flexibility</a> in the Feature Guide.</p>
+
+<h3>You own the infrastructure</h3>
+
+<p>Cloud chat services can change pricing, features, and terms of service at any time. If a service goes down, you are down. If a service is discontinued, your workflows are gone.</p>
+
+<p>Prosponsive runs on your machine. The infrastructure — containers, databases, workflows — is yours. You can back it up, migrate it, and modify it. The application is open source.</p>
+
+<hr>
+
+<h2><span class="section-number">3.</span> Side-by-Side Comparison</h2>
+
+<table>
+  <tr>
+    <th>Factor</th>
+    <th>Cloud Chat</th>
+    <th>Prosponsive</th>
+  </tr>
+  <tr>
+    <td>Setup time</td>
+    <td>Seconds (browser-based)</td>
+    <td>5-30 minutes (one-time install)</td>
+  </tr>
+  <tr>
+    <td>Data residency</td>
+    <td>Provider's servers</td>
+    <td>Your machine</td>
+  </tr>
+  <tr>
+    <td>Model choice</td>
+    <td>Single provider</td>
+    <td>7+ providers, swap anytime</td>
+  </tr>
+  <tr>
+    <td>Tool integration</td>
+    <td>Plugins / limited</td>
+    <td>Full n8n workflows</td>
+  </tr>
+  <tr>
+    <td>Offline capability</td>
+    <td>None</td>
+    <td>Full (with local models)</td>
+  </tr>
+  <tr>
+    <td>Credential security</td>
+    <td>N/A</td>
+    <td>Isolated from AI agent</td>
+  </tr>
+  <tr>
+    <td>Customization</td>
+    <td>Custom instructions</td>
+    <td>Full workflow builder</td>
+  </tr>
+</table>
+
+<hr>
+
+<h2><span class="section-number">4.</span> Key Decision Factors</h2>
+
+<h3>Privacy</h3>
+
+<p>If you work with sensitive data — legal documents, medical records, financial information, proprietary code — having that data stored and indexed on a cloud provider's servers may not be acceptable. Prosponsive stores your history, files, and workflow data locally. When using a cloud AI provider, only the current prompt is sent during execution. With a local model, you get complete air-gap operation.</p>
+
+<h3>Extensibility</h3>
+
+<p>Cloud chat extensibility is limited to what the provider allows — custom GPTs, plugins, or API integrations that run in their sandbox. Prosponsive extensibility is limited only by what n8n can connect to, which is effectively anything with an API. You build your own tools, control the logic, and own the data flow.</p>
+
+<h3>Beyond chat</h3>
+
+<p>Cloud chat providers are the known state of the world — and they are good at what they do. Prosponsive is what comes next. If you are satisfied with AI that discusses your work, keep using the chat providers. If you want AI that does your work — agents that take action, coordinate across systems, and operate without your constant attention — add Prosponsive alongside them.</p>
+
+<hr>
+
+<h2><span class="section-number">5.</span> Making the Choice</h2>
+
+<h3>ChatGPT, Claude.ai, or Gemini may be enough if you:</h3>
+
+<ul>
+  <li>Just need a quick answer or brainstorming session</li>
+  <li>Don't need tools that take real actions</li>
+  <li>Are fine with one provider's ecosystem</li>
+  <li>Don't mind your data living on someone else's server</li>
+</ul>
+
+<h3>Choose Prosponsive when you need more:</h3>
+
+<ul>
+  <li>Need AI that takes real actions — sending emails, running queries, triggering workflows</li>
+  <li>Handle sensitive data that cannot leave your machine</li>
+  <li>Want to switch between AI providers without switching products</li>
+  <li>Need custom tool integration beyond what plugins offer</li>
+  <li>Want the security and control of private infrastructure and data</li>
+</ul>
+
+<hr>
+
+<div class="guide-nav">
+  <a href="vs-claude-cowork.html">&larr; vs. Claude Cowork</a>
+  <a href="vs-copilot-workspace.html">vs. Copilot &amp; Workspace AI &rarr;</a>
+</div>
+
+<div style="text-align: center; margin-top: 3em; padding-top: 1em; border-top: 2px solid #D6DBD7; color: #5C635F; font-size: 0.85em;">
+  <img src="../prosponsive-icon.png" alt="Prosponsive" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 0.5em;">
+  <strong style="color: #2F4F3E;">Prosponsive</strong> — Lead more. Manage less.
+</div>
+
+</body>
+</html>
