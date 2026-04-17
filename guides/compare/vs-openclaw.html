@@ -148,6 +148,16 @@
 
 <p>OpenClaw's approach to autonomy is broad permissions — the agent can do what it needs to do, and the user trusts it to behave. Prosponsive's approach is controlled autonomy through auto-approvals. You explicitly define which tools can run without asking, under what conditions, and with what constraints. Everything else requires human approval. For more detail, see <a href="../features.html">Auto-Approvals</a> in the Feature Guide.</p>
 
+<h3>Full visibility into every tool execution</h3>
+
+<p>When a Prosponsive agent calls a tool, you see exactly what happened — what the tool did, what data it accessed, what the result was. Every execution is logged, inspectable, and auditable. You are never wondering what your agent did or why. OpenClaw skills execute in the background with minimal visibility into what they touched or what data left your system.</p>
+
+<h3>Multi-system tools vs. single-system skills</h3>
+
+<p>OpenClaw skills are typically single-system actions — scan a receipt, check a social feed, send a message. They are useful for consumer-oriented personal automation: meal planning, expense tracking, social monitoring, chat bot responses. Coordinating across multiple systems requires chaining skills together and hoping the AI sequences them correctly.</p>
+
+<p>Prosponsive tools are n8n workflows that orchestrate across multiple systems in a single execution. One tool can read from your CRM, check your billing system, draft a response, and post it back — with error handling and business logic built into the workflow. This makes Prosponsive suited for the kind of multi-system work that managers and knowledge workers actually do: project coordination, decision support, reporting across data sources, and operational workflows.</p>
+
 <h3>Built by an engineering leader from regulated industries</h3>
 
 <p>Prosponsive was built with the security scrutiny of someone who has led engineering teams in regulated industries — where security architecture is not an afterthought but a design constraint. The credential isolation model, the tool boundary system, and the approval workflow were designed before the first line of code was written.</p>
@@ -211,6 +221,21 @@
     <td>Tool approval model</td>
     <td>Broad permissions</td>
     <td><strong>Explicit auto-approvals</strong></td>
+  </tr>
+  <tr>
+    <td>Tool scope</td>
+    <td>Single-system skills</td>
+    <td><strong>Multi-system orchestrated workflows</strong></td>
+  </tr>
+  <tr>
+    <td>Execution visibility</td>
+    <td>Minimal</td>
+    <td><strong>Full — every step inspectable</strong></td>
+  </tr>
+  <tr>
+    <td>Primary use cases</td>
+    <td>Personal automation, chat bots, social monitoring</td>
+    <td><strong>Knowledge work, project coordination, multi-system operations</strong></td>
   </tr>
   <tr>
     <td>Data residency</td>
