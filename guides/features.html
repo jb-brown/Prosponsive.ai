@@ -169,7 +169,47 @@
 
 <hr>
 
-<h2><span class="section-number">5.</span> Higher-Value Tools</h2>
+<h2><span class="section-number">5.</span> Agent Autonomy</h2>
+
+<p>Agents in Prosponsive don't just answer questions — they manage your experience. They have built-in capabilities to organize, prioritize, and clean up after themselves so you spend less time managing and more time reviewing outcomes.</p>
+
+<h3>Thread and channel management</h3>
+
+<p>Agents can move threads to different channels. When a conversation spawns a topic that belongs somewhere else — a project discussion that surfaces a bug, a brainstorming session that produces an action item — the agent moves it to the right channel. Information ends up in one place regardless of where it originated, organized by context rather than by when it happened to come up.</p>
+
+<h3>Archiving</h3>
+
+<p>When an agent finishes a task, it can archive the channel or messages it no longer needs. Completed work doesn't clutter your view or consume tokens as context in future messages. Agents clean up after themselves — they know when work is done and act on it.</p>
+
+<h3>Performance visibility</h3>
+
+<p>Prosponsive gives you clear visibility into your agents' efficiency and effectiveness. You can see how your agents are performing — which ones are getting work done, which ones are consuming tokens without producing results, and where you have opportunities to save time and cost. This is not usage reporting for billing purposes. It is operational insight that helps you tune your agents, adjust your auto-approval rules, and identify where automation is working and where it isn't.</p>
+
+<p>The combination of agent autonomy, auto-approvals, and performance visibility creates a feedback loop: agents work independently, you review their results in bulk, performance data shows you where to expand automation, and your agents become more effective over time with less input from you.</p>
+
+<hr>
+
+<h2><span class="section-number">6.</span> Notifications and Agent Definitions</h2>
+
+<p>Prosponsive keeps you informed without demanding your attention. Notifications surface what matters, agent definitions control how agents behave, and scheduled prompts keep work moving — together they form the control layer that makes always-on operation practical.</p>
+
+<h3>Notifications</h3>
+
+<p>Agents notify you when something needs your attention — a tool action requires approval, a scheduled task completed, or an agent encountered something it cannot resolve on its own. Notifications are designed to be actionable, not noisy. You are not notified about routine operations that your auto-approval rules already handle. You are notified about the things that actually need you.</p>
+
+<h3>Agent definitions</h3>
+
+<p>Every agent in Prosponsive is defined by a markdown file that specifies its identity, instructions, tools, and behavior. Agent definitions are the control surface for how your agents operate — you define what each agent knows, what tools it can use, which channels it participates in, and how it should behave. This is not prompt engineering buried in a settings panel. It is a clear, editable document that fully describes your agent's capabilities and boundaries.</p>
+
+<p>Agent definitions combine with channels, auto-approvals, and scheduled prompts to create a complete automation system. Define an agent's behavior in its definition, assign it to the right channels, set auto-approval rules for its tools, schedule recurring prompts to trigger it, and configure notifications for when it needs you. Each piece is simple on its own — together they give you fine-grained control over autonomous operation.</p>
+
+<h3>The full system</h3>
+
+<p>Consider how these pieces work together: A scheduled prompt fires every morning, sending a message to your reporting agent. The agent uses its tools — auto-approved because you trust them — to gather data from your systems. It posts the results to the reporting channel, archives yesterday's report, and notifies you only if something unusual needs your attention. You defined all of this through an agent definition, a few auto-approval rules, one scheduled prompt, and a notification preference. No code. No orchestration. Just configuration.</p>
+
+<hr>
+
+<h2><span class="section-number">7.</span> Higher-Value Tools</h2>
 
 <p>Prosponsive tools are not MCP servers. They are fundamentally different in scope and design. Understanding this difference is key to understanding why Prosponsive exists.</p>
 
@@ -199,7 +239,7 @@
 
 <hr>
 
-<h2><span class="section-number">6.</span> Provider Agnostic</h2>
+<h2><span class="section-number">8.</span> Provider Agnostic</h2>
 
 <p>Prosponsive supports 7+ AI providers, and you can switch between them at any time. But provider independence is not just about avoiding lock-in — it is about aligning incentives.</p>
 
@@ -234,7 +274,7 @@
 
 <hr>
 
-<h2><span class="section-number">7.</span> Privacy and Security</h2>
+<h2><span class="section-number">9.</span> Privacy and Security</h2>
 
 <p>Prosponsive keeps your work private during execution. Your conversations, your data, and your tool activity all stay on your machine — not on someone else's server.</p>
 
@@ -260,7 +300,7 @@
 
 <hr>
 
-<h2><span class="section-number">8.</span> Extensibility</h2>
+<h2><span class="section-number">10.</span> Extensibility</h2>
 
 <p>Prosponsive is designed to be extended, not just configured. You can create custom agents, build custom tools, and connect to thousands of external services.</p>
 
@@ -297,7 +337,7 @@
 
 <hr>
 
-<h2><span class="section-number">9.</span> Multi-Language Support</h2>
+<h2><span class="section-number">11.</span> Multi-Language Support</h2>
 
 <p>Prosponsive supports 12 languages across its interface, so you can work in the language most natural to you.</p>
 
@@ -329,7 +369,7 @@
 
 <hr>
 
-<h2><span class="section-number">10.</span> Scheduled Prompts</h2>
+<h2><span class="section-number">12.</span> Scheduled Prompts</h2>
 
 <p>Scheduled prompts let you automate recurring AI tasks. Combined with async tool use and auto-approvals, they make Prosponsive an always-on system that works while you do not.</p>
 
@@ -373,6 +413,8 @@
     <tr><td><strong>Channels</strong></td><td>Agents and tools scoped to workspaces, not dumped into every conversation. Group agent collaboration no other product offers.</td></tr>
     <tr><td><strong>Filtering &amp; Bulk Approval</strong></td><td>Review and approve many actions at once. Not possible in products built around sequential chat.</td></tr>
     <tr><td><strong>Auto-Approvals</strong></td><td>Condition-based rules let trusted tools run without interrupting you. Only Prosponsive has this.</td></tr>
+    <tr><td><strong>Agent Autonomy</strong></td><td>Agents manage threads, archive completed work, and organize your channels. Performance visibility shows you where to optimize.</td></tr>
+    <tr><td><strong>Notifications &amp; Definitions</strong></td><td>Actionable notifications, editable agent definitions, and scheduled prompts form a complete always-on control layer.</td></tr>
     <tr><td><strong>Higher-Value Tools</strong></td><td>n8n workflows that orchestrate multiple systems per tool call. One tool does what multiple MCPs cannot.</td></tr>
     <tr><td><strong>Provider Agnostic</strong></td><td>7+ providers, switch anytime. Design that minimizes token cost instead of maximizing it.</td></tr>
     <tr><td><strong>Privacy &amp; Security</strong></td><td>Local execution. Encrypted connections. Your work stays on your machine.</td></tr>
