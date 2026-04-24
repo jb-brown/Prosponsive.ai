@@ -48,24 +48,27 @@ test('/eula redirect points at /eula/<current>/', () => {
   assert.match(html, /window\.location\.replace\('\/eula\/2026-04-24\/'\)/);
 });
 
-test('dated Privacy Policy page exists and has expected heading', () => {
-  const html = read(`legal/privacy/${VERSION}/index.html`);
+test('dated Privacy Policy page exists at /privacy/<version>/ and has expected heading', () => {
+  // Path matches spec §4.1 — site root, not nested under /legal/. The
+  // Prosponsive desktop app's acceptance modal links to these exact
+  // URLs (see src/renderer/components/legal/AcceptanceGateModal.tsx).
+  const html = read(`privacy/${VERSION}/index.html`);
   assert.match(html, /<h1>Privacy Policy<\/h1>/);
   assert.match(html, /prosponsive-icon|Prosponsive/i);
 });
 
-test('dated Terms of Service page exists and has expected heading', () => {
-  const html = read(`legal/terms/${VERSION}/index.html`);
+test('dated Terms of Service page exists at /terms/<version>/ and has expected heading', () => {
+  const html = read(`terms/${VERSION}/index.html`);
   assert.match(html, /<h1>Terms of Service<\/h1>/);
 });
 
-test('dated EULA page exists and has expected heading', () => {
-  const html = read(`legal/eula/${VERSION}/index.html`);
+test('dated EULA page exists at /eula/<version>/ and has expected heading', () => {
+  const html = read(`eula/${VERSION}/index.html`);
   assert.match(html, /<h1>End User License Agreement \(EULA\)<\/h1>/);
 });
 
 test('Terms of Service ships only Alternate A (Delaware courts) — no arbitration text', () => {
-  const html = read(`legal/terms/${VERSION}/index.html`);
+  const html = read(`terms/${VERSION}/index.html`);
   // User decision 1 (2026-04-24): Alternate A only. Guard against accidental
   // re-inclusion of Alternate B (JAMS arbitration) in a future bump.
   assert.ok(!/JAMS/i.test(html), 'Terms must not reference JAMS (Alternate B removed).');
@@ -90,4 +93,24 @@ test('legal hub page lists all three dated documents', () => {
   assert.match(html, new RegExp(`/terms/${VERSION}/`));
   assert.match(html, new RegExp(`/eula/${VERSION}/`));
   assert.match(html, /\/legal\/versions\.json/);
+});
+
+// Regression: the bare-path redirect target must point at a file that
+// actually exists on disk. A prior revision of this build placed dated
+// content under `/legal/privacy/<version>/` but redirected from
+// `/privacy/` to `/privacy/<version>/` — the target 404'd on GitHub
+// Pages and the Prosponsive desktop app's modal links followed the
+// same dead path. This test would have caught that at build time.
+test('every bare-path redirect resolves to a real on-disk file', () => {
+  for (const doc of ['privacy', 'terms', 'eula']) {
+    const redirectHtml = read(`${doc}/index.html`);
+    const match = /url=(\/[^"']+)/.exec(redirectHtml);
+    assert.ok(match, `redirect ${doc}/index.html missing url= target`);
+    const targetPath = match[1].replace(/\/$/, '/index.html');
+    const absTarget = path.join(ROOT, targetPath);
+    assert.ok(
+      fs.existsSync(absTarget),
+      `${doc}/index.html redirects to ${targetPath} which does not exist on disk`,
+    );
+  }
 });
