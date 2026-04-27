@@ -20,8 +20,8 @@
     .legal-doc th { background: #2F4F3E; color: white; padding: 0.5em 0.8em; text-align: left; }
     .legal-doc td { padding: 0.5em 0.8em; border-bottom: 1px solid #D6DBD7; }
     .legal-doc tr:nth-child(even) td { background: #F4F6F4; }
-    .legal-footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #D6DBD7; font-size: 0.9em; color: #3A5F4A; }
-    .legal-footer a { margin-right: 1em; }
+    .legal-footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #D6DBD7; font-size: 0.9em; color: #3A5F4A; text-align: center; }
+    .legal-footer a { margin: 0 0.5em; }
     .legal-doc p { margin: 0 0 1.25rem; }
     .legal-doc ul, .legal-doc ol { padding-left: 2.5rem; margin: 0 0 1.25rem; list-style-position: outside; }
     .legal-doc li { margin: 0 0 0.6rem; padding-left: 0.25rem; }
@@ -64,7 +64,7 @@
 <li><strong>Account information (via Clerk):</strong> When you create a Prosponsive account we collect your email address and your name. If you sign in with an OAuth provider (Google, Microsoft, GitHub), we additionally receive your profile image URL and an OAuth token from that provider. Clerk stores these on our behalf; see §5.1.</li>
 <li><strong>Feedback:</strong> When you submit in-app feedback, we collect the text you type and the Prosponsive app version. This is filed as an issue on our public GitHub repository via the GitHub REST API. Do not include sensitive information in feedback — the repository is public.</li>
 <li><strong>Support correspondence:</strong> If you email <code>privacy@prosponsive.ai</code> or <code>jb@prosponsive.ai</code> we receive the contents of your message and your email address.</li>
-<li><strong>Billing information (via Stripe):</strong> When you start a paid subscription, Stripe collects your card details, billing address, and tax information directly. We receive a payment method token, your subscription status, and transaction metadata; we do not see or store full card numbers. See §5.</li>
+<li><strong>Billing information (via Stripe):</strong> When you start a paid subscription, Stripe collects your card details, billing address, and tax information directly. Your payment information never touches our servers — we receive only a payment method token, your subscription status, and transaction metadata. See §5.</li>
 </ul>
 <h3>4.2 Information we collect automatically</h3>
 <ul>
@@ -85,7 +85,7 @@
 <hr>
 <h2>5. Sub-processors (third parties that process data on our behalf)</h2>
 <p>We rely on the following service providers. All are based in the United States and all have their own privacy policies and security programs.</p>
-<table><thead><tr><th>Sub-processor</th><th>What it does for us</th><th>What it receives</th><th>Location</th></tr></thead><tbody><tr><td><strong>Clerk</strong></td><td>Authentication and identity management</td><td>Your email address, name, profile image, OAuth tokens</td><td>United States</td></tr><tr><td><strong>Amazon Web Services (CloudFront, S3)</strong></td><td>App distribution and auto-updates</td><td>Your IP address at the network edge (transient, AWS routing only — we do not retain IPs in any logs we control)</td><td>United States (us-east-1)</td></tr><tr><td><strong>PostHog</strong></td><td>Anonymous product analytics (opt-in)</td><td>A random UUID and anonymized event metadata</td><td>United States</td></tr><tr><td><strong>GitHub</strong></td><td>In-app feedback submission via the GitHub REST API</td><td>Feedback text you author, the Prosponsive app version</td><td>United States</td></tr><tr><td><strong>Stripe</strong></td><td>Payment processing for paid subscriptions</td><td>Your billing information, card details (collected directly by Stripe — we do not see or store full card numbers), and transaction metadata</td><td>United States</td></tr></tbody></table>
+<table><thead><tr><th>Sub-processor</th><th>What it does for us</th><th>What it receives</th><th>Location</th></tr></thead><tbody><tr><td><strong>Clerk</strong></td><td>Authentication and identity management</td><td>Your email address, name, profile image, OAuth tokens</td><td>United States</td></tr><tr><td><strong>Amazon Web Services (CloudFront, S3)</strong></td><td>App distribution and auto-updates</td><td>Your IP address at the network edge (transient, AWS routing only — we do not retain IPs in any logs we control)</td><td>United States (us-east-1)</td></tr><tr><td><strong>PostHog</strong></td><td>Anonymous product analytics (opt-in)</td><td>A random UUID and anonymized event metadata</td><td>United States</td></tr><tr><td><strong>GitHub</strong></td><td>In-app feedback submission via the GitHub REST API</td><td>Feedback text you author, the Prosponsive app version</td><td>United States</td></tr><tr><td><strong>Stripe</strong></td><td>Payment processing for paid subscriptions</td><td>Your billing information and card details (collected and stored entirely by Stripe — never touch our servers); we receive only a payment method token, subscription status, and transaction metadata</td><td>United States</td></tr></tbody></table>
 <p>If you configure an external AI provider inside the app, conversation content and tool invocations you submit are sent to that provider by your copy of Prosponsive, under that provider's terms. Prosponsive does not route that traffic through any server we operate — the connection goes directly from your machine to the provider. Providers we currently support include:</p>
 <ul>
 <li>Ollama (runs locally on your machine — nothing leaves)</li>
@@ -198,7 +198,6 @@
     <nav class="legal-footer" aria-label="Legal documents">
       <a href="/privacy/">Privacy Policy</a>
       <a href="/terms/">Terms of Service</a>
-      <a href="/eula/">EULA</a>
       <a href="/legal/">All legal documents</a>
     </nav>
   </main>
