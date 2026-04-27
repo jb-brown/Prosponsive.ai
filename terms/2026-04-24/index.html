@@ -20,8 +20,8 @@
     .legal-doc th { background: #2F4F3E; color: white; padding: 0.5em 0.8em; text-align: left; }
     .legal-doc td { padding: 0.5em 0.8em; border-bottom: 1px solid #D6DBD7; }
     .legal-doc tr:nth-child(even) td { background: #F4F6F4; }
-    .legal-footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #D6DBD7; font-size: 0.9em; color: #3A5F4A; }
-    .legal-footer a { margin-right: 1em; }
+    .legal-footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #D6DBD7; font-size: 0.9em; color: #3A5F4A; text-align: center; }
+    .legal-footer a { margin: 0 0.5em; }
     .legal-doc p { margin: 0 0 1.25rem; }
     .legal-doc ul, .legal-doc ol { padding-left: 2.5rem; margin: 0 0 1.25rem; list-style-position: outside; }
     .legal-doc li { margin: 0 0 0.6rem; padding-left: 0.25rem; }
@@ -33,8 +33,8 @@
   <main class="legal-doc">
 <h1>Terms of Service</h1>
 <p><strong>Version:</strong> 2026-04-24 <strong>Effective date:</strong> 2026-04-24</p>
-<p>These Terms of Service (&quot;Terms&quot;) are a binding agreement between you and Prosponsive, Inc. (&quot;Prosponsive,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) and govern your use of the Prosponsive desktop application, the <code>prosponsive.ai</code> website, and any related services we provide (together, the &quot;Service&quot;). The End User License Agreement (EULA) at <code>https://prosponsive.ai/eula/</code> is incorporated into these Terms by reference; by accepting these Terms you also accept the EULA.</p>
-<p>Please read these Terms carefully. By creating an account, by signing in, or by using the Service, you confirm that you have read, understood, and agreed to be bound by these Terms and the EULA. If you do not agree, do not use the Service.</p>
+<p>These Terms of Service (&quot;Terms&quot;) are a binding agreement between you and Prosponsive, Inc. (&quot;Prosponsive,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) and govern your use of the Prosponsive desktop application, the <code>prosponsive.ai</code> website, and any related services we provide (together, the &quot;Service&quot;).</p>
+<p>Please read these Terms carefully. By creating an account, by signing in, or by using the Service, you confirm that you have read, understood, and agreed to be bound by these Terms. If you do not agree, do not use the Service.</p>
 <hr>
 <h2>1. Who we are</h2>
 <p>Prosponsive, Inc. is a Delaware corporation.</p>
@@ -56,7 +56,7 @@
 <h3>4.1 Your content stays on your machine</h3>
 <p>The Service is architected so that your conversations, your tool invocations, and your local data stay on your machine unless you explicitly configure an integration that sends them elsewhere. Prosponsive does not collect, cache, or retain conversation content on any server that we operate. See our Privacy Policy at <code>https://prosponsive.ai/privacy/</code> for details.</p>
 <h3>4.2 Third-party AI providers</h3>
-<p>When you configure an external AI provider (for example, OpenAI, Anthropic, AWS Bedrock, Google, Groq, Mistral), your copy of the Service sends conversation content and tool invocations to that provider according to that provider's terms. You are solely responsible for your relationship with the provider you choose and for any fees the provider may charge you. Prosponsive is not a party to your agreement with your AI provider.</p>
+<p>When you configure an AI provider (for example, Ollama for local LLM hosting and models, or a hosted service like OpenAI, Anthropic, AWS Bedrock, Google, Groq, Mistral), your copy of the Service routes conversation content and tool invocations to that provider according to that provider's terms. With a local provider like Ollama, this routing stays on your own machine. You are solely responsible for your relationship with the provider you choose and for any fees the provider may charge you. Prosponsive is not a party to your agreement with your AI provider.</p>
 <h3>4.3 Third-party integrations</h3>
 <p>The Service may connect to other third-party services at your direction (for example, communication platforms, storage providers, automation platforms). Those services have their own terms. We are not responsible for third-party services, and your use of them is subject to their terms.</p>
 <hr>
@@ -64,7 +64,7 @@
 <ul>
 <li><strong>Free tier.</strong> The Service currently offers a free tier subject to usage limits described inside the application and at <code>https://prosponsive.ai</code>.</li>
 <li><strong>Paid tiers.</strong> If you purchase a paid tier, you authorize us (or our payment processor) to charge the payment method on file for the applicable fee on a recurring basis until you cancel. Fees are listed at the point of purchase.</li>
-<li><strong>Payment processor.</strong> Payment is processed by a third-party provider (currently Stripe). We do not store full card numbers on our own systems.</li>
+<li><strong>Payment processor.</strong> Payment is processed by a third-party provider (currently Stripe). Card details are collected and stored entirely by Stripe — your payment information never touches our servers. We receive only a payment method token, subscription status, and transaction metadata.</li>
 <li><strong>Refunds.</strong> Fees are generally non-refundable except as required by law. If you believe you have been charged in error, contact us at <code>privacy@prosponsive.ai</code> within 30 days and we will review in good faith.</li>
 <li><strong>Taxes.</strong> Fees are exclusive of taxes. You are responsible for any applicable taxes.</li>
 <li><strong>Price changes.</strong> We may change our pricing. Changes will not apply to the current billing period; they apply to subsequent renewal periods after reasonable notice.</li>
@@ -98,7 +98,7 @@
 <h2>8. Our content and intellectual property</h2>
 <ul>
 <li><strong>Ownership.</strong> The Service, including the desktop application, the website, logos, text, graphics, and other materials we provide, is owned by Prosponsive or our licensors and is protected by intellectual-property laws.</li>
-<li><strong>Limited license.</strong> Subject to your compliance with these Terms and the EULA, we grant you a limited, non-exclusive, non-transferable, revocable license to use the desktop application and the Service for your personal or internal-business purposes.</li>
+<li><strong>Limited license.</strong> Subject to your compliance with these Terms, we grant you a limited, non-exclusive, non-transferable, revocable license to use the desktop application and the Service for your personal or internal-business purposes.</li>
 <li><strong>Feedback.</strong> If you send us feedback, suggestions, or ideas about the Service, you grant us a perpetual, royalty-free, worldwide, sublicensable license to use that feedback to improve the Service, without any obligation to you.</li>
 </ul>
 <hr>
@@ -136,7 +136,7 @@
 </ul>
 <hr>
 <h2>14. Indemnification</h2>
-<p>To the fullest extent permitted by law, you agree to indemnify and hold harmless Prosponsive, its officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses (including reasonable attorneys' fees) arising out of or related to: (a) your use of the Service; (b) your violation of these Terms or the EULA; (c) your violation of any law or the rights of any third party; or (d) any content you provide or generate with the Service.</p>
+<p>To the fullest extent permitted by law, you agree to indemnify and hold harmless Prosponsive, its officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses (including reasonable attorneys' fees) arising out of or related to: (a) your use of the Service; (b) your violation of these Terms; (c) your violation of any law or the rights of any third party; or (d) any content you provide or generate with the Service.</p>
 <hr>
 <h2>15. Governing law</h2>
 <p>These Terms are governed by the laws of the State of Delaware, United States, without regard to its conflict-of-laws rules. The United Nations Convention on Contracts for the International Sale of Goods does not apply.</p>
@@ -156,7 +156,7 @@
 <hr>
 <h2>18. General provisions</h2>
 <ul>
-<li><strong>Entire agreement.</strong> These Terms (together with the EULA and the Privacy Policy, each incorporated by reference) are the entire agreement between you and Prosponsive regarding the Service.</li>
+<li><strong>Entire agreement.</strong> These Terms (together with the Privacy Policy, incorporated by reference) are the entire agreement between you and Prosponsive regarding the Service.</li>
 <li><strong>Severability.</strong> If any provision is found unenforceable, the remaining provisions remain in effect.</li>
 <li><strong>No waiver.</strong> Our failure to enforce any right is not a waiver of that right.</li>
 <li><strong>Assignment.</strong> You may not assign these Terms without our prior written consent. We may assign these Terms in connection with a merger, acquisition, or sale of assets.</li>
@@ -173,7 +173,6 @@
     <nav class="legal-footer" aria-label="Legal documents">
       <a href="/privacy/">Privacy Policy</a>
       <a href="/terms/">Terms of Service</a>
-      <a href="/eula/">EULA</a>
       <a href="/legal/">All legal documents</a>
     </nav>
   </main>

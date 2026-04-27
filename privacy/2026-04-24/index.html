@@ -20,8 +20,8 @@
     .legal-doc th { background: #2F4F3E; color: white; padding: 0.5em 0.8em; text-align: left; }
     .legal-doc td { padding: 0.5em 0.8em; border-bottom: 1px solid #D6DBD7; }
     .legal-doc tr:nth-child(even) td { background: #F4F6F4; }
-    .legal-footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #D6DBD7; font-size: 0.9em; color: #3A5F4A; }
-    .legal-footer a { margin-right: 1em; }
+    .legal-footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #D6DBD7; font-size: 0.9em; color: #3A5F4A; text-align: center; }
+    .legal-footer a { margin: 0 0.5em; }
     .legal-doc p { margin: 0 0 1.25rem; }
     .legal-doc ul, .legal-doc ol { padding-left: 2.5rem; margin: 0 0 1.25rem; list-style-position: outside; }
     .legal-doc li { margin: 0 0 0.6rem; padding-left: 0.25rem; }
@@ -44,8 +44,8 @@
 <h2>2. The short version</h2>
 <ul>
 <li>We keep as much as possible on your own machine. The Prosponsive desktop application runs locally; your conversations, tool invocations, and local data do not leave your computer unless you explicitly configure an integration that sends them elsewhere (for example, a hosted AI provider).</li>
-<li>We use a small set of third-party services (&quot;sub-processors&quot;) for authentication, app distribution, optional analytics, and in-app feedback. Each is listed in §5.</li>
-<li>When you configure an external AI provider (OpenAI, Anthropic, AWS Bedrock, Google, Groq, Mistral, and similar), conversation content is sent to that provider under that provider's own terms. Prosponsive is not the processor for that data.</li>
+<li>We use a small set of third-party services (&quot;sub-processors&quot;) for authentication, app distribution, optional analytics, in-app feedback, and payment processing. Each is listed in §5.</li>
+<li>When you configure an AI provider (Ollama for local LLM hosting and models, or hosted services like OpenAI, Anthropic, AWS Bedrock, Google, Groq, Mistral, and similar), conversation content is processed by that provider under that provider's own terms. Prosponsive is not the processor for that data. With a local provider like Ollama, the conversation never leaves your machine.</li>
 <li>You can delete your account and we will delete or anonymize the personal information we hold about you, except for records we are required to keep (for example, acceptance records for this Privacy Policy itself — see §9).</li>
 </ul>
 <hr>
@@ -62,13 +62,14 @@
 <h3>4.1 Information you provide directly</h3>
 <ul>
 <li><strong>Account information (via Clerk):</strong> When you create a Prosponsive account we collect your email address and your name. If you sign in with an OAuth provider (Google, Microsoft, GitHub), we additionally receive your profile image URL and an OAuth token from that provider. Clerk stores these on our behalf; see §5.1.</li>
-<li><strong>Feedback:</strong> When you submit in-app feedback, we collect the text you type and the Prosponsive app version. This is filed as an issue on our public GitHub repository via the GitHub REST API. Do not include sensitive information in feedback — the repository is public.</li>
+<li><strong>Feedback:</strong> When you submit in-app feedback, we collect the text you author plus environment context that helps us reproduce reported bugs: basic device and operating-system information (e.g., OS name and version, RAM, CPU cores), basic AI configuration (the provider and model you're currently using), and the Prosponsive app version. We also attach a reporter token — your Clerk user ID for signed-in users, or an anonymous per-device UUID for unauthenticated trial users — so you can later list your own filed issues. Submissions are filed as issues on our public GitHub repository via the GitHub REST API. Do not include sensitive information in feedback — the repository is public.</li>
 <li><strong>Support correspondence:</strong> If you email <code>privacy@prosponsive.ai</code> or <code>jb@prosponsive.ai</code> we receive the contents of your message and your email address.</li>
+<li><strong>Billing information (via Stripe):</strong> When you start a paid subscription, Stripe collects your card details, billing address, and tax information directly. Your payment information never touches our servers — we receive only a payment method token, your subscription status, and transaction metadata. See §5.</li>
 </ul>
 <h3>4.2 Information we collect automatically</h3>
 <ul>
 <li><strong>IP address, at the network edge:</strong> When you download the Prosponsive installer or auto-update package from Amazon CloudFront, AWS sees your IP address as part of normal network routing. We have disabled CloudFront access logging, so we do not retain IP addresses in any access logs we control.</li>
-<li><strong>Device and usage analytics (opt-in only):</strong> If you opt in to analytics, we use PostHog to record anonymous event data. This is tied to a randomly generated UUID — we do not associate it with your account, your name, or your email. You can opt out at any time in Settings; opting out stops any further events from being sent.</li>
+<li><strong>Device and usage analytics (opt-in only):</strong> If you opt in to analytics, we use PostHog to record event data tied to a randomly generated UUID — we do not associate it with your account, your name, or your email, and we have disabled IP-based geolocation so PostHog does not persist coarse location data on our events. The events cover: feature-usage actions (e.g., conversation lifecycle and tool approvals — including the tool name but not its inputs or outputs, and the length of a message in characters but not its content); basic device and operating-system information; basic AI configuration (the provider and model you're currently using and your configured failover list); and the application's runtime state (app version, container runtime, session timing). For stuck or error events we additionally send a sanitized log tail — file paths, IP addresses, email addresses, and values that look like API keys are stripped before sending. You can opt out at any time in Settings; opting out stops any further events from being sent.</li>
 <li><strong>Acceptance records:</strong> When you accept this Privacy Policy or our Terms of Service, we record your user ID, the document you accepted, the version, the timestamp, and the application version. We also record a salted SHA-256 hash of your IP address (not the raw IP) and the user agent string. The hash is computed at our API gateway using a server-side pepper that is never logged. These records are append-only and are retained indefinitely for legal defensibility (see §9).</li>
 </ul>
 <h3>4.3 Information generated by your use of the app</h3>
@@ -84,7 +85,7 @@
 <hr>
 <h2>5. Sub-processors (third parties that process data on our behalf)</h2>
 <p>We rely on the following service providers. All are based in the United States and all have their own privacy policies and security programs.</p>
-<table><thead><tr><th>Sub-processor</th><th>What it does for us</th><th>What it receives</th><th>Location</th></tr></thead><tbody><tr><td><strong>Clerk</strong></td><td>Authentication and identity management</td><td>Your email address, name, profile image, OAuth tokens</td><td>United States</td></tr><tr><td><strong>Amazon Web Services (CloudFront, S3)</strong></td><td>App distribution and auto-updates</td><td>Your IP address at the network edge (transient, AWS routing only — we do not retain IPs in any logs we control)</td><td>United States (us-east-1)</td></tr><tr><td><strong>PostHog</strong></td><td>Anonymous product analytics (opt-in)</td><td>A random UUID and anonymized event metadata</td><td>United States</td></tr><tr><td><strong>GitHub</strong></td><td>In-app feedback submission via the GitHub REST API</td><td>Feedback text you author, the Prosponsive app version</td><td>United States</td></tr></tbody></table>
+<table><thead><tr><th>Sub-processor</th><th>What it does for us</th><th>What it receives</th><th>Location</th></tr></thead><tbody><tr><td><strong>Clerk</strong></td><td>Authentication and identity management</td><td>Your email address, name, profile image, OAuth tokens</td><td>United States</td></tr><tr><td><strong>Amazon Web Services (CloudFront, S3)</strong></td><td>App distribution and auto-updates</td><td>Your IP address at the network edge (transient, AWS routing only — we do not retain IPs in any logs we control)</td><td>United States (us-east-1)</td></tr><tr><td><strong>PostHog</strong></td><td>Anonymous product analytics (opt-in)</td><td>A randomly generated UUID; feature-usage events; basic device and operating-system information; basic AI configuration; the application's runtime state; sanitized log tails for stuck/error events. IP geolocation is disabled.</td><td>United States</td></tr><tr><td><strong>GitHub</strong></td><td>In-app feedback submission via the GitHub REST API</td><td>The text of your feedback; basic device and operating-system information; basic AI configuration; the Prosponsive app version; a reporter token tied to your Clerk user ID (or an anonymous per-device UUID for trial users); submission timestamp</td><td>United States</td></tr><tr><td><strong>Stripe</strong></td><td>Payment processing for paid subscriptions</td><td>Your billing information and card details (collected and stored entirely by Stripe — never touch our servers); we receive only a payment method token, subscription status, and transaction metadata</td><td>United States</td></tr></tbody></table>
 <p>If you configure an external AI provider inside the app, conversation content and tool invocations you submit are sent to that provider by your copy of Prosponsive, under that provider's terms. Prosponsive does not route that traffic through any server we operate — the connection goes directly from your machine to the provider. Providers we currently support include:</p>
 <ul>
 <li>Ollama (runs locally on your machine — nothing leaves)</li>
@@ -136,6 +137,7 @@
 <li><strong>PostHog analytics (opt-in):</strong> Retained per PostHog's defaults; anonymous and not tied to your account.</li>
 <li><strong>Feedback submissions:</strong> Retained indefinitely as public GitHub issues. Once filed they are out of our direct control — you can ask us to delete a specific issue by contacting us, and we will do so unless there is a legitimate need to keep it (for example, the issue is tracking a live bug).</li>
 <li><strong>Acceptance records for this Privacy Policy and our Terms of Service:</strong> Retained indefinitely in append-only storage. These are the record that you agreed to the current version, and we may need them for legal defense years later.</li>
+<li><strong>Billing records (via Stripe):</strong> Retained per Stripe's defaults and per applicable tax/accounting law (typically 7 years for tax records). When you cancel your subscription we close the Stripe customer record but transaction history is preserved as required by law.</li>
 <li><strong>Conversation content:</strong> Stays on your machine. We never have it, so we cannot retain or delete it for you; you manage it yourself.</li>
 </ul>
 <hr>
@@ -164,7 +166,7 @@
 </ul>
 <p>Categories of personal information we have collected in the past 12 months:</p>
 <ul>
-<li>Identifiers (email, name, account ID, hashed IP address on legal-acceptance records)</li>
+<li>Identifiers (email and name — collected on our behalf by Clerk; account ID; hashed IP address on legal-acceptance records)</li>
 <li>Commercial information (subscription status, usage counts)</li>
 <li>Internet or other electronic network activity information (anonymous app analytics, if you opted in)</li>
 <li>Professional information (information you include in feedback submissions)</li>
@@ -196,7 +198,6 @@
     <nav class="legal-footer" aria-label="Legal documents">
       <a href="/privacy/">Privacy Policy</a>
       <a href="/terms/">Terms of Service</a>
-      <a href="/eula/">EULA</a>
       <a href="/legal/">All legal documents</a>
     </nav>
   </main>
