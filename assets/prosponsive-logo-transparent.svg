@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 0 220 260">
+  <defs>
+    <mask id="sparkle-cut">
+      <rect x="-50" y="0" width="220" height="260" fill="white"/>
+      <path fill="black" d="
+        M 40 25
+        C 40 55, 85 100, 115 100
+        C 85 100, 40 145, 40 175
+        C 40 145, -5 100, -35 100
+        C -5 100, 40 55, 40 25
+        Z
+      "/>
+    </mask>
+  </defs>
+  <path fill="#2f4f3e" mask="url(#sparkle-cut)" d="
+    M 40 40 L 90 40 A 60 60 0 0 1 90 160 L 90 240 L 40 240 Z
+  "/>
+  <path fill="#4f6f5c" d="
+    M 40 45
+    C 40 67, 73 100, 95 100
+    C 73 100, 40 133, 40 155
+    C 40 133, 7 100, -15 100
+    C 7 100, 40 67, 40 45
+    Z
+  "/>
+</svg>
