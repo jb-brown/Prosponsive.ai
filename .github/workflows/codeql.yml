@@ -1,0 +1,54 @@
+name: CodeQL
+
+# CodeQL static analysis for the Prosponsive.ai marketing site.
+#
+# Repo is ~95% HTML / ~3% JavaScript / ~2% CSS — only JavaScript is
+# meaningfully analyzable by CodeQL, so the matrix is JS-only.
+#
+# Runs on:
+#   - every PR targeting main (so vulns are caught at review time)
+#   - every push to main (so a regression on direct-push commits is caught)
+#   - weekly schedule (catches new CVE rules added to CodeQL upstream against
+#     code that hasn't changed but suddenly has a new known-vuln signature)
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 12 * * 1'  # Mondays at 12:00 UTC
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    name: Analyze ${{ matrix.language }}
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [javascript]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          # Use the default + security-extended query suite for stronger coverage
+          # on a small attack surface.
+          queries: security-extended
+
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{ matrix.language }}"
