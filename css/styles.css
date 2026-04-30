@@ -74,12 +74,24 @@ main {
   line-height: 0;
 }
 
-.wordmark {
-  display: block;
-  margin: 0 auto;
+/* .cover-wordmark — large centered wordmark used on the home page hero
+   and the cover block of every guide page. Same class name everywhere
+   so home + guides share styling. */
+.cover-wordmark {
   width: 360px;
-  max-width: 100%;
+  max-width: 90%;
   height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+/* .footer-wordmark — small inline wordmark used in guide footers next to
+   the tagline. */
+.footer-wordmark {
+  height: 28px;
+  width: auto;
+  vertical-align: middle;
+  margin-right: 0.4em;
 }
 
 h1 {
