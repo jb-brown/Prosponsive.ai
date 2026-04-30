@@ -1,13 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 -50 1100 310">
   <!--
-    Wordmark v5:
-      - P shift backed off from -80 to -65. -80 was too high; -60 was the
-        prior trial. -65 is a small step up from -60. Bowl top now at
-        y=-25, swoop deepest at y=175, tail tip at y=155.
-      - Text x reduced from 155 → 125 to compress the P-to-"r" gap so it
-        visually matches the inter-letter spacing of the rest of the
-        word. The "r" left side-bearing already adds optical space, so
-        x=125 lets the visual gap line up with "r-o" / "o-s" / etc.
+    Wordmark — v7 P with composition tuning.
+      - viewBox -50 -50 1100 310
+      - P shifted up by 65 via translate(0, -65) so the deepest swoop of
+        the tail kisses the wordmark baseline (y=180) without going below.
+      - Text x=125 y=180, system font stack, font-size 180, weight 500,
+        letter-spacing -3, fill #2f4f3e (color unity with the P prevents
+        the eye reading "rosponsive" as a separate word).
   -->
   <defs>
     <mask id="sparkle-cut-wordmark">
