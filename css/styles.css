@@ -65,6 +65,23 @@ main {
   border-radius: 22%;
 }
 
+/* Wordmark replaces logo + brand-name pair in hero. The image already
+   contains the green-stem P glyph and the "rosponsive" wordmark, so the
+   surrounding <h1> is unstyled — it exists for document outline and
+   accessibility only. */
+.wordmark-heading {
+  margin: 0 0 0.5rem;
+  line-height: 0;
+}
+
+.wordmark {
+  display: block;
+  margin: 0 auto;
+  width: 360px;
+  max-width: 100%;
+  height: auto;
+}
+
 h1 {
   font-size: 3rem;
   font-weight: 700;

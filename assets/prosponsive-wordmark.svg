@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 -50 1100 310">
+  <!--
+    Wordmark v5:
+      - P shift backed off from -80 to -65. -80 was too high; -60 was the
+        prior trial. -65 is a small step up from -60. Bowl top now at
+        y=-25, swoop deepest at y=175, tail tip at y=155.
+      - Text x reduced from 155 → 125 to compress the P-to-"r" gap so it
+        visually matches the inter-letter spacing of the rest of the
+        word. The "r" left side-bearing already adds optical space, so
+        x=125 lets the visual gap line up with "r-o" / "o-s" / etc.
+  -->
+  <defs>
+    <mask id="sparkle-cut-wordmark">
+      <rect x="-50" y="-50" width="220" height="310" fill="white"/>
+      <path fill="black" d="
+        M 40 25
+        C 40 55, 85 100, 115 100
+        C 85 100, 40 145, 40 175
+        C 40 145, -5 100, -35 100
+        C -5 100, 40 55, 40 25
+        Z
+      "/>
+    </mask>
+  </defs>
+
+  <g transform="translate(0, -65)">
+    <path fill="#2f4f3e" mask="url(#sparkle-cut-wordmark)" d="
+      M 40 40
+      L 90 40
+      A 60 60 0 0 1 90 160
+      L 90 180
+      A 60 60 0 0 1 -15 220
+      A 42.04 42.04 0 0 0 40 180
+      Z
+    "/>
+    <path fill="#4f6f5c" d="
+      M 40 45
+      C 40 67, 73 100, 95 100
+      C 73 100, 40 133, 40 155
+      C 40 133, 7 100, -15 100
+      C 7 100, 40 67, 40 45
+      Z
+    "/>
+  </g>
+
+  <text x="125" y="180"
+        font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif"
+        font-size="180"
+        font-weight="500"
+        letter-spacing="-3"
+        fill="#2f4f3e">rosponsive</text>
+</svg>
