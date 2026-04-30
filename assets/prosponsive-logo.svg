@@ -1,4 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 0 220 260">
+  <!--
+    v7 — curled-tail P. Stem now ends at y=180 (down from y=240) and
+    sweeps into a tail with outer radius 60 (matches bowl) and inner
+    radius 42.04, ending at (-15, 220). Bowl + tail share curvature.
+    The split-cut composition is unchanged: the section background
+    (#e6eae7) shows in the right half of the sparkle so the sparkle
+    reads as a notch out of the P; the left half stays transparent.
+  -->
   <defs>
     <mask id="sparkle-cut">
       <rect x="-50" y="0" width="220" height="260" fill="white"/>
@@ -16,7 +24,13 @@
     </clipPath>
   </defs>
   <path fill="#2f4f3e" mask="url(#sparkle-cut)" d="
-    M 40 40 L 90 40 A 60 60 0 0 1 90 160 L 90 240 L 40 240 Z
+    M 40 40
+    L 90 40
+    A 60 60 0 0 1 90 160
+    L 90 180
+    A 60 60 0 0 1 -15 220
+    A 42.04 42.04 0 0 0 40 180
+    Z
   "/>
   <path fill="#e6eae7" clip-path="url(#right-of-line)" d="
     M 40 25

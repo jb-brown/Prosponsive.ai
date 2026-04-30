@@ -1,4 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 0 220 260">
+  <!--
+    v7 — curled-tail P with fully transparent sparkle hole. The mask
+    cuts the outer sparkle out of the green P so any background
+    shows through. Source for the wordmark's P glyph.
+  -->
   <defs>
     <mask id="sparkle-cut">
       <rect x="-50" y="0" width="220" height="260" fill="white"/>
@@ -13,7 +18,13 @@
     </mask>
   </defs>
   <path fill="#2f4f3e" mask="url(#sparkle-cut)" d="
-    M 40 40 L 90 40 A 60 60 0 0 1 90 160 L 90 240 L 40 240 Z
+    M 40 40
+    L 90 40
+    A 60 60 0 0 1 90 160
+    L 90 180
+    A 60 60 0 0 1 -15 220
+    A 42.04 42.04 0 0 0 40 180
+    Z
   "/>
   <path fill="#4f6f5c" d="
     M 40 45
