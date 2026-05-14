@@ -12,12 +12,31 @@ name: CodeQL
 #     code that hasn't changed but suddenly has a new known-vuln signature)
 
 on:
+  # paths-ignore: CodeQL only meaningfully analyzes JavaScript here, so PRs
+  # and pushes that only touch HTML / CSS / Markdown don't need to fire the
+  # workflow. The weekly schedule below still runs against everything so
+  # newly-disclosed CVE rules are caught even if no source has changed.
   pull_request:
     branches: [main]
+    paths-ignore:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.md'
   push:
     branches: [main]
+    paths-ignore:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.md'
   schedule:
     - cron: '0 12 * * 1'  # Mondays at 12:00 UTC
+
+# Cancel in-flight CodeQL runs when a new commit arrives on the same ref —
+# saves CI minutes on rapid-fire pushes to a PR branch. The scheduled run
+# uses ref `refs/heads/main` and so groups separately from PR runs.
+concurrency:
+  group: codeql-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
