@@ -33,7 +33,8 @@
   hr { border: none; border-top: 2px solid #D6DBD7; margin: 2em 0; }
   li { margin-bottom: 0.3em; }
   .cover { text-align: center; padding: 2em 0 1em 0; }
-  .cover img { width: 160px; height: 160px; }
+  .cover-wordmark { width: 360px; max-width: 90%; height: auto; display: block; margin: 0 auto; }
+  .footer-wordmark { height: 28px; width: auto; vertical-align: middle; margin-right: 0.4em; }
   .cover h1 { border-bottom: none; font-size: 2.8em; margin: 0.5em 0 0.1em 0; letter-spacing: 0.02em; }
   .cover .tagline { color: #5C635F; font-size: 1.2em; font-style: italic; margin-top: 0.3em; }
   .cover .version { color: #5C635F; font-size: 0.9em; margin-top: 2em; }
@@ -85,7 +86,33 @@
 
 <hr>
 
-<h2><span class="section-number">2.</span> Channels and Threads</h2>
+<h2><span class="section-number">2.</span> Async Group Chat</h2>
+
+<p>Prosponsive channels are not one-on-one conversations with a single AI. They are group chats. Multiple agents share a channel, and when you post a message, any agent assigned to that channel can respond — independently, in parallel, and asynchronously — each using its own tools.</p>
+
+<h3>The model</h3>
+
+<p>When you send a message to a channel with multiple agents, each agent processes it on its own terms. A research agent starts pulling data. A writing agent starts drafting. A monitoring agent checks the systems you asked about. None of them wait for the others. Each agent's tool calls run independently — and because tools execute asynchronously, each agent's work continues in the background while the others do the same.</p>
+
+<p>You post once. Parallel work begins across all agents simultaneously. Results arrive as they complete.</p>
+
+<h3>Why this is different</h3>
+
+<p>Most AI products are one-on-one: you message one assistant, it responds, you respond back. The conversation alternates in strict turns. If you want multiple agents involved, you route between them manually — copy context from one conversation to another, or build an orchestrator that handles routing for you.</p>
+
+<p>In Prosponsive, the channel is the coordination layer. All agents in a channel share the same conversation context automatically. No routing code. No context copying. You post a message and every agent in the channel sees it, responds on its own schedule, and posts results back — all asynchronously, all in parallel.</p>
+
+<h3>Why multiple agents rather than one powerful agent</h3>
+
+<p>A single agent with all your tools can handle sequential tasks. But when multiple agents with specialized tool sets work in parallel, you get specialization, isolation, and concurrency at the same time.</p>
+
+<p>Consider three agents in a channel: one with read access to your data sources, one with write access to your communication tools, and one that generates and formats documents. Each has only the tools it needs. The research agent pulls information. The communications agent drafts outreach. The document agent formats the output. All three can run simultaneously on a single message. One general agent with all three tool sets would run those tasks sequentially, carry a larger attack surface, and produce less focused results — because the model has to sort through everything to find what matters at each step.</p>
+
+<p>The group chat model is what makes this practical without orchestration code. Set up the channel once, share the right agents to it, and post. The agents do the rest.</p>
+
+<hr>
+
+<h2><span class="section-number">3.</span> Channels and Threads</h2>
 
 <p>Prosponsive organizes work into <strong>channels</strong> and <strong>threads</strong>, not flat conversations. This structure affects token cost, prompt quality, how agents collaborate, and how you stay organized as work scales.</p>
 
@@ -105,17 +132,13 @@
 
 <p>Because agents and tools are scoped to channels, each conversation carries only the context it needs. An agent managing your email does not receive instructions about your database queries. An agent that handles calendar scheduling does not see your code review tools. This keeps prompts lean, reduces token usage, and produces better results because the model is not sorting through irrelevant context to find what matters.</p>
 
-<h3>Group agent collaboration</h3>
-
-<p>Multiple agents can participate in the same channel, each with their own tools and expertise. You can assign a research agent, a writing agent, and a review agent to the same channel. They share context through the channel's conversation history, but each brings its own specialized capabilities. This enables multi-agent workflows without custom orchestration code — you just assign the right agents to the right channel.</p>
-
 <h3>Channel sharing</h3>
 
 <p>When you create an agent, you define which channels it can participate in. This means you control exactly which agents can see and respond in each workspace. You can share a channel across multiple agents for collaboration, or restrict it to a single specialist agent for focused work.</p>
 
 <hr>
 
-<h2><span class="section-number">3.</span> Filtering, Grouping, and Bulk Approval</h2>
+<h2><span class="section-number">4.</span> Filtering, Grouping, and Bulk Approval</h2>
 
 <p>Prosponsive is built for tasks, not talk. When agents use tools, they generate actions that need your review. In a typical AI chat product, you see these one at a time in a linear conversation. Prosponsive gives you filtering, grouping, and bulk approval instead.</p>
 
@@ -133,7 +156,7 @@
 
 <hr>
 
-<h2><span class="section-number">4.</span> Auto-Approvals</h2>
+<h2><span class="section-number">5.</span> Auto-Approvals</h2>
 
 <p>Prosponsive supports condition-based auto-approvals. You define rules, and matching tool calls execute without interrupting you.</p>
 
@@ -160,7 +183,7 @@
 
 <hr>
 
-<h2><span class="section-number">5.</span> Agent Autonomy</h2>
+<h2><span class="section-number">6.</span> Agent Autonomy</h2>
 
 <p>Agents in Prosponsive don't just answer questions — they manage your experience. They have built-in capabilities to organize, prioritize, and clean up after themselves so you spend less time managing and more time reviewing outcomes.</p>
 
@@ -180,7 +203,7 @@
 
 <hr>
 
-<h2><span class="section-number">6.</span> Notifications and Agent Definitions</h2>
+<h2><span class="section-number">7.</span> Notifications and Agent Definitions</h2>
 
 <p>Prosponsive keeps you informed without demanding your attention. Notifications surface what matters, agent definitions control how agents behave, and scheduled prompts keep work moving — together they form the control layer that makes always-on operation practical.</p>
 
@@ -200,15 +223,15 @@
 
 <hr>
 
-<h2><span class="section-number">7.</span> Higher-Value Tools</h2>
+<h2><span class="section-number">8.</span> Higher-Value Tools</h2>
 
-<p>Prosponsive tools are not MCP servers. They are fundamentally different in scope and design. Understanding this difference is key to understanding why Prosponsive exists.</p>
+<p>Custom tools are not MCP servers. They are fundamentally different in scope and design. Understanding this difference is key to understanding why Prosponsive exists.</p>
 
-<h3>MCPs vs. Prosponsive tools</h3>
+<h3>MCPs vs. Custom tools</h3>
 
 <p>An MCP (Model Context Protocol) server gives an AI model access to a single system — read from a database, post to Slack, create a GitHub issue. Each MCP is a thin wrapper around one API. To accomplish anything meaningful, you have to orchestrate multiple MCP calls yourself, or hope the AI model figures out the right sequence.</p>
 
-<p>A Prosponsive tool is an <a href="https://n8n.io">n8n</a> workflow. A single tool can connect to multiple systems, apply business logic, transform data between steps, handle errors, and produce a finished outcome. One Prosponsive tool does what would require multiple MCP calls plus manual coordination to achieve.</p>
+<p>A Custom tool is an <a href="https://n8n.io">n8n</a> workflow. A single tool can connect to multiple systems, apply business logic, transform data between steps, handle errors, and produce a finished outcome. One custom tool does what would require multiple MCP calls plus manual coordination to achieve.</p>
 
 <h3>Example: the difference in practice</h3>
 
@@ -218,7 +241,7 @@
 
 <h3>Powered by n8n</h3>
 
-<p>Every Prosponsive tool is built in <a href="https://n8n.io">n8n</a>, a visual workflow automation platform that runs locally alongside Prosponsive. You build tools by connecting nodes in a drag-and-drop editor. n8n has pre-built nodes for over a thousand services — Slack, Gmail, Google Sheets, Notion, GitHub, Jira, databases, HTTP APIs, and more. You can inspect, modify, and debug every tool. Nothing is a black box.</p>
+<p>Every custom tool is built in <a href="https://n8n.io">n8n</a>, a visual workflow automation platform that runs locally alongside Prosponsive. You build tools by connecting nodes in a drag-and-drop editor. n8n has pre-built nodes for over a thousand services — Slack, Gmail, Google Sheets, Notion, GitHub, Jira, databases, HTTP APIs, and more. You can inspect, modify, and debug every tool. Nothing is a black box.</p>
 
 <h3>Credential isolation</h3>
 
@@ -230,7 +253,7 @@
 
 <hr>
 
-<h2><span class="section-number">8.</span> Provider Agnostic</h2>
+<h2><span class="section-number">9.</span> Provider Agnostic</h2>
 
 <p>Prosponsive supports 7+ AI providers, and you can switch between them at any time. But provider independence is not just about avoiding lock-in — it is about aligning incentives.</p>
 
@@ -269,7 +292,7 @@
 
 <hr>
 
-<h2><span class="section-number">9.</span> Privacy and Security</h2>
+<h2><span class="section-number">10.</span> Privacy and Security</h2>
 
 <p>Prosponsive keeps your work private during execution. Your conversations, your data, and your tool activity all stay on your machine — not on someone else's server.</p>
 
@@ -297,7 +320,7 @@
 
 <hr>
 
-<h2><span class="section-number">10.</span> Extensibility</h2>
+<h2><span class="section-number">11.</span> Extensibility</h2>
 
 <p>Prosponsive is designed to be extended, not just configured. You can create custom agents, build custom tools, and connect to thousands of external services.</p>
 
@@ -340,7 +363,7 @@
 
 <hr>
 
-<h2><span class="section-number">11.</span> Multi-Language Support</h2>
+<h2><span class="section-number">12.</span> Multi-Language Support</h2>
 
 <p>Prosponsive supports 12 languages across its interface, so you can work in the language most natural to you.</p>
 
@@ -357,8 +380,8 @@
     <tr><td>German</td><td>Deutsch</td></tr>
     <tr><td>Italian</td><td>Italiano</td></tr>
     <tr><td>Portuguese</td><td>Portugu&ecirc;s</td></tr>
-    <tr><td>Dutch</td><td>Nederlands</td></tr>
-    <tr><td>Polish</td><td>Polski</td></tr>
+    <tr><td>Indonesian</td><td>Bahasa Indonesia</td></tr>
+    <tr><td>Thai</td><td>ภาษาไทย</td></tr>
     <tr><td>Japanese</td><td>&#26085;&#26412;&#35486;</td></tr>
     <tr><td>Korean</td><td>&#54620;&#44397;&#50612;</td></tr>
     <tr><td>Chinese (Simplified)</td><td>&#31616;&#20307;&#20013;&#25991;</td></tr>
@@ -372,7 +395,7 @@
 
 <hr>
 
-<h2><span class="section-number">12.</span> Scheduled Prompts</h2>
+<h2><span class="section-number">13.</span> Scheduled Prompts</h2>
 
 <p>Scheduled prompts let you automate recurring AI tasks. Combined with async tool use and auto-approvals, they make Prosponsive an always-on system that works while you do not.</p>
 
@@ -413,8 +436,9 @@
   </thead>
   <tbody>
     <tr><td><strong>Async Tool Use</strong></td><td>Tools run in the background. You get results, not loading spinners.</td></tr>
+    <tr><td><strong>Async Group Chat</strong></td><td>Multiple agents in a channel respond and use tools in parallel. Post once — parallel work begins across all agents simultaneously.</td></tr>
     <tr><td><strong>Channels &amp; Threads</strong></td><td>Agents and tools scoped to workspaces. Threads keep tasks contained, collapsible, and movable between channels.</td></tr>
-    <tr><td><strong>Filtering &amp; Bulk Approval</strong></td><td>Review and approve many actions at once. Review and approve many actions at once — built for task management, not sequential chat.</td></tr>
+    <tr><td><strong>Filtering &amp; Bulk Approval</strong></td><td>Review and approve many pending actions at once — built for task management, not sequential chat.</td></tr>
     <tr><td><strong>Auto-Approvals</strong></td><td>Condition-based rules let trusted tools run without interrupting you.</td></tr>
     <tr><td><strong>Agent Autonomy</strong></td><td>Agents manage threads, archive completed work, and organize your channels. Performance visibility shows you where to optimize.</td></tr>
     <tr><td><strong>Notifications &amp; Definitions</strong></td><td>Actionable notifications, editable agent definitions, and scheduled prompts form a complete always-on control layer.</td></tr>
