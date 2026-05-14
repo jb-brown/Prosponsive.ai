@@ -102,33 +102,56 @@
       <!-- RELEASES START -->
       <article class="release-entry">
         <h2>v1.0.51 — May 13, 2026</h2>
-        <h3>Subscription Plans</h3>
+        <h3>Account and Subscriptions</h3>
         <ul>
-          <li><strong>Free and paid plans now available</strong> — Prosponsive offers a free tier to get started, with paid plans for heavier workloads. Upgrade or manage your subscription directly from the app</li>
-          <li><strong>Usage tracking built in</strong> — see how much of your weekly allowance you've used at a glance, with a clear reset countdown</li>
-          <li><strong>Smooth upgrade and billing flows</strong> — subscribe, manage, or cancel through a fast in-app checkout experience powered by Stripe</li>
+          <li><strong>Free and paid tiers</strong> — sign in to unlock higher usage limits, or continue anonymously with the starter tier</li>
+          <li><strong>Usage at a glance</strong> — your current usage, plan tier, and weekly reset countdown appear in the account flyout</li>
+          <li><strong>Seamless checkout</strong> — subscribing and managing your subscription open directly in your browser; the app refreshes your entitlement immediately after checkout</li>
+          <li><strong>Promo codes</strong> — promo codes are now accepted at checkout</li>
+          <li><strong>Automatic usage sync</strong> — usage counts sync when you reconnect to the internet, resume from sleep, or bring the app to the foreground</li>
         </ul>
-        <h3>Smarter AI Agents</h3>
+        <h3>Terms of Service and Privacy Policy</h3>
         <ul>
-          <li><strong>Confidence-based tool approval</strong> — set per-tool auto-approve and auto-deny rules based on how confident the AI is in each action, so routine tasks run hands-free while anything uncertain waits for your review</li>
-          <li><strong>Multi-agent improvements</strong> — agents hand off work to each other more reliably, with better context preservation across the full conversation</li>
-          <li><strong>Thread summaries</strong> — long conversations are automatically summarized so agents (and you) can pick up where things left off without re-reading everything</li>
+          <li>Prosponsive now includes a Terms of Service, EULA, and Privacy Policy, presented on first launch</li>
+          <li>Anonymous users can accept before signing in, and their acceptance carries over when they create an account</li>
         </ul>
-        <h3>Account and Sign-In</h3>
+        <h3>Multi-Agent Orchestration</h3>
         <ul>
-          <li><strong>More reliable sign-in</strong> — authentication restores correctly on app restart, and expired sessions refresh silently in the background</li>
-          <li><strong>Terms and privacy acceptance</strong> — a streamlined one-time agreement flow appears when needed, integrated naturally into setup</li>
+          <li><strong>Coordinated agent chains</strong> — AI chains can now coordinate multiple specialized agents in a single response; maximum chain depth is configurable in Settings</li>
+          <li><strong>Configurable limits</strong> — the maximum number of tool steps per response and the AI inference timeout are now configurable in Settings</li>
         </ul>
-        <h3>Security and Privacy</h3>
+        <h3>Tool Approval and Auto-Approval Rules</h3>
         <ul>
-          <li>Continued security enhancements — stronger connection standards, better isolation between app components, and reduced exposure of personal information across logs and telemetry</li>
+          <li><strong>Confidence badges</strong> — tool approval cards show the AI model's self-rated confidence as a color-coded badge</li>
+          <li><strong>Confidence thresholds</strong> — auto-approval rules support an optional confidence threshold: auto-approve only when confidence meets your threshold, or auto-deny when it falls below</li>
+          <li><strong>Approvals survive restarts</strong> — pending tool approvals are preserved across app restarts</li>
+          <li>Tool categories are now labeled "Core tools" and "Custom tools"</li>
         </ul>
-        <h3>Polish and Reliability</h3>
+        <h3>Thread Summaries</h3>
         <ul>
-          <li><strong>Smoother conversation experience</strong> — messages, tool calls, and agent responses all display more consistently, including after reload</li>
-          <li><strong>Tool name display fixes</strong> — tool cards show clean names without internal namespace prefixes</li>
-          <li><strong>Accessibility improvements</strong> — updated UI components meet WCAG 2.1 AA contrast and interaction standards</li>
-          <li><strong>i18n sweep</strong> — all new UI text is localized across the 12 supported languages</li>
+          <li><strong>Automatic summaries</strong> — collapsed threads show a conversation summary; if the model skips generating one, the app retries in the background</li>
+          <li><strong>Persistent collapse state</strong> — thread collapse/expand state is saved across sessions</li>
+          <li>The thread summary prompt is customizable in Settings</li>
+        </ul>
+        <h3>Windows</h3>
+        <ul>
+          <li><strong>Code-signed builds</strong> — Windows builds are now code-signed via Azure Trusted Signing, eliminating the SmartScreen warning on launch</li>
+        </ul>
+        <h3>Reliability</h3>
+        <ul>
+          <li>Conversation messages that fail to save due to a transient database error are now retried automatically</li>
+          <li>Custom tool discovery retries automatically when the initial cache is empty after a failed startup</li>
+          <li>Fixed several edge cases in session restore, token refresh, and sign-in state after restart</li>
+          <li>Fixed completed tool calls occasionally re-executing on re-entry into a thread</li>
+          <li>Default Ollama model is now llama3.1:8b</li>
+          <li>The local API server now requires authentication, so only Prosponsive's own services can reach it</li>
+        </ul>
+        <h3>Security</h3>
+        <ul>
+          <li>Electron renderer runs in a sandboxed process with a Content Security Policy</li>
+          <li>All TLS connections enforce TLS 1.2 minimum with FIPS-approved ciphers</li>
+          <li>Container bind mounts are read-only where possible; log files are owner-readable only</li>
+          <li>Auto-update downloads are verified with SHA-512 checksums and publisher signature before installation</li>
         </ul>
       </article>
       <article class="release-entry">
