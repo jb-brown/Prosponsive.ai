@@ -73,6 +73,10 @@
 
 <p>The first thing the Email Assistant needs is the ability to send email. You'll install this from the tool catalog — which also walks you through adding your SMTP credentials to n8n.</p>
 
+<div class="tip">
+  <strong>Email Assistant</strong> is a built-in agent that ships with Prosponsive. If you don't see it in the Agents tab, make sure you're on v1.0.28 or later.
+</div>
+
 <h3>Step 1: Open the Email Assistant agent</h3>
 
 <ol>
@@ -112,6 +116,8 @@
 <blockquote><p><strong>Gmail users</strong>: Gmail requires an App Password instead of your account password. Go to <a href="https://myaccount.google.com/apppasswords">myaccount.google.com/apppasswords</a>, generate one for "Prosponsive", and use that here.</p></blockquote>
 
 <blockquote><p><strong>iCloud users</strong>: Go to your <a href="https://account.apple.com/account/manage">iCloud account page</a> &rarr; App-Specific Passwords, generate one for "Prosponsive", and use that here.</p></blockquote>
+
+<blockquote><p><strong>Outlook / Microsoft 365 users</strong>: If your organization has disabled basic authentication (common since 2022), app passwords won't work and you'll see repeated authentication failures. Ask your IT admin whether legacy auth is enabled, or switch to OAuth2 in n8n's SMTP credential settings.</p></blockquote>
 
 <h3>Step 4: Select the credential and install</h3>
 
@@ -154,7 +160,7 @@
 
 <ul>
   <li>Use <strong>Send</strong> for announcements, notifications, and messages where a reply is not expected.</li>
-  <li>Use <strong>Send and Wait</strong> when you need confirmation — approvals, sign-offs, or anything where silence is not an acceptable outcome.</li>
+  <li>Use <strong>Send and Wait</strong> when you need confirmation — approvals, sign-offs, or anything where silence is not an acceptable outcome. If the wait period expires without a reply, n8n resumes the workflow with a timeout signal and the agent can follow up.</li>
 </ul>
 
 <p>Try it:</p>
@@ -197,12 +203,15 @@
 
 <blockquote><p>Use the same App Password / App-Specific Password approach from Section 1 — same provider, same steps, just select the IMAP credential type instead of SMTP.</p></blockquote>
 
+<blockquote><p><strong>Outlook / Microsoft 365 users</strong>: If basic authentication is disabled in your tenant, IMAP won't work with a password. See the note in Section 1 — the same OAuth2 consideration applies here.</p></blockquote>
+
 <h3>Step 3: Wire the credential and activate</h3>
 
 <ol>
   <li>In the imported workflow, click the <strong>Read Inbox</strong> node.</li>
   <li>Set the <strong>Credential</strong> dropdown to the IMAP credential you just created.</li>
-  <li>Click <strong>Save</strong>, then toggle the workflow to <strong>Active</strong> (button in the top-right corner).</li>
+  <li>Click <strong>Save</strong> on the node panel, then <strong>Save</strong> on the workflow (top-right).</li>
+  <li>Click <strong>Activate</strong> (toggle in the top-right corner) to enable the workflow.</li>
 </ol>
 
 <h3>Step 4: Add the tool to the Email Assistant</h3>
@@ -365,7 +374,7 @@
 
 <p>In the <strong>Guardrails</strong> section, update the evaluation order:</p>
 
-<pre><code>- First evaluate delete rules. If a match, call `email_delete`. Then evaluate channel routing rules. If a match, call `move-thread`. If no rules match and no action is needed, summarize and ask me.</code></pre>
+<pre><code>- First evaluate delete rules. If a match, call `email_delete`. Then evaluate channel routing rules. If a match, call `move-thread`. If no rules match and no action needed, summarize and ask me.</code></pre>
 
 <h3>Test it</h3>
 
