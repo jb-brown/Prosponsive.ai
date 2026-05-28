@@ -112,7 +112,7 @@
 
 <hr>
 
-<h2><span class="section-number">3.</span> Channels and Threads</h2>
+<h2 id="channels"><span class="section-number">3.</span> Channels and Threads</h2>
 
 <p>Prosponsive organizes work into <strong>channels</strong> and <strong>threads</strong>, not flat conversations. This structure affects token cost, prompt quality, how agents collaborate, and how you stay organized as work scales.</p>
 
@@ -132,7 +132,7 @@
 
 <p>Because agents and tools are scoped to channels, each conversation carries only the context it needs. An agent managing your email does not receive instructions about your database queries. An agent that handles calendar scheduling does not see your code review tools. This keeps prompts lean, reduces token usage, and produces better results because the model is not sorting through irrelevant context to find what matters.</p>
 
-<h3>Channel sharing</h3>
+<h3 id="channel-sharing">Channel sharing</h3>
 
 <p>When you create an agent, you define which channels it can participate in. This means you control exactly which agents can see and respond in each workspace. You can share a channel across multiple agents for collaboration, or restrict it to a single specialist agent for focused work.</p>
 
