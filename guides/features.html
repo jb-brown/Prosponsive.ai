@@ -138,7 +138,21 @@
 
 <hr>
 
-<h2><span class="section-number">4.</span> Filtering, Grouping, and Bulk Approval</h2>
+<h2><span class="section-number">4.</span> Conversation Archiving</h2>
+
+<p>Threads are automatically archived after a period of inactivity. Archiving keeps your active conversation list focused without permanently removing anything — archived threads are always recoverable.</p>
+
+<h3>Restoring an archived thread</h3>
+
+<p>You can restore any archived thread at any time. The conversation list includes filter and group-by controls with an option to show archived threads. Find the thread you want, open it, and restore it — it returns to your active list as if it never left.</p>
+
+<h3>Why this matters</h3>
+
+<p>As you use Prosponsive over time, completed tasks and resolved conversations accumulate. Without archiving, the conversation list grows without bound and older items make it harder to see what is current. Automatic archiving keeps the list clean. Because archived threads are always accessible through the filter controls, nothing is lost — just out of the way until you need it.</p>
+
+<hr>
+
+<h2><span class="section-number">5.</span> Filtering, Grouping, and Bulk Approval</h2>
 
 <p>Prosponsive is built for tasks, not talk. When agents use tools, they generate actions that need your review. In a typical AI chat product, you see these one at a time in a linear conversation. Prosponsive gives you filtering, grouping, and bulk approval instead.</p>
 
@@ -156,7 +170,7 @@
 
 <hr>
 
-<h2><span class="section-number">5.</span> Auto-Approvals</h2>
+<h2><span class="section-number">6.</span> Auto-Approvals</h2>
 
 <p>Prosponsive supports condition-based auto-approvals. You define rules, and matching tool calls execute without interrupting you.</p>
 
@@ -183,7 +197,7 @@
 
 <hr>
 
-<h2><span class="section-number">6.</span> Agent Autonomy</h2>
+<h2><span class="section-number">7.</span> Agent Autonomy</h2>
 
 <p>Agents in Prosponsive don't just answer questions — they manage your experience. They have built-in capabilities to organize, prioritize, and clean up after themselves so you spend less time managing and more time reviewing outcomes.</p>
 
@@ -203,7 +217,7 @@
 
 <hr>
 
-<h2><span class="section-number">7.</span> Notifications and Agent Definitions</h2>
+<h2><span class="section-number">8.</span> Notifications and Agent Definitions</h2>
 
 <p>Prosponsive keeps you informed without demanding your attention. Notifications surface what matters, agent definitions control how agents behave, and scheduled prompts keep work moving — together they form the control layer that makes always-on operation practical.</p>
 
@@ -223,7 +237,7 @@
 
 <hr>
 
-<h2><span class="section-number">8.</span> Higher-Value Tools</h2>
+<h2><span class="section-number">9.</span> Higher-Value Tools</h2>
 
 <p>Custom tools are not MCP servers. They are fundamentally different in scope and design. Understanding this difference is key to understanding why Prosponsive exists.</p>
 
@@ -253,7 +267,7 @@
 
 <hr>
 
-<h2><span class="section-number">9.</span> Provider Agnostic</h2>
+<h2><span class="section-number">10.</span> Provider Agnostic</h2>
 
 <p>Prosponsive supports 7+ AI providers, and you can switch between them at any time. But provider independence is not just about avoiding lock-in — it is about aligning incentives.</p>
 
@@ -292,7 +306,7 @@
 
 <hr>
 
-<h2><span class="section-number">10.</span> Privacy and Security</h2>
+<h2><span class="section-number">11.</span> Privacy and Security</h2>
 
 <p>Prosponsive keeps your work private during execution. Your conversations, your data, and your tool activity all stay on your machine — not on someone else's server.</p>
 
@@ -320,7 +334,7 @@
 
 <hr>
 
-<h2><span class="section-number">11.</span> Extensibility</h2>
+<h2><span class="section-number">12.</span> Extensibility</h2>
 
 <p>Prosponsive is designed to be extended, not just configured. You can create custom agents, build custom tools, and connect to thousands of external services.</p>
 
@@ -355,6 +369,16 @@
 
 <p>Your agents filter out what doesn't matter, take action on what does, and only involve you when needed. A webhook fires when a customer submits a support ticket — your agent triages it, pulls context from your CRM, drafts a response, and notifies you only if escalation is required. A batch process dumps daily sales data — your agent summarizes it and posts the digest to your reporting channel. The data flows in, agents handle it, and you see only the outcomes that need your attention.</p>
 
+<h3>The tool catalog</h3>
+
+<p>The Prosponsive tool catalog covers <strong>216 products</strong> and <strong>2,533 tools</strong>. When you select a tool from the catalog for an agent, you are choosing a workflow that Prosponsive agents can use — ensuring the tool is wired up and discoverable without any manual configuration. The catalog is the starting point for equipping an agent with real-world integrations.</p>
+
+<p>Tools in the catalog are identified in <strong>node:operation</strong> format — for example, <code>Gmail:send</code> or <code>Notion:createPage</code>. This format appears in the tool picker when you add tools to an agent.</p>
+
+<h3>Tool setup</h3>
+
+<p>Adding a tool to an agent uses a single picker tree organized by node and operation. When you select a tool, guidance is automatically populated in the agent definition — you do not need to write parameter instructions from scratch. The credential picker is a single dropdown; you select the credential to use for that tool. Simple tools like Send Email skip configuration steps that do not apply.</p>
+
 <h3>Thousands of integrations</h3>
 
 <p>Through n8n, Prosponsive can connect to over a thousand external services out of the box. If a service has an API, you can build a tool for it — often without writing a single line of code. And because each tool is a workflow, not a single API call, you can combine multiple integrations into one tool that produces a complete outcome.</p>
@@ -363,7 +387,7 @@
 
 <hr>
 
-<h2><span class="section-number">12.</span> Multi-Language Support</h2>
+<h2><span class="section-number">13.</span> Multi-Language Support</h2>
 
 <p>Prosponsive supports 12 languages across its interface, so you can work in the language most natural to you.</p>
 
@@ -395,7 +419,7 @@
 
 <hr>
 
-<h2><span class="section-number">13.</span> Scheduled Prompts</h2>
+<h2><span class="section-number">14.</span> Scheduled Prompts</h2>
 
 <p>Scheduled prompts let you automate recurring AI tasks. Combined with async tool use and auto-approvals, they make Prosponsive an always-on system that works while you do not.</p>
 
@@ -428,6 +452,28 @@
 
 <hr>
 
+<h2><span class="section-number">15.</span> Inference Tuning</h2>
+
+<p>The inference settings panel gives you direct control over how the AI model processes each request. These controls apply globally and let you tune the balance between output quality, response length, and token cost.</p>
+
+<h3>Max output length</h3>
+
+<p>Sets the maximum number of tokens the AI model can generate in a single response. Lower values produce shorter, more concise replies and reduce token usage. Higher values allow the model to produce longer, more detailed responses when the task requires it. Set this to match your typical use — a general-purpose agent handling brief questions benefits from a lower limit, while a document-generation agent may need more room.</p>
+
+<h3>Temperature</h3>
+
+<p>Controls how deterministic or creative the model's responses are. Lower values (closer to 0) produce consistent, predictable output — useful for agents that summarize data, extract fields, or follow structured instructions. Higher values introduce more variation — useful for agents that draft creative content or generate alternatives. Most task-oriented agents work best at a low to moderate temperature.</p>
+
+<h3>History depth</h3>
+
+<p>Controls how many prior messages from the conversation are included in each request to the AI model. A higher history depth gives the model more context, which improves coherence in long conversations but increases token usage with every turn. A lower depth keeps requests lean and is appropriate when each message is relatively self-contained. Adjust history depth when you want to trade off context richness against token cost.</p>
+
+<h3>Where to find it</h3>
+
+<p>Open <strong>Settings</strong> and navigate to the inference settings panel. Changes take effect immediately for subsequent messages — there is no restart required.</p>
+
+<hr>
+
 <h2>Summary</h2>
 
 <table>
@@ -438,6 +484,7 @@
     <tr><td><strong>Async Tool Use</strong></td><td>Tools run in the background. You get results, not loading spinners.</td></tr>
     <tr><td><strong>Async Group Chat</strong></td><td>Multiple agents in a channel respond and use tools in parallel. Post once — parallel work begins across all agents simultaneously.</td></tr>
     <tr><td><strong>Channels &amp; Threads</strong></td><td>Agents and tools scoped to workspaces. Threads keep tasks contained, collapsible, and movable between channels.</td></tr>
+    <tr><td><strong>Conversation Archiving</strong></td><td>Threads archive automatically after inactivity. Restore any thread from the conversation list's filter and group-by controls.</td></tr>
     <tr><td><strong>Filtering &amp; Bulk Approval</strong></td><td>Review and approve many pending actions at once — built for task management, not sequential chat.</td></tr>
     <tr><td><strong>Auto-Approvals</strong></td><td>Condition-based rules let trusted tools run without interrupting you.</td></tr>
     <tr><td><strong>Agent Autonomy</strong></td><td>Agents manage threads, archive completed work, and organize your channels. Performance visibility shows you where to optimize.</td></tr>
@@ -445,9 +492,10 @@
     <tr><td><strong>Higher-Value Tools</strong></td><td>n8n workflows that orchestrate multiple systems per tool call. One tool orchestrates what would otherwise take multiple separate calls.</td></tr>
     <tr><td><strong>Provider Agnostic</strong></td><td>7+ providers, switch anytime. Design that minimizes token cost instead of maximizing it.</td></tr>
     <tr><td><strong>Privacy &amp; Security</strong></td><td>Local execution. Encrypted connections. Enterprise security scrutiny.</td></tr>
-    <tr><td><strong>Extensibility</strong></td><td>Custom agents, custom workflows, 1000+ integrations via n8n.</td></tr>
+    <tr><td><strong>Extensibility</strong></td><td>Custom agents, tool catalog (216 products, 2,533 tools), custom workflows, 1000+ integrations via n8n.</td></tr>
     <tr><td><strong>Multi-Language</strong></td><td>12 languages across the full interface.</td></tr>
     <tr><td><strong>Scheduled Prompts</strong></td><td>Automated recurring tasks. Combined with auto-approvals, Prosponsive works while you don't.</td></tr>
+    <tr><td><strong>Inference Tuning</strong></td><td>Configure max output length, temperature, and history depth to match your agents and control token cost.</td></tr>
   </tbody>
 </table>
 
