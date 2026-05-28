@@ -115,7 +115,7 @@
 
 <blockquote><p><strong>iCloud users</strong>: Go to your <a href="https://account.apple.com/account/manage">iCloud account page</a> &rarr; App-Specific Passwords, generate one for "Prosponsive", and use that here.</p></blockquote>
 
-<blockquote><p><strong>Outlook / Microsoft 365 users</strong>: If your organization has disabled basic authentication (common since 2022), app passwords won't work and you'll see repeated authentication failures. Ask your IT admin whether legacy auth is enabled, or switch to OAuth2 in n8n's SMTP credential settings.</p></blockquote>
+<blockquote><p><strong>Outlook / Microsoft 365 users</strong>: You may need to ensure "Authenticated SMTP" is enabled for your specific mailbox in the Microsoft 365 admin center.</p></blockquote>
 
 <h3>Step 4: Install the tool</h3>
 
@@ -200,7 +200,7 @@
 
 <blockquote><p>Use the same App Password / App-Specific Password approach from Section 1 — same provider, same steps, just select the IMAP credential type instead of SMTP.</p></blockquote>
 
-<blockquote><p><strong>Outlook / Microsoft 365 users</strong>: If basic authentication is disabled in your tenant, IMAP won't work with a password. See the note in Section 1 — the same OAuth2 consideration applies here.</p></blockquote>
+<blockquote><p><strong>Outlook / Microsoft 365 users</strong>: You may need to ensure IMAP access is enabled for your specific mailbox in the Microsoft 365 admin center.</p></blockquote>
 
 <h3>Step 3: Wire the credential and activate</h3>
 
