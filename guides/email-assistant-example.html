@@ -61,40 +61,133 @@
 
 <h1>Example: Email Assistant</h1>
 
-<p>This guide walks you through connecting your email inbox to Prosponsive and building an automated triage workflow. By the end, you'll have routing rules, deletion rules, auto-approval, and bulk actions working together.</p>
+<p>This guide builds up an email assistant in three stages — starting with sending, then adding receive, and finally automating inbox triage with channels and scheduled prompts. Each stage teaches you a new part of how Prosponsive and n8n work together.</p>
 
 <div class="tip">
-  <strong>Prerequisites:</strong> This guide assumes you have completed the <a href="install-guide.html">Install Guide</a> and are familiar with the <a href="basics.html">Prosponsive Basics</a>.
+  <strong>Prerequisites:</strong> Complete the <a href="install-guide.html">Install Guide</a> and read through <a href="basics.html">Prosponsive Basics</a> before starting here.
 </div>
 
 <hr>
 
-<h2><span class="section-number">1.</span> Connect Your Email</h2>
+<h2><span class="section-number">1.</span> Add the Send Email Tool</h2>
 
-<p>Let's connect your email inbox so Prosponsive can help you triage it.</p>
+<p>The first thing the Email Assistant needs is the ability to send email. You'll install this from the tool catalog — which also walks you through adding your SMTP credentials to n8n.</p>
 
-<h3>Step 1: Open n8n Credentials</h3>
+<h3>Step 1: Open the Email Assistant agent</h3>
 
 <ol>
-  <li>Click the <strong>n8n</strong> tab in the sidebar.</li>
-  <li>Click <strong>Credentials</strong> to open the n8n credential manager in your browser.</li>
+  <li>Click the <strong>Agents</strong> tab in the sidebar.</li>
+  <li>Select <strong>Email Assistant</strong>.</li>
 </ol>
 
-<h3>Step 2: Create an IMAP credential</h3>
+<h3>Step 2: Add the Send Email tool</h3>
 
 <ol>
-  <li>In n8n, click <strong>Add Credential</strong>.</li>
-  <li>Search for "IMAP" and select it.</li>
-  <li>Fill in your email server details:
+  <li>In the agent editor, click <strong>Add Tool</strong> in the tools panel.</li>
+  <li>In the tool catalog, open <strong>Send Email</strong> &rarr; <strong>Email</strong> &rarr; <strong>Send</strong>.</li>
+  <li>A credential prompt appears. Click <strong>Add credential in n8n</strong> — this opens the n8n credential manager in your browser.</li>
+</ol>
+
+<h3>Step 3: Create an SMTP credential in n8n</h3>
+
+<ol>
+  <li>In n8n, click <strong>Add Credential</strong> and search for "SMTP".</li>
+  <li>Fill in your mail server details:
     <table>
       <thead>
-        <tr><th>Field</th><th>Example (Gmail)</th><th>Example (Outlook)</th><th>Example (iCloud)</th></tr>
+        <tr><th>Field</th><th>Gmail</th><th>Outlook / Microsoft 365</th><th>iCloud</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Host</strong></td><td><code>smtp.gmail.com</code></td><td><code>smtp.office365.com</code></td><td><code>smtp.mail.me.com</code></td></tr>
+        <tr><td><strong>Port</strong></td><td><code>465</code></td><td><code>587</code></td><td><code>587</code></td></tr>
+        <tr><td><strong>User</strong></td><td><code>you@gmail.com</code></td><td><code>you@company.com</code></td><td><code>you@icloud.com</code></td></tr>
+        <tr><td><strong>Password</strong></td><td>App password</td><td>Your password or app password</td><td>App-Specific Password</td></tr>
+        <tr><td><strong>SSL/TLS</strong></td><td>Enabled</td><td>STARTTLS</td><td>STARTTLS</td></tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<blockquote><p><strong>Gmail users</strong>: Gmail requires an App Password instead of your account password. Go to <a href="https://myaccount.google.com/apppasswords">myaccount.google.com/apppasswords</a>, generate one for "Prosponsive", and use that here.</p></blockquote>
+
+<blockquote><p><strong>iCloud users</strong>: Go to your <a href="https://account.apple.com/account/manage">iCloud account page</a> &rarr; App-Specific Passwords, generate one for "Prosponsive", and use that here.</p></blockquote>
+
+<h3>Step 4: Select the credential and install</h3>
+
+<ol>
+  <li>Back in Prosponsive, refresh the credential dropdown and select the SMTP credential you just created.</li>
+  <li>Click <strong>Install Tool</strong>. Prosponsive generates a workflow in n8n and adds the tool to the Email Assistant agent automatically.</li>
+</ol>
+
+<hr>
+
+<h2><span class="section-number">2.</span> Compose and Send Your First Email</h2>
+
+<p>With Send Email installed, try it out.</p>
+
+<ol>
+  <li>Open a conversation with the <strong>Email Assistant</strong>.</li>
+  <li>Type something like:
+    <blockquote><p>Send a quick note to alex@example.com — subject "Checking in", body "Hey Alex, just following up on our conversation from last week. Let me know if you have time to chat."</p></blockquote>
+  </li>
+  <li>The agent will show you the full draft before sending. Review it, then reply <strong>"Send it"</strong> to confirm.</li>
+</ol>
+
+<p>The agent won't send without your confirmation unless you explicitly tell it to proceed directly. This is the default guardrail — you can remove it from the agent definition once you're comfortable.</p>
+
+<hr>
+
+<h2><span class="section-number">3.</span> Add Send and Wait for Response</h2>
+
+<p>When you need to know whether the recipient replied — an approval request, an action item with a deadline — use <strong>Send and Wait for Response</strong> instead. n8n holds the workflow open until a reply arrives or the wait period expires.</p>
+
+<h3>Install the tool</h3>
+
+<ol>
+  <li>In the Email Assistant agent editor, click <strong>Add Tool</strong> again.</li>
+  <li>Navigate to <strong>Send Email</strong> &rarr; <strong>Email</strong> &rarr; <strong>Send and Wait for Response</strong>.</li>
+  <li>Select the same SMTP credential and click <strong>Install Tool</strong>.</li>
+</ol>
+
+<h3>When to use it</h3>
+
+<ul>
+  <li>Use <strong>Send</strong> for announcements, notifications, and messages where a reply is not expected.</li>
+  <li>Use <strong>Send and Wait</strong> when you need confirmation — approvals, sign-offs, or anything where silence is not an acceptable outcome.</li>
+</ul>
+
+<p>Try it:</p>
+<blockquote><p>Send an approval request to alex@example.com for the Q3 budget proposal. I need a yes or no by Friday. Use send-and-wait.</p></blockquote>
+
+<hr>
+
+<h2><span class="section-number">4.</span> Set Up Email Receiving</h2>
+
+<p>Now let's give the agent the ability to read your inbox. This step uses a pre-built workflow you import into n8n and configure with your IMAP credentials.</p>
+
+<h3>Step 1: Import the Email Receive workflow into n8n</h3>
+
+<ol>
+  <li>Click the <strong>n8n</strong> tab in the sidebar and open <strong>Workflows</strong>.</li>
+  <li>Click <strong>Import from file</strong> and select <code>email-receive.json</code> from the Prosponsive seeds folder.</li>
+  <li>The workflow opens with three nodes: <strong>Tool Webhook</strong> &rarr; <strong>Read Inbox</strong> &rarr; <strong>Format Emails</strong>.</li>
+</ol>
+
+<h3>Step 2: Create an IMAP credential in n8n</h3>
+
+<ol>
+  <li>In n8n, go to <strong>Credentials</strong> and click <strong>Add Credential</strong>.</li>
+  <li>Search for "IMAP" and fill in your server details:
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Gmail</th><th>Outlook</th><th>iCloud</th></tr>
       </thead>
       <tbody>
         <tr><td><strong>Host</strong></td><td><code>imap.gmail.com</code></td><td><code>outlook.office365.com</code></td><td><code>imap.mail.me.com</code></td></tr>
         <tr><td><strong>Port</strong></td><td><code>993</code></td><td><code>993</code></td><td><code>993</code></td></tr>
-        <tr><td><strong>User</strong></td><td><code>you@gmail.com</code></td><td><code>you@company.com</code></td><td><code>you@company.com</code></td></tr>
-        <tr><td><strong>Password</strong></td><td>App password (see below)</td><td>Your password or app password</td><td>App-Specific password (see below)</td></tr>
+        <tr><td><strong>User</strong></td><td><code>you@gmail.com</code></td><td><code>you@company.com</code></td><td><code>you@icloud.com</code></td></tr>
+        <tr><td><strong>Password</strong></td><td>App password</td><td>Your password or app password</td><td>App-Specific Password</td></tr>
         <tr><td><strong>SSL/TLS</strong></td><td>Enabled</td><td>Enabled</td><td>Enabled</td></tr>
       </tbody>
     </table>
@@ -102,223 +195,124 @@
   <li>Click <strong>Save</strong>.</li>
 </ol>
 
-<blockquote><p><strong>Gmail users</strong>: Gmail requires an "App Password" instead of your regular password. Go to <a href="https://myaccount.google.com/apppasswords">myaccount.google.com/apppasswords</a>, generate one for "Prosponsive", and use that as the password above.</p></blockquote>
+<blockquote><p>Use the same App Password / App-Specific Password approach from Section 1 — same provider, same steps, just select the IMAP credential type instead of SMTP.</p></blockquote>
 
-<blockquote><p><strong>Outlook/Microsoft 365 users</strong>: If your organization uses modern authentication, you may need to use OAuth2 instead of a password. Ask your IT admin if app passwords are enabled.</p></blockquote>
-
-<blockquote><p><strong>iCloud users</strong>: Apple requires an "App-Specific Password" instead of your regular password. Go to your iCloud <a href="https://account.apple.com/account/manage">account management page</a> and click "App-Specific Passwords", generate one for "Prosponsive", and use that as password above.</p></blockquote>
-
-<h3>Step 3: Configure the email polling workflow</h3>
+<h3>Step 3: Wire the credential and activate</h3>
 
 <ol>
-  <li>Go back to the n8n tab and click <strong>Workflows</strong>.</li>
-  <li>Find <strong>"Prosponsive: IMAP New Email"</strong> and open it.</li>
-  <li>Click the <strong>Email Read IMAP (Prosponsive)</strong> node (the second node in the chain).</li>
-  <li>In the node settings, find the <strong>Credential</strong> dropdown and select the IMAP credential you just created. (it may look already selected, but select it again)</li>
-  <li>Click <strong>Save</strong> on the node, then <strong>Save</strong> on the workflow.</li>
-  <li>Toggle the workflow to <strong>Publish</strong> (button in the top-right corner).</li>
+  <li>In the imported workflow, click the <strong>Read Inbox</strong> node.</li>
+  <li>Set the <strong>Credential</strong> dropdown to the IMAP credential you just created.</li>
+  <li>Click <strong>Save</strong>, then toggle the workflow to <strong>Active</strong> (button in the top-right corner).</li>
 </ol>
 
-<p>This workflow polls your inbox every 5 minutes and sends new emails to Prosponsive for triage. It does not mark them as read, or impact your normal email client in any way.</p>
-
-<h3>Step 4: Configure the email move-to-folder tool</h3>
+<h3>Step 4: Add the tool to the Email Assistant</h3>
 
 <ol>
-  <li>Still in n8n Workflows, find <strong>"email-move-to-folder"</strong> and open it.</li>
-  <li>Click the IMAP node in the workflow.</li>
-  <li>Set the <strong>Credential</strong> to the same IMAP credential.</li>
-  <li>Save and <strong>Publish</strong> the workflow.</li>
+  <li>Back in Prosponsive, open the <strong>Email Assistant</strong> agent editor and click <strong>Add Tool</strong>.</li>
+  <li>Under <strong>Workflows</strong>, find <strong>Email Receive: Read Inbox</strong> — it appears now that the workflow is active.</li>
+  <li>Select it and click <strong>Add</strong>.</li>
 </ol>
 
-<p>This allows the email agent to move emails between IMAP folders when folder routing rules are configured.</p>
+<p>Test it:</p>
+<blockquote><p>Check my email</p></blockquote>
 
-<div class="tip">
-<strong>Note:</strong> The "email-delete" workflow exists but is left inactive for now. You'll enable it later in this guide when you add deletion capabilities to the email agent.
-</div>
+<p>The agent calls the receive tool, then summarizes what's in your inbox — how many new messages, which need a reply, which are informational.</p>
 
 <hr>
 
-<h2><span class="section-number">2.</span> Watch Email Triage in Action</h2>
+<h2><span class="section-number">5.</span> Automate with a Channel and Scheduled Prompt</h2>
 
-<p>With the IMAP workflow active, new emails will start appearing in the <strong>Email Inbox</strong> channel within 5 minutes. Send yourself one or two to see it in action.</p>
+<p>Instead of asking the agent to check email manually, set up a channel and a scheduled prompt so it runs on its own.</p>
 
-<h3>What happens automatically</h3>
+<h3>Step 1: Create an Email channel</h3>
 
 <ol>
-  <li>A new email arrives in your inbox.</li>
-  <li>The n8n workflow fetches it and sends it to the "Email Inbox" channel, created by the <strong>Executive Assistant Email Agent</strong>.</li>
-  <li>The agent evaluates the email and <strong>summarizes the recommended action</strong> and may ask you for approval to use a tool.</li>
+  <li>In any Prosponsive conversation, type:
+    <blockquote><p>Create a channel called Email</p></blockquote>
+  </li>
+  <li>Approve the <strong>create-conversation</strong> tool card. The Email channel appears in the sidebar.</li>
 </ol>
 
-<h3>What you'll see in the channel</h3>
+<h3>Step 2: Add a scheduled prompt</h3>
 
-<p>Each email appears as a thread. The agent's response includes:</p>
+<ol>
+  <li>Open <strong>Settings</strong> &rarr; <strong>Scheduled Prompts</strong> and click <strong>Add Scheduled Prompt</strong>.</li>
+  <li>Configure it:
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Value</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Prompt</strong></td><td><code>Check for new emails and summarize what needs my attention.</code></td></tr>
+        <tr><td><strong>Agent</strong></td><td>Email Assistant</td></tr>
+        <tr><td><strong>Channel</strong></td><td>Email</td></tr>
+        <tr><td><strong>Schedule</strong></td><td>Every 30 minutes (or whatever cadence suits you)</td></tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Click <strong>Save</strong> and toggle it <strong>on</strong>.</li>
+</ol>
 
-<ul>
-  <li><strong>Priority level</strong> (urgent, high, medium, low)</li>
-  <li><strong>Summary</strong> of the email content</li>
-  <li><strong>Action items</strong> if any were identified</li>
-  <li>A <strong>tool card</strong> if the agent proposes an action (move, archive)</li>
-  <li>An <strong>external link icon</strong> in the top-right corner of the message — click it to open the original email in your mail client (Apple Mail, Outlook, etc.)</li>
-</ul>
-
-<p>You can approve, or implicitly decline by replying to guide the agent differently.</p>
+<p>The Email Assistant now checks your inbox on the schedule you set and posts a summary to the Email channel. New threads appear there automatically — no manual prompting needed.</p>
 
 <hr>
 
-<h2><span class="section-number">3.</span> Organize with Channels: Your First Move</h2>
+<h2><span class="section-number">6.</span> Organize with Channels</h2>
 
-<p>Let's say a Project Zen email has arrived in your Email Inbox. You want to move it to its own channel to keep things organized.</p>
+<p>As the agent's summaries arrive in the Email channel, you can move threads to project-specific channels to keep things organized.</p>
+
+<h3>Move a thread manually</h3>
 
 <ol>
-  <li>Open the <strong>Email Inbox</strong> channel.</li>
-  <li>Find the Project Zen email thread.</li>
-  <li>Reply to the thread:
+  <li>Open the <strong>Email</strong> channel and find a thread you want to move.</li>
+  <li>Reply to it:
     <blockquote><p>Move this to Project Zen</p></blockquote>
   </li>
-  <li>The <strong>Prosponsive</strong> agent (your default coordinator) proposes a <strong>move-thread</strong> tool card with target "Project Zen".</li>
-  <li>Click <strong>Approve</strong>.</li>
+  <li>The agent proposes a <strong>move-thread</strong> tool card targeting "Project Zen". Approve it.</li>
 </ol>
 
-<h3>What happens</h3>
+<p>The thread moves to the Project Zen channel (created automatically if it doesn't exist). A tombstone link is left behind in Email so you can find it later.</p>
 
-<ul>
-  <li>The entire thread moves to the <strong>Project Zen</strong> channel (create this channel first by typing "Create a channel called Project Zen" in any chat).</li>
-  <li>A <strong>tombstone</strong> with a link to the new destination is left in Email Inbox: <em>"Thread moved to Project Zen — 3 messages"</em>.</li>
-</ul>
+<h3>Teach the agent to route automatically</h3>
 
-<p>Click "Project Zen" in the sidebar to see your moved thread in its new home.</p>
+<p>Add routing rules to the agent definition so it proposes moves on its own. Open the <strong>Email Assistant</strong> agent editor, find the Capabilities section, and add a table like this:</p>
 
-<hr>
-
-<h2><span class="section-number">4.</span> Organize with Channels: Approvals</h2>
-
-<p>Now let's do the same for an email requesting your approval.</p>
-
-<ol>
-  <li>Back in <strong>Email Inbox</strong>, find an email where someone is asking for your sign-off or approval.</li>
-  <li>Reply:
-    <blockquote><p>Move this to Approvals</p></blockquote>
-  </li>
-  <li>Approve the <strong>move-thread</strong> tool card.</li>
-</ol>
-
-<p>The "Approvals" channel is created automatically. You now have a dedicated space for approval requests — no more hunting through your inbox.</p>
-
-<hr>
-
-<h2><span class="section-number">5.</span> Customize the Email Agent: Add Delete Rules</h2>
-
-<p>The email agent ships without deletion capabilities — you add them when you're ready. This is a safety measure: you control exactly when the agent can delete emails.</p>
-
-<h3>Step 1: Add the delete tool</h3>
-
-<ol>
-  <li>Click the <strong>Agents</strong> tab in the sidebar.</li>
-  <li>Select <strong>Executive Assistant Email Agent</strong>.</li>
-  <li>In the agent editor, open the tool picker. Tools are organized in a tree by node and operation — for example, <code>Email:delete</code>. Find <code>email_delete</code> and select it.</li>
-  <li>When you add the tool, guidance is automatically populated in the agent definition. You can review and adjust it, but the defaults give the agent what it needs to get started.</li>
-  <li>If the tool requires a credential, select it from the credential dropdown that appears alongside the tool.</li>
-</ol>
-
-<h3>Step 2: Add delete rules</h3>
-
-<p>In the <strong>Capabilities</strong> section of the agent definition, add the following block. You can place it right after the "Tombstone cleanup" bullet:</p>
-
-<pre><code>- **CRITICAL: Apply delete rules BEFORE routing rules.** If an email matches a delete rule, delete it immediately — do not evaluate routing rules.
-- Apply the delete rules below when deciding `email_delete` actions:
-  - **Thread participation override**: NEVER delete an email if the thread contains a previous reply from the user. If the user has participated in the thread, it's a conversation — not spam. Skip all delete rules and evaluate routing rules instead.
-  - **Unsubscribe / manage preferences signals**: Delete when the HTML body contains any link or text to unsubscribe, manage email preferences, or opt out. These links are typically in the footer. Always scan the full HTML body.
-  - **Marketing / promotional content**: Delete when the email is bulk marketing — product recommendations, promotional offers, newsletters from commercial brands, "shop now" calls-to-action, or automated notifications from retail/e-commerce platforms.
-  - **Sales cold solicitation**: Delete when the email is an unsolicited outreach attempting to sell a product or service. Hallmarks: no prior relationship, generic pitch language, calls-to-action to book a demo or schedule a call.</code></pre>
-
-<h3>Step 3: Add delete tool parameters</h3>
-
-<p>In the <strong>Tool Parameter Sourcing</strong> section, add:</p>
-
-<pre><code>When calling `email_delete`, provide these parameters:
-- **uid**: The numeric IMAP UID from the Request Context (e.g., 123, 456). This is always a plain integer — never a UUID or any other format.
-- **mailbox**: From the Request Context (default to `INBOX` if missing)
-- **reason**: A one-line justification for deletion (e.g., "Marketing newsletter with unsubscribe link")</code></pre>
-
-<h3>Step 4: Activate the delete workflow in n8n</h3>
-
-<ol>
-  <li>Go to the <strong>n8n</strong> tab &gt; <strong>Workflows</strong>.</li>
-  <li>Find <strong>"email-delete"</strong> and open it.</li>
-  <li>Set the IMAP credential on the IMAP node (same as before).</li>
-  <li>Save and <strong>Activate</strong> the workflow.</li>
-</ol>
-
-<h3>Step 5: Update the guardrails</h3>
-
-<p>In the <strong>Guardrails</strong> section, update the evaluation order to check delete rules first:</p>
-
-<p>Replace the routing evaluation bullet with:</p>
-
-<pre><code>- First evaluate delete rules. If a match, call `email_delete`. Then evaluate channel routing rules. If a match, call `move-thread`. Then evaluate folder routing rules. If a match, call `email_move_to_folder`. If no rules match and no action is needed, call `archive-thread`. If no rules match but action may be needed, summarize and ask the user.</code></pre>
-
-<h3>Test it</h3>
-
-<p>Wait for a marketing email or newsletter to arrive. The email agent will propose an <strong>email_delete</strong> tool card with a reason like "Marketing newsletter with unsubscribe link." Approve it and the email is moved to trash on your mail server.</p>
-
-<hr>
-
-<h2><span class="section-number">6.</span> Add Channel Routing Rules and Manage at Scale</h2>
-
-<p>So far you've moved threads manually by telling Prosponsive to move them. Now let's teach the email agent to propose moves automatically.</p>
-
-<h3>Step 1: Add channel routing rules</h3>
-
-<ol>
-  <li>Open the <strong>Agents</strong> tab &gt; <strong>Executive Assistant Email Agent</strong>.</li>
-  <li>In the <strong>Capabilities</strong> section, find the channel routing rules placeholder (the example table with "Project Alpha"). Replace it with your actual rules:
-    <pre><code>| Channel | When to route |
+<pre><code>| Channel | When to route |
 |---|---|
 | `Project Zen` | Email is about Project Zen — mentions the project name, related people, or deliverables. |
-| `Approvals` | Email is requesting manager approval or sign-off from the user. |</code></pre>
-  </li>
-  <li>Save the agent definition.</li>
-</ol>
+| `Approvals` | Email is requesting my approval or sign-off. |</code></pre>
 
-<p>Now the email agent will automatically propose <code>move-thread</code> tool cards for emails matching these rules.</p>
+<p>Save the agent. It will now propose <code>move-thread</code> cards automatically for emails matching these rules.</p>
 
-<h3>Step 2: Send some test emails</h3>
+<hr>
 
-<p>Send yourself 3-4 emails related to Project Zen from another account (or forward existing ones). Use subjects like:</p>
+<h2><span class="section-number">7.</span> Bulk Actions and Auto-Approval</h2>
 
-<ul>
-  <li>"Project Zen: Updated timeline for Phase 2"</li>
-  <li>"Re: Project Zen milestone review"</li>
-  <li>"Zen team standup notes — March 31"</li>
-</ul>
+<p>Once routing rules are in place and a few emails have arrived, you can review and approve proposed actions in bulk.</p>
 
-<p>Wait a few minutes for the n8n polling workflow to pick them up.</p>
-
-<h3>Step 3: See the results in Email Inbox</h3>
-
-<p>Open the <strong>Email Inbox</strong> channel. You'll see several new threads, each with a <strong>move-thread</strong> tool card proposed by the email agent, targeting the "Project Zen" channel.</p>
-
-<h3>Step 4: Use filtering and grouping</h3>
-
-<p>Above the message list, click the <strong>Filter &amp; Group</strong> controls:</p>
+<h3>Group by tool name</h3>
 
 <ol>
-  <li><strong>Group by</strong>: Select <strong>Tool Name</strong>.</li>
-  <li>The approval cards are now grouped — all "Move Thread" proposals appear together under a single header.</li>
+  <li>In the Email channel, click the <strong>Filter &amp; Group</strong> controls above the message list.</li>
+  <li>Set <strong>Group by</strong> to <strong>Tool Name</strong>.</li>
+  <li>All "Move Thread" proposals appear together under a single group header.</li>
 </ol>
 
-<p>This makes it easy to review similar actions in bulk instead of scrolling through individual threads.</p>
-
-<h3>Step 5: Set up auto-approval</h3>
-
-<p>Before approving the existing cards, let's set up auto-approval so future Project Zen moves happen without manual intervention:</p>
+<h3>Bulk-approve the group</h3>
 
 <ol>
-  <li>Open <strong>Settings</strong> (gear icon in the sidebar).</li>
-  <li>Navigate to <strong>Tool Approval Rules</strong>.</li>
-  <li>Click <strong>Add Rule</strong>.</li>
-  <li>Configure the rule:
+  <li>Review the grouped cards to confirm the routing looks right.</li>
+  <li>Click <strong>Approve All</strong> on the group header.</li>
+  <li>All pending move-thread actions execute at once.</li>
+</ol>
+
+<h3>Set up auto-approval</h3>
+
+<p>Once you're confident a routing rule is correct, you can stop seeing approval cards for it entirely:</p>
+
+<ol>
+  <li>Open <strong>Settings</strong> &rarr; <strong>Tool Approval Rules</strong> and click <strong>Add Rule</strong>.</li>
+  <li>Configure:
     <ul>
       <li><strong>Tool name</strong>: <code>move-thread</code></li>
       <li><strong>Condition</strong>: Target contains "Project Zen"</li>
@@ -328,28 +322,54 @@
   <li>Save the rule.</li>
 </ol>
 
-<p>From now on, any <code>move-thread</code> targeting "Project Zen" will execute automatically — no approval card, no waiting.</p>
+<p>Future Project Zen routing happens silently. You only see a card for channels you haven't auto-approved yet, or when the agent is unsure about a match.</p>
 
-<h3>Step 6: Bulk-approve existing cards</h3>
+<hr>
 
-<p>Back in the Email Inbox channel, your grouped Move Thread cards are still pending. Instead of approving them one by one:</p>
+<h2><span class="section-number">8.</span> Add Delete Rules</h2>
+
+<p>The Email Assistant ships without deletion capabilities — you add them when you're ready. This is a safety measure: you control exactly when the agent can delete.</p>
+
+<h3>Step 1: Enable the delete workflow in n8n</h3>
 
 <ol>
-  <li>Look at the group header for "Move Thread" proposals.</li>
-  <li>Click the <strong>Approve All</strong> button on the group header.</li>
-  <li>All pending move-thread cards execute at once.</li>
+  <li>In n8n, open <strong>Workflows</strong> and find <strong>"email-delete"</strong>.</li>
+  <li>Click the IMAP node and set the same IMAP credential from Section 4.</li>
+  <li>Save and <strong>Activate</strong> the workflow.</li>
 </ol>
 
-<p>The Project Zen emails move to the Project Zen channel, tombstones are left behind (the email agent will auto-archive them), and your inbox is clean.</p>
+<h3>Step 2: Add the tool to the agent</h3>
 
-<h3>The result</h3>
+<ol>
+  <li>In the Email Assistant agent editor, click <strong>Add Tool</strong>.</li>
+  <li>Under Workflows, find <strong>email-delete</strong> and add it.</li>
+</ol>
 
-<ul>
-  <li><strong>Email Inbox</strong>: Clean — only emails needing your attention remain.</li>
-  <li><strong>Project Zen</strong>: All related emails, past and future, automatically routed here.</li>
-  <li><strong>Approvals</strong>: Approval requests collected in one place.</li>
-  <li><strong>Future emails</strong>: Project Zen emails auto-approve and move without your intervention. Approval emails still show a card for your review (you can add auto-approval for those too when you're confident in the routing).</li>
-</ul>
+<h3>Step 3: Add delete rules to the agent definition</h3>
+
+<p>In the <strong>Capabilities</strong> section of the agent, add:</p>
+
+<pre><code>- **CRITICAL: Evaluate delete rules BEFORE routing rules.** If a delete rule matches, delete immediately — do not evaluate routing rules.
+- Apply these delete rules when deciding `email_delete` actions:
+  - **Thread participation override**: NEVER delete if the thread contains a previous reply from me. If I have participated in the thread, skip all delete rules.
+  - **Unsubscribe signals**: Delete when the HTML body contains any unsubscribe, manage preferences, or opt-out link.
+  - **Marketing / promotional content**: Delete bulk marketing — product recommendations, promotional offers, newsletters, "shop now" calls-to-action.
+  - **Cold sales solicitation**: Delete unsolicited outreach attempting to sell a product or service — no prior relationship, generic pitch, book-a-demo CTA.</code></pre>
+
+<p>In the <strong>Tool Parameter Sourcing</strong> section, add:</p>
+
+<pre><code>When calling `email_delete`, provide these parameters:
+- **uid**: The numeric IMAP UID from the Request Context (always a plain integer, never a UUID)
+- **mailbox**: From the Request Context (default to `INBOX` if missing)
+- **reason**: One-line justification (e.g., "Marketing newsletter with unsubscribe link")</code></pre>
+
+<p>In the <strong>Guardrails</strong> section, update the evaluation order:</p>
+
+<pre><code>- First evaluate delete rules. If a match, call `email_delete`. Then evaluate channel routing rules. If a match, call `move-thread`. If no rules match and no action is needed, summarize and ask me.</code></pre>
+
+<h3>Test it</h3>
+
+<p>Wait for a marketing email or newsletter to arrive. The Email Assistant will propose an <code>email_delete</code> card with a reason like "Marketing newsletter with unsubscribe link." Approve it and the email moves to trash on your mail server.</p>
 
 <hr>
 
