@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /guides/security-architecture-whitepaper.html
+Disallow: /linkedin-security-review-message.html
 
 Sitemap: https://prosponsive.ai/sitemap.xml
