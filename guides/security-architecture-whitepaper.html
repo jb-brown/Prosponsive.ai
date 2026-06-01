@@ -45,8 +45,12 @@
   .guide-card { background: #E6EAE7; border-left: 4px solid #4F6F5C; padding: 1em 1.2em; border-radius: 0 4px 4px 0; margin: 1.5em 0; }
   .guide-card h3 { margin-top: 0; }
   .guide-card p { margin: 0.4em 0; }
-  .mermaid { margin: 1.5em 0; text-align: center; }
+  .mermaid { margin: 1.5em 0; text-align: center; page-break-inside: avoid; break-inside: avoid; }
   </style>
+  <link rel="modulepreload"
+        href="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs"
+        integrity="sha384-whY2DyvhZRFfs9hvtGdZaKcgbETgqMlDN+KNlWnXEL2QDa2XQkBOApUT7arfftO9"
+        crossorigin="anonymous">
   <script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
     mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
