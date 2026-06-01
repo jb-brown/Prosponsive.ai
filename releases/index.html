@@ -101,6 +101,38 @@
     <section class="releases-list" aria-label="Release notes">
       <!-- RELEASES START -->
       <article class="release-entry">
+        <h2>v1.0.54 — June 1, 2026</h2>
+        <h3>Email Assistant</h3>
+        <ul>
+          <li><strong>Receive and act on email automatically</strong> — A new Email Assistant agent is ready to use out of the box. Connect it to any IMAP mailbox and it reads incoming messages, opens a Prosponsive conversation per sender thread, and responds using the same AI capabilities as your other agents.</li>
+        </ul>
+        <h3>Workflow Updates</h3>
+        <ul>
+          <li><strong>Built-in workflows keep themselves current</strong> — Prosponsive now updates its built-in tool workflows when a new version starts. Credential assignments and active/inactive state are preserved across updates, so nothing breaks when the app upgrades.</li>
+        </ul>
+        <h3>Agent Management</h3>
+        <ul>
+          <li><strong>Agents now live where you can find them</strong> — Agent definition files are saved to your <code>~/Agents/</code> folder, making them easy to find, back up, or edit directly. Existing agents have been migrated automatically.</li>
+          <li><strong>Tools refresh when your connections change</strong> — The tool list on the agent page now updates automatically when workflows are added or reconnected. A manual refresh button is also available.</li>
+        </ul>
+        <h3>Local AI</h3>
+        <ul>
+          <li><strong>Clearer feedback during Ollama model downloads</strong> — Progress tracks reliably as a percentage during model pulls. If a pull fails silently, you'll see an actionable error instead of the app appearing to hang.</li>
+        </ul>
+        <h3>Conversation Experience</h3>
+        <ul>
+          <li><strong>Agent responses thread correctly</strong> — The final response from an autonomous run now appears under the message that triggered the agent, keeping multi-step conversations readable.</li>
+        </ul>
+        <h3>Reliability</h3>
+        <ul>
+          <li>Archived conversations now render correctly and no longer appear as unexpected tool approval prompts.</li>
+          <li>The built-in Prosponsive agent is now read-only, preventing accidental edits that could break agent behavior.</li>
+          <li>Fixed a startup issue that could prevent features from launching correctly on some machines.</li>
+          <li>Agent badges no longer truncate the agent name when multiple roles are assigned.</li>
+          <li>34 previously untranslated strings now display correctly for non-English locales.</li>
+        </ul>
+      </article>
+      <article class="release-entry">
         <h2>v1.0.53 — May 27, 2026</h2>
         <ul>
           <li><strong>Your agents work with the tools you already use</strong> — Prosponsive now covers 216 products and 2,533 tools, so your autonomous agents can connect directly to the platforms already in your workflow. Top integrations include Salesforce (65 tools), Zoho CRM (61), ClickUp (57), Monica CRM (52), Harvest (51), Pipedrive (49), Slack (44), and GitHub (37). If you work with it, Prosponsive likely has it covered.</li>
