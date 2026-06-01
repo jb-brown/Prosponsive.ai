@@ -124,6 +124,18 @@
   <li>Click <strong>Add Tool</strong>. Prosponsive generates a workflow in n8n and adds the tool to the Email Assistant agent automatically.</li>
 </ol>
 
+<h3>Step 5: Add your from email address to the agent</h3>
+
+<p>The Send Email tool requires a <strong>From</strong> address with every message. You'll add your email address directly to the agent definition so it always knows to use it.</p>
+
+<ol>
+  <li>Open the <strong>Email Assistant</strong> agent editor in Prosponsive.</li>
+  <li>Near the bottom of the agent definition, in the <strong>Guardrails</strong> section, add a line:
+    <blockquote><p>My email address for sending is <code>you@example.com</code>. Always use this as the <code>fromEmail</code> parameter when calling send tools.</p></blockquote>
+  </li>
+  <li>Replace <code>you@example.com</code> with your actual SMTP account email address, then save.</li>
+</ol>
+
 <hr>
 
 <h2><span class="section-number">2.</span> Compose and Send Your First Email</h2>
@@ -131,59 +143,36 @@
 <p>With Send Email installed, try it out.</p>
 
 <ol>
-  <li><a href="features.html#channels">Create a channel</a> — name it something like "Email".</li>
-  <li>Send a first message in the channel (e.g., "Hi") — this activates the channel controls.</li>
+  <li><a href="features.html#channels">Create a channel</a> by typing <strong>"Hello Prosponsive"</strong> — this starts a new channel and activates the channel controls.</li>
   <li><a href="features.html#channel-sharing">Share the channel</a> to the <strong>Email Assistant</strong> using the controls panel that appears above the message list.</li>
   <li>Now ask the agent to send something:
     <blockquote><p>Send a quick note to alex@example.com — subject "Checking in", body "Hey Alex, just following up on our conversation from last week. Let me know if you have time to chat."</p></blockquote>
   </li>
-  <li>The agent will show you the full draft before sending. Review it, then reply <strong>"Send it"</strong> to confirm.</li>
+  <li>The agent will show you the full draft before sending — review it, then reply <strong>"Send it"</strong> to confirm. If it skips straight to the send card, reply <strong>"Show me the draft first"</strong> to get a preview.</li>
 </ol>
 
 <p>The agent won't send without your confirmation unless you explicitly tell it to proceed directly. This is the default guardrail — you can remove it from the agent definition once you're comfortable.</p>
 
 <hr>
 
-<h2><span class="section-number">3.</span> Add Send and Wait for Response</h2>
+<h2><span class="section-number">3.</span> Set Up Email Receiving</h2>
 
-<p>When you need to know whether the recipient replied — an approval request, an action item with a deadline — use <strong>Send and Wait for Response</strong> instead. n8n holds the workflow open until a reply arrives or the wait period expires.</p>
-
-<h3>Install the tool</h3>
-
-<ol>
-  <li>In the Email Assistant agent editor, click <strong>Add Tool</strong> again.</li>
-  <li>Type <strong>Send Email</strong> to filter, then select <strong>Send Email</strong> &rarr; <strong>Email</strong> &rarr; <strong>Send and Wait for Response</strong>.</li>
-  <li>Select the same SMTP credential and click <strong>Add Tool</strong>.</li>
-</ol>
-
-<h3>When to use it</h3>
-
-<ul>
-  <li>Use <strong>Send</strong> for announcements, notifications, and messages where a reply is not expected.</li>
-  <li>Use <strong>Send and Wait</strong> when you need confirmation — approvals, sign-offs, or anything where silence is not an acceptable outcome. If the wait period expires without a reply, n8n resumes the workflow with a timeout signal and the agent can follow up.</li>
-</ul>
-
-<p>Try it:</p>
-<blockquote><p>Send an approval request to alex@example.com for the Q3 budget proposal. I need a yes or no by Friday. Use send-and-wait.</p></blockquote>
-
-<hr>
-
-<h2><span class="section-number">4.</span> Set Up Email Receiving</h2>
-
-<p>Now let's give the agent the ability to read your inbox. This step uses a pre-built workflow you import into n8n and configure with your IMAP credentials.</p>
+<p>Now let's give the agent the ability to read your inbox. This step uses a pre-built workflow you import into n8n and configure with your IMAP credentials. IMAP is the protocol for <em>reading</em> email — separate from SMTP, which you set up in Section 1 for <em>sending</em>. Most mail providers support both.</p>
 
 <h3>Step 1: Import the Email Receive workflow into n8n</h3>
 
 <ol>
   <li>Click the <strong>n8n</strong> tab in the sidebar and open <strong>Workflows</strong>.</li>
-  <li>Click <strong>Import from file</strong> and select <code>email-receive.json</code> from the Prosponsive seeds folder.</li>
+  <li>Click the orange <strong>Create workflow</strong> button to open a blank canvas. In the canvas editor, click the <strong>⋯</strong> menu in the top-right corner and select <strong>Import from file</strong>. Select <code>email-receive.json</code> from the <strong>Tools</strong> folder inside the Prosponsive project directory you selected at install time.</li>
   <li>The workflow opens with three nodes: <strong>Tool Webhook</strong> &rarr; <strong>Read Inbox</strong> &rarr; <strong>Format Emails</strong>.</li>
 </ol>
 
-<h3>Step 2: Create an IMAP credential in n8n</h3>
+<h3>Step 2: Add your IMAP credential</h3>
+
+<blockquote><p><strong>Same account, different protocol.</strong> SMTP (which you set up in Section 1) is the send protocol. IMAP is the read protocol. Your email provider uses both — same username and password, just a different credential type in n8n.</p></blockquote>
 
 <ol>
-  <li>In n8n, go to <strong>Credentials</strong> and click <strong>Add Credential</strong>. Search for and select <strong>IMAP</strong>.</li>
+  <li>Double-click the <strong>Email Read IMAP (Prosponsive)</strong> node on the canvas, then click the <strong>Set up Credential</strong> button that appears in the node panel.</li>
   <li>Fill in your server details:
     <table>
       <thead>
@@ -200,48 +189,39 @@
   <li>Click the orange <strong>Create Credential</strong> button in the top-right corner of n8n.</li>
 </ol>
 
-<blockquote><p>Use the same App Password / App-Specific Password approach from Section 1 — same provider, same steps, just select the IMAP credential type instead of SMTP.</p></blockquote>
-
 <blockquote><p><strong>Outlook / Microsoft 365 users</strong>: You may need to ensure IMAP access is enabled for your specific mailbox in the Microsoft 365 admin center.</p></blockquote>
 
-<h3>Step 3: Wire the credential and activate</h3>
+<h3>Step 3: Save and activate</h3>
 
 <ol>
-  <li>In the imported workflow, click the <strong>Read Inbox</strong> node.</li>
-  <li>Set the <strong>Credential</strong> dropdown to the IMAP credential you just created.</li>
-  <li>Click <strong>Save</strong> on the node panel, then <strong>Save</strong> on the workflow (top-right).</li>
-  <li>Click <strong>Activate</strong> (toggle in the top-right corner) to enable the workflow.</li>
+  <li>After filling in your credentials, click <strong>Save</strong> in the credential form. This closes the form and returns you to the node panel.</li>
+  <li>Close the node panel (click the <strong>✕</strong> or click outside it). The workflow saves automatically.</li>
+  <li>Click <strong>Publish</strong> (top-right). A version note popup appears — leave it as-is and click <strong>Publish</strong> again to confirm.</li>
 </ol>
 
 <h3>Step 4: Add the tool to the Email Assistant</h3>
 
 <ol>
   <li>Back in Prosponsive, open the <strong>Email Assistant</strong> agent editor and click <strong>Add Tool</strong>.</li>
-  <li>Under <strong>Workflows</strong>, find <strong>Email Receive: Read Inbox</strong> — it appears now that the workflow is active.</li>
+  <li>Under <strong>Workflows</strong>, find <strong>Email Receive: Read Inbox</strong> — it appears now that the workflow is active. If you don't see it, click the <strong>refresh button</strong> (the circular arrow icon at the top-right of the tool catalog) to pull the latest list from n8n.</li>
   <li>Select it and click <strong>Add</strong>.</li>
 </ol>
 
 <p>Test it:</p>
 <blockquote><p>Check my email</p></blockquote>
 
-<p>The agent calls the receive tool, then summarizes what's in your inbox — how many new messages, which need a reply, which are informational.</p>
+<p>The tool fetches up to 20 emails per run and tracks its position using the IMAP UID of the last message it processed. Each subsequent run picks up where the previous one left off — only new emails are submitted. Your inbox read/unread state is never touched. Each email is submitted individually for agent inference and appears as its own thread in the <strong>Email</strong> channel. Switch to the Email channel to see them arrive. The tool returns a count of emails processed, but the actual content and agent responses are in the Email channel, not in the channel where you typed the command.</p>
+
+<p>You can control how many emails are fetched in a single run by telling the agent how many you want — up to 50:</p>
+<blockquote><p>Check my last 5 emails</p></blockquote>
 
 <hr>
 
-<h2><span class="section-number">5.</span> Automate with a Channel and Scheduled Prompt</h2>
+<h2><span class="section-number">4.</span> Automate with a Channel and Scheduled Prompt</h2>
 
 <p>Instead of asking the agent to check email manually, set up a channel and a scheduled prompt so it runs on its own.</p>
 
-<h3>Step 1: Create an Email channel</h3>
-
-<ol>
-  <li>In any Prosponsive conversation, type:
-    <blockquote><p>Create a channel called Email</p></blockquote>
-  </li>
-  <li>Approve the <strong>create-conversation</strong> tool card. The Email channel appears in the sidebar.</li>
-</ol>
-
-<h3>Step 2: Add a scheduled prompt</h3>
+<h3>Step 1: Add a scheduled prompt</h3>
 
 <ol>
   <li>Open <strong>Settings</strong> &rarr; <strong>Scheduled Prompts</strong> and click <strong>Add Scheduled Prompt</strong>.</li>
@@ -261,11 +241,11 @@
   <li>Click <strong>Save</strong> and toggle it <strong>on</strong>.</li>
 </ol>
 
-<p>The Email Assistant now checks your inbox on the schedule you set and posts a summary to the Email channel. New threads appear there automatically — no manual prompting needed.</p>
+<p>The Email Assistant now checks your inbox on the schedule you set. Each new email appears as its own thread in the Email channel automatically — no manual prompting needed.</p>
 
 <hr>
 
-<h2><span class="section-number">6.</span> Organize with Channels</h2>
+<h2><span class="section-number">5.</span> Organize with Channels</h2>
 
 <p>As the agent's summaries arrive in the Email channel, you can move threads to project-specific channels to keep things organized.</p>
 
@@ -283,9 +263,11 @@
 
 <h3>Teach the agent to route automatically</h3>
 
-<p>Add routing rules to the agent definition so it proposes moves on its own. Open the <strong>Email Assistant</strong> agent editor, find the Capabilities section, and add a table like this:</p>
+<p>Add routing rules to the agent definition so it proposes moves on its own. Open the <strong>Email Assistant</strong> agent editor and add a new <code>## Routing Rules</code> section at the end of the agent description with a table like this:</p>
 
-<pre><code>| Channel | When to route |
+<pre><code>## Routing Rules
+
+| Channel | When to route |
 |---|---|
 | `Project Zen` | Email is about Project Zen — mentions the project name, related people, or deliverables. |
 | `Approvals` | Email is requesting my approval or sign-off. |</code></pre>
@@ -294,15 +276,16 @@
 
 <hr>
 
-<h2><span class="section-number">7.</span> Bulk Actions and Auto-Approval</h2>
+<h2><span class="section-number">6.</span> Bulk Actions and Auto-Approval</h2>
 
 <p>Once routing rules are in place and a few emails have arrived, you can review and approve proposed actions in bulk.</p>
 
 <h3>Group by tool name</h3>
 
 <ol>
-  <li>In the Email channel, click the <strong>Filter &amp; Group</strong> controls above the message list.</li>
-  <li>Set <strong>Group by</strong> to <strong>Tool Name</strong>.</li>
+  <li>In the Email channel, move your cursor toward the top of the message list — a <strong>Filter &amp; Group</strong> control bar slides down from the top edge. Click it to expand the options.</li>
+  <li>Set <strong>Group by</strong> to <strong>Tool</strong>.</li>
+  <li>Set <strong>Filter</strong> to <strong>Move Thread</strong>.</li>
   <li>All "Move Thread" proposals appear together under a single group header.</li>
 </ol>
 
@@ -316,68 +299,75 @@
 
 <h3>Set up auto-approval</h3>
 
-<p>Once you're confident a routing rule is correct, you can stop seeing approval cards for it entirely:</p>
+<p>Once you're confident a routing rule is correct, you can stop seeing approval cards for it entirely. To get a fresh card to work with, send yourself a test email that will trigger the rule — for example, an email mentioning "Project Zen". When the approval card appears:</p>
 
 <ol>
-  <li>Open <strong>Settings</strong> &rarr; <strong>Tool Approval Rules</strong> and click <strong>Add Rule</strong>.</li>
-  <li>Configure:
-    <ul>
-      <li><strong>Tool name</strong>: <code>move-thread</code></li>
-      <li><strong>Condition</strong>: Target contains "Project Zen"</li>
-      <li><strong>Action</strong>: Auto-approve</li>
-    </ul>
-  </li>
-  <li>Save the rule.</li>
+  <li>Find the <strong>Move Thread</strong> approval card for the channel you want to auto-approve.</li>
+  <li>Open the dropdown on the card and choose <strong>Auto-approve</strong>.</li>
+  <li>Prosponsive creates the rule for you — no manual configuration needed.</li>
 </ol>
 
 <p>Future Project Zen routing happens silently. You only see a card for channels you haven't auto-approved yet, or when the agent is unsure about a match.</p>
 
 <hr>
 
-<h2><span class="section-number">8.</span> Add Delete Rules</h2>
+<h2><span class="section-number">7.</span> Add Trash Rules</h2>
 
-<p>The Email Assistant ships without deletion capabilities — you add them when you're ready. This is a safety measure: you control exactly when the agent can delete.</p>
+<p>To move emails to trash on your mail server, you'll install the <strong>Email Move To Folder</strong> tool — a separate n8n workflow that issues IMAP move commands. Once it's installed, you teach the agent which folder is your trash and when to use it.</p>
 
-<h3>Step 1: Enable the delete workflow in n8n</h3>
-
-<ol>
-  <li>In n8n, open <strong>Workflows</strong> and find <strong>"email-delete"</strong>.</li>
-  <li>Click the IMAP node and set the same IMAP credential from Section 4.</li>
-  <li>Save and <strong>Activate</strong> the workflow.</li>
-</ol>
-
-<h3>Step 2: Add the tool to the agent</h3>
+<h3>Step 1: Import and activate the Email Move To Folder workflow</h3>
 
 <ol>
-  <li>In the Email Assistant agent editor, click <strong>Add Tool</strong>.</li>
-  <li>Under Workflows, find <strong>email-delete</strong> and add it.</li>
+  <li>Click the <strong>n8n</strong> tab in the sidebar and open <strong>Workflows</strong>.</li>
+  <li>Click the orange <strong>Create workflow</strong> button, then click the <strong>⋯</strong> menu in the top-right corner of the canvas and select <strong>Import from file</strong>. Select <code>email-move-to-folder.json</code> from the <strong>Tools</strong> folder inside your Prosponsive project directory.</li>
+  <li>Double-click the <strong>IMAP Move Email</strong> node and set the same IMAP credential you created in Section 3.</li>
+  <li>Click <strong>Publish</strong> to activate the workflow.</li>
+  <li>Back in Prosponsive, open the <strong>Email Assistant</strong> agent editor and click <strong>Add Tool</strong>. Under <strong>Workflows</strong>, find <strong>Email Move To Folder</strong> and add it. If you don't see it, click the refresh button at the top-right of the tool catalog.</li>
 </ol>
 
-<h3>Step 3: Add delete rules to the agent definition</h3>
+<h3>Step 2: Find your trash folder name</h3>
 
-<p>In the <strong>Capabilities</strong> section of the agent, add:</p>
+<p>The trash folder name varies by provider:</p>
 
-<pre><code>- **CRITICAL: Evaluate delete rules BEFORE routing rules.** If a delete rule matches, delete immediately — do not evaluate routing rules.
-- Apply these delete rules when deciding `email_delete` actions:
-  - **Thread participation override**: NEVER delete if the thread contains a previous reply from me. If I have participated in the thread, skip all delete rules.
-  - **Unsubscribe signals**: Delete when the HTML body contains any unsubscribe, manage preferences, or opt-out link.
-  - **Marketing / promotional content**: Delete bulk marketing — product recommendations, promotional offers, newsletters, "shop now" calls-to-action.
-  - **Cold sales solicitation**: Delete unsolicited outreach attempting to sell a product or service — no prior relationship, generic pitch, book-a-demo CTA.</code></pre>
+<table>
+  <thead>
+    <tr><th>Provider</th><th>Trash folder name</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Gmail</td><td><code>[Gmail]/Trash</code></td></tr>
+    <tr><td>Outlook / Microsoft 365</td><td><code>Deleted Items</code></td></tr>
+    <tr><td>iCloud</td><td><code>Deleted Messages</code></td></tr>
+    <tr><td>Other</td><td><code>Trash</code> (most providers)</td></tr>
+  </tbody>
+</table>
 
-<p>In the <strong>Tool Parameter Sourcing</strong> section, add:</p>
+<h3>Step 3: Add trash rules to the agent definition</h3>
 
-<pre><code>When calling `email_delete`, provide these parameters:
+<p>Open the <strong>Email Assistant</strong> agent editor and add a new <code>## Trash Rules</code> section at the end of the agent description:</p>
+
+<pre><code>## Trash Rules
+
+- **CRITICAL: Evaluate trash rules BEFORE routing rules.** If a trash rule matches, move to trash immediately — do not evaluate routing rules.
+- Apply these trash rules when deciding `email_move_to_folder` trash actions:
+  - **Thread participation override**: NEVER trash if the thread contains a previous reply from me. If I have participated in the thread, skip all trash rules.
+  - **Unsubscribe signals**: Trash when the HTML body contains any unsubscribe, manage preferences, or opt-out link.
+  - **Marketing / promotional content**: Trash bulk marketing — product recommendations, promotional offers, newsletters, "shop now" calls-to-action.
+  - **Cold sales solicitation**: Trash unsolicited outreach attempting to sell a product or service — no prior relationship, generic pitch, book-a-demo CTA.</code></pre>
+
+<p>In the <strong>Tool Parameter Guidance</strong> section, add:</p>
+
+<pre><code>When calling `email_move_to_folder` to trash an email, provide these parameters:
+- **folderName**: The trash folder for this account (e.g. `[Gmail]/Trash`, `Deleted Items`, `Deleted Messages`, or `Trash`)
 - **uid**: The numeric IMAP UID from the Request Context (always a plain integer, never a UUID)
-- **mailbox**: From the Request Context (default to `INBOX` if missing)
-- **reason**: One-line justification (e.g., "Marketing newsletter with unsubscribe link")</code></pre>
+- **mailbox**: From the Request Context (default to `INBOX` if missing)</code></pre>
 
-<p>In the <strong>Guardrails</strong> section, update the evaluation order:</p>
+<p>In the <strong>Guardrails</strong> section, add:</p>
 
-<pre><code>- First evaluate delete rules. If a match, call `email_delete`. Then evaluate channel routing rules. If a match, call `move-thread`. If no rules match and no action needed, summarize and ask me.</code></pre>
+<pre><code>- First evaluate trash rules. If a match, call `email_move_to_folder` with the trash folder. Then evaluate channel routing rules. If a match, call `move-thread`. If no rules match and no action needed, summarize and ask me.</code></pre>
 
 <h3>Test it</h3>
 
-<p>Wait for a marketing email or newsletter to arrive. The Email Assistant will propose an <code>email_delete</code> card with a reason like "Marketing newsletter with unsubscribe link." Approve it and the email moves to trash on your mail server.</p>
+<p>Wait for a marketing email or newsletter to arrive. The Email Assistant will propose an <code>email_move_to_folder</code> card targeting your trash folder with a reason. Approve it and the email moves to trash on your mail server — recoverable any time from your email client.</p>
 
 <hr>
 
