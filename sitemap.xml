@@ -32,6 +32,12 @@
   </url>
 
   <url>
+    <loc>https://prosponsive.ai/guides/feedback.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>https://prosponsive.ai/guides/email-assistant-example.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -110,13 +116,13 @@
   </url>
 
   <url>
-    <loc>https://prosponsive.ai/privacy/</loc>
+    <loc>https://prosponsive.ai/privacy/2026-04-24/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://prosponsive.ai/terms/</loc>
+    <loc>https://prosponsive.ai/terms/2026-04-24/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
