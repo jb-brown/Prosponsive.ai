@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prosponsive Security Architecture White Paper</title>
+  <link rel="icon" href="../assets/prosponsive-logo-icon.svg?v=2026-05-04" type="image/svg+xml">
+  <link rel="alternate icon" href="../assets/favicon.ico?v=2026-05-04">
+  <link rel="apple-touch-icon" href="../assets/icon.png?v=2026-05-04">
+  <style>
+  body, .vscode-body, .markdown-body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    color: #1F2321 !important;
+    background-color: #F4F6F4 !important;
+    line-height: 1.6;
+    max-width: 7.5in;
+    margin: 0 auto;
+  }
+  h1 { color: #2F4F3E; font-size: 2em; border-bottom: 3px solid #2F4F3E; padding-bottom: 0.4em; margin-top: 0; }
+  h2 { color: #2F4F3E; font-size: 1.4em; border-bottom: 1px solid #D6DBD7; padding-bottom: 0.3em; margin-top: 2em; page-break-after: avoid; }
+  h3 { color: #3A5F4A; font-size: 1.1em; margin-top: 1.5em; page-break-after: avoid; }
+  a { color: #2F4F3E; text-decoration: underline; }
+  code { background: #E6EAE7; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace; }
+  pre { background: #E6EAE7; border-left: 4px solid #2F4F3E; padding: 0.8em 1em; border-radius: 4px; overflow-x: auto; page-break-inside: avoid; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 4px solid #4F6F5C; background: #F4F6F4; margin: 1em 0; padding: 0.6em 1em; border-radius: 0 4px 4px 0; color: #3A5F4A; page-break-inside: avoid; }
+  blockquote p { margin: 0.3em 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.9em; page-break-inside: avoid; }
+  th { background: #2F4F3E; color: white; padding: 0.5em 0.8em; text-align: left; font-weight: 600; }
+  td { padding: 0.5em 0.8em; border-bottom: 1px solid #D6DBD7; }
+  tr:nth-child(even) td { background: #F4F6F4; }
+  strong { color: #2F4F3E; }
+  hr { border: none; border-top: 2px solid #D6DBD7; margin: 2em 0; }
+  li { margin-bottom: 0.3em; }
+  .cover { text-align: center; padding: 2em 0 1em 0; }
+  .cover-wordmark { width: 360px; max-width: 90%; height: auto; display: block; margin: 0 auto; }
+  .footer-wordmark { height: 28px; width: auto; vertical-align: middle; margin-right: 0.4em; }
+  .cover h1 { border-bottom: none; font-size: 2.8em; margin: 0.5em 0 0.1em 0; letter-spacing: 0.02em; }
+  .cover .tagline { color: #5C635F; font-size: 1.2em; font-style: italic; margin-top: 0.3em; }
+  .cover .version { color: #5C635F; font-size: 0.9em; margin-top: 2em; }
+  .tip { background: #E6EAE7; border-left: 4px solid #4F6F5C; padding: 0.6em 1em; border-radius: 0 4px 4px 0; margin: 1em 0; page-break-inside: avoid; }
+  .tip strong { color: #2F4F3E; }
+  .section-number { color: #4F6F5C; font-weight: 400; }
+  .guide-card { background: #E6EAE7; border-left: 4px solid #4F6F5C; padding: 1em 1.2em; border-radius: 0 4px 4px 0; margin: 1.5em 0; }
+  .guide-card h3 { margin-top: 0; }
+  .guide-card p { margin: 0.4em 0; }
+  </style>
+</head>
+<body>
+
+<div style="background:#2F4F3E;color:#F4F6F4;text-align:center;padding:0.5em 1em;font-size:0.85em;letter-spacing:0.03em;">
+  CONFIDENTIAL — Prospective Customer Security Review Only
+</div>
+
+<div class="cover">
+  <img src="../assets/prosponsive-wordmark.svg" alt="Prosponsive" class="cover-wordmark">
+  <div class="tagline">Security Architecture White Paper</div>
+  <div class="version">Version 1.0 · May 2026 · security@prosponsive.ai</div>
+</div>
+
+<div style="background:#E6EAE7;border-left:4px solid #2F4F3E;padding:0.8em 1.2em;border-radius:0 4px 4px 0;margin:1.5em 0;font-size:0.9em;">
+  <strong>Company:</strong> Prosponsive, Inc. — <a href="https://prosponsive.ai">prosponsive.ai</a><br>
+  <strong>Document Classification:</strong> Confidential — Prospective Customer Security Review Only<br>
+  <strong>Version:</strong> 1.0<br>
+  <strong>Last Updated:</strong> May 2026<br>
+  <strong>Contact:</strong> <a href="mailto:security@prosponsive.ai">security@prosponsive.ai</a>
+</div>
+
+<hr>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="#executive-summary">Executive Summary</a></li>
+  <li><a href="#architecture-overview">Architecture Overview</a></li>
+  <li><a href="#defense-in-depth-model">Defense-in-Depth Model</a></li>
+  <li><a href="#encryption-in-transit">Encryption in Transit</a></li>
+  <li><a href="#encryption-at-rest">Encryption at Rest</a></li>
+  <li><a href="#secret-management">Secret Management</a></li>
+  <li><a href="#authentication-and-authorization">Authentication and Authorization</a></li>
+  <li><a href="#network-security">Network Security</a></li>
+  <li><a href="#container-security">Container Security</a></li>
+  <li><a href="#application-security-electron">Application Security (Electron)</a></li>
+  <li><a href="#input-validation-and-injection-prevention">Input Validation and Injection Prevention</a></li>
+  <li><a href="#code-signing-and-distribution">Code Signing and Distribution</a></li>
+  <li><a href="#auto-update-security">Auto-Update Security</a></li>
+  <li><a href="#data-privacy-and-logging">Data Privacy and Logging</a></li>
+  <li><a href="#feedback-system">Feedback System</a></li>
+  <li><a href="#supply-chain-security">Supply Chain Security</a></li>
+  <li><a href="#fips-140-2140-3-posture">FIPS 140-2/140-3 Posture</a></li>
+  <li><a href="#sanctions-and-trade-compliance">Sanctions and Trade Compliance</a></li>
+  <li><a href="#known-limitations-and-mitigations">Known Limitations and Mitigations</a></li>
+  <li><a href="#sub-processors">Sub-processors</a></li>
+</ol>
+
+<hr>
+
+<h2 id="executive-summary">Executive Summary</h2>
+
+<p>Prosponsive is a desktop application built on Electron that orchestrates AI-powered workflows through a local n8n automation engine backed by PostgreSQL. All components run locally on the user's machine — no customer data leaves the device unless the user explicitly configures an external integration.</p>
+
+<p>This document describes the security architecture and controls implemented across every layer of the application. Prosponsive follows a defense-in-depth strategy: no single control is relied upon in isolation, and multiple overlapping protections exist at the network, transport, storage, application, and OS levels.</p>
+
+<p><strong>Key security properties:</strong></p>
+
+<ul>
+  <li>All inter-component communication is encrypted via TLS with a locally generated Certificate Authority</li>
+  <li>All secrets (database passwords, API tokens, encryption keys) are generated with cryptographic randomness, stored with restrictive file permissions, and never logged</li>
+  <li>Application credentials are encrypted at rest with AES-256-GCM</li>
+  <li>Container images are pinned by SHA-256 manifest digest</li>
+  <li>macOS: Hardened Runtime with Apple notarization; Windows: Azure Trusted Signing (EV-equivalent)</li>
+  <li>Auto-updates are verified via SHA-512 checksum and code signature before installation</li>
+  <li>Strict Content Security Policy, context isolation, and IPC channel allowlisting follow Electron security best practices</li>
+  <li>All database access uses parameterized queries; all user-facing content is sanitized against XSS</li>
+</ul>
+
+<hr>
+
+<h2 id="architecture-overview">Architecture Overview</h2>
+
+<p>Prosponsive runs entirely on the user's workstation. The deployment consists of:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Technology</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Desktop shell</td>
+      <td>Electron (Chromium + Node.js)</td>
+      <td>UI, lifecycle, IPC</td>
+    </tr>
+    <tr>
+      <td>Automation engine</td>
+      <td>n8n (containerized)</td>
+      <td>Workflow execution</td>
+    </tr>
+    <tr>
+      <td>Database</td>
+      <td>PostgreSQL 15 (containerized)</td>
+      <td>Persistent storage</td>
+    </tr>
+    <tr>
+      <td>Container runtime</td>
+      <td>Podman or Docker Desktop</td>
+      <td>Container orchestration</td>
+    </tr>
+    <tr>
+      <td>Local API server</td>
+      <td>Node.js HTTPS server</td>
+      <td>Inter-component communication</td>
+    </tr>
+    <tr>
+      <td>Renderer server</td>
+      <td>Node.js HTTPS server</td>
+      <td>Serves renderer assets; receives Clerk OAuth authorization codes over encrypted loopback</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>All containers bind exclusively to <code>127.0.0.1</code> — no service is reachable from the network. The Electron app, n8n, and PostgreSQL communicate over localhost using TLS with mutual certificate validation.</p>
+
+<div class="tip"><strong>Architecture diagram:</strong> All components run on localhost only. The Electron app (main process HTTPS API :3100 + renderer) communicates with n8n (:5678) and PostgreSQL (:5432) over TLS. n8n and PostgreSQL share a private container network; all host-to-container port mappings bind exclusively to 127.0.0.1.</div>
+
+<blockquote>
+  <p><strong>Network isolation:</strong> The n8n and PostgreSQL containers share a private container network (<code>prosponsive-network</code>) that is not routable from the host or LAN. The n8n-to-PostgreSQL connection stays entirely within the container network. Host-to-container connections traverse mapped ports bound to <code>127.0.0.1</code>. The n8n container reaches the host API server via <code>host.containers.internal</code> (container-to-host gateway).</p>
+  <p><strong>Database isolation:</strong> <code>CONNECT</code> is revoked from <code>PUBLIC</code> on the <code>prosponsive</code> database. The <code>n8n</code> user can only access the <code>n8n</code> database; the <code>prosponsive</code> user can only access the <code>prosponsive</code> database. Each authenticates with independently generated SCRAM-SHA-256 credentials. A catch-all <code>reject</code> rule in <code>pg_hba.conf</code> denies any connection not explicitly permitted.</p>
+</blockquote>
+
+<hr>
+
+<h2 id="defense-in-depth-model">Defense-in-Depth Model</h2>
+
+<p>Security controls are layered so that compromise of any single layer does not expose customer data:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Layer</th>
+      <th>Controls</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>OS / Disk</strong></td>
+      <td>FileVault (macOS, default), BitLocker (Windows Pro/Enterprise), file permissions (0600/0700)</td>
+    </tr>
+    <tr>
+      <td><strong>Network</strong></td>
+      <td>Localhost-only binding, DNS rebinding protection, Host header allowlisting, container network isolation</td>
+    </tr>
+    <tr>
+      <td><strong>Transport</strong></td>
+      <td>TLS 1.2+ with local CA, SCRAM-SHA-256 database authentication, certificate pinning for n8n API</td>
+    </tr>
+    <tr>
+      <td><strong>Storage</strong></td>
+      <td>AES-256-GCM encrypted credential storage, n8n credential encryption via dedicated key, restricted file permissions on all secrets</td>
+    </tr>
+    <tr>
+      <td><strong>Application</strong></td>
+      <td>Context isolation, Content Security Policy, parameterized SQL, HTML sanitization, protocol allowlisting, IPC channel restriction, IPC allowlist validation (tier, version string, tool name)</td>
+    </tr>
+    <tr>
+      <td><strong>Cloud API</strong></td>
+      <td>AWS WAF (managed ruleset + body-size enforcement), Lambda-layer input validation, server-side legal gate, single-flight token refresh</td>
+    </tr>
+    <tr>
+      <td><strong>Distribution</strong></td>
+      <td>Code-signed binaries (Apple notarization + Azure Trusted Signing), SHA-512 verified auto-updates, SHA-256 pinned container images</td>
+    </tr>
+    <tr>
+      <td><strong>Data Lifecycle</strong></td>
+      <td>Soft-delete with configurable hard-delete sweep (30–3,650 days), system-initiated thread-inactivity archiving (default: 60 days) feeding the same hard-delete lifecycle, read-path enforcement on all deleted records</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2 id="encryption-in-transit">Encryption in Transit</h2>
+
+<h3>Local Certificate Authority</h3>
+
+<p>Prosponsive generates a private Certificate Authority on first launch. This CA issues TLS certificates used for all local inter-component communication.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Artifact</th>
+      <th>Key Size</th>
+      <th>Signature</th>
+      <th>Validity</th>
+      <th>File Permission</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CA private key</td>
+      <td>RSA 4096-bit</td>
+      <td>—</td>
+      <td>—</td>
+      <td><code>0600</code> (owner read/write only)</td>
+    </tr>
+    <tr>
+      <td>CA certificate</td>
+      <td>—</td>
+      <td>SHA-256</td>
+      <td>3650 days</td>
+      <td><code>0644</code></td>
+    </tr>
+    <tr>
+      <td>Server private key</td>
+      <td>RSA 2048-bit</td>
+      <td>—</td>
+      <td>—</td>
+      <td><code>0600</code></td>
+    </tr>
+    <tr>
+      <td>Server certificate</td>
+      <td>—</td>
+      <td>SHA-256</td>
+      <td>825 days</td>
+      <td><code>0644</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The server certificate contains Subject Alternative Names for <code>localhost</code>, <code>127.0.0.1</code>, <code>host.containers.internal</code>, and <code>host.docker.internal</code>, covering all supported connection paths.</p>
+
+<p>Temporary files generated during certificate signing (CSR, CNF, serial) are deleted immediately after use.</p>
+
+<h3>CA Trust Installation</h3>
+
+<p>The local CA is installed into the operating system's trust store so that all TLS clients (Chromium, Node.js, container processes) validate the certificate chain without bypass:</p>
+
+<ul>
+  <li><strong>macOS:</strong> Installed into the user's login keychain via <code>security add-trusted-cert</code>. No administrator elevation is required for user-domain trust. The trust cache is refreshed immediately after installation.</li>
+  <li><strong>Windows:</strong> Installed into the Root certificate store via <code>certutil -addstore</code> with UAC elevation.</li>
+</ul>
+
+<p>Duplicate CA entries are detected and cleaned up by SHA-1 fingerprint before reinstallation, preventing keychain accumulation across app updates.</p>
+
+<h3>TLS Enforcement</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Connection</th>
+      <th>TLS Enforced</th>
+      <th>Verification</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Electron UI to n8n</td>
+      <td>Yes</td>
+      <td>Local CA pinned via <code>setCertificateVerifyProc</code> — verifies issuer and cryptographic chain</td>
+    </tr>
+    <tr>
+      <td>Electron to PostgreSQL</td>
+      <td>Yes</td>
+      <td><code>rejectUnauthorized: true</code> with explicit CA certificate</td>
+    </tr>
+    <tr>
+      <td>n8n to PostgreSQL</td>
+      <td>Yes</td>
+      <td>SSL enforced by PostgreSQL server configuration</td>
+    </tr>
+    <tr>
+      <td>Electron to local API server</td>
+      <td>Yes</td>
+      <td>HTTPS-only; server will not start without valid certificates</td>
+    </tr>
+    <tr>
+      <td>Renderer server</td>
+      <td>Yes</td>
+      <td>HTTPS-only with FIPS cipher allowlist (TLS 1.2+, AES-GCM); serves renderer assets and receives Clerk authorization codes exclusively over encrypted loopback</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>No certificate error bypass exists.</strong> The <code>certificate-error</code> event handler is absent; Chromium's default strict chain validation applies.</p>
+
+<h3>Zscaler TLS Inspection Proxy Compatibility</h3>
+
+<p>Many enterprise environments route outbound HTTPS traffic through Zscaler Internet Access, which terminates and re-signs TLS connections using a Zscaler Root CA pre-installed on managed endpoints. Applications that do not trust the Zscaler CA will fail with certificate validation errors — a common deployment blocker for security-conscious tools that enforce strict TLS.</p>
+
+<p>Prosponsive supports two container runtimes — Podman and Docker Desktop — and handles Zscaler differently for each:</p>
+
+<p><strong>Docker Desktop</strong> manages its own TLS trust chain and inherits the host's trusted CA certificates automatically. No additional configuration is needed — Zscaler works out of the box.</p>
+
+<p><strong>Podman</strong> runs containers inside a lightweight virtual machine (macOS) or WSL2 distribution (Windows) that has its own, separate trust store. The host's Zscaler CA is not automatically available inside the VM. Prosponsive bridges this gap:</p>
+
+<ol>
+  <li><strong>Detection:</strong> On startup, the application checks for the presence of Zscaler certificates by name. On macOS this searches the System keychain for certificates matching "Zscaler" (<code>security find-certificate -c "Zscaler"</code>); on Windows it queries the <code>LocalMachine\Root</code> certificate store for subjects matching "Zscaler". This is a targeted lookup for a known certificate name — the application does not enumerate or scan the trust store.</li>
+  <li><strong>Propagation:</strong> When a Zscaler CA is found, its PEM-encoded certificate is exported and installed into the Podman VM's trust store (<code>/etc/pki/ca-trust/source/anchors/</code>) via <code>podman machine ssh</code>. The VM's trust bundle is then rebuilt (<code>update-ca-trust extract</code>), making the Zscaler CA trusted by all containers.</li>
+  <li><strong>No bypass:</strong> At no point is certificate verification disabled. The Zscaler CA is added to the VM's trust chain as a legitimate root — the same approach an IT department would use when configuring any server. All TLS validation remains strict.</li>
+  <li><strong>Health monitoring:</strong> TLS connectivity is checked on a health-check cycle with a 10-minute TTL cache. If the Podman VM's clock drifts after sleep/hibernate (a common cause of spurious certificate "not yet valid" errors), the health check corrects the VM clock before re-evaluating TLS.</li>
+  <li><strong>Cleanup:</strong> Temporary certificate files created during the export/install process are deleted in a <code>finally</code> block regardless of success or failure.</li>
+  <li><strong>Caching:</strong> The Zscaler detection result is cached for the duration of the application session to avoid repeated keychain queries, which on macOS Sequoia can trigger an "access data from other apps" prompt.</li>
+</ol>
+
+<p><strong>Result:</strong> Prosponsive works out of the box behind Zscaler on both container runtimes with zero manual configuration. IT teams do not need to add exceptions, bypass rules, or custom proxy settings.</p>
+
+<p><strong>Scope:</strong> Zscaler is the only TLS inspection proxy currently supported with automatic detection. Organizations using other inspection proxies (Palo Alto, Fortinet, etc.) should contact Prosponsive support for assistance.</p>
+
+<hr>
+
+<h2 id="encryption-at-rest">Encryption at Rest</h2>
+
+<h3>Application Credential Encryption</h3>
+
+<p>All sensitive application values — including API tokens and service credentials — are encrypted before being written to disk using an AES-256-GCM encrypted storage layer:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Algorithm</td>
+      <td>AES-256-GCM</td>
+    </tr>
+    <tr>
+      <td>Key size</td>
+      <td>256 bits</td>
+    </tr>
+    <tr>
+      <td>IV</td>
+      <td>96 bits (random per encryption)</td>
+    </tr>
+    <tr>
+      <td>Authentication tag</td>
+      <td>128 bits</td>
+    </tr>
+    <tr>
+      <td>Storage format</td>
+      <td>Base64-encoded: <code>IV ‖ AuthTag ‖ Ciphertext</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The master encryption key is a 256-bit key generated by <code>crypto.randomBytes(32)</code> and stored at <code>~/.prosponsive/encryption-key</code> with file permission <code>0600</code>. The storage directory itself is created with permission <code>0700</code>.</p>
+
+<p>On decryption failure (key mismatch, corruption, or format error), the stale encrypted file is deleted rather than returning potentially corrupt data. Legacy plaintext files discovered during retrieval are automatically migrated to encrypted form.</p>
+
+<h3>n8n Workflow Credential Encryption</h3>
+
+<p>n8n stores workflow credentials (API keys, OAuth tokens, database passwords configured by the user within workflows) encrypted in PostgreSQL using a dedicated 256-bit encryption key (<code>N8N_ENCRYPTION_KEY</code>). This key is generated by Prosponsive using <code>crypto.randomBytes(32)</code> and injected into the n8n container at startup. Without this key, n8n cannot decrypt stored workflow credentials.</p>
+
+<h3>Database Data-at-Rest</h3>
+
+<p>PostgreSQL data files reside in a named container volume (<code>prosponsive-db-data</code>). The database engine does not apply its own encryption to data files. Data-at-rest protection relies on OS-level full-disk encryption:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Platform</th>
+      <th>Coverage</th>
+      <th>Default State</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>macOS</strong></td>
+      <td>FileVault (full-disk AES-XTS)</td>
+      <td>Enabled by default on all modern Macs</td>
+    </tr>
+    <tr>
+      <td><strong>Windows Pro/Enterprise</strong></td>
+      <td>BitLocker</td>
+      <td>Available; may require user enablement</td>
+    </tr>
+    <tr>
+      <td><strong>Windows Home</strong></td>
+      <td>Device Encryption</td>
+      <td>Available on supported hardware (TPM 2.0 + UEFI Secure Boot); coverage varies</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Organizations are advised to ensure OS-level disk encryption is enabled on endpoints running Prosponsive to meet compliance requirements.</p>
+
+<h3>File Permission Hardening</h3>
+
+<p>All sensitive files are created with restrictive Unix permissions, regardless of the user's umask:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Resource</th>
+      <th>Permission</th>
+      <th>Effect</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>~/.prosponsive/</code> (state directory)</td>
+      <td><code>0700</code></td>
+      <td>Owner-only access</td>
+    </tr>
+    <tr>
+      <td><code>~/.prosponsive/secrets/</code></td>
+      <td><code>0700</code></td>
+      <td>Owner-only access</td>
+    </tr>
+    <tr>
+      <td>All password/key files</td>
+      <td><code>0600</code></td>
+      <td>Owner read/write only</td>
+    </tr>
+    <tr>
+      <td>Encryption key</td>
+      <td><code>0600</code></td>
+      <td>Owner read/write only</td>
+    </tr>
+    <tr>
+      <td>SSL private keys</td>
+      <td><code>0600</code></td>
+      <td>Owner read/write only</td>
+    </tr>
+    <tr>
+      <td>Log files</td>
+      <td><code>0600</code></td>
+      <td>Owner read/write only</td>
+    </tr>
+    <tr>
+      <td>Log directory</td>
+      <td><code>0700</code></td>
+      <td>Owner-only access</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2 id="secret-management">Secret Management</h2>
+
+<h3>Key and Password Generation</h3>
+
+<p>All cryptographic material is generated using Node.js <code>crypto.randomBytes()</code>, which is backed by the operating system's CSPRNG (<code>/dev/urandom</code> on macOS, <code>BCryptGenRandom</code> on Windows).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Secret</th>
+      <th>Length</th>
+      <th>Entropy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>PostgreSQL passwords</td>
+      <td>32 alphanumeric characters</td>
+      <td>~190 bits (62^32)</td>
+    </tr>
+    <tr>
+      <td>n8n encryption key</td>
+      <td>32 bytes (64 hex chars)</td>
+      <td>256 bits</td>
+    </tr>
+    <tr>
+      <td>SecureStorage master key</td>
+      <td>32 bytes (64 hex chars)</td>
+      <td>256 bits</td>
+    </tr>
+    <tr>
+      <td>AES-256-GCM IVs</td>
+      <td>12 bytes per encryption</td>
+      <td>96 bits</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Secret Storage</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Secret</th>
+      <th>Storage Location</th>
+      <th>Permission</th>
+      <th>Encrypted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>n8n PostgreSQL password</td>
+      <td><code>~/.prosponsive/secrets/pg-password</code></td>
+      <td><code>0600</code></td>
+      <td>No (protected by file permissions + FDE)</td>
+    </tr>
+    <tr>
+      <td>App PostgreSQL password</td>
+      <td><code>~/.prosponsive/secrets/app-pg-password</code></td>
+      <td><code>0600</code></td>
+      <td>No (protected by file permissions + FDE)</td>
+    </tr>
+    <tr>
+      <td>n8n encryption key</td>
+      <td><code>~/.prosponsive/secrets/n8n-encryption-key</code></td>
+      <td><code>0600</code></td>
+      <td>No (protected by file permissions + FDE)</td>
+    </tr>
+    <tr>
+      <td>Master encryption key</td>
+      <td><code>~/.prosponsive/encryption-key</code></td>
+      <td><code>0600</code></td>
+      <td>No (root key — protects other secrets)</td>
+    </tr>
+    <tr>
+      <td>n8n API token</td>
+      <td><code>~/.prosponsive/n8n-api-token.enc</code></td>
+      <td><code>0600</code></td>
+      <td>Yes (AES-256-GCM)</td>
+    </tr>
+    <tr>
+      <td>SSL CA private key</td>
+      <td><code>~/.prosponsive/ssl/local-ca.key</code></td>
+      <td><code>0600</code></td>
+      <td>No (protected by file permissions + FDE)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Secret Storage Model</h3>
+
+<p>Prosponsive uses a split storage model: infrastructure secrets (database passwords, the n8n encryption key) are stored as restricted files (<code>0600</code>) rather than in the OS keychain, because OS keychains trigger interactive password prompts on each application launch in many configurations. File-based storage with restrictive permissions and optional full-disk encryption provides equivalent protection without UX friction for these machine-local infrastructure credentials. The local API bearer token is stored via the AES-256-GCM encrypted storage layer described in the Encryption at Rest section.</p>
+
+<p>Authentication material (Clerk access tokens and refresh tokens) is stored in the OS keychain (<code>keytar</code> on macOS and Windows) because these credentials require revocation awareness and are managed by an external identity provider. Keychain storage for auth tokens provides OS-enforced access control without additional file-permission management.</p>
+
+<h3>Secret Lifecycle</h3>
+
+<ul>
+  <li><strong>Generation:</strong> Automatic on first launch; each secret is generated independently.</li>
+  <li><strong>Rotation:</strong> Manual. Credential files can be deleted; the application regenerates fresh credentials and reinitializes the database volume on next launch.</li>
+  <li><strong>Recovery:</strong> A credential mismatch repair flow detects when the database volume and secret files are out of sync (e.g., after partial restore) and offers an automated recovery path.</li>
+</ul>
+
+<hr>
+
+<h2 id="authentication-and-authorization">Authentication and Authorization</h2>
+
+<h3>PostgreSQL Authentication</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Control</th>
+      <th>Implementation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Authentication method</td>
+      <td>SCRAM-SHA-256 (all connections)</td>
+    </tr>
+    <tr>
+      <td>Password hashing</td>
+      <td>Server-side <code>password_encryption = scram-sha-256</code></td>
+    </tr>
+    <tr>
+      <td>initdb defaults</td>
+      <td><code>--auth-host=scram-sha-256 --auth-local=scram-sha-256</code></td>
+    </tr>
+    <tr>
+      <td>Connection restrictions</td>
+      <td><code>pg_hba.conf</code> with explicit allowlist and catch-all <code>reject</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>pg_hba.conf policy:</strong></p>
+
+<pre><code># TYPE  DATABASE  USER       ADDRESS              METHOD
+local   all       all                             scram-sha-256
+host    all       all        127.0.0.1/32         scram-sha-256
+host    all       all        ::1/128              scram-sha-256
+hostssl all       all        samenet              scram-sha-256
+host    all       all        all                  reject</code></pre>
+
+<p>The final <code>reject</code> rule ensures that any connection not explicitly permitted is denied. No <code>trust</code> or <code>md5</code> authentication is used anywhere.</p>
+
+<h3>Database User Isolation</h3>
+
+<p>Two separate PostgreSQL users are provisioned, each with access to only its own database:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Database</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>n8n</code></td>
+      <td><code>n8n</code></td>
+      <td>n8n workflow engine (superuser for n8n schema management)</td>
+    </tr>
+    <tr>
+      <td><code>prosponsive</code></td>
+      <td><code>prosponsive</code></td>
+      <td>Application data (conversations, messages, tasks)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The <code>prosponsive</code> database has <code>CONNECT</code> revoked from <code>PUBLIC</code> — only the <code>prosponsive</code> user is explicitly granted connection access. The <code>n8n</code> user cannot connect to the <code>prosponsive</code> database and vice versa.</p>
+
+<p>Password injection into the database init script uses PostgreSQL's parameterized variable binding (<code>psql -v pw="$PASSWORD"</code> with <code>:'pw'</code>), preventing SQL injection during provisioning.</p>
+
+<h3>n8n API Authentication</h3>
+
+<p>Communication between the Electron application and the n8n automation engine is authenticated via an API key. This key is stored in Prosponsive's AES-256-GCM encrypted storage and is never written to logs.</p>
+
+<h3>Local API Server Authentication</h3>
+
+<p>The local HTTPS API server is protected by a per-session bearer token. A 256-bit token is generated on first launch, stored in Prosponsive's AES-256-GCM encrypted storage, and automatically seeded into n8n as the "Prosponsive Internal API" credential — providing a single source of truth with no manual workflow configuration required. Every inbound request must present this token in the <code>Authorization</code> header; the server performs a constant-time comparison to prevent timing-based token inference. The server is fail-closed: if the token cannot be loaded or generated at startup, the server refuses to start. Unauthenticated requests receive an opaque <code>401</code> response with no hint about which check failed. The sole exemption is <code>GET /api/health</code>, which is unauthenticated to support dependency health monitoring.</p>
+
+<h3>Legal Acceptance Gate</h3>
+
+<p>Prosponsive enforces legal document acceptance (Terms of Service, Privacy Policy) as a server-side gate at the Lambda layer, prior to any business logic. Acceptance is checked on every commerce and synchronization API call; requests from users with missing or stale acceptance records are rejected with HTTP 451.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Control</th>
+      <th>Implementation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Enforcement point</td>
+      <td>Lambda boundary — evaluated before any business logic executes</td>
+    </tr>
+    <tr>
+      <td>Required-version authority</td>
+      <td>DynamoDB <code>legal-config</code> table — not a client-accessible configuration file</td>
+    </tr>
+    <tr>
+      <td>Failure mode</td>
+      <td>Fail-closed: missing or malformed configuration returns HTTP 500</td>
+    </tr>
+    <tr>
+      <td>Version format</td>
+      <td>ISO 8601 datetime strings (<code>YYYY-MM-DDTHH:mm:ssZ</code>), enabling same-day hotfix versioning</td>
+    </tr>
+    <tr>
+      <td>Client bypass</td>
+      <td>Not possible — acceptance is verified against the authoritative server record on every request</td>
+    </tr>
+    <tr>
+      <td>MITM attack surface</td>
+      <td>Required version strings are read from DynamoDB on each invocation and are not available at any client-reachable configuration endpoint</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The legal-acceptance record is stored per-user in DynamoDB. Accepted versions are compared against the required set on each request; stale or missing acceptances halt the request with HTTP 451 (Unavailable For Legal Reasons) and return the list of documents requiring re-acceptance.</p>
+
+<h3>Cloud Session Lifecycle</h3>
+
+<p>Authentication tokens from Clerk are short-lived JWT access tokens backed by longer-lived refresh tokens stored in the OS keychain. The session lifecycle enforces the following properties:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Control</th>
+      <th>Implementation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Revocation detection</td>
+      <td>Token refresh failures with 4xx responses from Clerk are treated as revocation signals. In-memory session state is cleared and the keychain cache entry is deleted immediately.</td>
+    </tr>
+    <tr>
+      <td>Atomic persistence</td>
+      <td>User identity and access token are written to the keychain before being set in memory, ensuring an in-memory user always has a corresponding keychain entry.</td>
+    </tr>
+    <tr>
+      <td>Persistence failure surfacing</td>
+      <td>Keychain write failures during token rotation are surfaced to the caller rather than silently ignored.</td>
+    </tr>
+    <tr>
+      <td>Single-flight refresh coalescing</td>
+      <td>Concurrent 403 responses from the commerce API trigger a single coordinated token refresh; racing refreshes are not possible.</td>
+    </tr>
+    <tr>
+      <td>Required identity claim</td>
+      <td>The Clerk userinfo endpoint must return a <code>sub</code> claim. An absent or empty <code>sub</code> claim is treated as an authentication failure — there is no fallback to an empty-string user identifier.</td>
+    </tr>
+    <tr>
+      <td>Concurrent OAuth prevention</td>
+      <td>A new sign-in attempt supersedes any in-flight OAuth flow. Two concurrent OAuth authorization codes cannot race.</td>
+    </tr>
+    <tr>
+      <td>Session restoration</td>
+      <td>On startup, cached credentials are restored and a background token refresh is scheduled to ensure the access token is fresh before the first commerce Lambda call.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2 id="network-security">Network Security</h2>
+
+<h3>Localhost-Only Binding</h3>
+
+<p>Every service that accepts connections is explicitly bound to <code>127.0.0.1</code>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Service</th>
+      <th>Bind Address</th>
+      <th>Port</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>n8n (HTTPS)</td>
+      <td><code>127.0.0.1</code></td>
+      <td>5678</td>
+    </tr>
+    <tr>
+      <td>PostgreSQL</td>
+      <td><code>127.0.0.1</code></td>
+      <td>5432</td>
+    </tr>
+    <tr>
+      <td>Local API server (HTTPS)</td>
+      <td><code>127.0.0.1</code></td>
+      <td>3100</td>
+    </tr>
+    <tr>
+      <td>Renderer server (HTTPS)</td>
+      <td><code>127.0.0.1</code></td>
+      <td>21572</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>No service is accessible from the local network, Wi-Fi, or any external interface. n8n also makes TLS-secured webhook callbacks to the local API server for workflow-triggered events.</p>
+
+<h3>DNS Rebinding Protection</h3>
+
+<p>The local API server validates the <code>Host</code> header on every incoming request against an explicit allowlist:</p>
+
+<pre><code>127.0.0.1, localhost, [::1], host.containers.internal, host.docker.internal</code></pre>
+
+<p>Requests with any other hostname are rejected with <code>HTTP 403</code>. This prevents malicious web pages from exploiting DNS rebinding to reach the local API server.</p>
+
+<h3>CORS Origin Restriction</h3>
+
+<p>The local API server enforces a strict CORS policy. Rather than permitting all origins, the server maintains an allowlist of known HTTPS origins built from trusted hostnames and application ports. When a cross-origin request arrives, the server checks the <code>Origin</code> header against this allowlist. If the origin matches, it is reflected in the <code>Access-Control-Allow-Origin</code> response header. If it does not match, no CORS headers are set and the browser blocks the response.</p>
+
+<p>This prevents a malicious website from using JavaScript to read data from the local API — even though the server is reachable on localhost, the browser will not release the response to an unauthorized origin. Combined with DNS rebinding protection, this provides two independent layers of defense against cross-origin attacks.</p>
+
+<p>Only HTTPS origins are permitted. HTTP origins are rejected.</p>
+
+<h3>Request Size Limits</h3>
+
+<p>The local API server enforces a maximum request body size of 1 MB. Oversized requests are immediately destroyed at the socket level and rejected with <code>HTTP 413</code>.</p>
+
+<h3>AWS WAF Enforcement</h3>
+
+<p>Prosponsive's cloud API is protected by AWS WAF with the <code>AWSManagedRulesCommonRuleSet</code> active ruleset. Clients that violate WAF rules receive HTTP 403 from the WAF edge before the request reaches application code, providing an additional layer of abuse resistance independent of application-layer input validation.</p>
+
+<h3>Container Network Isolation</h3>
+
+<p>All containers communicate over a private container network (<code>prosponsive-network</code>). Inter-container traffic (e.g., n8n to PostgreSQL) stays within this network and does not traverse the host's network stack. Port mappings to the host are explicitly declared and bound to <code>127.0.0.1</code>.</p>
+
+<hr>
+
+<h2 id="container-security">Container Security</h2>
+
+<h3>Image Integrity</h3>
+
+<p>Both container images are referenced by <strong>tag and SHA-256 manifest-list digest</strong>:</p>
+
+<pre><code>n8nio/n8n:2.17.2@sha256:4e5be628f9eb05e3fde3cd242c84f6000165c95d...
+postgres:15.17-alpine@sha256:1c52f5ad23db5d7648a63634444af76de48e63b...</code></pre>
+
+<p>This ensures that even if a tag is repointed to a different image on the registry, the application will only pull the exact image that was verified and tested. Updates to these images follow a documented procedure that includes updating both the tag and digest.</p>
+
+<h3>Least Privilege</h3>
+
+<ul>
+  <li>The n8n container runs as the non-root <code>node</code> user (n8n's default). No <code>privileged</code> flag or capability additions (<code>cap_add</code>) are used.</li>
+  <li>The Electron application on Windows requests execution level <code>asInvoker</code> — it does not require or request UAC elevation.</li>
+  <li>Read-only volume mounts are used wherever the container does not need write access: SSL certificates, workflow definitions, custom node modules, and hooks directories are all mounted <code>read_only: true</code>.</li>
+</ul>
+
+<h3>Named Volumes</h3>
+
+<p>PostgreSQL data is stored in a named container volume rather than a host bind mount. This is a deliberate choice: Windows hosts cannot enforce Unix file permissions (<code>chmod</code>/<code>chown</code>) on bind-mounted directories, which PostgreSQL requires for its data directory. Named volumes use the container runtime's native filesystem, preserving permission semantics.</p>
+
+<hr>
+
+<h2 id="application-security-electron">Application Security (Electron)</h2>
+
+<h3>Context Isolation and Node Integration</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Setting</th>
+      <th>Value</th>
+      <th>Effect</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>nodeIntegration</code></td>
+      <td><code>false</code></td>
+      <td>Renderer process has no access to Node.js APIs</td>
+    </tr>
+    <tr>
+      <td><code>contextIsolation</code></td>
+      <td><code>true</code></td>
+      <td>Preload script and renderer JavaScript execute in separate V8 contexts</td>
+    </tr>
+    <tr>
+      <td><code>sandbox</code></td>
+      <td><code>true</code></td>
+      <td>Renderer runs in an OS-level sandboxed process with no filesystem or Node.js access</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>All communication between the renderer and main process flows through <code>contextBridge.exposeInMainWorld()</code>, which exposes only a typed, named set of IPC channels. No raw <code>ipcRenderer.send</code> or <code>ipcRenderer.invoke</code> with arbitrary channel names is available to renderer code.</p>
+
+<h3>Content Security Policy</h3>
+
+<p>A strict Content Security Policy is applied to all pages via <code>session.defaultSession.webRequest.onHeadersReceived</code> before any windows are created:</p>
+
+<pre><code>default-src 'self';
+script-src 'self';
+style-src 'self' 'unsafe-inline';
+img-src 'self' data: blob:;
+font-src 'self' data:;
+connect-src 'self';
+media-src 'self' blob:;
+worker-src 'self' blob:;
+frame-src 'none';
+object-src 'none';
+base-uri 'self';
+form-action 'none';</code></pre>
+
+<p>Notable restrictions:</p>
+
+<ul>
+  <li><strong>No inline scripts, no <code>eval()</code></strong> — <code>script-src 'self'</code> only</li>
+  <li><strong>No iframes</strong> — <code>frame-src 'none'</code></li>
+  <li><strong>No plugins</strong> — <code>object-src 'none'</code></li>
+  <li><strong>No form submissions</strong> — <code>form-action 'none'</code></li>
+</ul>
+
+<h3>Navigation Restrictions</h3>
+
+<ul>
+  <li>Cross-origin navigation from the main window is blocked except for known OAuth provider URLs and the Prosponsive auth domain. The allowlist includes standard OAuth path patterns (<code>/authorize</code>, <code>/oauth/auth</code>), provider domains (Google, Microsoft, GitHub), Clerk (<code>*.clerk.accounts.dev</code> for development, <code>*.clerk.com</code>), Cloudflare challenges, and all <code>*.prosponsive.ai</code> subdomains (production auth via <code>clerk.prosponsive.ai</code>).</li>
+  <li>New window requests are intercepted: OAuth URLs open in the system browser; localhost URLs are permitted; all others are redirected to the system browser via <code>shell.openExternal()</code>.</li>
+  <li><code>shell.openExternal()</code> calls are validated against a protocol allowlist (<code>http:</code>, <code>https:</code>, <code>message:</code>, <code>ms-outlook:</code>). All other protocols (including <code>javascript:</code>, <code>file:</code>, <code>data:</code>) are rejected.</li>
+</ul>
+
+<h3>Single Instance Lock</h3>
+
+<p><code>app.requestSingleInstanceLock()</code> prevents multiple instances from running simultaneously. A second launch attempt focuses the existing window and exits. This prevents race conditions on database ports, container names, and lock files.</p>
+
+<hr>
+
+<h2 id="input-validation-and-injection-prevention">Input Validation and Injection Prevention</h2>
+
+<h3>SQL Injection Prevention</h3>
+
+<p>All database queries use PostgreSQL's native parameter binding (<code>$1</code>, <code>$2</code>, etc.) via the <code>pg</code> library's <code>pool.query(sql, [params])</code> interface. User data and external input are never interpolated into SQL strings. Schema DDL uses fixed strings with no variable components.</p>
+
+<h3>Cross-Site Scripting (XSS) Prevention</h3>
+
+<p>AI-generated content rendered in the UI passes through a sanitization pipeline:</p>
+
+<ol>
+  <li><strong>Markdown parsing</strong> via <code>react-markdown</code></li>
+  <li><strong>HTML sanitization</strong> via <code>rehype-sanitize</code> using the <code>hast-util-sanitize</code> default schema</li>
+  <li><strong>Protocol allowlisting</strong> on hyperlinks (only <code>http:</code>, <code>https:</code>, and <code>message:</code> are permitted in <code>href</code> attributes)</li>
+  <li><strong>No <code>dangerouslySetInnerHTML</code></strong> — all content is rendered through React's controlled rendering pipeline</li>
+</ol>
+
+<h3>Path Traversal Prevention</h3>
+
+<ul>
+  <li>The static file renderer server validates that resolved file paths begin with the expected renderer directory before serving. Requests that escape this directory receive <code>HTTP 403</code>.</li>
+  <li>Storage key names in the encrypted storage layer are validated against <code>/^[a-zA-Z0-9_-]+$/</code>, preventing path traversal via crafted key names.</li>
+</ul>
+
+<h3>IPC Channel Input Validation</h3>
+
+<p>IPC channels exposed to the renderer process enforce allowlist validation at the main-process handler boundary. The renderer is a partially-trusted context in Electron's security model; IPC handlers validate all parameters before forwarding to backend services.</p>
+
+<p>Notable allowlist controls:</p>
+
+<ul>
+  <li><strong>Subscription tier:</strong> The upgrade IPC handler validates the requested tier against an explicit allowlist before forwarding to the checkout URL builder. Unrecognized tier values are rejected without reaching the payment surface.</li>
+  <li><strong>Legal version strings:</strong> Accepted version strings are validated against a strict regex (<code>^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}Z)?$</code>) both at the IPC boundary and before persistence.</li>
+  <li><strong>AI provider tool names:</strong> Tool names are sanitized to <code>^[a-zA-Z0-9_-]{1,128}$</code> before transmission to any AI provider API. A name-to-original mapping is maintained so that the executor receives the original name while the provider receives the sanitized form. Length is truncated to the provider's maximum (128 characters). Name collisions after sanitization are flagged with a warning.</li>
+</ul>
+
+<hr>
+
+<h2 id="code-signing-and-distribution">Code Signing and Distribution</h2>
+
+<h3>macOS</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Control</th>
+      <th>Implementation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Code signing</td>
+      <td>Apple Developer ID certificate</td>
+    </tr>
+    <tr>
+      <td>Hardened Runtime</td>
+      <td>Enabled — restricts JIT, unsigned memory, and library loading</td>
+    </tr>
+    <tr>
+      <td>Notarization</td>
+      <td>Submitted to Apple for malware scanning and stapled to the binary</td>
+    </tr>
+    <tr>
+      <td>Entitlements</td>
+      <td>Minimal: JIT (Chromium), unsigned memory (Electron renderer), network client/server, file access</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Windows</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Control</th>
+      <th>Implementation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Code signing</td>
+      <td>Azure Trusted Signing (EV-equivalent cloud signing service)</td>
+    </tr>
+    <tr>
+      <td>Publisher identity</td>
+      <td>Prosponsive, Inc.</td>
+    </tr>
+    <tr>
+      <td>Execution level</td>
+      <td><code>asInvoker</code> — no UAC elevation required</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Distribution Channel</h3>
+
+<p>Signed binaries are published to an S3 bucket and served via CloudFront. Download URLs are HTTPS-only. The <code>-latest-*</code> redirect targets (the stable "always current" download URLs) carry a <code>Content-Disposition: attachment; filename="&lt;version-stamped-filename&gt;"</code> header in RFC 6266 quoted-string form. This ensures that a user downloading from the stable redirect URL receives a file named with the exact version string, providing a consistent basis for checksum and signature verification against the published release manifest.</p>
+
+<hr>
+
+<h2 id="auto-update-security">Auto-Update Security</h2>
+
+<p>Prosponsive uses <code>electron-updater</code> for automatic updates. Every update undergoes two verification steps before installation:</p>
+
+<ol>
+  <li><strong>SHA-512 checksum verification</strong> — the downloaded file's hash is compared against the hash published in the release manifest. Mismatches are rejected and the update is discarded.</li>
+  <li><strong>Code signature verification</strong> — the downloaded binary's code signature is verified against the expected signing identity. Invalid signatures are rejected and the update is discarded.</li>
+</ol>
+
+<p>Updates install on application quit, not via silent in-session replacement. The user is informed when an update is available and can choose when to restart.</p>
+
+<p>Update checks occur every 4 hours, with an initial check 10 seconds after launch. Only stable releases are consumed (<code>allowPrerelease: false</code>).</p>
+
+<hr>
+
+<h2 id="data-privacy-and-logging">Data Privacy and Logging</h2>
+
+<h3>What Is Logged</h3>
+
+<p>Diagnostic logs include:</p>
+
+<ul>
+  <li>Dependency check results and repair actions</li>
+  <li>Container health state transitions</li>
+  <li>Certificate generation and trust installation events</li>
+  <li>Credential file creation events (e.g., "Generated new random PostgreSQL password") — <strong>never the credential value</strong></li>
+  <li>Auto-update lifecycle events, including explicit security rejection reasons</li>
+  <li>Legal acceptance gate decisions, including per-document acceptance status</li>
+  <li>Commerce synchronization heartbeat outcomes (usage pushed, gate state transitions)</li>
+  <li>Weekly usage-limit events (logged once per occurrence, not on every rejected request)</li>
+</ul>
+
+<h3>What Is Never Logged</h3>
+
+<ul>
+  <li>Password, token, or key values</li>
+  <li>Full API tokens (only the last 4 characters appear in diagnostics)</li>
+  <li>User file paths in analytics events</li>
+  <li>IP addresses in analytics events</li>
+  <li>Email addresses in analytics events</li>
+</ul>
+
+<p>Where user identifiers appear in server-side diagnostic logs, they are truncated (first 12 characters followed by an ellipsis) to prevent full identifier reconstruction from log aggregation pipelines.</p>
+
+<h3>PII Sanitization</h3>
+
+<p>All error strings sent to analytics are processed through a sanitization function that strips:</p>
+
+<ul>
+  <li>Unix and Windows file paths</li>
+  <li>Email addresses</li>
+  <li>IPv4 and IPv6 addresses</li>
+  <li>Environment variable values (<code>KEY=value</code> patterns)</li>
+</ul>
+
+<p>Sanitized strings are truncated to 200 characters maximum.</p>
+
+<h3>Analytics Consent</h3>
+
+<p>Analytics collection is <strong>opt-in</strong>. The application defaults to opted out at construction time (<code>optedOut = true</code>). Tracking is only enabled if the user explicitly consents. The analytics identifier is a random UUID with no correlation to user identity.</p>
+
+<h3>Log File Security</h3>
+
+<p>Log files are created with permission <code>0600</code> (owner read/write only) in a directory with permission <code>0700</code> (owner-only access). Rotated log files inherit these permissions.</p>
+
+<h3>Data Retention and User-Controlled Erasure</h3>
+
+<p>Conversation data (conversations, messages) is managed under a soft-delete model. Deletion is triggered by two independent paths — user-initiated and system-initiated — both of which funnel into the same soft-delete/hard-delete lifecycle:</p>
+
+<p><strong>User-initiated deletion:</strong> When a user deletes a conversation, the record is soft-deleted immediately — excluded from all read paths — and permanently removed by a background sweep process once the configured retention window expires.</p>
+
+<p><strong>System-initiated inactivity archiving:</strong> A background thread-inactivity sweep automatically archives threads that have had no activity for a configurable period (default: 60 days). Archived threads are excluded from the active conversation list and are stamped with the same soft-delete timestamp as user-initiated deletions, so they are subject to the same retention window and are permanently removed by the same hard-delete sweep — ensuring that stale conversation data does not accumulate indefinitely even without user action.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Deletion mechanism</td>
+      <td>Soft-delete (<code>deleted_at</code> timestamp) — data is immediately excluded from all read paths</td>
+    </tr>
+    <tr>
+      <td>Retention window</td>
+      <td>User-configurable, clamped to 30–3,650 days</td>
+    </tr>
+    <tr>
+      <td>Hard deletion</td>
+      <td>Records past their retention window are permanently removed by a background sweep process</td>
+    </tr>
+    <tr>
+      <td>Inactivity archive threshold</td>
+      <td>Configurable (default: 60 days); threads with no activity beyond this period are archived automatically and enter the same retention window</td>
+    </tr>
+    <tr>
+      <td>Read-path enforcement</td>
+      <td>All read queries filter <code>AND deleted_at IS NULL</code>; deleted records cannot be surfaced via any API, IPC channel, or tool invocation</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The soft-delete model ensures that deletion takes effect immediately (data is inaccessible from the moment of deletion), while the configurable retention window allows users to define how long deleted records are held before permanent removal. System-initiated archiving provides an additional layer of automatic data minimization, ensuring that inactive conversation data is subject to the same eventual hard-deletion without requiring manual intervention. These controls are directly mappable to right-to-erasure and data-minimization requirements under privacy regulations.</p>
+
+<hr>
+
+<h2 id="feedback-system">Feedback System</h2>
+
+<p>Prosponsive includes a built-in feedback system that allows users to submit bug reports and feature requests directly from the application.</p>
+
+<h3>Submission Channel</h3>
+
+<p>Feedback is submitted as GitHub issues to a dedicated private repository accessible only to the Prosponsive team. The repo is private so that user-submitted bug reports — which may include environment context (OS version, AI provider configuration, app version) and reproduction details — are not exposed publicly. The desktop application does not hold a GitHub credential; submissions are routed through a Prosponsive backend service authenticated by the user's Clerk JWT, so an attacker who compromises a user's machine cannot extract a GitHub credential from the application.</p>
+
+<h3>Reporter Identity</h3>
+
+<p>Each feedback submission is tagged with a reporter label derived server-side from the verified Clerk JWT — the client cannot supply an arbitrary reporter identity. Submitting feedback or listing prior submissions therefore requires a signed-in Prosponsive account.</p>
+
+<h3>Input Sanitization</h3>
+
+<p>User-provided feedback content is sanitized before submission to prevent metadata injection. The sanitization function strips attempts to forge internal metadata comment blocks or section headers, preventing a user from spoofing reporter identity or injecting false environment information.</p>
+
+<hr>
+
+<h2 id="supply-chain-security">Supply Chain Security</h2>
+
+<p>Supply chain controls span two categories: static guarantees about the dependency tree and build inputs, and active scanning and update controls that run on every pull request and on a continuous schedule.</p>
+
+<h3>Static Controls</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Control</th>
+      <th>Implementation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Dependency integrity</strong></td>
+      <td>All dependencies are locked with cryptographic integrity hashes covering the full transitive tree. No dependency can be silently substituted without breaking the build.</td>
+    </tr>
+    <tr>
+      <td><strong>Container image pinning</strong></td>
+      <td>Both container images are pinned by SHA-256 manifest digest (see Container Security). A tag repoint on the registry cannot cause a different image to be pulled.</td>
+    </tr>
+    <tr>
+      <td><strong>Schema validation</strong></td>
+      <td>External API responses are validated against strict schemas at runtime. Unexpected fields or types are rejected before reaching application logic.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Pull-Request Security Gate</h3>
+
+<p>Every pull request runs three independent security scans before code can merge. Branch protection requires all three to pass; a failure in any scan blocks the merge.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Scan</th>
+      <th>What it covers</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Dependency vulnerability scanning</strong></td>
+      <td>The production dependency closure is checked against known vulnerability advisories on every PR. HIGH and CRITICAL findings fail the build.</td>
+    </tr>
+    <tr>
+      <td><strong>Static analysis (SAST)</strong></td>
+      <td>Code is scanned for security anti-patterns across all languages in the codebase. Any finding fails the build.</td>
+    </tr>
+    <tr>
+      <td><strong>Secret scanning</strong></td>
+      <td>Every commit in the PR is scanned for inadvertently committed credentials or secrets. Any finding fails the build.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The gate is fail-closed: a scan failure or inconclusive result blocks the merge. There is no override path that bypasses all three checks.</p>
+
+<h3>Continuous Dependency Hygiene</h3>
+
+<p>Dependency updates are managed on an automated schedule, with a security-driven bypass that applies vulnerability patches outside the regular update window.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Control</th>
+      <th>Implementation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Scheduled updates</strong></td>
+      <td>Dependencies are updated in batches on a weekly schedule, keeping the update volume reviewable.</td>
+    </tr>
+    <tr>
+      <td><strong>Vulnerability-driven updates</strong></td>
+      <td>Newly disclosed vulnerabilities trigger security-update pull requests immediately, independent of the weekly schedule.</td>
+    </tr>
+    <tr>
+      <td><strong>Digest pinning for CI pipeline actions and container images</strong></td>
+      <td>CI pipeline actions and container images are pinned by commit SHA or manifest digest. Automated tooling refreshes these pins when upstream content changes, blocking the silent-tag-overwrite class of supply-chain attack.</td>
+    </tr>
+    <tr>
+      <td><strong>Auto-merge policy</strong></td>
+      <td>Low-risk updates (patch versions, digest refreshes, lockfile maintenance) merge automatically on green CI. Release-critical packages and major version bumps always require human review before merge.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Vulnerability-driven updates are applied within the same release cycle they are disclosed in, spanning direct dependencies, transitive dependencies, the Electron runtime stack, and container image digests.</p>
+
+<hr>
+
+<h2 id="fips-140-2140-3-posture">FIPS 140-2/140-3 Posture</h2>
+
+<p>FIPS 140-2 and 140-3 compliance is an end-to-end property of a full cryptographic stack — algorithms, module implementations, FIPS-enabled kernel mode, and every component in the data path must all satisfy the standard simultaneously. This section documents the current posture of each cryptographic domain and identifies the gaps that must be closed for a complete FIPS-validated deployment. PostgreSQL is assessed fully below; remaining domains are under active assessment and will be documented in subsequent revisions.</p>
+
+<p><strong>Host OS vs. container VM boundary.</strong> Prosponsive runs on macOS and Windows. On both platforms, containers (PostgreSQL, n8n) execute inside a Linux virtual machine — Podman Machine on macOS, WSL2 on Windows. The FIPS boundary relevant to containerized components is the <strong>Linux VM kernel</strong>, not the macOS or Windows host kernel. macOS carries Apple CMVP-validated cryptographic modules for the host OS (user space, kernel, Secure Key Store), and Windows 10 and later include Microsoft-validated modules — but these certifications do not extend into the Linux VM. Customers who need FIPS-validated module execution for containerized workloads must configure the Linux VM kernel in FIPS mode (<code>fips=1</code> at boot) independently of any FIPS posture on the macOS or Windows host. Running Prosponsive on a FIPS-certified macOS or Windows machine does not, by itself, satisfy FIPS requirements for the containerized components described in this section.</p>
+
+<p><strong>Container runtime layer (Podman / Docker Engine).</strong> Prosponsive supports both Podman and Docker Desktop as container runtimes, detected automatically at startup. The runtime daemon — Podman or Docker Engine — is a Go application that manages container lifecycle, image pulls, and network namespace configuration. For daemon-level operations such as pulling images from registries and communicating over the container socket API, the runtime uses Go's standard TLS stack. Go's standard TLS implementation is not FIPS-validated; FIPS-capable Go distributions exist (such as Microsoft's FIPS-validated Go toolchain and the go-boring fork), but standard Podman and Docker Desktop distributions do not use them.</p>
+
+<p>The runtime daemon is not, however, in the cryptographic data path for Prosponsive's application connections. The <code>pg</code> client's TLS connection to the PostgreSQL container and n8n's internal API communications are established directly through container network namespaces — the runtime creates and manages those namespaces but does not proxy or participate in the TLS handshakes. The runtime's unvalidated Go TLS is therefore scoped to registry operations (image pulls at initial setup or update time), not to the ongoing application TLS flows described in the PostgreSQL, n8n, and TLS Stack subsections below.</p>
+
+<h3>PostgreSQL</h3>
+
+<p><strong>Algorithm approval vs. module validation.</strong> Prosponsive's default PostgreSQL image (<code>postgres:15.17-alpine</code>) uses FIPS-approved algorithm families throughout: SCRAM-SHA-256 (with embedded HMAC-SHA-256 and PBKDF2) for authentication, TLS 1.2 or higher with AES-256-GCM ciphersuites for transport, and AES-256-GCM for any at-rest primitives exposed by the engine. The gap is at the implementation layer: Alpine Linux's OpenSSL build has not undergone FIPS 140-2 or 140-3 module validation. Using FIPS-approved algorithms via an unvalidated module does not constitute FIPS compliance — the distinction between algorithm approval and module validation is fundamental to the standard.</p>
+
+<p><strong>Requirements for a FIPS-validated PostgreSQL deployment.</strong> Two prerequisites must be satisfied simultaneously:</p>
+
+<ol>
+  <li><strong>FIPS-enabled Linux kernel.</strong> The Linux kernel executing the container must have <code>/proc/sys/crypto/fips_enabled = 1</code>, set via the <code>fips=1</code> kernel parameter at boot. On macOS and Windows this means the Podman Machine or WSL2 VM kernel — not the host OS kernel. Containerized cryptographic libraries check this flag at startup to activate the FIPS provider. This is the customer's infrastructure responsibility and is entirely outside Prosponsive's control.</li>
+  <li><strong>FIPS-validated PostgreSQL image.</strong> The container image must link PostgreSQL against a FIPS-validated OpenSSL provider. <code>registry.access.redhat.com/rhel9/postgresql-15</code> is the only freely-pullable option that meets this requirement; it is validated when run on a FIPS-enabled RHEL system. Chainguard's postgres-fips image and Docker Hardened Images also provide validated runtimes but require paid accounts with those vendors.</li>
+</ol>
+
+<p><strong>Current posture statement.</strong> Prosponsive's default PostgreSQL configuration is not FIPS 140-2 or 140-3 validated at the module level. The cryptographic algorithms in use are drawn from FIPS-approved families, but the Alpine-based image executes them through an unvalidated OpenSSL build. Customers operating in environments that require FIPS-validated cryptographic modules — such as U.S. federal agencies or contractors subject to FISMA, FedRAMP, or CMMC — should not rely on the default image to satisfy that requirement. The planned configurable image override described in the roadmap note below is the intended path for such customers.</p>
+
+<p><strong>Roadmap.</strong> A future configuration option to override the PostgreSQL container image is planned. This option will allow customers with FIPS requirements to substitute a validated base image — such as <code>rhel9/postgresql-15</code> on a FIPS-enabled RHEL deployment, or a vendor-supplied equivalent — without rebuilding or repackaging Prosponsive.</p>
+
+<h3>TLS Stack (Node.js / OpenSSL)</h3>
+
+<p><strong>Algorithm approval vs. module validation.</strong> Prosponsive's Node.js TLS layer uses FIPS-approved algorithm families: AES-256-GCM cipher suites, ECDHE key exchange, SHA-2 MACs, and TLS 1.2 or higher enforced at the application layer. The gap is at the implementation layer: these operations execute through Electron's bundled OpenSSL, which is not a FIPS 140-2 or 140-3 validated module. Standard Electron distributions are not compiled against a FIPS-validated OpenSSL provider, and the <code>--enable-fips</code> and <code>--openssl-fips</code> flags available in standalone Node.js builds are not applicable to the Electron runtime. Using FIPS-approved algorithms via an unvalidated module does not constitute FIPS compliance — the distinction between algorithm approval and module validation applies here exactly as it does for the PostgreSQL and SCRAM-SHA-256 subsections.</p>
+
+<p><strong>Scope of affected connections.</strong> Three categories of TLS connections flow through Node.js and Electron's bundled OpenSSL: the <code>pg</code> client connection to the PostgreSQL container (TLS with a locally-anchored CA, <code>rejectUnauthorized: true</code>), the local HTTPS API server (<code>https.createServer</code>), and any outbound HTTPS connections initiated from the Node.js process (Ollama, AI provider endpoints, feedback, and commerce calls routed through Node.js <code>https</code>). n8n API calls route through Electron's Chromium network stack, which uses BoringSSL — a separate cryptographic module assessed in the n8n subsection.</p>
+
+<p><strong>Application-level TLS floor and cipher allowlist.</strong> Prosponsive enforces TLS 1.2 as the minimum protocol version and restricts cipher negotiation to FIPS-approved algorithm families across all production database and API TLS connections. TLS 1.3 negotiation is limited to AES-256-GCM-SHA384 and AES-128-GCM-SHA256; TLS 1.2 negotiation is limited to ECDHE and DHE key exchange with AES-GCM. ChaCha20-Poly1305 is intentionally excluded as it is not FIPS-approved. TLS 1.0, TLS 1.1, RC4, 3DES, MD5-based MACs, and export-grade ciphers are explicitly prohibited at the application layer. The underlying Electron OpenSSL module remains unvalidated as described above — the cipher floor narrows the attack surface but does not close the module-validation gap.</p>
+
+<p><strong>Host OS FIPS boundary.</strong> macOS and Windows FIPS certifications apply to the host operating system's cryptographic modules only — Apple's CMVP-validated modules on macOS and Microsoft's validated modules on Windows. These certifications do not extend into Electron's bundled OpenSSL. The Electron process maintains its own cryptographic boundary, and the relevant validation status is that of the OpenSSL instance linked into the Electron binary, not the host OS. Running Prosponsive on a FIPS-certified macOS or Windows machine does not produce a FIPS-validated Node.js TLS layer.</p>
+
+<p><strong>Path to a FIPS-validated TLS posture.</strong> No configuration change within the current Electron distribution closes this gap. Two structural paths exist, neither currently implemented. The first is a custom Electron build with the OpenSSL FIPS provider enabled. Note that Electron 26+ already ships OpenSSL 3.x (via Node.js 20+), so the OpenSSL version is not the obstacle; the gap is specifically that the OpenSSL 3.x FIPS provider (<code>fips.so</code>) is not compiled into standard Electron distributions. Enabling it requires a fork of the Electron build toolchain, and Electron's upstream build system does not support this as a first-class option. This path has been assessed and deferred: the maintenance burden and security-release latency risk outweigh the benefit, given that the same coverage can be achieved via the second path without an Electron fork. The second is an OS-native crypto offload — replacing Node.js <code>tls</code> and <code>crypto</code> calls with macOS Security framework or Windows CNG/BCrypt APIs, which use the OS's validated cryptographic modules. Both paths require significant architectural investment.</p>
+
+<p><strong>Current posture statement.</strong> Prosponsive's Node.js TLS layer is not FIPS 140-2 or 140-3 validated at the module level. The cipher suites and protocol versions in use are drawn from FIPS-approved families, but Electron's bundled OpenSSL executes them through an unvalidated module. Customers operating in environments that require FIPS-validated cryptographic modules should not rely on the default Electron distribution to satisfy that requirement for any TLS connection handled by the Node.js layer. (n8n API calls route through Chromium's BoringSSL and are assessed separately in the n8n subsection.)</p>
+
+<h3>AES-256-GCM At-Rest Encryption</h3>
+
+<p>The FIPS posture of the AES-256-GCM at-rest encryption layer, including the cryptographic module executing those primitives, is under active assessment and will be documented in a subsequent whitepaper revision.</p>
+
+<h3>SCRAM-SHA-256 Protocol Layer (Node.js Client Side)</h3>
+
+<p><strong>Algorithm approval vs. module validation.</strong> The <code>pg</code> (node-postgres) driver performs SCRAM-SHA-256 authentication using HMAC-SHA-256 and PBKDF2, both per RFC 5802 and both drawn from FIPS-approved algorithm families. The gap is at the implementation layer: node-postgres invokes these primitives through Node.js's built-in <code>crypto</code> module, which is backed by Electron's bundled OpenSSL — the same unvalidated module described in the TLS Stack subsection above. Using FIPS-approved algorithm families via an unvalidated module does not constitute FIPS compliance — the algorithm-vs.-module distinction is the same here as in the PostgreSQL and TLS Stack subsections.</p>
+
+<p><strong>Shared OpenSSL dependency.</strong> The SCRAM-SHA-256 client-side implementation does not use a separate cryptographic module — it shares the same Electron OpenSSL instance as the Node.js TLS stack. The FIPS posture of the SCRAM-SHA-256 layer is therefore directly dependent on, and not separable from, the FIPS posture of the TLS stack. Remediation of one requires remediation of the other; the structural paths and effort involved are the same as those described in the TLS Stack subsection.</p>
+
+<p><strong>Current posture statement.</strong> Prosponsive's SCRAM-SHA-256 client-side implementation is not FIPS 140-2 or 140-3 validated at the module level. The HMAC-SHA-256 and PBKDF2 operations are drawn from FIPS-approved algorithm families, but node-postgres executes them through Electron's unvalidated OpenSSL. Customers operating in environments that require FIPS-validated cryptographic modules should not rely on the current <code>pg</code> authentication layer to satisfy that requirement.</p>
+
+<h3>n8n Container</h3>
+
+<p>The FIPS posture of the n8n automation engine container, including its Node.js runtime and bundled cryptographic dependencies, is under active assessment and will be documented in a subsequent whitepaper revision.</p>
+
+<h3>Container Base Images</h3>
+
+<p>The broader FIPS posture of Prosponsive's container base image strategy — including the path from Alpine-based images to FIPS-validated alternatives across all components — is under active assessment and will be documented in a subsequent whitepaper revision.</p>
+
+<hr>
+
+<h2 id="sanctions-and-trade-compliance">Sanctions and Trade Compliance</h2>
+
+<p>Prosponsive's sanctions-compliance posture is built on <strong>minimizing identity data at the application layer</strong> and <strong>delegating compliance-critical screening to specialized vendors</strong> with established programs.</p>
+
+<h3>Network-edge geographic blocking</h3>
+
+<p>Application binaries and the auto-update feed are served via AWS CloudFront. The distribution enforces a country-level block against the four jurisdictions subject to comprehensive United States embargoes:</p>
+
+<ul>
+  <li>Cuba (CU)</li>
+  <li>Iran (IR)</li>
+  <li>North Korea (KP)</li>
+  <li>Syria (SY)</li>
+</ul>
+
+<p>Requests originating in those countries receive an HTTP 403 from the CloudFront edge before reaching the origin S3 bucket. This control covers both fresh installs and the auto-update channel.</p>
+
+<p>Sub-country embargoed regions (Crimea, the so-called Donetsk People's Republic, the so-called Luhansk People's Republic) are not addressable by ISO 3166-1 country code; the residual exposure for those regions is small and accepted, as the application has no direct presence or marketing in those areas.</p>
+
+<h3>Authentication layer (Clerk)</h3>
+
+<p>End-user authentication is managed by Clerk. Clerk is SOC 2 Type II attested, supports HIPAA compliance with a BAA available on its Enterprise plan, and is GDPR- and CCPA-compliant. Clerk is independently penetration-tested against the OWASP Application Security Verification Standard and the NIST Technical Guide to Information Security Testing and Assessment (SP 800-115).</p>
+
+<p><strong>Neither the Prosponsive agent runtime nor the prosponsive.ai backend services process or store user identity.</strong> Identity creation, verification, and management — including email, name, profile image, password, multi-factor configuration, and OAuth/social-login state — happen within Clerk and the user's chosen OAuth provider, not within any Prosponsive service. Prosponsive's services only ever receive Clerk-issued JWT authentication tokens, validate them against Clerk's published JWKS, and extract a single opaque user identifier (the <code>sub</code> claim) for use as a foreign key into our own subscription and usage records. We do not extract, log, or persist email addresses, names, profile images, or any other identity-bearing claim from those tokens.</p>
+
+<p>Authentication tokens issued by Clerk are short-lived; if a user is later flagged at any layer in the chain, residual access expires at the next refresh interval rather than persisting indefinitely.</p>
+
+<h3>Payment layer (Stripe)</h3>
+
+<p>Subscription processing is handled by Stripe. As a regulated US financial services provider — registered with FinCEN as a Money Services Business and licensed as a money transmitter in the states where required for its services — Stripe complies with sanctions programs administered by the US Office of Foreign Assets Control (OFAC). Stripe screens accounts, including connected accounts and transactions, in compliance with its own obligations under those regimes; flagged accounts have payouts paused pending review.</p>
+
+<p>Prosponsive stores <strong>no payment card data, no billing addresses, and no Stripe customer secrets</strong>. The only payment-related data persisted by Prosponsive is the opaque Stripe customer identifier (used to look up subscription state) and the resolved subscription tier.</p>
+
+<h3>Data minimization as a control</h3>
+
+<p>The combined effect of the layers above is that Prosponsive's <em>server-side</em> systems hold essentially no personally identifying information beyond an opaque Clerk user identifier and a resolved subscription-tier flag. Identifying data such as email, name, and OAuth tokens is held by Clerk on our behalf (see Sub-processors), payment instruments and billing addresses are held by Stripe, and end-user content (conversations, tasks, messages, file attachments) is stored on the user's local workstation and never traverses Prosponsive infrastructure.</p>
+
+<p>This server-side data-minimization is deliberate: the smallest feasible cloud-side data surface reduces both the legal obligation to perform additional screening at our layer and the consequences of any future incident affecting Prosponsive infrastructure.</p>
+
+<p>All formerly IP-bearing audit records are now stored as peppered SHA-256 hashes (irreversible without the operator-managed pepper), and IP-bearing access logs at the network edge have been disabled. Combined with the data-minimization architecture above, Prosponsive's server-side data surface does not contain any identifier that meets the GDPR Article 4(1) definition of personal data — and consequently does not require an Article 17 right-to-be-forgotten mechanism for our own records. End users may request deletion of their identity record from Clerk and their customer record from Stripe directly; both are vendor-handled.</p>
+
+<h3>Acknowledged residual risk</h3>
+
+<p>Country-embargo coverage at CloudFront is paired with payment-layer SDN screening at Stripe, but a residual gap exists for the free tier accessed from a non-embargoed country by an individual who is on a sanctions list (and therefore should not be served). Prosponsive does not currently perform fuzzy name screening against the OFAC SDN list at the authentication layer.</p>
+
+<p>The following factors materially reduce, but do not fully eliminate, the OFAC strict-liability exposure of this gap:</p>
+
+<ul>
+  <li>The free tier does not facilitate a financial transaction and is therefore outside the scope of the sanctions-screening obligations that apply to money transmitters and merchants of record.</li>
+  <li>Prosponsive holds insufficient identifying data (no billing address, no government ID, no date of birth) to perform name screening at a useful confidence threshold; fuzzy matching on name and email alone produces high false-positive rates without correspondingly improving true-positive recall.</li>
+  <li>All payment-tier escalations pass through Stripe, which independently performs the high-risk-moment screening.</li>
+</ul>
+
+<p>Prosponsive monitors this gap and re-evaluates as the user base and product scope evolve.</p>
+
+<hr>
+
+<h2 id="known-limitations-and-mitigations">Known Limitations and Mitigations</h2>
+
+<p>This section documents security properties that are not yet at their target state, along with the mitigations in place.</p>
+
+<h3>Database Data-at-Rest (Non-FDE Systems)</h3>
+
+<p>PostgreSQL data files are not encrypted by the database engine. On systems without OS-level full-disk encryption (primarily Windows Home without Device Encryption), database files on the container volume are readable by any process running as the same OS user.</p>
+
+<p><strong>Mitigation:</strong> (1) All services bind to localhost only, limiting the attack surface to local processes. (2) n8n workflow credentials are encrypted at the application layer via <code>N8N_ENCRYPTION_KEY</code>. (3) Prosponsive application credentials (API tokens) are encrypted with AES-256-GCM. (4) macOS FileVault is enabled by default on all modern Macs, covering the majority of the current user base.</p>
+
+<hr>
+
+<h2 id="sub-processors">Sub-processors</h2>
+
+<p>Prosponsive relies on the following third-party services that process or transmit user data. All other components (database, workflow engine, local API server) run entirely on the user's local machine.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sub-processor</th>
+      <th>Purpose</th>
+      <th>Data Processed</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Clerk</strong> (<code>clerk.prosponsive.ai</code>)</td>
+      <td>Authentication and identity management</td>
+      <td>Email address, name, profile image, OAuth tokens</td>
+      <td>US (Clerk infrastructure)</td>
+    </tr>
+    <tr>
+      <td><strong>Stripe</strong></td>
+      <td>Subscription processing and payment-layer sanctions screening</td>
+      <td>Billing name, address, payment instrument</td>
+      <td>US (Stripe infrastructure)</td>
+    </tr>
+    <tr>
+      <td><strong>AWS CloudFront / S3</strong></td>
+      <td>Application distribution and auto-updates</td>
+      <td>None retained by Prosponsive (CloudFront access logging disabled; request IPs are seen transiently by the edge but not written to logs we control)</td>
+      <td>US (us-east-1)</td>
+    </tr>
+    <tr>
+      <td><strong>PostHog</strong></td>
+      <td>Anonymous usage analytics (opt-in only)</td>
+      <td>A randomly generated UUID; feature-usage events; basic device and operating-system information; basic AI configuration; the application's runtime state; sanitized log tails for stuck/error events. IP geolocation is disabled at the SDK level.</td>
+      <td>US (PostHog Cloud)</td>
+    </tr>
+    <tr>
+      <td><strong>GitHub</strong> (host of the feedback repository; submissions are server-mediated)</td>
+      <td>In-app feedback submission via the feedback Lambda</td>
+      <td>The text of the feedback authored by the user; basic device and operating-system information; basic AI configuration; the Prosponsive app version; a reporter label derived from the Clerk user ID; submission timestamp. Feedback submission requires a signed-in Clerk user — the desktop client does not embed a GitHub credential, and unauthenticated submission is not supported.</td>
+      <td>US (GitHub infrastructure)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>AI Inference Providers (User-Configured)</h3>
+
+<p>Prosponsive supports multiple AI inference providers. The user selects and configures their provider; Prosponsive does not route data through any AI provider by default. When a provider is configured, conversation content and tool invocations are sent to the selected provider's API.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Provider</th>
+      <th>Configuration Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>AWS Bedrock</td>
+      <td>AWS SSO profile with Bedrock access</td>
+    </tr>
+    <tr>
+      <td>Ollama</td>
+      <td>Local installation (no data leaves the machine)</td>
+    </tr>
+    <tr>
+      <td>OpenAI</td>
+      <td>API key</td>
+    </tr>
+    <tr>
+      <td>Anthropic</td>
+      <td>API key</td>
+    </tr>
+    <tr>
+      <td>Google Gemini</td>
+      <td>API key</td>
+    </tr>
+    <tr>
+      <td>Groq</td>
+      <td>API key</td>
+    </tr>
+    <tr>
+      <td>Mistral</td>
+      <td>API key</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The user is solely responsible for their relationship with their chosen AI provider, including any data processing agreements. Prosponsive does not intermediate, cache, or retain inference data beyond the local session.</p>
+
+<hr>
+
+<div style="text-align:center;color:#5C635F;font-size:0.85em;margin:2em 0;">
+  <strong>Prosponsive, Inc.</strong> | <a href="https://prosponsive.ai">prosponsive.ai</a> | <a href="mailto:security@prosponsive.ai">security@prosponsive.ai</a><br><br>
+  <em>This document is confidential and intended solely for the use of the organization to whom it was provided for the purpose of security evaluation. Redistribution without written consent from Prosponsive, Inc. is prohibited.</em>
+</div>
+
+</body>
+</html>
