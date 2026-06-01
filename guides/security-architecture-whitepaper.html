@@ -45,7 +45,12 @@
   .guide-card { background: #E6EAE7; border-left: 4px solid #4F6F5C; padding: 1em 1.2em; border-radius: 0 4px 4px 0; margin: 1.5em 0; }
   .guide-card h3 { margin-top: 0; }
   .guide-card p { margin: 0.4em 0; }
+  .mermaid { margin: 1.5em 0; text-align: center; }
   </style>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+  </script>
 </head>
 <body>
 
@@ -165,7 +170,39 @@
 
 <p>All containers bind exclusively to <code>127.0.0.1</code> — no service is reachable from the network. The Electron app, n8n, and PostgreSQL communicate over localhost using TLS with mutual certificate validation.</p>
 
-<div class="tip"><strong>Architecture diagram:</strong> All components run on localhost only. The Electron app (main process HTTPS API :3100 + renderer) communicates with n8n (:5678) and PostgreSQL (:5432) over TLS. n8n and PostgreSQL share a private container network; all host-to-container port mappings bind exclusively to 127.0.0.1.</div>
+<div class="mermaid">
+graph LR
+    subgraph machine["Localhost Only"]
+
+        subgraph electron["Electron Application (host)"]
+            api["Main Process<br/>HTTPS API :3100"]
+            renderer["Renderer (UI)"]
+            api --- renderer
+        end
+
+        subgraph containerNet["Private Network"]
+
+            n8n["n8n Container<br/>:5678"]
+
+            subgraph pgcontainer["PostgreSQL Container :5432"]
+                n8ndb["n8n db<br/>user: n8n<br/>workflows, executions,<br/>credentials"]
+                prospdb["prosponsive db<br/>user: prosponsive<br/>conversations, messages,<br/>tasks"]
+            end
+        end
+
+        api -- "TLS / SCRAM-SHA-256<br/>via mapped port" --> prospdb
+        renderer -- "TLS" --> n8n
+        n8n -. "SCRAM-SHA-256<br/>container-internal" .-> n8ndb
+        n8n -- "TLS webhooks<br/>via host gateway" --> api
+    end
+
+    style machine fill:none,stroke:#666,stroke-width:2px
+    style electron fill:none,stroke:#4a9eff,stroke-width:2px
+    style containerNet fill:none,stroke:#f59e0b,stroke-width:2px,stroke-dasharray:8
+    style pgcontainer fill:none,stroke:#22c55e,stroke-width:2px
+    style n8ndb fill:none,stroke:#22c55e,stroke-width:1px,stroke-dasharray:5
+    style prospdb fill:none,stroke:#22c55e,stroke-width:1px,stroke-dasharray:5
+</div>
 
 <blockquote>
   <p><strong>Network isolation:</strong> The n8n and PostgreSQL containers share a private container network (<code>prosponsive-network</code>) that is not routable from the host or LAN. The n8n-to-PostgreSQL connection stays entirely within the container network. Host-to-container connections traverse mapped ports bound to <code>127.0.0.1</code>. The n8n container reaches the host API server via <code>host.containers.internal</code> (container-to-host gateway).</p>
