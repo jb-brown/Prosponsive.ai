@@ -159,47 +159,62 @@ h1 {
   color: var(--text-secondary);
 }
 
-/* ---- Beta Badge ---- */
 
-.beta-badge {
-  display: inline-block;
-  margin-top: 0.875rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  background: linear-gradient(
-    90deg,
-    var(--text-secondary) 35%,
-    #b8d4bc 50%,
-    var(--text-secondary) 65%
-  );
-  background-size: 300% auto;
-  background-position: -200% 0;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  background-clip: text;
-  animation: beta-shimmer 120s linear infinite;
+
+/* ---- Hero Nav ---- */
+
+.hero-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
 }
 
-@keyframes beta-shimmer {
-  0%    { background-position: -200% 0; }
-  2.5%  { background-position:  200% 0; }
-  100%  { background-position:  200% 0; }
+.hero-nav a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.8125rem;
+}
+
+.hero-nav a:hover,
+.hero-nav a:focus-visible {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.hero-nav a:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 /* ---- Hero Quote ---- */
 
 .hero-quote {
-  margin: 2.5rem auto 0;
-  font-size: 1rem;
-  color: var(--text-secondary);
+  margin: 0.75rem auto 0;
+  font-size: 4rem;
   font-style: italic;
-  border-left: 3px solid var(--accent);
-  padding-left: 1rem;
-  text-align: left;
-  max-width: 420px;
+  text-align: center;
+  max-width: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--text-secondary) 35%,
+    #d4edd8 50%,
+    var(--text-secondary) 65%
+  );
+  background-size: 300% auto;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  background-clip: text;
+  animation: quote-shimmer 60s linear 2s infinite;
+}
+
+@keyframes quote-shimmer {
+  0%   { background-position:   0% 0; }
+  5%   { background-position: 100% 0; }
+  100% { background-position: 100% 0; }
 }
 
 /* ---- Platform Note ---- */
@@ -364,7 +379,7 @@ footer a:focus-visible {
     transform: none;
   }
 
-  .beta-badge {
+  .hero-quote {
     animation: none;
     background: none;
     -webkit-text-fill-color: var(--text-secondary);
