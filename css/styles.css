@@ -178,6 +178,7 @@ h1 {
   background-position: -200% 0;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  color: transparent;
   background-clip: text;
   animation: beta-shimmer 120s linear infinite;
 }
@@ -191,7 +192,7 @@ h1 {
 /* ---- Hero Quote ---- */
 
 .hero-quote {
-  margin-top: 2.5rem;
+  margin: 2.5rem auto 0;
   font-size: 1rem;
   color: var(--text-secondary);
   font-style: italic;
