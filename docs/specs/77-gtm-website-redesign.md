@@ -294,7 +294,7 @@ No photography, no stock imagery — consistent with the current restrained, typ
 
 ### 3.6 Acceptance criteria (from the issue)
 
-- [x] All four Drive docs read and synthesized → Phase 1 + Appendices A/B.
+- [x] All four source docs read and synthesized → Phase 1 + Appendices A/B.
 - [x] Sitemap with page-level purpose mapped to personas/buying stages → Phase 2 (§2.2).
 - [x] Implementation plan with phases, page-priority order, design constraints → Phase 3 (§3.1–3.5).
 - [x] No placeholder copy — section intent grounded in actual doc content (verbatim tags + copy bank).
