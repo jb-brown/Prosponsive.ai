@@ -8,6 +8,10 @@
   </url>
 
   <url>
+    <loc>https://prosponsive.ai/download/</loc>
+  </url>
+
+  <url>
     <loc>https://prosponsive.ai/how-it-works/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>

@@ -65,7 +65,7 @@
         <a href="/for/privacy/">For Privacy</a>
         <a href="/how-it-works/">How It Works</a>
         <a href="guides/user-guide.html">Guides</a>
-        <a href="#download" class="nav-cta">Download</a>
+        <a href="/download/" class="nav-cta">Download</a>
       </nav>
     </div>
   </header>
@@ -81,35 +81,6 @@
       </h1>
       <p class="tagline">AI That Works While You Don't</p>
 
-      <div class="download-area" id="download">
-        <a
-          id="download-btn"
-          class="btn-download"
-          href="#"
-          aria-label="Download Prosponsive for macOS"
-        >
-          Download for macOS
-        </a>
-        <p id="version-info" class="version-info" aria-live="polite"></p>
-      </div>
-
-      <p id="platform-note" class="platform-note" aria-live="polite"></p>
-      <p class="platform-switch">
-        See downloads for
-        <button type="button" class="link-btn" data-platform="macos">macOS</button>
-        or <button type="button" class="link-btn" data-platform="windows">Windows</button>.
-      </p>
-
-      <p class="hero-quote">
-        "If Slack was rebuilt autonomous agent first."
-      </p>
-      <nav class="hero-nav" aria-label="Quick links">
-        <a href="/how-it-works/">How It Works</a>
-        <a href="guides/user-guide.html">Guides</a>
-        <a href="releases/">Release Notes</a>
-        <a href="guides/feedback.html">Feedback</a>
-        <a href="/legal/">Legal</a>
-      </nav>
     </section>
 
     <!-- ====================================================
@@ -117,8 +88,8 @@
     ==================================================== -->
     <section class="reframe-band" aria-labelledby="reframe-heading">
       <div class="section-inner reframe-inner">
-        <h2 id="reframe-heading" class="reframe-statement">Everyone knows AI can save time. Most are still babysitting it.</h2>
-        <p class="reframe-sub">Your AI agents actually work while you don't — running tools in the background, in parallel, with your data staying on your machine. It's what Slack would look like if it were built agent-first.</p>
+        <h2 id="reframe-heading" class="reframe-statement">Everyone knows AI can save time.<br>Most are still babysitting it.</h2>
+        <p class="reframe-sub">Your AI agents actually work while you don't — running tools in the background, in parallel, with your data staying on your machine.</p>
       </div>
     </section>
 
@@ -143,14 +114,18 @@
           </div>
           <div class="stat-item" role="listitem">
             <span class="stat-value">100%</span>
-            <span class="stat-label">Local — data never leaves your machine</span>
+            <span class="stat-label">Local runtime — your files &amp; keys stay on your machine</span>
           </div>
           <div class="stat-item" role="listitem">
             <span class="stat-value">50–100+</span>
             <span class="stat-label">Daily interruptions eliminated</span>
           </div>
+          <div class="stat-item" role="listitem">
+            <span class="stat-value">0%</span>
+            <span class="stat-label">Credential exposure to AI providers</span>
+          </div>
         </div>
-        <p class="stat-disclaimer">Directional estimates — validate before customer-facing ROI use.</p>
+
       </div>
     </section>
 
@@ -197,7 +172,7 @@
               <span class="pillar-number" aria-hidden="true">02</span>
               <h3 class="section-heading">Protect your data, credentials &amp; continuity</h3>
             </div>
-            <p>Local execution, credential isolation, automatic failover across 7+ providers, offline-capable. Your data never leaves your machine. Your secrets never touch an AI provider.</p>
+            <p>The agent runtime, tool execution, and storage all run on your machine. Your credentials never touch an AI provider. LLMs are remote and tools can call external APIs — but your files, keys, and workflow state stay local.</p>
             <p>Sensitive work doesn't have to route through cloud servers. Prosponsive runs on your desktop — your documents, credentials, and workflows stay with you. And if one model goes down, it automatically fails over to the next.</p>
             <div class="pillar-cta">
               <a href="guides/security-architecture-whitepaper.html" class="btn-secondary">Read security architecture</a>
@@ -206,7 +181,7 @@
           <div class="pillar-metrics-panel" aria-label="Pillar 02 metrics">
             <div class="metric-row">
               <span class="metric-value">100%</span>
-              <span class="metric-label">local execution — data sovereignty by design</span>
+              <span class="metric-label">local runtime — your files &amp; keys stay on your machine</span>
             </div>
             <div class="metric-row">
               <span class="metric-value">Zero</span>
@@ -252,70 +227,6 @@
     </section>
 
     <!-- ====================================================
-         Section D — Social Proof
-    ==================================================== -->
-    <section class="social-proof" aria-labelledby="proof-heading">
-      <div class="section-inner">
-        <h2 id="proof-heading" class="section-heading" style="text-align:center;margin-bottom:2rem;">What early adopters are saying</h2>
-        <div class="quote-grid">
-          <div class="quote-card">
-            <blockquote>
-              "I was already running Claude with a stack of MCP servers. I thought I had figured out AI automation — until I realized I was still sitting at my desk approving every tool call, copying context between conversations, and manually sequencing the steps. Prosponsive was the first platform where the agents actually worked without me."
-            </blockquote>
-            <cite>— Early adopter &middot; Software engineer &middot; Independent power user</cite>
-          </div>
-          <div class="quote-card">
-            <blockquote>
-              "The thing that sold me wasn't the feature list — it was the first time I set up a scheduled prompt, walked away, and came back to a completed research brief. I hadn't clicked anything. I hadn't approved anything. It just ran. That's a different category of tool."
-            </blockquote>
-            <cite>— Early adopter &middot; Independent consultant &middot; Prosponsive beta user</cite>
-          </div>
-        </div>
-
-        <div class="outcome-table-wrap">
-          <h3 class="outcome-table-heading">Results by user type</h3>
-          <p class="outcome-table-disclaimer">Directional estimates based on observed usage patterns — validate before customer-facing ROI use.</p>
-          <table class="outcome-table">
-            <thead>
-              <tr>
-                <th>User type</th>
-                <th>Outcome pattern</th>
-                <th>Architecture driver</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Power User / Developer</td>
-                <td>Recovered 60–90 min/day from task babysitting</td>
-                <td>Async tool execution + parallel agent channels</td>
-              </tr>
-              <tr>
-                <td>Independent Consultant</td>
-                <td>Recurring task setup eliminated (briefings, digests, monitoring run automatically)</td>
-                <td>Scheduled prompts + auto-approvals</td>
-              </tr>
-              <tr>
-                <td>Privacy-Conscious Professional</td>
-                <td>Moved sensitive workflows fully local, kept cloud providers for non-sensitive work</td>
-                <td>Local-first + credential isolation</td>
-              </tr>
-              <tr>
-                <td>Multi-Tool Power User</td>
-                <td>Consolidated 4 AI subscriptions into one platform</td>
-                <td>Provider-agnostic + channel scoping</td>
-              </tr>
-              <tr>
-                <td>Operations Manager</td>
-                <td>~70% per-task tool-call overhead reduction on multi-system workflows</td>
-                <td>n8n workflow tools + single-call orchestration</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
          Section E — Persona Grid + CTA
     ==================================================== -->
     <section class="persona-section" aria-labelledby="personas-heading">
@@ -356,14 +267,7 @@
         </div>
 
         <div class="persona-cta-row">
-          <a
-            id="download-btn-footer"
-            class="btn-download"
-            href="#"
-            aria-label="Download Prosponsive for macOS"
-          >
-            Download for macOS
-          </a>
+          <a href="/download/" class="btn-download">Download free</a>
           <p class="persona-cta-note">Free to download &middot; macOS &amp; Windows</p>
         </div>
       </div>
@@ -387,24 +291,5 @@
     </div>
   </footer>
 
-  <script src="js/download.js"></script>
-  <script>
-    // Mirror the download button state to the footer CTA button
-    (function () {
-      function syncFooterBtn() {
-        var primaryBtn = document.getElementById('download-btn');
-        var footerBtn = document.getElementById('download-btn-footer');
-        if (!primaryBtn || !footerBtn) return;
-        footerBtn.href = primaryBtn.href;
-        footerBtn.textContent = primaryBtn.textContent;
-        footerBtn.setAttribute('aria-label', primaryBtn.getAttribute('aria-label') || primaryBtn.textContent);
-      }
-      // Sync after download.js runs (it fires on DOMContentLoaded + after fetch)
-      document.addEventListener('DOMContentLoaded', function () {
-        setTimeout(syncFooterBtn, 100);
-        setTimeout(syncFooterBtn, 2000);
-      });
-    })();
-  </script>
 </body>
 </html>
