@@ -86,7 +86,6 @@ main {
 .section-subheading {
   font-size: 1.0625rem;
   color: var(--text-secondary);
-  max-width: 600px;
   margin-bottom: 0;
   line-height: 1.65;
 }

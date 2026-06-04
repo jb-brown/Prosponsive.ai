@@ -4,12 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Security Architecture — Prosponsive</title>
-  <meta name="description" content="Prosponsive's security model: local execution, credential isolation, tool runtime containment, and no server-side data storage.">
+  <meta name="description" content="Prosponsive's security model: local execution, credential isolation, tool runtime containment, no server-side storage, and permanent hard-delete for local data.">
   <link rel="canonical" href="https://prosponsive.ai/security/">
+  <meta property="og:title" content="Security Architecture — Prosponsive">
+  <meta property="og:description" content="Prosponsive's security model: local execution, credential isolation, tool runtime containment, no server-side storage, and permanent hard-delete for local data.">
+  <meta property="og:url" content="https://prosponsive.ai/security/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://prosponsive.ai/assets/prosponsive-logo-icon.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Security Architecture — Prosponsive">
+  <meta name="twitter:description" content="Prosponsive's security model: local execution, credential isolation, tool runtime containment, no server-side storage, and permanent hard-delete for local data.">
   <link rel="icon" href="../assets/prosponsive-logo-icon.svg?v=2026-05-04" type="image/svg+xml">
   <link rel="alternate icon" href="../assets/favicon.ico?v=2026-05-04">
   <link rel="apple-touch-icon" href="../assets/icon.png?v=2026-05-04">
   <link rel="stylesheet" href="../css/styles.css">
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+  </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -64,71 +76,47 @@
     <section aria-labelledby="arch-heading">
       <div class="section-inner">
         <h2 id="arch-heading" class="section-heading">The trust boundary</h2>
-        <p class="section-subheading">Prosponsive is structured as a layered model where each tier communicates only with the tier directly adjacent to it. Credentials never cross a tier boundary.</p>
+        <p style="font-size:0.9375rem;color:var(--text-secondary);line-height:1.65;margin-bottom:0.875rem;">Prosponsive is structured as a layered model using containers for runtime isolation and separate storage for access separation. Each tier communicates only with the tier directly adjacent to it. Credentials never cross a tier boundary.</p>
 
-        <div class="arch-diagram" role="img" aria-label="Architecture diagram showing four tiers: LLM Provider (remote), Agent Runtime (local), Tool Runtime n8n container, and Your Systems, plus a separate Credential Store accessible only to the Tool Runtime">
+        <p style="font-size:0.9375rem;color:var(--text-secondary);line-height:1.65;margin-bottom:1.5rem;">The diagram below shows all components running on localhost only. The Electron app (UI and main process API) communicates with the <a href="https://n8n.io" target="_blank" rel="noopener">n8n</a> tool runtime and PostgreSQL over TLS. n8n and PostgreSQL run in an isolated private container network — not reachable from the host network or LAN. Each database is accessible only by its own dedicated user; no cross-database access is permitted.</p>
 
-          <div class="arch-tier arch-tier--remote">
-            <span class="arch-tier-label">Remote</span>
-            <div class="arch-tier-box">
-              <strong>LLM Provider</strong>
-              <span class="arch-tier-note">e.g. Anthropic, OpenAI, Ollama</span>
-            </div>
-          </div>
+        <div class="mermaid">
+graph LR
+    subgraph machine["Localhost Only"]
 
-          <div class="arch-connector" aria-hidden="true">
-            <span class="arch-connector-arrow">&#x21D5;</span>
-            <span class="arch-connector-desc">inference calls (prompt + context only)</span>
-          </div>
+        subgraph electron["Electron Application (host)"]
+            api["Main Process<br/>HTTPS API :3100"]
+            renderer["Renderer (UI)"]
+            api --- renderer
+        end
 
-          <div class="arch-tier arch-tier--local">
-            <span class="arch-tier-label">Local</span>
-            <div class="arch-tier-box">
-              <strong>Agent Runtime</strong>
-              <span class="arch-tier-note">Prosponsive desktop app</span>
-            </div>
-          </div>
+        subgraph containerNet["Private Network"]
 
-          <div class="arch-connector" aria-hidden="true">
-            <span class="arch-connector-arrow">&#x21D5;</span>
-            <span class="arch-connector-desc">tool requests / results only</span>
-          </div>
+            n8n["n8n Container<br/>:5678"]
 
-          <div class="arch-tier arch-tier--local">
-            <span class="arch-tier-label">Local</span>
-            <div class="arch-tier-box arch-tier-box--isolated">
-              <strong>Tool Runtime &mdash; n8n container</strong>
-              <span class="arch-tier-note">isolated container with its own storage</span>
-            </div>
-          </div>
+            subgraph pgcontainer["PostgreSQL Container :5432"]
+                n8ndb["n8n db<br/>user: n8n<br/>workflows, executions,<br/>credentials"]
+                prospdb["prosponsive db<br/>user: prosponsive<br/>conversations, messages,<br/>tasks"]
+            end
+        end
 
-          <div class="arch-connector" aria-hidden="true">
-            <span class="arch-connector-arrow">&#x21D5;</span>
-            <span class="arch-connector-desc">external API calls</span>
-          </div>
+        api -- "TLS / SCRAM-SHA-256<br/>via mapped port" --> prospdb
+        renderer -- "TLS" --> n8n
+        n8n -. "SCRAM-SHA-256<br/>container-internal" .-> n8ndb
+        n8n -- "TLS webhooks<br/>via host gateway" --> api
+    end
 
-          <div class="arch-tier arch-tier--external">
-            <span class="arch-tier-label">External</span>
-            <div class="arch-tier-box">
-              <strong>Your Systems</strong>
-              <span class="arch-tier-note">Salesforce, NetSuite, Slack, etc.</span>
-            </div>
-          </div>
-
-          <div class="arch-credential-store" aria-hidden="true">
-            <div class="arch-credential-box">
-              <strong>Credential Store</strong>
-              <span class="arch-tier-note">accessible only inside Tool Runtime</span>
-            </div>
-          </div>
-
-        </div><!-- /.arch-diagram -->
-
-        <div class="arch-legend" aria-hidden="true">
-          <span class="arch-legend-item arch-legend-remote">Remote</span>
-          <span class="arch-legend-item arch-legend-local">Local</span>
-          <span class="arch-legend-item arch-legend-external">External (your systems)</span>
+    style machine fill:none,stroke:#666,stroke-width:2px
+    style electron fill:none,stroke:#4a9eff,stroke-width:2px
+    style containerNet fill:none,stroke:#f59e0b,stroke-width:2px,stroke-dasharray:8
+    style pgcontainer fill:none,stroke:#22c55e,stroke-width:2px
+    style n8ndb fill:none,stroke:#22c55e,stroke-width:1px,stroke-dasharray:5
+    style prospdb fill:none,stroke:#22c55e,stroke-width:1px,stroke-dasharray:5
         </div>
+
+        <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.65;margin-top:1rem;border-left:3px solid var(--border);padding-left:1rem;"><strong>LLM inference (not shown):</strong> The main process makes outbound inference calls to either Ollama running locally on the machine, or to an external LLM provider (Anthropic, OpenAI, etc.) over HTTPS. Only the prompt and context are sent — credentials and data never leave the machine as part of inference calls.</p>
+
+        <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.65;margin-top:0.75rem;border-left:3px solid var(--border);padding-left:1rem;"><strong>n8n tool calls (not shown):</strong> Tools you build in n8n can make any outbound call their workflow is configured to make — reading from or writing to Salesforce, querying a database, calling a REST API, sending a webhook. You design the tool; you decide what it touches. Prosponsive does not restrict or inspect what your tools call, and never initiates any external call on its own.</p>
 
       </div>
     </section>
@@ -137,7 +125,7 @@
     <section aria-labelledby="principles-heading" style="background-color:var(--surface);border-top:1px solid var(--border);">
       <div class="section-inner">
         <h2 id="principles-heading" class="section-heading">Security principles</h2>
-        <p class="section-subheading">Six properties enforced by the architecture, not by configuration or policy.</p>
+        <p class="section-subheading">Properties enforced by the architecture, not by configuration or policy.</p>
 
         <ul class="value-props value-props--grid" role="list">
           <li class="value-prop-item">
@@ -148,14 +136,14 @@
           </li>
           <li class="value-prop-item">
             <div class="value-prop-content">
-              <h3>Least-privilege credential storage</h3>
-              <p>Credentials are encrypted locally. They are accessible only to the tool execution runtime, not to the agent runtime or the LLM. The agent never sees credentials in any form.</p>
+              <h3>Least-privilege access</h3>
+              <p>Every resource Prosponsive touches — credentials, database connections, files — is granted the minimum access required. Credentials are accessible only to the tool execution runtime. Database users can only access their own database. Files are created with 0600/0700 permissions. The agent runtime and LLM cannot access the credential store under any code path.</p>
             </div>
           </li>
           <li class="value-prop-item">
             <div class="value-prop-content">
               <h3>Tool runtime isolation</h3>
-              <p>n8n runs in an isolated container with its own storage. The agent sends a request and receives only the result. Credentials and internal container state are never exposed to the agent runtime.</p>
+              <p>Tools run in <a href="https://n8n.io" target="_blank" rel="noopener">n8n</a> as an isolated container with its own storage. The agent sends a request and receives only the result. Credentials and internal container state are never exposed to the agent runtime. Because tools execute inside a container, they have no access to the host OS filesystem or host processes — the container boundary prevents any tool from reading arbitrary files or interacting with the host system directly. Tools can make outbound network calls to external systems and communicate back to the Prosponsive API via defined channels, but nothing beyond those explicitly permitted paths.</p>
             </div>
           </li>
           <li class="value-prop-item">
@@ -166,14 +154,26 @@
           </li>
           <li class="value-prop-item">
             <div class="value-prop-content">
-              <h3>Encrypted at rest</h3>
-              <p>All local data is encrypted. Credentials are stored with least-privilege access — the agent runtime and LLM cannot access the credential store directly under any code path.</p>
+              <h3>FIPS encryption in transit and at rest</h3>
+              <p>All local data is encrypted at rest using AES-256-GCM. All communication between components — including localhost-only traffic — is SSL-enforced. Even though all traffic stays on the machine, TLS is required on every connection: the renderer to n8n, the main process to PostgreSQL, and the n8n container back to the host API.</p>
+            </div>
+          </li>
+          <li class="value-prop-item">
+            <div class="value-prop-content">
+              <h3>Data retention — built-in, not bolted on</h3>
+              <p>Prosponsive enforces data retention by design. Soft delete marks data as deleted and excludes it from all views immediately. Hard delete permanently and irreversibly purges your local data — there is no server-side copy to recover from, so a hard delete is truly final. Inactive conversations are automatically archived after a configurable period (default: 60 days) and enter the same hard-delete lifecycle.</p>
             </div>
           </li>
           <li class="value-prop-item">
             <div class="value-prop-content">
               <h3>Provider-agnostic design</h3>
               <p>No vendor lock-in on the security model. Swap AI providers without re-architecting. Automatic failover between providers does not change the isolation model or credential boundaries.</p>
+            </div>
+          </li>
+          <li class="value-prop-item">
+            <div class="value-prop-content">
+              <h3>Supply chain security</h3>
+              <p>Security is enforced at two layers. Every pull request runs dependency vulnerability scanning, static analysis (SAST), and secret scanning before code can merge. In parallel, the repository is continuously and proactively scanned — newly disclosed vulnerabilities in dependencies, container images, and the runtime stack trigger P1 priorities and often automated remediation processes that close them within the same release cycle, independent of any scheduled update window. Dependencies are locked with cryptographic integrity hashes. Container images are pinned by SHA-256 manifest digest.</p>
             </div>
           </li>
         </ul>
@@ -203,19 +203,24 @@
                 <td>Prompt + context only. Credentials are never included in inference calls.</td>
               </tr>
               <tr>
-                <td>Tool call results</td>
-                <td>Returned to agent runtime (local)</td>
-                <td>Results only. No credentials or internal container state are passed back.</td>
-              </tr>
-              <tr>
-                <td>Update checks</td>
+                <td>Version checks</td>
                 <td>Prosponsive update server</td>
-                <td>Version string only. No usage data, identifiers, or content.</td>
+                <td>Current version string only. No usage data, user identifiers, or content of any kind.</td>
               </tr>
               <tr>
-                <td>Everything else</td>
-                <td>Stays on your machine</td>
-                <td>Conversation history, documents, credentials, workflow state — never transmitted.</td>
+                <td>Subscription validation &amp; usage volume</td>
+                <td>Prosponsive billing server</td>
+                <td>An anonymous subscriber identifier and usage volume (e.g. number of agent runs). No tool names, prompt content, conversation data, or any user-generated content is included.</td>
+              </tr>
+              <tr>
+                <td>Instrumentation &amp; observability data <em>(optional)</em></td>
+                <td>Prosponsive diagnostics server</td>
+                <td>Opt-in only. If enabled, sends anonymized crash reports and performance diagnostics to help improve the product. Never includes conversation content, tool names, credentials, or any user-generated data. Disabled by default.</td>
+              </tr>
+              <tr>
+                <td>Tool calls to external systems</td>
+                <td>Your discretion — whatever your tools are configured to call</td>
+                <td>Prosponsive never initiates external calls on its own. Every outbound call is the result of a tool you configured. You own the tool design; you decide what gets called.</td>
               </tr>
             </tbody>
           </table>
@@ -235,9 +240,11 @@
         <div class="hiw-narrative" style="margin-top:2rem;">
           <p><strong>Credential injection model.</strong> Credentials are stored inside the n8n container and are never passed to or visible by the agent runtime or the LLM. When the agent calls a tool by name, the request travels to the tool runtime. The container resolves which credential that tool requires and injects it internally. The credential does not appear in the request from the agent, and does not appear in the result returned to the agent. There is no code path where the agent runtime handles a plaintext credential.</p>
 
-          <p><strong>Blast radius control.</strong> Auto-approval rules define exactly what agents can do without human confirmation &mdash; scoped by tool set, action type, or channel. Actions outside the approved rules require explicit human review before execution. This limits the blast radius of a misconfigured or misbehaving agent to the scope the operator has explicitly permitted.</p>
+          <p><strong>Blast radius control.</strong> Auto-approval rules define exactly what agents can do without human confirmation &mdash; scoped by tool set, action type, or channel. Rules can also incorporate LLM confidence thresholds: a high-confidence threshold auto-approves only when the model's confidence in the tool call exceeds it; a low-confidence threshold auto-denies below a floor and stops the action before it's even proposed; everything in between is surfaced for manual review. Actions outside the approved rules require explicit human confirmation before execution. This limits the blast radius of a misconfigured or misbehaving agent to the scope the operator has explicitly permitted.</p>
 
-          <p><strong>No Prosponsive account required.</strong> Prosponsive does not require account creation to use the product. No user identity data is sent to Prosponsive servers. The only optional network communication is version check requests, which transmit a version string with no user-identifying information attached.</p>
+          <p><strong>Full tool execution audit trail.</strong> Every tool use is logged by <a href="https://n8n.io" target="_blank" rel="noopener">n8n</a> with full inputs and outputs. Every workflow execution step is captured and traceable for review at any time — what ran, when, what data went in, and what came back. All of this stays local on your machine. This is a native property of n8n, not something Prosponsive adds on top.</p>
+
+          <p><strong>No Prosponsive account required.</strong> Prosponsive does not require account creation to use the product. No user identity data is sent to Prosponsive servers. Version check requests transmit a version string with no user-identifying information attached.</p>
         </div>
 
       </div>

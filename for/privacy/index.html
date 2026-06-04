@@ -3,9 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prosponsive for Privacy-Conscious Professionals — Data Sovereignty by Design</title>
-  <meta name="description" content="Sensitive work doesn't have to route through cloud servers. Prosponsive runs locally — your documents, credentials, and workflows stay with you, not with a provider.">
+  <title>Prosponsive for Privacy-Conscious Professionals</title>
+  <meta name="description" content="Sensitive work doesn't need cloud servers. Prosponsive runs locally — your documents, credentials, and workflows stay with you, never sent to a provider.">
   <link rel="canonical" href="https://prosponsive.ai/for/privacy/">
+  <meta property="og:title" content="Prosponsive for Privacy-Conscious Professionals">
+  <meta property="og:description" content="Sensitive work doesn't need cloud servers. Prosponsive runs locally — your documents, credentials, and workflows stay with you, never sent to a provider.">
+  <meta property="og:url" content="https://prosponsive.ai/for/privacy/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://prosponsive.ai/assets/prosponsive-logo-icon.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Prosponsive for Privacy-Conscious Professionals">
+  <meta name="twitter:description" content="Sensitive work doesn't need cloud servers. Prosponsive runs locally — your documents, credentials, and workflows stay with you, never sent to a provider.">
   <link rel="icon" href="../../assets/prosponsive-logo-icon.svg?v=2026-05-04" type="image/svg+xml">
   <link rel="alternate icon" href="../../assets/favicon.ico?v=2026-05-04">
   <link rel="apple-touch-icon" href="../../assets/icon.png?v=2026-05-04">
@@ -17,7 +25,7 @@
     "@id": "https://prosponsive.ai/for/privacy/#webpage",
     "url": "https://prosponsive.ai/for/privacy/",
     "name": "Prosponsive for Privacy-Conscious Professionals",
-    "description": "Sensitive work doesn't have to route through cloud servers. Prosponsive runs locally — your documents, credentials, and workflows stay with you, not with a provider.",
+    "description": "Sensitive work doesn't need cloud servers. Prosponsive runs locally — your documents, credentials, and workflows stay with you, never sent to a provider.",
     "isPartOf": { "@id": "https://prosponsive.ai/#organization" }
   }
   </script>
@@ -51,12 +59,11 @@
     <!-- Hero -->
     <section class="persona-hero" aria-labelledby="hero-heading">
       <div class="section-inner">
-        <div class="persona-hero-label">Privacy-Conscious Professional · Tier 1</div>
         <h1 id="hero-heading">Sensitive work doesn't have to route through the cloud.</h1>
-        <p class="persona-hero-message">Sensitive work doesn't have to route through cloud servers. Prosponsive runs locally — your documents, credentials, and workflows stay with you, not with a provider.</p>
+        <p class="persona-hero-message">Sensitive work doesn't need cloud servers. Prosponsive runs locally — your documents, credentials, and workflows stay with you, never sent to a provider.</p>
         <div class="persona-hero-cta">
           <a href="/#download" class="btn-download">Download for macOS</a>
-          <a href="../../guides/security-architecture-whitepaper.html" class="btn-secondary">Read security architecture</a>
+          <a href="/security/" class="btn-secondary">Read security architecture</a>
         </div>
       </div>
     </section>
@@ -72,21 +79,21 @@
             <span class="value-prop-rank" aria-label="Priority 1">1</span>
             <div class="value-prop-content">
               <h3>100% local execution — data sovereignty by design</h3>
-              <p>Prosponsive runs entirely on your desktop. Your conversation history, documents, credentials, and workflow data never leave your machine. There is no cloud routing for your content — the platform is built local-first, not cloud-first with a "privacy mode" bolted on. 100% local execution means data sovereignty by architecture, not by policy.</p>
+              <p>Prosponsive runs entirely on your desktop. Your conversation history, documents, credentials, and workflow data are never sent to Prosponsive servers or anywhere else without you explicitly including them in AI inference or a tool call. There is no cloud routing for your content — the platform is built local-first, not cloud-first with a "privacy mode" bolted on. 100% local execution means data sovereignty by architecture, not by policy.</p>
             </div>
           </li>
           <li class="value-prop-item">
             <span class="value-prop-rank" aria-label="Priority 2">2</span>
             <div class="value-prop-content">
               <h3>Credential isolation — your secrets never touch an AI provider</h3>
-              <p>API keys, passwords, and authentication tokens are encrypted locally and isolated from every AI provider. They never travel through the AI inference layer. When an agent executes a tool that requires credentials, those credentials are injected locally — the AI model sees only the result. Zero credential exposure by design.</p>
+              <p>API keys, passwords, and authentication tokens are encrypted locally with least-privilege access. They are never transmitted to AI model providers or stored server-side. When an agent executes a tool, it informs the tool runtime — an isolated container with its own storage — which executes the tool and returns only the result. The tool runtime is a black box to the agent runtime. Credentials never leave it.</p>
             </div>
           </li>
           <li class="value-prop-item">
             <span class="value-prop-rank" aria-label="Priority 3">3</span>
             <div class="value-prop-content">
-              <h3>Offline capability with local AI models</h3>
-              <p>When sensitive workflows require air-gap conditions or unreliable connectivity, Prosponsive supports local AI models (via Ollama) that run entirely on-device — no internet connection required for inference. Mix cloud providers for non-sensitive work and local models for sensitive workflows, in separate channels.</p>
+              <h3>Local AI models — no data sent to a provider</h3>
+              <p>Prosponsive supports local AI models via Ollama, running entirely on-device. For sensitive work where no data should leave the machine at the inference layer, configure Prosponsive to use a local model and nothing is transmitted externally.</p>
             </div>
           </li>
           <li class="value-prop-item">
@@ -94,6 +101,7 @@
             <div class="value-prop-content">
               <h3>Encrypted at rest, in transit — no server-side storage</h3>
               <p>Conversation history and workflow state are encrypted locally. There is no server-side storage of your work. Prosponsive never stores anything server-side — your data exists only on your machine. Read the full security architecture for implementation details.</p>
+              <p>When you're ready to remove data, Prosponsive supports both soft delete (conversations are marked deleted and excluded from all views) and hard delete (permanently and irreversibly purge your local data). Because everything is local, a hard delete on your machine is a true hard delete — there is no server-side copy to recover from.</p>
             </div>
           </li>
         </ul>
@@ -138,7 +146,7 @@
               <tr>
                 <td>AI inference</td>
                 <td>Cloud provider required</td>
-                <td>7+ cloud providers + local models (Ollama); offline-capable</td>
+                <td>7+ cloud providers or local models (Ollama) — one configured at a time</td>
               </tr>
               <tr>
                 <td>Tool execution results</td>
@@ -149,7 +157,7 @@
           </table>
         </div>
         <div style="margin-top:1.5rem;">
-          <a href="../../guides/security-architecture-whitepaper.html" class="btn-secondary">Read the full security architecture</a>
+          <a href="/security/" class="btn-secondary">Read the full security architecture</a>
         </div>
       </div>
     </section>
@@ -158,7 +166,7 @@
     <section class="cta-band" aria-labelledby="cta-heading">
       <div class="section-inner">
         <h2 id="cta-heading">Your data stays with you.</h2>
-        <p>Prosponsive is the personal autonomous agent platform built for sensitive work. Local execution, credential isolation, offline capability — by design.</p>
+        <p>Prosponsive is the personal autonomous agent platform built for sensitive work. Local execution, credential isolation, and local AI model support — by design.</p>
         <a href="/#download" class="btn-download">Download for macOS</a>
         <p style="margin-top:0.75rem;font-size:0.875rem;color:rgba(244,246,244,0.75);">Free to download &middot; macOS &amp; Windows</p>
       </div>
@@ -167,19 +175,16 @@
   </main>
 
   <footer>
-    <p>&copy; 2026 Prosponsive, Inc. All rights reserved.</p>
-    <nav class="footer-nav-extended" aria-label="Footer links">
-      <a href="/for/power-users/">For Developers</a>
-      <a href="/for/consultants/">For Consultants</a>
-      <a href="/for/privacy/">For Privacy</a>
-      <a href="/for/teams/">For Teams</a>
-      <a href="/how-it-works/">How It Works</a>
-      <a href="../../guides/user-guide.html">Guides</a>
-      <a href="../../releases/">Release Notes</a>
-      <a href="../../guides/compare/">Compare</a>
-      <a href="../../guides/feedback.html">Feedback</a>
-      <a href="/legal/">Legal</a>
-    </nav>
+    <div class="footer-inner">
+      <p class="footer-copy">&copy; 2026 Prosponsive, Inc. All rights reserved.</p>
+      <nav class="footer-nav" aria-label="Footer links">
+        <a href="/how-it-works/">How It Works</a>
+        <a href="../../guides/user-guide.html">Guides</a>
+        <a href="../../guides/compare/">Compare</a>
+        <a href="../../releases/">Release Notes</a>
+        <a href="/legal/">Legal</a>
+      </nav>
+    </div>
   </footer>
 
 </body>

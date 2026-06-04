@@ -3,9 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How Prosponsive Works — The Bottleneck Isn't the Model. It's the Architecture.</title>
-  <meta name="description" content="Your AI agents actually work while you don't — running tools in the background, in parallel, with your data staying on your machine. The full 2-minute picture.">
+  <title>How Prosponsive Works — Prosponsive</title>
+  <meta name="description" content="The bottleneck isn't the AI model — it's the architecture. Prosponsive runs agents in parallel, executes tools locally, and keeps your data on your machine.">
   <link rel="canonical" href="https://prosponsive.ai/how-it-works/">
+  <meta property="og:title" content="How Prosponsive Works — Prosponsive">
+  <meta property="og:description" content="The bottleneck isn't the AI model — it's the architecture. Prosponsive runs agents in parallel, executes tools locally, and keeps your data on your machine.">
+  <meta property="og:url" content="https://prosponsive.ai/how-it-works/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://prosponsive.ai/assets/prosponsive-logo-icon.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How Prosponsive Works — Prosponsive">
+  <meta name="twitter:description" content="The bottleneck isn't the AI model — it's the architecture. Prosponsive runs agents in parallel, executes tools locally, and keeps your data on your machine.">
   <link rel="icon" href="../assets/prosponsive-logo-icon.svg?v=2026-05-04" type="image/svg+xml">
   <link rel="alternate icon" href="../assets/favicon.ico?v=2026-05-04">
   <link rel="apple-touch-icon" href="../assets/icon.png?v=2026-05-04">
@@ -64,11 +72,11 @@
     <!-- The Problem -->
     <section aria-labelledby="problem-heading">
       <div class="section-inner">
-        <h2 id="problem-heading" class="section-heading">The problem with how you're using AI today</h2>
+        <h2 id="problem-heading" class="section-heading">The problem with how AI is used today</h2>
         <div class="hiw-narrative">
           <p>Most knowledge workers are doing the same thing: they've got ChatGPT in one tab, Claude in another, maybe Zapier running in the background — and they're manually stitching it all together. They're copying context between conversations, sitting and watching while tools process one step at a time, and wondering why their "AI-powered workflow" still feels like a lot of work.</p>
           <p>Here's what they're often missing: <strong>the bottleneck isn't the AI model. It's the architecture around it.</strong></p>
-          <p>Most tools are built synchronously — you wait. They're built for one provider — you're locked in. And your data passes through cloud servers you don't control.</p>
+          <p>Most AI tools are synchronous — you type and then you wait for your agent to let you participate again. It's one synchronous step at a time. They're built for one provider — you're locked in. And your data passes through cloud servers you don't control.</p>
         </div>
       </div>
     </section>
@@ -78,7 +86,7 @@
       <div class="section-inner">
         <h2 id="different-heading" class="section-heading">Prosponsive was built differently</h2>
         <div class="hiw-narrative">
-          <p>It runs on your desktop. Multiple specialized agents work in parallel inside channels, using tools that orchestrate across your real systems — email, CRM, databases, Slack — not just one at a time, but as complete workflows.</p>
+          <p>It runs on your desktop. Multiple specialized agents work in parallel inside channels, using tools that orchestrate across your real systems — Salesforce, NetSuite, Workday, ServiceNow — not just one at a time, but as complete workflows.</p>
           <p><strong>You post a task and walk away.</strong> The agents run, tools execute in the background, and results are waiting when you return. Your credentials never touch an AI provider. And if one model goes down, it automatically fails over to the next.</p>
           <p>For knowledge workers who are serious about reclaiming their time and protecting their data, it's the difference between an AI assistant and an AI that actually works while you're not.</p>
         </div>
@@ -104,7 +112,7 @@
             <div class="hiw-full-step-icon" aria-hidden="true">2</div>
             <div class="hiw-full-step-content">
               <h3>Agents work in parallel</h3>
-              <p>Unlike cloud AI chat tools where you wait for one model to finish before the next step begins, Prosponsive runs multiple specialized agents simultaneously. One agent can be drafting while another is researching while a third is monitoring. Each runs on its own context without you as the passing mechanism between them. You're not the orchestrator anymore — the platform is. Parallel agent channels mean multi-step workflows that used to take hours can complete in minutes.</p>
+              <p>Unlike cloud AI chat tools where you wait for one response to finish before the next step begins, Prosponsive runs multiple specialized agents simultaneously. One agent can be drafting while another is researching while a third is monitoring. Each runs on its own context without you as the passing mechanism between them. You're not the orchestrator anymore — the platform is. Parallel agent channels mean multi-step workflows that used to take hours can complete in minutes.</p>
             </div>
           </div>
 
@@ -112,7 +120,7 @@
             <div class="hiw-full-step-icon" aria-hidden="true">3</div>
             <div class="hiw-full-step-content">
               <h3>Tools execute asynchronously — across real systems</h3>
-              <p>Prosponsive agents use n8n-powered tools that orchestrate across your real systems — email, CRM, databases, Slack, calendars, project management — not just one at a time, but as complete workflows in a single tool call. Instead of one MCP call per system, n8n workflows execute across multiple systems per agent invocation: read a ticket, look up the customer, check billing history, and draft the response as a single operation. Async execution means the tools run in the background while you focus elsewhere. Your credentials are encrypted locally and never touch the AI model — they're injected at execution time on your machine.</p>
+              <p>Prosponsive agents use <a href="https://n8n.io" target="_blank" rel="noopener">n8n</a>-powered tools that orchestrate across your real systems — Salesforce, NetSuite, Workday, ServiceNow, and hundreds more — not just one at a time, but as complete workflows in a single tool call. Instead of one MCP call per system, n8n workflows execute across multiple systems per agent invocation: read a ticket, look up the customer, check billing history, and draft the response as a single operation. Async execution means the tools run in the background while you focus elsewhere. Your credentials are encrypted and not accessible by the agent runtime.</p>
             </div>
           </div>
 
@@ -150,33 +158,12 @@
           </div>
 
         </div>
-        <p style="font-size:0.8125rem;color:var(--text-secondary);text-align:center;margin-top:1rem;">All metrics are directional estimates — validate before customer-facing ROI use.</p>
       </div>
     </section>
 
-    <!-- Quote -->
-    <section aria-labelledby="proof-heading">
-      <div class="section-inner">
-        <h2 id="proof-heading" class="section-heading">What it feels like in practice</h2>
-        <div class="quote-grid">
-          <div class="quote-block">
-            <blockquote>
-              "I was already running Claude with a stack of MCP servers. I thought I had figured out AI automation — until I realized I was still sitting at my desk approving every tool call, copying context between conversations, and manually sequencing the steps. Prosponsive was the first platform where the agents actually worked without me."
-            </blockquote>
-            <cite>— Early adopter &middot; Software engineer &middot; Independent power user</cite>
-          </div>
-          <div class="quote-block">
-            <blockquote>
-              "The thing that sold me wasn't the feature list — it was the first time I set up a scheduled prompt, walked away, and came back to a completed research brief. I hadn't clicked anything. I hadn't approved anything. It just ran. That's a different category of tool."
-            </blockquote>
-            <cite>— Early adopter &middot; Independent consultant &middot; Prosponsive beta user</cite>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- Persona routing -->
-    <section aria-labelledby="routing-heading" style="background-color:var(--surface);border-top:1px solid var(--border);">
+    <section aria-labelledby="routing-heading" style="background-color:var(--bg);border-top:1px solid var(--border);">
       <div class="section-inner">
         <h2 id="routing-heading" class="section-heading">Find your path</h2>
         <p class="section-subheading">Prosponsive was built for different kinds of knowledge workers. Find what matters most for how you work.</p>
@@ -222,19 +209,16 @@
   </main>
 
   <footer>
-    <p>&copy; 2026 Prosponsive, Inc. All rights reserved.</p>
-    <nav class="footer-nav-extended" aria-label="Footer links">
-      <a href="/for/power-users/">For Developers</a>
-      <a href="/for/consultants/">For Consultants</a>
-      <a href="/for/privacy/">For Privacy</a>
-      <a href="/for/teams/">For Teams</a>
-      <a href="/how-it-works/">How It Works</a>
-      <a href="../guides/user-guide.html">Guides</a>
-      <a href="../releases/">Release Notes</a>
-      <a href="../guides/compare/">Compare</a>
-      <a href="../guides/feedback.html">Feedback</a>
-      <a href="/legal/">Legal</a>
-    </nav>
+    <div class="footer-inner">
+      <p class="footer-copy">&copy; 2026 Prosponsive, Inc. All rights reserved.</p>
+      <nav class="footer-nav" aria-label="Footer links">
+        <a href="/how-it-works/">How It Works</a>
+        <a href="../guides/user-guide.html">Guides</a>
+        <a href="../guides/compare/">Compare</a>
+        <a href="../releases/">Release Notes</a>
+        <a href="/legal/">Legal</a>
+      </nav>
+    </div>
   </footer>
 
 </body>

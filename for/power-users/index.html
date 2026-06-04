@@ -3,9 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prosponsive for Developers &amp; Power Users — Close the Orchestration Gap</title>
-  <meta name="description" content="Your AI stack still has you as the orchestrator. Prosponsive closes the loop — parallel agents, async tools, credential isolation, and automatic failover. Built for people who know what they actually want from AI.">
+  <title>Prosponsive for Developers &amp; Power Users</title>
+  <meta name="description" content="Your AI stack still has you as the orchestrator. Prosponsive closes the gap — parallel agents, async tools, credential isolation, and automatic failover. Local-first.">
   <link rel="canonical" href="https://prosponsive.ai/for/power-users/">
+  <meta property="og:title" content="Prosponsive for Developers &amp; Power Users">
+  <meta property="og:description" content="Your AI stack still has you as the orchestrator. Prosponsive closes the gap — parallel agents, async tools, credential isolation, and automatic failover. Local-first.">
+  <meta property="og:url" content="https://prosponsive.ai/for/power-users/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://prosponsive.ai/assets/prosponsive-logo-icon.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Prosponsive for Developers &amp; Power Users">
+  <meta name="twitter:description" content="Your AI stack still has you as the orchestrator. Prosponsive closes the gap — parallel agents, async tools, credential isolation, and automatic failover. Local-first.">
   <link rel="icon" href="../../assets/prosponsive-logo-icon.svg?v=2026-05-04" type="image/svg+xml">
   <link rel="alternate icon" href="../../assets/favicon.ico?v=2026-05-04">
   <link rel="apple-touch-icon" href="../../assets/icon.png?v=2026-05-04">
@@ -51,7 +59,6 @@
     <!-- Hero -->
     <section class="persona-hero" aria-labelledby="hero-heading">
       <div class="section-inner">
-        <div class="persona-hero-label">Developer / Power User · Tier 1</div>
         <h1 id="hero-heading">Your AI stack still has you as the orchestrator.</h1>
         <p class="persona-hero-message">Your AI stack still has you as the orchestrator. Prosponsive closes the loop — parallel agents, async tools, credential isolation, and automatic failover. Built for people who know what they actually want from AI.</p>
         <div class="persona-hero-cta">
@@ -72,28 +79,28 @@
             <span class="value-prop-rank" aria-label="Priority 1">1</span>
             <div class="value-prop-content">
               <h3>Async parallel agents close the orchestration gap</h3>
-              <p>Stop being the context-passing middleware. Prosponsive runs multiple specialized agents in parallel channels — each one executing tools asynchronously in the background. You post a task and walk away. Results are waiting when you return. No more sitting at your desk approving every tool call, copying context between conversations, and manually sequencing steps. Directional estimate: 30–90 min/day reclaimed from task babysitting.</p>
+              <p>Stop being the context-passing middleware. Prosponsive runs multiple specialized agents in parallel channels — each one executing tools asynchronously in the background. You post a task and walk away. Results are waiting when you return. No more sitting at your desk approving every tool call, copying context between conversations, and manually sequencing steps.</p>
             </div>
           </li>
           <li class="value-prop-item">
             <span class="value-prop-rank" aria-label="Priority 2">2</span>
             <div class="value-prop-content">
               <h3>Credential isolation for production systems</h3>
-              <p>Your API keys are encrypted locally and isolated from every AI provider — they never touch a model or leave your machine. Each channel can be scoped to specific tool sets, so production credentials stay separated from dev workflows. Your secrets never touch an AI provider. Zero credential exposure by architecture, not by policy.</p>
+              <p>Your API keys are encrypted locally with least-privilege access. They are never transmitted to AI model providers or stored server-side. When an agent executes a tool, it informs the tool runtime — an isolated container with its own storage — which executes the tool and returns only the result. The tool runtime is a black box to the agent runtime. Credentials never leave it.</p>
             </div>
           </li>
           <li class="value-prop-item">
             <span class="value-prop-rank" aria-label="Priority 3">3</span>
             <div class="value-prop-content">
               <h3>Provider-agnostic with automatic failover</h3>
-              <p>7+ AI providers supported in a single platform. Switch providers per channel, per task, or per cost budget — rebuild nothing. If one model goes down, Prosponsive automatically fails over to the next. Directional estimate: 20–40% cost optimization through provider switching; 100% of single-provider downtime eliminated via automatic failover.</p>
+              <p>7+ AI providers supported in a single platform. Switch providers per channel, per task, or per cost budget — rebuild nothing. If one model goes down, Prosponsive automatically fails over to the next.</p>
             </div>
           </li>
           <li class="value-prop-item">
             <span class="value-prop-rank" aria-label="Priority 4">4</span>
             <div class="value-prop-content">
-              <h3>n8n multi-system tools vs. single MCP calls</h3>
-              <p>Instead of one MCP call per system, n8n workflows orchestrate across multiple systems in a single agent tool call. Read a ticket, look up the customer, check billing, and draft the response — as one operation. 2,533 pre-built integrations across 216 products. Directional estimate: 60–80% fewer tool calls vs. equivalent MCP stacks; 5–10× faster than custom API development.</p>
+              <h3><a href="https://n8n.io" target="_blank" rel="noopener">n8n</a> multi-system tools vs. single MCP calls</h3>
+              <p>Instead of a separate AI call for every read, write, or lookup, n8n workflows orchestrate across multiple systems in a single agent tool call — read a ticket, look up the customer, check billing, and draft the response as one operation. Traditional tool calls are one-to-one with actions; Prosponsive collapses them into a single orchestrated step. Start with 2,533 pre-built integrations across 216 products out of the box and build your own with a visual workflow designer.</p>
             </div>
           </li>
         </ul>
@@ -157,17 +164,6 @@
     </section>
 
     <!-- Social proof quote -->
-    <section aria-labelledby="proof-heading">
-      <div class="section-inner">
-        <h2 id="proof-heading" class="section-heading">From an early adopter</h2>
-        <div class="quote-block" style="max-width:680px;">
-          <blockquote>
-            "I was already running Claude with a stack of MCP servers. I thought I had figured out AI automation — until I realized I was still sitting at my desk approving every tool call, copying context between conversations, and manually sequencing the steps. Prosponsive was the first platform where the agents actually worked without me."
-          </blockquote>
-          <cite>— Early adopter &middot; Software engineer &middot; Independent power user</cite>
-        </div>
-      </div>
-    </section>
 
     <!-- CTA Band -->
     <section class="cta-band" aria-labelledby="cta-heading">
@@ -182,19 +178,16 @@
   </main>
 
   <footer>
-    <p>&copy; 2026 Prosponsive, Inc. All rights reserved.</p>
-    <nav class="footer-nav-extended" aria-label="Footer links">
-      <a href="/for/power-users/">For Developers</a>
-      <a href="/for/consultants/">For Consultants</a>
-      <a href="/for/privacy/">For Privacy</a>
-      <a href="/for/teams/">For Teams</a>
-      <a href="/how-it-works/">How It Works</a>
-      <a href="../../guides/user-guide.html">Guides</a>
-      <a href="../../releases/">Release Notes</a>
-      <a href="../../guides/compare/">Compare</a>
-      <a href="../../guides/feedback.html">Feedback</a>
-      <a href="/legal/">Legal</a>
-    </nav>
+    <div class="footer-inner">
+      <p class="footer-copy">&copy; 2026 Prosponsive, Inc. All rights reserved.</p>
+      <nav class="footer-nav" aria-label="Footer links">
+        <a href="/how-it-works/">How It Works</a>
+        <a href="../../guides/user-guide.html">Guides</a>
+        <a href="../../guides/compare/">Compare</a>
+        <a href="../../releases/">Release Notes</a>
+        <a href="/legal/">Legal</a>
+      </nav>
+    </div>
   </footer>
 
 </body>

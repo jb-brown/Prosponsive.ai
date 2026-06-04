@@ -3,9 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prosponsive for IT &amp; Security Teams — Every AI Action Auditable</title>
-  <meta name="description" content="Every AI action auditable. Auto-approval rules define what agents can do without human review. Credentials never touch the AI provider. Local execution by design.">
+  <title>Prosponsive for IT &amp; Security Teams — AI Actions Auditable</title>
+  <meta name="description" content="Every AI action auditable. Auto-approval rules define what agents can do unattended. Credentials never touch the AI provider. Local execution by design.">
   <link rel="canonical" href="https://prosponsive.ai/for/teams/">
+  <meta property="og:title" content="Prosponsive for IT &amp; Security Teams — AI Actions Auditable">
+  <meta property="og:description" content="Every AI action auditable. Auto-approval rules define what agents can do unattended. Credentials never touch the AI provider. Local execution by design.">
+  <meta property="og:url" content="https://prosponsive.ai/for/teams/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://prosponsive.ai/assets/prosponsive-logo-icon.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Prosponsive for IT &amp; Security Teams — AI Actions Auditable">
+  <meta name="twitter:description" content="Every AI action auditable. Auto-approval rules define what agents can do unattended. Credentials never touch the AI provider. Local execution by design.">
   <link rel="icon" href="../../assets/prosponsive-logo-icon.svg?v=2026-05-04" type="image/svg+xml">
   <link rel="alternate icon" href="../../assets/favicon.ico?v=2026-05-04">
   <link rel="apple-touch-icon" href="../../assets/icon.png?v=2026-05-04">
@@ -17,7 +25,7 @@
     "@id": "https://prosponsive.ai/for/teams/#webpage",
     "url": "https://prosponsive.ai/for/teams/",
     "name": "Prosponsive for IT & Security Teams",
-    "description": "Every AI action auditable. Auto-approval rules define what agents can do without human review. Credentials never touch the AI provider. Local execution by design.",
+    "description": "Every AI action auditable. Auto-approval rules define what agents can do unattended. Credentials never touch the AI provider. Local execution by design.",
     "isPartOf": { "@id": "https://prosponsive.ai/#organization" }
   }
   </script>
@@ -52,11 +60,10 @@
     <!-- Hero -->
     <section class="persona-hero" aria-labelledby="hero-heading">
       <div class="section-inner">
-        <div class="persona-hero-label">IT / Security Decision Maker · Secondary</div>
         <h1 id="hero-heading">Every AI action auditable.</h1>
-        <p class="persona-hero-message">Every AI action auditable. Auto-approval rules define what agents can do without human review. Credentials never touch the AI provider. Local execution by design.</p>
+        <p class="persona-hero-message">Every AI action auditable. Auto-approval rules define what agents can do unattended. Credentials never touch the AI provider. Local execution by design.</p>
         <div class="persona-hero-cta">
-          <a href="../../guides/security-architecture-whitepaper.html" class="btn-download" style="background-color:#f4f6f4;color:var(--accent);">Read security architecture</a>
+          <a href="/security/" class="btn-download" style="background-color:#f4f6f4;color:var(--accent);">Read security architecture</a>
           <a href="/#download" class="btn-secondary">Download for macOS</a>
         </div>
       </div>
@@ -73,28 +80,28 @@
             <span class="value-prop-rank" aria-label="Priority 1">1</span>
             <div class="value-prop-content">
               <h3>Governance, audit trail + auto-approval boundaries</h3>
-              <p>Every AI action is auditable. Auto-approval rules define exactly what agents are permitted to do without human review — which tools, which operations, which scope. Actions outside those rules require explicit approval. The audit trail captures what each agent did, when, and with what credentials. You define the boundaries; agents operate within them.</p>
+              <p>Every AI action is auditable. Auto-approval rules define exactly what agents are permitted to do without human review — which tools, which operations, which scope. Rules can include LLM confidence thresholds: set a high threshold to auto-approve only when the model is confident, a low threshold to auto-deny when confidence falls short, and anything in between is proposed by the agent but requires manual review before execution. The audit trail captures what each agent did, when, and with what credentials. You define the boundaries; agents operate within them.</p>
             </div>
           </li>
           <li class="value-prop-item">
             <span class="value-prop-rank" aria-label="Priority 2">2</span>
             <div class="value-prop-content">
               <h3>Credential isolation — secrets never touch an AI provider</h3>
-              <p>API keys, service account credentials, and authentication tokens are encrypted locally on the user's machine. They are never transmitted to AI model providers or stored server-side. When an agent executes a tool requiring credentials, those are injected locally — the inference layer never sees the secret. Zero credential exposure by architecture.</p>
+              <p>API keys, service account credentials, and authentication tokens are encrypted locally with least-privilege access. They are never transmitted to AI model providers or stored server-side. When an agent executes a tool, it informs the tool runtime — an isolated container with its own storage — which executes the tool and returns only the result. The tool runtime is a black box to the agent runtime. Credentials never leave it.</p>
             </div>
           </li>
           <li class="value-prop-item">
             <span class="value-prop-rank" aria-label="Priority 3">3</span>
             <div class="value-prop-content">
               <h3>Local execution / data residency</h3>
-              <p>Prosponsive runs on the user's desktop. Conversation history, documents, and workflow data never leave the machine. 100% local execution means data residency is enforced by the architecture — not by a cloud provider's contractual commitment to a region. Offline-capable with local AI models for air-gap or restricted-network environments.</p>
+              <p>Prosponsive runs on the user's desktop. Conversation history, documents, and workflow data never leave the machine. 100% local execution means data residency is enforced by the architecture — not by a cloud provider's contractual commitment to a region.</p>
             </div>
           </li>
           <li class="value-prop-item">
             <span class="value-prop-rank" aria-label="Priority 4">4</span>
             <div class="value-prop-content">
               <h3>Provider failover for operational continuity</h3>
-              <p>7+ AI providers supported with automatic failover. When a cloud AI provider has an outage, Prosponsive automatically switches to the configured fallback — zero manual intervention, no productivity loss. Directional estimate: 100% of single-provider downtime eliminated via automatic failover. Provider-agnostic design means no vendor lock-in for your users.</p>
+              <p>7+ AI providers supported with automatic failover. When a cloud AI provider has an outage, Prosponsive automatically switches to the configured fallback — zero manual intervention, no productivity loss. Anthropic goes down or you run out of credits? Your configured backup will immediately get used and Prosponsive will periodically re-check to switch back to Anthropic. Provider-agnostic design means no vendor lock-in for your users.</p>
             </div>
           </li>
         </ul>
@@ -142,15 +149,15 @@
                 <td>7+ providers; automatic failover; switch anytime</td>
               </tr>
               <tr>
-                <td>Offline / air-gap support</td>
-                <td>Internet required for all inference</td>
-                <td>Local AI models (Ollama) for air-gap environments</td>
+                <td>Data lifecycle controls</td>
+                <td>Deletion subject to provider retention policy</td>
+                <td>Soft delete (excluded from all views) or hard delete (permanent, unrecoverable purge of local data)</td>
               </tr>
             </tbody>
           </table>
         </div>
         <div style="margin-top:1.5rem;">
-          <a href="../../guides/security-architecture-whitepaper.html" class="btn-secondary">Read the full security architecture</a>
+          <a href="/security/" class="btn-secondary">Read the full security architecture</a>
         </div>
       </div>
     </section>
@@ -160,7 +167,7 @@
       <div class="section-inner">
         <h2 id="cta-heading">AI governance built in, not bolted on.</h2>
         <p>Prosponsive is the personal autonomous agent platform where every AI action is auditable, credentials are isolated, and data never leaves the machine.</p>
-        <a href="../../guides/security-architecture-whitepaper.html" class="btn-download" style="background-color:#f4f6f4;color:var(--accent);">Read security architecture</a>
+        <a href="/security/" class="btn-download" style="background-color:#f4f6f4;color:var(--accent);">Read security architecture</a>
         <p style="margin-top:0.75rem;font-size:0.875rem;color:rgba(244,246,244,0.75);">Or <a href="/#download" style="color:rgba(244,246,244,0.85);">download Prosponsive</a> to evaluate directly &middot; macOS &amp; Windows</p>
       </div>
     </section>
@@ -168,19 +175,16 @@
   </main>
 
   <footer>
-    <p>&copy; 2026 Prosponsive, Inc. All rights reserved.</p>
-    <nav class="footer-nav-extended" aria-label="Footer links">
-      <a href="/for/power-users/">For Developers</a>
-      <a href="/for/consultants/">For Consultants</a>
-      <a href="/for/privacy/">For Privacy</a>
-      <a href="/for/teams/">For Teams</a>
-      <a href="/how-it-works/">How It Works</a>
-      <a href="../../guides/user-guide.html">Guides</a>
-      <a href="../../releases/">Release Notes</a>
-      <a href="../../guides/compare/">Compare</a>
-      <a href="../../guides/feedback.html">Feedback</a>
-      <a href="/legal/">Legal</a>
-    </nav>
+    <div class="footer-inner">
+      <p class="footer-copy">&copy; 2026 Prosponsive, Inc. All rights reserved.</p>
+      <nav class="footer-nav" aria-label="Footer links">
+        <a href="/how-it-works/">How It Works</a>
+        <a href="../../guides/user-guide.html">Guides</a>
+        <a href="../../guides/compare/">Compare</a>
+        <a href="../../releases/">Release Notes</a>
+        <a href="/legal/">Legal</a>
+      </nav>
+    </div>
   </footer>
 
 </body>
