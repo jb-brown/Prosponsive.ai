@@ -73,7 +73,7 @@
   <main id="main-content">
 
     <!-- ====================================================
-         Block 1 — Hero
+         Hero
     ==================================================== -->
     <section class="hero" aria-labelledby="app-name">
       <h1 id="app-name" class="wordmark-heading">
@@ -113,24 +113,24 @@
     </section>
 
     <!-- ====================================================
-         Block 2 — Reframe Strip
+         Section A — Reframe (full-bleed accent band)
     ==================================================== -->
-    <section class="reframe-strip" aria-labelledby="reframe-heading">
-      <div class="section-inner">
-        <h2 id="reframe-heading" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">The AI productivity problem</h2>
-        <p>Everyone knows AI assistants can save time. But most knowledge workers are still switching between five different AI tabs, babysitting every task, and watching their screen while tools "think." We built Prosponsive so your AI agents actually work while you don't — running tools in the background, in parallel, with your data staying on your machine. It's what Slack would look like if it were built agent-first.</p>
+    <section class="reframe-band" aria-labelledby="reframe-heading">
+      <div class="section-inner reframe-inner">
+        <h2 id="reframe-heading" class="reframe-statement">Everyone knows AI can save time. Most are still babysitting it.</h2>
+        <p class="reframe-sub">Your AI agents actually work while you don't — running tools in the background, in parallel, with your data staying on your machine. It's what Slack would look like if it were built agent-first.</p>
       </div>
     </section>
 
     <!-- ====================================================
-         Block 3 — Stat Bar
+         Section B — Stat Bar
     ==================================================== -->
-    <section class="stat-bar" aria-labelledby="stats-heading">
+    <section class="stat-band" aria-labelledby="stats-heading">
       <div class="section-inner">
-        <h2 id="stats-heading" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Key metrics</h2>
+        <h2 id="stats-heading" class="visually-hidden">Key metrics</h2>
         <div class="stat-grid" role="list">
           <div class="stat-item" role="listitem">
-            <span class="stat-value">30–90 Min</span>
+            <span class="stat-value">30–90 min</span>
             <span class="stat-label">Reclaimed daily from task babysitting</span>
           </div>
           <div class="stat-item" role="listitem">
@@ -143,180 +143,128 @@
           </div>
           <div class="stat-item" role="listitem">
             <span class="stat-value">100%</span>
-            <span class="stat-label">Local execution — data never leaves your machine</span>
+            <span class="stat-label">Local — data never leaves your machine</span>
           </div>
           <div class="stat-item" role="listitem">
             <span class="stat-value">50–100+</span>
-            <span class="stat-label">Daily interruptions eliminated via auto-approvals</span>
+            <span class="stat-label">Daily interruptions eliminated</span>
           </div>
         </div>
-        <p style="font-size:0.8125rem;color:var(--text-secondary);text-align:center;margin-top:1rem;">Directional estimates — validate before customer-facing ROI use.</p>
+        <p class="stat-disclaimer">Directional estimates — validate before customer-facing ROI use.</p>
       </div>
     </section>
 
     <!-- ====================================================
-         Block 4 — Pillar 01: Reclaim your time
+         Section C — Three Pillars
     ==================================================== -->
-    <section class="pillar-section" aria-labelledby="pillar01-heading">
+    <section class="pillars" aria-labelledby="pillars-heading">
       <div class="section-inner">
-        <div class="pillar-header">
-          <span class="pillar-number" aria-hidden="true">01</span>
-          <h2 id="pillar01-heading">Reclaim time from the coordination layer</h2>
-        </div>
-        <div class="pillar-body">
-          <p>Async tools, parallel agents, auto-approvals, and scheduled prompts eliminate task babysitting. Post a task and walk away. Results are waiting when you return.</p>
-          <p>Most AI tools are synchronous — you wait, one step at a time. Prosponsive runs multiple specialized agents in parallel channels, executing tools in the background while you focus on work that matters.</p>
-          <div class="pillar-metrics" aria-label="Pillar 01 metrics">
-            <span class="pillar-metric"><strong>30–90 min/day</strong> reclaimed from task babysitting</span>
-            <span class="pillar-metric"><strong>50–100+</strong> daily interruptions eliminated via auto-approvals</span>
-            <span class="pillar-metric"><strong>3–7 hrs/week</strong> on recurring tasks eliminated by scheduled prompts</span>
+        <h2 id="pillars-heading" class="visually-hidden">Three pillars</h2>
+
+        <!-- Pillar 01 -->
+        <div class="pillar-row">
+          <div class="pillar-text">
+            <div class="pillar-header">
+              <span class="pillar-number" aria-hidden="true">01</span>
+              <h3 class="section-heading">Reclaim time from the coordination layer</h3>
+            </div>
+            <p>Async tools, parallel agents, auto-approvals, and scheduled prompts eliminate task babysitting. Post a task and walk away. Results are waiting when you return.</p>
+            <p>Most AI tools are synchronous — you wait, one step at a time. Prosponsive runs multiple specialized agents in parallel channels, executing tools in the background while you focus on work that matters.</p>
+            <div class="pillar-cta">
+              <a href="/how-it-works/" class="btn-secondary">See how it works</a>
+            </div>
           </div>
-          <div class="pillar-cta">
-            <a href="/how-it-works/" class="btn-secondary">See how it works</a>
+          <div class="pillar-metrics-panel" aria-label="Pillar 01 metrics">
+            <div class="metric-row">
+              <span class="metric-value">30–90 min/day</span>
+              <span class="metric-label">reclaimed from task babysitting</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-value">50–100+</span>
+              <span class="metric-label">daily interruptions eliminated via auto-approvals</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-value">3–7 hrs/week</span>
+              <span class="metric-label">on recurring tasks eliminated by scheduled prompts</span>
+            </div>
           </div>
         </div>
+
+        <!-- Pillar 02 -->
+        <div class="pillar-row pillar-row-reverse">
+          <div class="pillar-text">
+            <div class="pillar-header">
+              <span class="pillar-number" aria-hidden="true">02</span>
+              <h3 class="section-heading">Protect your data, credentials &amp; continuity</h3>
+            </div>
+            <p>Local execution, credential isolation, automatic failover across 7+ providers, offline-capable. Your data never leaves your machine. Your secrets never touch an AI provider.</p>
+            <p>Sensitive work doesn't have to route through cloud servers. Prosponsive runs on your desktop — your documents, credentials, and workflows stay with you. And if one model goes down, it automatically fails over to the next.</p>
+            <div class="pillar-cta">
+              <a href="guides/security-architecture-whitepaper.html" class="btn-secondary">Read security architecture</a>
+            </div>
+          </div>
+          <div class="pillar-metrics-panel" aria-label="Pillar 02 metrics">
+            <div class="metric-row">
+              <span class="metric-value">100%</span>
+              <span class="metric-label">local execution — data sovereignty by design</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-value">Zero</span>
+              <span class="metric-label">credential exposure to AI providers</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-value">0 downtime</span>
+              <span class="metric-label">from single-provider outages via automatic failover</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pillar 03 -->
+        <div class="pillar-row">
+          <div class="pillar-text">
+            <div class="pillar-header">
+              <span class="pillar-number" aria-hidden="true">03</span>
+              <h3 class="section-heading">Deploy real tool integration — not just conversation</h3>
+            </div>
+            <p>n8n workflows orchestrate multiple systems per agent call. 2,533 tools across 216 products — one agent call executes a complete workflow: read a ticket, look up the customer, check billing, and draft the response as a single operation.</p>
+            <p>Not trigger-action automation. Not single MCP calls. Prosponsive agents use n8n-powered tools that coordinate across your real systems — email, CRM, databases, Slack — in one step, with 60–80% fewer tool calls compared to equivalent MCP stacks.</p>
+            <div class="pillar-cta">
+              <a href="guides/n8n-tool-building-guide.html" class="btn-secondary">Browse integrations</a>
+            </div>
+          </div>
+          <div class="pillar-metrics-panel" aria-label="Pillar 03 metrics">
+            <div class="metric-row">
+              <span class="metric-value">2,533 tools</span>
+              <span class="metric-label">across 216 products</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-value">60–80%</span>
+              <span class="metric-label">fewer tool calls vs. MCP</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-value">5–10×</span>
+              <span class="metric-label">faster than custom API development</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
     <!-- ====================================================
-         Block 5 — Pillar 02: Protect your data & continuity
-    ==================================================== -->
-    <section class="pillar-section" aria-labelledby="pillar02-heading">
-      <div class="section-inner">
-        <div class="pillar-header">
-          <span class="pillar-number" aria-hidden="true">02</span>
-          <h2 id="pillar02-heading">Protect your data, credentials &amp; continuity</h2>
-        </div>
-        <div class="pillar-body">
-          <p>Local execution, credential isolation, automatic failover across 7+ providers, offline-capable. Your data never leaves your machine. Your secrets never touch an AI provider.</p>
-          <p>Sensitive work doesn't have to route through cloud servers. Prosponsive runs on your desktop — your documents, credentials, and workflows stay with you. And if one model goes down, it automatically fails over to the next.</p>
-          <div class="pillar-metrics" aria-label="Pillar 02 metrics">
-            <span class="pillar-metric"><strong>100%</strong> local execution — data sovereignty by design</span>
-            <span class="pillar-metric"><strong>Zero</strong> credential exposure to AI providers</span>
-            <span class="pillar-metric"><strong>0</strong> downtime from single-provider outages via automatic failover</span>
-          </div>
-          <div class="pillar-cta">
-            <a href="guides/security-architecture-whitepaper.html" class="btn-secondary">Read security architecture</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         Block 6 — Pillar 03: Real tool integration
-    ==================================================== -->
-    <section class="pillar-section" aria-labelledby="pillar03-heading">
-      <div class="section-inner">
-        <div class="pillar-header">
-          <span class="pillar-number" aria-hidden="true">03</span>
-          <h2 id="pillar03-heading">Deploy real tool integration — not just conversation</h2>
-        </div>
-        <div class="pillar-body">
-          <p>n8n workflows orchestrate multiple systems per agent call. 2,533 tools across 216 products — one agent call executes a complete workflow: read a ticket, look up the customer, check billing, and draft the response as a single operation.</p>
-          <p>Not trigger-action automation. Not single MCP calls. Prosponsive agents use n8n-powered tools that coordinate across your real systems — email, CRM, databases, Slack — in one step, with 60–80% fewer tool calls compared to equivalent MCP stacks.</p>
-          <div class="pillar-metrics" aria-label="Pillar 03 metrics">
-            <span class="pillar-metric"><strong>2,533 tools</strong> across 216 products</span>
-            <span class="pillar-metric"><strong>60–80%</strong> fewer tool calls vs. MCP</span>
-            <span class="pillar-metric"><strong>5–10×</strong> faster than custom API development</span>
-          </div>
-          <div class="pillar-cta">
-            <a href="guides/n8n-tool-building-guide.html" class="btn-secondary">Browse integrations</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         Block 7 — How It Works (mini)
-    ==================================================== -->
-    <section class="how-it-works-mini" aria-labelledby="hiw-heading">
-      <div class="section-inner">
-        <h2 id="hiw-heading" class="section-heading" style="text-align:center;">How it works</h2>
-        <p class="section-subheading" style="text-align:center;margin:0 auto 0;">The bottleneck isn't the AI model. It's the architecture around it.</p>
-        <div class="hiw-steps">
-          <div class="hiw-step">
-            <div class="hiw-step-number" aria-hidden="true">1</div>
-            <h3>Post a task</h3>
-            <p>Drop your request into a channel. Assign it to one or more specialized agents.</p>
-          </div>
-          <div class="hiw-step">
-            <div class="hiw-step-number" aria-hidden="true">2</div>
-            <h3>Agents work in parallel</h3>
-            <p>Multiple agents run simultaneously in channels — your coordination layer.</p>
-          </div>
-          <div class="hiw-step">
-            <div class="hiw-step-number" aria-hidden="true">3</div>
-            <h3>Tools execute async</h3>
-            <p>Workflows connect your real systems — email, CRM, databases — in the background.</p>
-          </div>
-          <div class="hiw-step">
-            <div class="hiw-step-number" aria-hidden="true">4</div>
-            <h3>Results are waiting</h3>
-            <p>Come back to completed work. No babysitting. No approvals per step.</p>
-          </div>
-        </div>
-        <div class="hiw-link">
-          <a href="/how-it-works/" class="btn-secondary">See the full picture</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         Block 8 — Persona Selector
-    ==================================================== -->
-    <section class="persona-selector" aria-labelledby="personas-heading">
-      <div class="section-inner">
-        <h2 id="personas-heading" class="section-heading">Built for your workflow</h2>
-        <p class="section-subheading">Find your fit — each path leads to what matters most for how you work.</p>
-        <div class="persona-grid">
-          <a href="/for/power-users/" class="persona-card">
-            <div class="persona-card-tier">Developer / Power User</div>
-            <h3>Close the orchestration gap</h3>
-            <p>Your AI stack still has you as the orchestrator. Parallel agents, async tools, credential isolation, and automatic failover — built for people who know what they want from AI.</p>
-            <span class="persona-card-arrow">For developers and power users &rarr;</span>
-          </a>
-          <a href="/for/consultants/" class="persona-card">
-            <div class="persona-card-tier">Independent Professional</div>
-            <h3>Set up once. Walk away.</h3>
-            <p>You shouldn't have to manage your AI. Turn recurring tasks into automatic outcomes — briefings, digests, monitoring — with your data staying on your machine.</p>
-            <span class="persona-card-arrow">For consultants and freelancers &rarr;</span>
-          </a>
-          <a href="/for/privacy/" class="persona-card">
-            <div class="persona-card-tier">Privacy-Conscious Professional</div>
-            <h3>Data sovereignty by design</h3>
-            <p>Sensitive work doesn't have to route through cloud servers. Your documents, credentials, and workflows stay with you — not with a provider.</p>
-            <span class="persona-card-arrow">For legal, finance, HR, and healthcare &rarr;</span>
-          </a>
-          <a href="/for/teams/" class="persona-card">
-            <div class="persona-card-tier">IT / Security Decision Maker</div>
-            <h3>Every AI action auditable</h3>
-            <p>Auto-approval rules define what agents can do without human review. Credentials never touch the AI provider. Local execution by design.</p>
-            <span class="persona-card-arrow">For IT and security leaders &rarr;</span>
-          </a>
-          <a href="/how-it-works/" class="persona-card">
-            <div class="persona-card-tier">Curious Professional</div>
-            <h3>A team of specialists in a group chat</h3>
-            <p>AI should work while you don't. Drop a task and come back to results, not process. No code. No babysitting. Just outcomes.</p>
-            <span class="persona-card-arrow">See how Prosponsive works &rarr;</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         Block 9 — Social Proof
+         Section D — Social Proof
     ==================================================== -->
     <section class="social-proof" aria-labelledby="proof-heading">
       <div class="section-inner">
-        <h2 id="proof-heading" class="section-heading">What early adopters are saying</h2>
+        <h2 id="proof-heading" class="section-heading" style="text-align:center;margin-bottom:2rem;">What early adopters are saying</h2>
         <div class="quote-grid">
-          <div class="quote-block">
+          <div class="quote-card">
             <blockquote>
               "I was already running Claude with a stack of MCP servers. I thought I had figured out AI automation — until I realized I was still sitting at my desk approving every tool call, copying context between conversations, and manually sequencing the steps. Prosponsive was the first platform where the agents actually worked without me."
             </blockquote>
             <cite>— Early adopter &middot; Software engineer &middot; Independent power user</cite>
           </div>
-          <div class="quote-block">
+          <div class="quote-card">
             <blockquote>
               "The thing that sold me wasn't the feature list — it was the first time I set up a scheduled prompt, walked away, and came back to a completed research brief. I hadn't clicked anything. I hadn't approved anything. It just ran. That's a different category of tool."
             </blockquote>
@@ -325,8 +273,8 @@
         </div>
 
         <div class="outcome-table-wrap">
-          <h3 style="font-size:1.125rem;font-weight:700;color:var(--text-primary);margin-bottom:1rem;">Results by user type</h3>
-          <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:1rem;">Directional estimates based on observed usage patterns — validate before customer-facing ROI use.</p>
+          <h3 class="outcome-table-heading">Results by user type</h3>
+          <p class="outcome-table-disclaimer">Directional estimates based on observed usage patterns — validate before customer-facing ROI use.</p>
           <table class="outcome-table">
             <thead>
               <tr>
@@ -368,25 +316,46 @@
     </section>
 
     <!-- ====================================================
-         Block 10 — Competitive Teaser
+         Section E — Persona Grid + CTA
     ==================================================== -->
-    <section class="competitive-teaser" aria-labelledby="compare-heading">
+    <section class="persona-section" aria-labelledby="personas-heading">
       <div class="section-inner">
-        <h2 id="compare-heading">Already using Claude, GPT, or Zapier?</h2>
-        <p>Prosponsive is not a replacement for your AI subscriptions — it's the coordination layer that makes them work together, locally, in parallel. See how the architectures compare.</p>
-        <a href="guides/compare/" class="btn-secondary">Compare Prosponsive to alternatives</a>
-      </div>
-    </section>
+        <h2 id="personas-heading" class="section-heading" style="text-align:center;margin-bottom:0.5rem;">Built for your workflow</h2>
+        <p class="section-subheading" style="text-align:center;margin:0 auto 2.5rem;">Find your fit — each path leads to what matters most for how you work.</p>
+        <div class="persona-grid">
+          <a href="/for/power-users/" class="persona-card">
+            <div class="persona-card-tier">Developer / Power User</div>
+            <h3>Close the orchestration gap</h3>
+            <p>Your AI stack still has you as the orchestrator. Parallel agents, async tools, credential isolation, and automatic failover — built for people who know what they want from AI.</p>
+            <span class="persona-card-arrow">For developers and power users &rarr;</span>
+          </a>
+          <a href="/for/consultants/" class="persona-card">
+            <div class="persona-card-tier">Independent Professional</div>
+            <h3>Set up once. Walk away.</h3>
+            <p>You shouldn't have to manage your AI. Turn recurring tasks into automatic outcomes — briefings, digests, monitoring — with your data staying on your machine.</p>
+            <span class="persona-card-arrow">For consultants and freelancers &rarr;</span>
+          </a>
+          <a href="/for/privacy/" class="persona-card">
+            <div class="persona-card-tier">Privacy-Conscious Professional</div>
+            <h3>Data sovereignty by design</h3>
+            <p>Sensitive work doesn't have to route through cloud servers. Your documents, credentials, and workflows stay with you — not with a provider.</p>
+            <span class="persona-card-arrow">For legal, finance, HR, and healthcare &rarr;</span>
+          </a>
+          <a href="/for/teams/" class="persona-card">
+            <div class="persona-card-tier">IT / Security Decision Maker</div>
+            <h3>Every AI action auditable</h3>
+            <p>Auto-approval rules define what agents can do without human review. Credentials never touch the AI provider. Local execution by design.</p>
+            <span class="persona-card-arrow">For IT and security leaders &rarr;</span>
+          </a>
+          <a href="/how-it-works/" class="persona-card">
+            <div class="persona-card-tier">Curious Professional</div>
+            <h3>A team of specialists in a group chat</h3>
+            <p>AI should work while you don't. Drop a task and come back to results, not process. No code. No babysitting. Just outcomes.</p>
+            <span class="persona-card-arrow">See how Prosponsive works &rarr;</span>
+          </a>
+        </div>
 
-    <!-- ====================================================
-         Block 11 — Final CTA Band
-    ==================================================== -->
-    <section class="cta-band" aria-labelledby="cta-heading">
-      <div class="section-inner">
-        <h2 id="cta-heading">AI That Works While You Don't</h2>
-        <p>Prosponsive is the personal autonomous agent platform that runs AI assistants locally on your desktop — so your agents actually work while you don't.</p>
-
-        <div class="download-area">
+        <div class="persona-cta-row">
           <a
             id="download-btn-footer"
             class="btn-download"
@@ -395,16 +364,8 @@
           >
             Download for macOS
           </a>
+          <p class="persona-cta-note">Free to download &middot; macOS &amp; Windows</p>
         </div>
-        <p style="margin-top:0.75rem;font-size:0.875rem;color:rgba(244,246,244,0.75);">Free to download &middot; macOS &amp; Windows</p>
-
-        <section class="requirements" aria-labelledby="req-heading">
-          <h2 id="req-heading">System Requirements</h2>
-          <ul>
-            <li><strong>macOS</strong> 12 (Monterey) or later — Apple Silicon (arm64)</li>
-            <li><strong>Windows</strong> 10 or later — x64 or ARM64</li>
-          </ul>
-        </section>
       </div>
     </section>
 
@@ -414,19 +375,16 @@
        Footer
   ==================================================== -->
   <footer>
-    <p>&copy; 2026 Prosponsive, Inc. All rights reserved.</p>
-    <nav class="footer-nav-extended" aria-label="Footer links">
-      <a href="/for/power-users/">For Developers</a>
-      <a href="/for/consultants/">For Consultants</a>
-      <a href="/for/privacy/">For Privacy</a>
-      <a href="/for/teams/">For Teams</a>
-      <a href="/how-it-works/">How It Works</a>
-      <a href="guides/user-guide.html">Guides</a>
-      <a href="releases/">Release Notes</a>
-      <a href="guides/compare/">Compare</a>
-      <a href="guides/feedback.html">Feedback</a>
-      <a href="/legal/">Legal</a>
-    </nav>
+    <div class="footer-inner">
+      <p class="footer-copy">&copy; 2026 Prosponsive, Inc. All rights reserved.</p>
+      <nav class="footer-nav" aria-label="Footer links">
+        <a href="/how-it-works/">How It Works</a>
+        <a href="guides/user-guide.html">Guides</a>
+        <a href="guides/compare/">Compare</a>
+        <a href="releases/">Release Notes</a>
+        <a href="/legal/">Legal</a>
+      </nav>
+    </div>
   </footer>
 
   <script src="js/download.js"></script>
