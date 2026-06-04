@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Architecture — Prosponsive</title>
+  <meta name="description" content="Prosponsive's security model: local execution, credential isolation, tool runtime containment, and no server-side data storage.">
+  <link rel="canonical" href="https://prosponsive.ai/security/">
+  <link rel="icon" href="../assets/prosponsive-logo-icon.svg?v=2026-05-04" type="image/svg+xml">
+  <link rel="alternate icon" href="../assets/favicon.ico?v=2026-05-04">
+  <link rel="apple-touch-icon" href="../assets/icon.png?v=2026-05-04">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://prosponsive.ai/security/#webpage",
+    "url": "https://prosponsive.ai/security/",
+    "name": "Security Architecture — Prosponsive",
+    "description": "Prosponsive's security model: local execution, credential isolation, tool runtime containment, and no server-side data storage.",
+    "isPartOf": { "@id": "https://prosponsive.ai/#organization" }
+  }
+  </script>
+</head>
+<body class="page-wrapper">
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="/" class="site-header-logo" aria-label="Prosponsive home">
+        <img src="../assets/prosponsive-wordmark.svg" alt="Prosponsive">
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="/for/power-users/">For Developers</a>
+        <a href="/for/consultants/">For Consultants</a>
+        <a href="/for/privacy/">For Privacy</a>
+        <a href="/for/teams/">For Teams</a>
+        <a href="/how-it-works/">How It Works</a>
+        <a href="../guides/user-guide.html">Guides</a>
+        <a href="/#download" class="nav-cta">Download</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb section-inner" style="padding-top:1rem;padding-bottom:1rem;">
+      <a href="/">Home</a><span aria-hidden="true"> › </span>Security Architecture
+    </div>
+
+    <!-- Hero -->
+    <section class="persona-hero" aria-labelledby="hero-heading">
+      <div class="section-inner">
+        <h1 id="hero-heading">Security by architecture, not policy.</h1>
+        <p class="persona-hero-message">Local execution. Isolated tool runtime. Zero server-side data storage. Here's how it works.</p>
+        <div class="persona-hero-cta">
+          <a href="/download/" class="btn-secondary">Download free</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 1: Architecture overview -->
+    <section aria-labelledby="arch-heading">
+      <div class="section-inner">
+        <h2 id="arch-heading" class="section-heading">The trust boundary</h2>
+        <p class="section-subheading">Prosponsive is structured as a layered model where each tier communicates only with the tier directly adjacent to it. Credentials never cross a tier boundary.</p>
+
+        <div class="arch-diagram" role="img" aria-label="Architecture diagram showing four tiers: LLM Provider (remote), Agent Runtime (local), Tool Runtime n8n container, and Your Systems, plus a separate Credential Store accessible only to the Tool Runtime">
+
+          <div class="arch-tier arch-tier--remote">
+            <span class="arch-tier-label">Remote</span>
+            <div class="arch-tier-box">
+              <strong>LLM Provider</strong>
+              <span class="arch-tier-note">e.g. Anthropic, OpenAI, Ollama</span>
+            </div>
+          </div>
+
+          <div class="arch-connector" aria-hidden="true">
+            <span class="arch-connector-arrow">&#x21D5;</span>
+            <span class="arch-connector-desc">inference calls (prompt + context only)</span>
+          </div>
+
+          <div class="arch-tier arch-tier--local">
+            <span class="arch-tier-label">Local</span>
+            <div class="arch-tier-box">
+              <strong>Agent Runtime</strong>
+              <span class="arch-tier-note">Prosponsive desktop app</span>
+            </div>
+          </div>
+
+          <div class="arch-connector" aria-hidden="true">
+            <span class="arch-connector-arrow">&#x21D5;</span>
+            <span class="arch-connector-desc">tool requests / results only</span>
+          </div>
+
+          <div class="arch-tier arch-tier--local">
+            <span class="arch-tier-label">Local</span>
+            <div class="arch-tier-box arch-tier-box--isolated">
+              <strong>Tool Runtime &mdash; n8n container</strong>
+              <span class="arch-tier-note">isolated container with its own storage</span>
+            </div>
+          </div>
+
+          <div class="arch-connector" aria-hidden="true">
+            <span class="arch-connector-arrow">&#x21D5;</span>
+            <span class="arch-connector-desc">external API calls</span>
+          </div>
+
+          <div class="arch-tier arch-tier--external">
+            <span class="arch-tier-label">External</span>
+            <div class="arch-tier-box">
+              <strong>Your Systems</strong>
+              <span class="arch-tier-note">Salesforce, NetSuite, Slack, etc.</span>
+            </div>
+          </div>
+
+          <div class="arch-credential-store" aria-hidden="true">
+            <div class="arch-credential-box">
+              <strong>Credential Store</strong>
+              <span class="arch-tier-note">accessible only inside Tool Runtime</span>
+            </div>
+          </div>
+
+        </div><!-- /.arch-diagram -->
+
+        <div class="arch-legend" aria-hidden="true">
+          <span class="arch-legend-item arch-legend-remote">Remote</span>
+          <span class="arch-legend-item arch-legend-local">Local</span>
+          <span class="arch-legend-item arch-legend-external">External (your systems)</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 2: Security principles -->
+    <section aria-labelledby="principles-heading" style="background-color:var(--surface);border-top:1px solid var(--border);">
+      <div class="section-inner">
+        <h2 id="principles-heading" class="section-heading">Security principles</h2>
+        <p class="section-subheading">Six properties enforced by the architecture, not by configuration or policy.</p>
+
+        <ul class="value-props value-props--grid" role="list">
+          <li class="value-prop-item">
+            <div class="value-prop-content">
+              <h3>Local-first execution</h3>
+              <p>Agent runtime, tool execution, and storage all run on the user's machine. Nothing routes through Prosponsive servers. There is no cloud routing layer for your content.</p>
+            </div>
+          </li>
+          <li class="value-prop-item">
+            <div class="value-prop-content">
+              <h3>Least-privilege credential storage</h3>
+              <p>Credentials are encrypted locally. They are accessible only to the tool execution runtime, not to the agent runtime or the LLM. The agent never sees credentials in any form.</p>
+            </div>
+          </li>
+          <li class="value-prop-item">
+            <div class="value-prop-content">
+              <h3>Tool runtime isolation</h3>
+              <p>n8n runs in an isolated container with its own storage. The agent sends a request and receives only the result. Credentials and internal container state are never exposed to the agent runtime.</p>
+            </div>
+          </li>
+          <li class="value-prop-item">
+            <div class="value-prop-content">
+              <h3>No server-side data storage</h3>
+              <p>Conversation history, documents, and workflow state are never sent to or stored by Prosponsive. Your data exists only on your machine. This is enforced by the architecture, not a setting.</p>
+            </div>
+          </li>
+          <li class="value-prop-item">
+            <div class="value-prop-content">
+              <h3>Encrypted at rest</h3>
+              <p>All local data is encrypted. Credentials are stored with least-privilege access — the agent runtime and LLM cannot access the credential store directly under any code path.</p>
+            </div>
+          </li>
+          <li class="value-prop-item">
+            <div class="value-prop-content">
+              <h3>Provider-agnostic design</h3>
+              <p>No vendor lock-in on the security model. Swap AI providers without re-architecting. Automatic failover between providers does not change the isolation model or credential boundaries.</p>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </section>
+
+    <!-- Section 3: Data flow table -->
+    <section aria-labelledby="dataflow-heading">
+      <div class="section-inner">
+        <h2 id="dataflow-heading" class="section-heading">What leaves your machine</h2>
+        <p class="section-subheading" style="margin-bottom:1.5rem;">The short answer: very little, and never anything sensitive.</p>
+
+        <div class="outcome-table-wrap">
+          <table class="outcome-table">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Destination</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>LLM inference calls</td>
+                <td>Configured AI provider</td>
+                <td>Prompt + context only. Credentials are never included in inference calls.</td>
+              </tr>
+              <tr>
+                <td>Tool call results</td>
+                <td>Returned to agent runtime (local)</td>
+                <td>Results only. No credentials or internal container state are passed back.</td>
+              </tr>
+              <tr>
+                <td>Update checks</td>
+                <td>Prosponsive update server</td>
+                <td>Version string only. No usage data, identifiers, or content.</td>
+              </tr>
+              <tr>
+                <td>Everything else</td>
+                <td>Stays on your machine</td>
+                <td>Conversation history, documents, credentials, workflow state — never transmitted.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p style="margin-top:1.25rem;font-size:0.9375rem;color:var(--text-secondary);max-width:680px;">The tool runtime is a black box to the agent runtime &mdash; it receives requests and returns results. Credentials never leave the container.</p>
+
+      </div>
+    </section>
+
+    <!-- Section 4: Implementation details -->
+    <section aria-labelledby="impl-heading" style="background-color:var(--surface);border-top:1px solid var(--border);">
+      <div class="section-inner">
+        <h2 id="impl-heading" class="section-heading">Implementation details</h2>
+        <p class="section-subheading">For security engineers doing technical due diligence.</p>
+
+        <div class="hiw-narrative" style="margin-top:2rem;">
+          <p><strong>Credential injection model.</strong> Credentials are stored inside the n8n container and are never passed to or visible by the agent runtime or the LLM. When the agent calls a tool by name, the request travels to the tool runtime. The container resolves which credential that tool requires and injects it internally. The credential does not appear in the request from the agent, and does not appear in the result returned to the agent. There is no code path where the agent runtime handles a plaintext credential.</p>
+
+          <p><strong>Blast radius control.</strong> Auto-approval rules define exactly what agents can do without human confirmation &mdash; scoped by tool set, action type, or channel. Actions outside the approved rules require explicit human review before execution. This limits the blast radius of a misconfigured or misbehaving agent to the scope the operator has explicitly permitted.</p>
+
+          <p><strong>No Prosponsive account required.</strong> Prosponsive does not require account creation to use the product. No user identity data is sent to Prosponsive servers. The only optional network communication is version check requests, which transmit a version string with no user-identifying information attached.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA Band -->
+    <section class="cta-band" aria-labelledby="cta-heading">
+      <div class="section-inner">
+        <h2 id="cta-heading">Built for sensitive work.</h2>
+        <p>Download Prosponsive and see the security model in action. Local execution. Free.</p>
+        <a href="/download/" class="btn-download">Download free</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-copy">&copy; 2026 Prosponsive, Inc. All rights reserved.</p>
+      <nav class="footer-nav" aria-label="Footer links">
+        <a href="/how-it-works/">How It Works</a>
+        <a href="../guides/user-guide.html">Guides</a>
+        <a href="../guides/compare/">Compare</a>
+        <a href="../releases/">Release Notes</a>
+        <a href="/legal/">Legal</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>
