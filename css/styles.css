@@ -996,6 +996,13 @@ h1 {
   }
 }
 
+.download-requirements {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 1.25rem;
+}
+
 /* ================================================================
    Footer
    ================================================================ */
