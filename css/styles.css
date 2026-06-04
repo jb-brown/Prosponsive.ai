@@ -839,10 +839,15 @@ h1 {
 }
 
 .persona-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.125rem;
   margin-bottom: 3.5rem;
+}
+
+.persona-grid .persona-card {
+  flex: 0 0 calc((100% - 2.25rem) / 3);
 }
 
 .persona-card {
@@ -912,14 +917,14 @@ h1 {
 }
 
 @media (max-width: 900px) {
-  .persona-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .persona-grid .persona-card {
+    flex: 0 0 calc((100% - 1.125rem) / 2);
   }
 }
 
 @media (max-width: 767px) {
-  .persona-grid {
-    grid-template-columns: 1fr;
+  .persona-grid .persona-card {
+    flex: 0 0 100%;
   }
   .persona-card:hover,
   .persona-card:focus-visible {
