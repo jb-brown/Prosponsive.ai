@@ -7,15 +7,15 @@
   <link rel="icon" href="../../assets/prosponsive-logo-icon.svg?v=2026-05-04" type="image/svg+xml">
   <link rel="alternate icon" href="../../assets/favicon.ico?v=2026-05-04">
   <link rel="apple-touch-icon" href="../../assets/icon.png?v=2026-05-04">
+  <link rel="stylesheet" href="../../css/styles.css">
   <style>
   body, .vscode-body, .markdown-body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     color: #1F2321 !important;
     background-color: #F4F6F4 !important;
     line-height: 1.6;
-    max-width: 7.5in;
-    margin: 0 auto;
   }
+  .guide-content { max-width: 7.5in; margin: 0 auto; padding: 2rem 1.5rem; }
   h1 { color: #2F4F3E; font-size: 2em; border-bottom: 3px solid #2F4F3E; padding-bottom: 0.4em; margin-top: 0; }
   h2 { color: #2F4F3E; font-size: 1.4em; border-bottom: 1px solid #D6DBD7; padding-bottom: 0.3em; margin-top: 2em; page-break-after: avoid; }
   h3 { color: #3A5F4A; font-size: 1.1em; margin-top: 1.5em; page-break-after: avoid; }
@@ -46,13 +46,28 @@
   .guide-nav a:hover { text-decoration: underline; }
   </style>
 </head>
-<body>
+<body class="page-wrapper">
 
-<div class="cover">
-  <img src="../../assets/prosponsive-wordmark.svg" alt="Prosponsive" class="cover-wordmark">
-  <div class="tagline">vs. Ollama, LM Studio, and GPT4All</div>
-  <div class="version">Personal Autonomous Agent Platform</div>
-</div>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="/" class="site-header-logo" aria-label="Prosponsive home">
+      <img src="../../assets/prosponsive-wordmark.svg" alt="Prosponsive">
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="/">Home</a>
+      <a href="/for/power-users/">For Developers</a>
+      <a href="/for/consultants/">For Consultants</a>
+      <a href="/for/privacy/">For Privacy</a>
+      <a href="/for/teams/">For Teams</a>
+      <a href="/how-it-works/">How It Works</a>
+      <a href="../user-guide.html">Guides</a>
+      <a href="/download/" class="nav-cta">Download</a>
+    </nav>
+  </div>
+</header>
+
+<div class="guide-content">
+<nav class="breadcrumb" aria-label="Breadcrumb" style="margin-bottom:1.5rem;"><a href="/">Home</a><span aria-hidden="true"> › </span><a href="../user-guide.html">Guides</a><span aria-hidden="true"> › </span><a href="./">Compare</a></nav>
 
 <div class="guide-nav">
   <a href="vs-automation.html">&larr; vs. Automation Platforms</a>
@@ -203,9 +218,21 @@
   <a href="vs-custom-agents.html">vs. Custom GPTs &amp; Assistants &rarr;</a>
 </div>
 
-<div style="text-align: center; margin-top: 3em; padding-top: 1em; border-top: 2px solid #D6DBD7; color: #5C635F; font-size: 0.85em;">
-  <img src="../../assets/prosponsive-wordmark.svg" alt="Prosponsive" class="footer-wordmark"> — Personal Autonomous Agent Platform
+
 </div>
+
+<footer>
+  <div class="footer-inner">
+    <p class="footer-copy">&copy; 2026 Prosponsive, Inc. All rights reserved.</p>
+    <nav class="footer-nav" aria-label="Footer links">
+      <a href="/how-it-works/">How It Works</a>
+      <a href="../user-guide.html">Guides</a>
+      <a href="./">Compare</a>
+      <a href="/releases/">Release Notes</a>
+      <a href="/legal/">Legal</a>
+    </nav>
+  </div>
+</footer>
 
 </body>
 </html>
