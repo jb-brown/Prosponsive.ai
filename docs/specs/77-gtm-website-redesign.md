@@ -179,7 +179,7 @@ The current site **already has a `/guides/compare/` subtree** with seven competi
 | **/for/privacy/** | Local-first as the only architecture that qualifies | Privacy-Conscious / decision | "Sensitive work doesn't have to route through the cloud." | Download · "Read security architecture" |
 | **/for/teams/** | Governance & audit for evaluators | IT / Security / evaluation | "Every AI action auditable." | "Read security architecture" · Download |
 | **/compare/** + children | Win the bake-off | All Tier-1 / decision | "How Prosponsive compares." | Download · per-competitor reframe |
-| **/how-it-works/** | Level-set "it's not just a chat app" | Curious + Power User / consideration | "The bottleneck isn't the model. It's the architecture." | Download |
+| **/how-it-works/** | Level-set "it's not just a chat app"; primary landing destination for Curious Professional from the home persona selector | Curious + Power User / consideration | "The bottleneck isn't the model. It's the architecture." | Download |
 | **/pricing/** | Remove the cost objection; PLG entry | All / decision | "Start free. Keep your data." (pending model — see guardrail) | Download / Get started |
 | **/security/** | Credibility for privacy + IT personas | Privacy, IT/Security / evaluation | "Data sovereignty by design." | Download |
 | **/download/** | Canonical download + requirements | All / action | "Download Prosponsive" | Platform download buttons |
@@ -195,7 +195,7 @@ The home page is the full pitch in scroll form. Sequence (this is the build orde
 5. **Pillar 02 — Protect your data & continuity** — local execution / credential isolation / failover / offline, with 100% local + zero credential exposure + 0 downtime. CTA: "Read security architecture."
 6. **Pillar 03 — Real tool integration** — n8n multi-system tools, 2,533/216, visual builder, the "read a ticket → look up customer → check billing → draft response as ONE tool call" example. CTA: "Browse integrations."
 7. **How it works (mini)** — channels → parallel agents → async tools → results-waiting, 3–4 step visual. Link to /how-it-works/.
-8. **Persona selector** — five cards (the §1.3 messages), each linking to its /for/ or /product/ page. Lets each visitor self-route.
+8. **Persona selector** — Five cards, four linking to their `/for/` destination pages (`/for/power-users/`, `/for/consultants/`, `/for/privacy/`, `/for/teams/`); the Curious Professional card links to `/how-it-works/` where that persona is addressed as primary. Lets each visitor self-route.
 9. **Social proof** — the two archetype quotes (§1.5) + outcome-pattern strip (Legal-cleared framing only).
 10. **Competitive teaser** — "Already using Claude, GPT, or Zapier?" → links into /compare/.
 11. **Final CTA band** — tagline restated + download + system requirements (existing `.requirements` content).
@@ -244,6 +244,8 @@ Self-routing destinations for paid/ABM campaigns (MRD §09). Each leads with the
 
 **Phase E — Supporting pages.**
 `/how-it-works/` (full pitch explainer), `/security/` (whitepaper promotion), `/pricing/` (conditional on commercial model). Update `sitemap.xml` + `robots.txt` + footer nav across all pages. Add per-page JSON-LD `WebPage` schema (pattern already used in `guides/features.html`).
+
+> **robots.txt policy decision required for `/security/` — must be resolved before Phase E begins.** The current `robots.txt` has `Disallow: /guides/security-architecture-whitepaper.html`. Before the `/security/` page is published, the team must make an explicit decision on crawl policy. Options: (a) add `Allow: /security/` and update `robots.txt` to permit indexing, or (b) add `Disallow: /security/` to preserve the existing no-crawl policy. Do NOT default to either — this requires a conscious decision. Document the decision in this spec before Phase E begins.
 
 > Rationale: order maximizes narrative coverage per unit of effort — fix the page everyone sees first (A), then build the evaluation path (B→C), then the campaign landing pages (D), then supporting depth (E). Each phase is independently shippable.
 
@@ -303,14 +305,14 @@ No photography, no stock imagery — consistent with the current restrained, typ
 <a name="appendix-a"></a>
 ## Appendix A — Source Document Provenance
 
-| Document | Drive ID | What was extracted |
+| Document | Internal codename | What was extracted |
 |---|---|---|
-| Prosponsive_Messaging_Framework.docx | `19bGGzzwCNvZTeNuTuE1A2dHugVe8HhuQ` | Positioning statement, taglines, 3 pillars, persona quick-reference, competitor table, 50/100/200-word descriptions |
-| Prosponsive_Draft Pitches & SolutionBrief.docx | `1Dq8eE3DhdOj05pWUtmSqRUQJWazo_ZGV` | 4 elevator pitches, solution brief, headline stat bar, capability/benefit tables, "problem we own" |
-| Prosponsive_MRD.docx | `1AJiNb_Pa9dNLDZevh_Pfpz6cbXr9a5Xq` | Personas (2 tiers), 10 pain points, 6 differentiators, market trends, competitor landscape, customer evidence (+ editorial/Legal notes), campaign strategy |
-| Prosponsive_Value_Selling_Assets.docx | `1e1Uo_-fEEMA5MOfDldgx1eBiNZ4VK6wZ` | Value-selling pitches, differentiated capabilities & benefits table, quantitative benefit ranges |
+| Prosponsive_Messaging_Framework.docx | internal document ID — contact jb@prosponsive.ai | Positioning statement, taglines, 3 pillars, persona quick-reference, competitor table, 50/100/200-word descriptions |
+| Prosponsive_Draft Pitches & SolutionBrief.docx | internal document ID — contact jb@prosponsive.ai | 4 elevator pitches, solution brief, headline stat bar, capability/benefit tables, "problem we own" |
+| Prosponsive_MRD.docx | internal document ID — contact jb@prosponsive.ai | Personas (2 tiers), 10 pain points, 6 differentiators, market trends, competitor landscape, customer evidence (+ editorial/Legal notes), campaign strategy |
+| Prosponsive_Value_Selling_Assets.docx | internal document ID — contact jb@prosponsive.ai | Value-selling pitches, differentiated capabilities & benefits table, quantitative benefit ranges |
 
-All four read via `mcp__claude_ai_Google_Drive__read_file_content`. Source docs are marked "Confidential — Do Not Distribute" / "For internal use"; **do not copy doc internal notes, SLAs, or the confidential footer onto the public site.**
+Source docs are marked "Confidential — Do Not Distribute" / "For internal use"; **do not copy doc internal notes, SLAs, or the confidential footer onto the public site.**
 
 ---
 
@@ -340,6 +342,13 @@ The 11-row "Differentiated Capability / What It Means / Quantitative Benefit" ta
 
 > Every benefit range above carries the source hedge: *directional estimate — validate with discovery data before customer-facing ROI use.*
 
+> **Important for implementation:** The rows above are structural summaries only. The verbatim three-column table (Capability / What It Means / Quantitative Benefit) is in `Prosponsive_Value_Selling_Assets.docx`, §"Capability Comparison." The developer/copywriter writing each `/product/` page MUST pull the exact row text from that source doc — do not paraphrase the quantified benefit numbers. The bucketed structure above is a guide to which rows belong on which page.
+
+### B.6 — 200-Word Brand Description
+*Source: Prosponsive_Messaging_Framework.docx, §"Brand Descriptions"*
+
+[The 200-word version is documented in the Messaging Framework source doc. It is the recommended copy for press kit pages, partner profiles, and App Store / directory descriptions. The copywriter executing Phase C should pull this verbatim from the source doc and adapt only for tense/voice consistency with the site. Do not write a new 200-word description — the source doc version has been through messaging review.]
+
 ---
 
 <a name="appendix-c"></a>
@@ -363,6 +372,6 @@ Radii: 8px (buttons), 12px (cards). Breakpoint: 767px. Min tap target: 44px. Mot
 ---
 
 ### Open decisions for reviewer / user
-1. **`/compare/` relocation vs. alias** — moving `/guides/compare/*` changes indexed URLs. Recommend keeping existing URLs live (301 or alias) to preserve SEO from the SEO initiative; confirm GitHub Pages redirect approach.
+1. **`/compare/` relocation vs. alias** — **Decision: `/guides/compare/` URLs are canonical and must not be moved.** GitHub Pages has no redirect infrastructure; a true 301 is not achievable without a CDN layer not currently in use. The new `/compare/` page is an **alias index** that lists and links to the existing `/guides/compare/` pages — it does not replace them. The `sitemap.xml` must continue to list the `/guides/compare/` URLs as canonical entries. The `/compare/` index is a navigation convenience, not a content migration. Do not add `<meta http-equiv="refresh">` stubs or JavaScript redirects on the old paths — they harm SEO without providing the 301 benefit.
 2. **`/pricing/` commercial model** — depends on the free-tier/trial PLG model (MRD §09). Ship as "start free / how to get started" if tiers aren't finalized; do not fabricate pricing.
 3. **Customer quotes & quantified claims** — require Legal clearance per the MRD editorial note before any go live. Spec uses archetype attribution only.
