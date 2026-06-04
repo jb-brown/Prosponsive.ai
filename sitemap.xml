@@ -8,6 +8,36 @@
   </url>
 
   <url>
+    <loc>https://prosponsive.ai/how-it-works/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://prosponsive.ai/for/power-users/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://prosponsive.ai/for/consultants/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://prosponsive.ai/for/privacy/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://prosponsive.ai/for/teams/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>https://prosponsive.ai/guides/user-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

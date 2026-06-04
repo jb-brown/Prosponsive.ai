@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prosponsive for Privacy-Conscious Professionals — Data Sovereignty by Design</title>
+  <meta name="description" content="Sensitive work doesn't have to route through cloud servers. Prosponsive runs locally — your documents, credentials, and workflows stay with you, not with a provider.">
+  <link rel="canonical" href="https://prosponsive.ai/for/privacy/">
+  <link rel="icon" href="../../assets/prosponsive-logo-icon.svg?v=2026-05-04" type="image/svg+xml">
+  <link rel="alternate icon" href="../../assets/favicon.ico?v=2026-05-04">
+  <link rel="apple-touch-icon" href="../../assets/icon.png?v=2026-05-04">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://prosponsive.ai/for/privacy/#webpage",
+    "url": "https://prosponsive.ai/for/privacy/",
+    "name": "Prosponsive for Privacy-Conscious Professionals",
+    "description": "Sensitive work doesn't have to route through cloud servers. Prosponsive runs locally — your documents, credentials, and workflows stay with you, not with a provider.",
+    "isPartOf": { "@id": "https://prosponsive.ai/#organization" }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="/" class="site-header-logo" aria-label="Prosponsive home">
+        <img src="../../assets/prosponsive-wordmark.svg" alt="Prosponsive">
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="/for/power-users/">For Developers</a>
+        <a href="/for/consultants/">For Consultants</a>
+        <a href="/for/privacy/" aria-current="page">For Privacy</a>
+        <a href="/how-it-works/">How It Works</a>
+        <a href="../../guides/user-guide.html">Guides</a>
+        <a href="/#download" class="nav-cta">Download</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb section-inner" style="padding-top:1rem;padding-bottom:1rem;">
+      <a href="/">Home</a><span aria-hidden="true"> › </span>For Privacy-Conscious Professionals
+    </div>
+
+    <!-- Hero -->
+    <section class="persona-hero" aria-labelledby="hero-heading">
+      <div class="section-inner">
+        <div class="persona-hero-label">Privacy-Conscious Professional · Tier 1</div>
+        <h1 id="hero-heading">Sensitive work doesn't have to route through the cloud.</h1>
+        <p class="persona-hero-message">Sensitive work doesn't have to route through cloud servers. Prosponsive runs locally — your documents, credentials, and workflows stay with you, not with a provider.</p>
+        <div class="persona-hero-cta">
+          <a href="/#download" class="btn-download">Download for macOS</a>
+          <a href="../../guides/security-architecture-whitepaper.html" class="btn-secondary">Read security architecture</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value Props -->
+    <section aria-labelledby="value-props-heading">
+      <div class="section-inner">
+        <h2 id="value-props-heading" class="section-heading">What matters most for you</h2>
+        <p class="section-subheading">Ranked by what privacy-conscious professionals in legal, finance, HR, and healthcare-adjacent work need most — local execution, credential hygiene, and encrypted-at-rest data.</p>
+
+        <ul class="value-props" role="list">
+          <li class="value-prop-item">
+            <span class="value-prop-rank" aria-label="Priority 1">1</span>
+            <div class="value-prop-content">
+              <h3>100% local execution — data sovereignty by design</h3>
+              <p>Prosponsive runs entirely on your desktop. Your conversation history, documents, credentials, and workflow data never leave your machine. There is no cloud routing for your content — the platform is built local-first, not cloud-first with a "privacy mode" bolted on. 100% local execution means data sovereignty by architecture, not by policy.</p>
+            </div>
+          </li>
+          <li class="value-prop-item">
+            <span class="value-prop-rank" aria-label="Priority 2">2</span>
+            <div class="value-prop-content">
+              <h3>Credential isolation — your secrets never touch an AI provider</h3>
+              <p>API keys, passwords, and authentication tokens are encrypted locally and isolated from every AI provider. They never travel through the AI inference layer. When an agent executes a tool that requires credentials, those credentials are injected locally — the AI model sees only the result. Zero credential exposure by design.</p>
+            </div>
+          </li>
+          <li class="value-prop-item">
+            <span class="value-prop-rank" aria-label="Priority 3">3</span>
+            <div class="value-prop-content">
+              <h3>Offline capability with local AI models</h3>
+              <p>When sensitive workflows require air-gap conditions or unreliable connectivity, Prosponsive supports local AI models (via Ollama) that run entirely on-device — no internet connection required for inference. Mix cloud providers for non-sensitive work and local models for sensitive workflows, in separate channels.</p>
+            </div>
+          </li>
+          <li class="value-prop-item">
+            <span class="value-prop-rank" aria-label="Priority 4">4</span>
+            <div class="value-prop-content">
+              <h3>Encrypted at rest, in transit — no server-side storage</h3>
+              <p>Conversation history and workflow state are encrypted locally. There is no server-side storage of your work. Prosponsive never stores anything server-side — your data exists only on your machine. Read the full security architecture for implementation details.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Architecture summary -->
+    <section aria-labelledby="arch-heading" style="background-color:var(--surface);border-top:1px solid var(--border);">
+      <div class="section-inner">
+        <h2 id="arch-heading" class="section-heading">The privacy architecture at a glance</h2>
+        <p class="section-subheading">Built differently from cloud AI tools — local-first means the architecture enforces privacy, not a checkbox setting.</p>
+        <div class="capability-table-wrap">
+          <table class="capability-table">
+            <thead>
+              <tr>
+                <th>Data type</th>
+                <th>Cloud AI tools</th>
+                <th>Prosponsive</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Conversation history</td>
+                <td>Stored on provider servers</td>
+                <td>Stored locally, encrypted at rest</td>
+              </tr>
+              <tr>
+                <td>Uploaded documents</td>
+                <td>Transmitted to cloud servers</td>
+                <td>Never leave your machine</td>
+              </tr>
+              <tr>
+                <td>API keys &amp; credentials</td>
+                <td>Passed through inference layer or stored in cloud</td>
+                <td>Encrypted locally — never touch an AI provider</td>
+              </tr>
+              <tr>
+                <td>Workflow data</td>
+                <td>Cloud-routed by default</td>
+                <td>Local execution only</td>
+              </tr>
+              <tr>
+                <td>AI inference</td>
+                <td>Cloud provider required</td>
+                <td>7+ cloud providers + local models (Ollama); offline-capable</td>
+              </tr>
+              <tr>
+                <td>Tool execution results</td>
+                <td>Returned via cloud infrastructure</td>
+                <td>Executed locally — results returned to local agent</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top:1.5rem;">
+          <a href="../../guides/security-architecture-whitepaper.html" class="btn-secondary">Read the full security architecture</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Band -->
+    <section class="cta-band" aria-labelledby="cta-heading">
+      <div class="section-inner">
+        <h2 id="cta-heading">Your data stays with you.</h2>
+        <p>Prosponsive is the personal autonomous agent platform built for sensitive work. Local execution, credential isolation, offline capability — by design.</p>
+        <a href="/#download" class="btn-download">Download for macOS</a>
+        <p style="margin-top:0.75rem;font-size:0.875rem;color:rgba(244,246,244,0.75);">Free to download &middot; macOS &amp; Windows</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Prosponsive, Inc. All rights reserved.</p>
+    <nav class="footer-nav-extended" aria-label="Footer links">
+      <a href="/for/power-users/">For Developers</a>
+      <a href="/for/consultants/">For Consultants</a>
+      <a href="/for/privacy/">For Privacy</a>
+      <a href="/for/teams/">For Teams</a>
+      <a href="/how-it-works/">How It Works</a>
+      <a href="../../guides/user-guide.html">Guides</a>
+      <a href="../../releases/">Release Notes</a>
+      <a href="../../guides/compare/">Compare</a>
+      <a href="../../guides/feedback.html">Feedback</a>
+      <a href="/legal/">Legal</a>
+    </nav>
+  </footer>
+
+</body>
+</html>
