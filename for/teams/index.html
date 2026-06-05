@@ -18,6 +18,17 @@
   <link rel="alternate icon" href="../../assets/favicon.ico?v=2026-05-04">
   <link rel="apple-touch-icon" href="../../assets/icon.png?v=2026-05-04">
   <link rel="stylesheet" href="../../css/styles.css">
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(a!==void 0?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return a!==void 0&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString()+" (stub people)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a]),e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('__POSTHOG_API_KEY__', {
+      api_host: 'https://us.i.posthog.com',
+      autocapture: false,
+      capture_pageview: true,
+      persistence: 'localStorage+cookie',
+      cross_subdomain_cookie: false,
+      disable_session_recording: true
+    });
+  </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -46,7 +57,7 @@
         <a href="/for/teams/" aria-current="page">For Teams</a>
         <a href="/how-it-works/">How It Works</a>
         <a href="../../guides/user-guide.html">Guides</a>
-        <a href="/download/" class="nav-cta">Download</a>
+        <a href="/download/" class="nav-cta" data-cta-location="nav">Download</a>
       </nav>
     </div>
   </header>
@@ -64,8 +75,8 @@
         <h1 id="hero-heading">Every AI action auditable.</h1>
         <p class="persona-hero-message">Every AI action auditable. Auto-approval rules define what agents can do unattended. Credentials never touch the AI provider. Local execution by design.</p>
         <div class="persona-hero-cta">
-          <a href="/security/" class="btn-download" style="background-color:#f4f6f4;color:var(--accent);">Read security architecture</a>
-          <a href="/download/" class="btn-secondary">Download for macOS</a>
+          <a href="/security/" class="btn-download" style="background-color:#f4f6f4;color:var(--accent);" data-cta-location="hero_primary">Read security architecture</a>
+          <a href="/download/" class="btn-secondary" data-cta-location="hero_secondary">Download for macOS</a>
         </div>
       </div>
     </section>
@@ -158,7 +169,7 @@
           </table>
         </div>
         <div style="margin-top:1.5rem;">
-          <a href="/security/" class="btn-secondary">Read the full security architecture</a>
+          <a href="/security/" class="btn-secondary" data-cta-location="security_section">Read the full security architecture</a>
         </div>
       </div>
     </section>
@@ -168,7 +179,7 @@
       <div class="section-inner">
         <h2 id="cta-heading">AI governance built in, not bolted on.</h2>
         <p>Prosponsive is the personal autonomous agent platform where every AI action is auditable, credentials are isolated, and data never leaves the machine.</p>
-        <a href="/security/" class="btn-download" style="background-color:#f4f6f4;color:var(--accent);">Read security architecture</a>
+        <a href="/security/" class="btn-download" style="background-color:#f4f6f4;color:var(--accent);" data-cta-location="inline">Read security architecture</a>
         <p style="margin-top:0.75rem;font-size:0.875rem;color:rgba(244,246,244,0.75);">Or <a href="/download/" style="color:rgba(244,246,244,0.85);">download Prosponsive</a> to evaluate directly &middot; macOS &amp; Windows</p>
       </div>
     </section>
@@ -188,5 +199,6 @@
     </div>
   </footer>
 
+  <script src="/js/analytics.js"></script>
 </body>
 </html>

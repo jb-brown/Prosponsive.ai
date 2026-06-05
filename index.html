@@ -18,6 +18,17 @@
   <link rel="alternate icon" href="assets/favicon.ico?v=2026-05-04">
   <link rel="apple-touch-icon" href="assets/icon.png?v=2026-05-04">
   <link rel="stylesheet" href="css/styles.css">
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(a!==void 0?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return a!==void 0&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString()+" (stub people)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a]),e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('__POSTHOG_API_KEY__', {
+      api_host: 'https://us.i.posthog.com',
+      autocapture: false,
+      capture_pageview: true,
+      persistence: 'localStorage+cookie',
+      cross_subdomain_cookie: false,
+      disable_session_recording: true
+    });
+  </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -73,7 +84,7 @@
         <a href="/for/privacy/">For Privacy</a>
         <a href="/how-it-works/">How It Works</a>
         <a href="guides/user-guide.html">Guides</a>
-        <a href="/download/" class="nav-cta">Download</a>
+        <a href="/download/" class="nav-cta" data-cta-location="nav">Download</a>
       </nav>
     </div>
   </header>
@@ -154,7 +165,7 @@
             <p>Async tools, parallel agents, auto-approvals, and scheduled prompts eliminate task babysitting. Post a task and walk away. Results are waiting when you return.</p>
             <p>Most AI tools are synchronous — you type and then you wait for your agent to let you participate again. It's one synchronous step at a time. Prosponsive runs multiple specialized agents in parallel, executing tools in the background while you focus on work that matters.</p>
             <div class="pillar-cta">
-              <a href="/how-it-works/" class="btn-secondary">See how it works</a>
+              <a href="/how-it-works/" class="btn-secondary" data-cta-location="how_it_works_section">See how it works</a>
             </div>
           </div>
           <div class="pillar-metrics-panel" aria-label="Pillar 01 metrics">
@@ -182,7 +193,7 @@
             </div>
             <p>The agent runtime, tool execution, and storage all run on your machine — your files, keys, and workflow state stay local even though LLMs are remote and tools can call external APIs. Your credentials never touch an AI provider. And if one model goes down, Prosponsive automatically fails over to the next.</p>
             <div class="pillar-cta">
-              <a href="/security/" class="btn-secondary">Read security architecture</a>
+              <a href="/security/" class="btn-secondary" data-cta-location="security_section">Read security architecture</a>
             </div>
           </div>
           <div class="pillar-metrics-panel" aria-label="Pillar 02 metrics">
@@ -211,7 +222,7 @@
             <p><a href="https://n8n.io" target="_blank" rel="noopener">n8n</a> workflows orchestrate multiple systems per agent call. 2,533 tools across 216 products — one agent call executes a complete workflow: read a ticket, look up the customer, check billing, and draft the response as a single operation.</p>
             <p>Not trigger-action automation. Not single MCP calls. Prosponsive agents use n8n-powered tools that coordinate across your real systems — Salesforce, NetSuite, Workday, ServiceNow — in one step, with 60–80% fewer tool calls compared to equivalent MCP stacks.</p>
             <div class="pillar-cta">
-              <a href="/integrations/" class="btn-secondary">Browse integrations</a>
+              <a href="/integrations/" class="btn-secondary" data-cta-location="integrations_section">Browse integrations</a>
             </div>
           </div>
           <div class="pillar-metrics-panel" aria-label="Pillar 03 metrics">
@@ -241,31 +252,31 @@
         <h2 id="personas-heading" class="section-heading" style="text-align:center;margin-bottom:0.5rem;">Built for your workflow</h2>
         <p class="section-subheading" style="text-align:center;margin:0 auto 2.5rem;">Find your fit — each path leads to what matters most for how you work.</p>
         <div class="persona-grid">
-          <a href="/for/power-users/" class="persona-card">
+          <a href="/for/power-users/" class="persona-card" data-cta-location="persona_grid">
             <div class="persona-card-tier">Developer / Power User</div>
             <h3>Close the orchestration gap</h3>
             <p>Your AI stack still has you as the orchestrator. Parallel agents, async tools, credential isolation, and automatic failover — built for people who know what they want from AI.</p>
             <span class="persona-card-arrow">For developers and power users &rarr;</span>
           </a>
-          <a href="/for/consultants/" class="persona-card">
+          <a href="/for/consultants/" class="persona-card" data-cta-location="persona_grid">
             <div class="persona-card-tier">Independent Professional</div>
             <h3>Set up once. Walk away.</h3>
             <p>You shouldn't have to manage your AI. Turn recurring tasks into automatic outcomes — briefings, digests, monitoring — with your data staying on your machine.</p>
             <span class="persona-card-arrow">For consultants and freelancers &rarr;</span>
           </a>
-          <a href="/for/privacy/" class="persona-card">
+          <a href="/for/privacy/" class="persona-card" data-cta-location="persona_grid">
             <div class="persona-card-tier">Privacy-Conscious Professional</div>
             <h3>Data sovereignty by design</h3>
             <p>Sensitive work doesn't have to route through cloud servers. Your documents, credentials, and workflows stay with you — not with a provider.</p>
             <span class="persona-card-arrow">For legal, finance, HR, and healthcare &rarr;</span>
           </a>
-          <a href="/for/teams/" class="persona-card">
+          <a href="/for/teams/" class="persona-card" data-cta-location="persona_grid">
             <div class="persona-card-tier">IT / Security Decision Maker</div>
             <h3>Every AI action auditable</h3>
             <p>Auto-approval rules define what agents can do without human review. Credentials never touch the AI provider. Local execution by design.</p>
             <span class="persona-card-arrow">For IT and security leaders &rarr;</span>
           </a>
-          <a href="/how-it-works/" class="persona-card">
+          <a href="/how-it-works/" class="persona-card" data-cta-location="persona_grid">
             <div class="persona-card-tier">Curious Professional</div>
             <h3>A team of specialists in a group chat</h3>
             <p>AI should work while you don't. Drop a task and come back to results, not process. No code. No babysitting. Just outcomes.</p>
@@ -294,5 +305,6 @@
     </div>
   </footer>
 
+  <script src="/js/analytics.js"></script>
 </body>
 </html>
