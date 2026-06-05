@@ -4,13 +4,14 @@
   // --- UTM helper ---
   function readUTMs() {
     var params = new URLSearchParams(window.location.search);
-    return {
+    var raw = {
       utm_source:   params.get('utm_source'),
       utm_medium:   params.get('utm_medium'),
       utm_campaign: params.get('utm_campaign'),
       utm_content:  params.get('utm_content'),
       utm_term:     params.get('utm_term')
     };
+    return Object.fromEntries(Object.entries(raw).filter(function(e) { return e[1] !== null; }));
   }
 
   // --- Platform from download URL ---
