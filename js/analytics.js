@@ -40,24 +40,49 @@
   }
 
   // --- Download click handler ---
-  // Binds to .btn-download and #download-btn. On click: prevents default
-  // navigation, stamps ph_id into the href, captures the download_click event,
-  // then programmatically follows the link. This ordering ensures the URL is
-  // stamped before navigation proceeds.
+  // Binds to [data-download-btn] and #download-btn. On click: distinguishes
+  // between real installer URLs (CloudFront, /latest, /latest-win) and
+  // navigation links to the /download/ page.
+  //
+  // Installer URLs: prevent default, stamp ph_id, capture download_click, then
+  // follow the link. This ordering ensures ph_id is stamped before navigation.
+  //
+  // Page navigation URLs (/download/): let the browser follow naturally and
+  // capture a cta_click (like other secondary CTAs) — no ph_id stamping and
+  // no preventDefault, since the download page reconstructs the installer URL
+  // from scratch and the stitch would be lost anyway.
+  function isInstallerUrl(href) {
+    return href.indexOf('cloudfront.net') !== -1
+      || href.indexOf('/latest') !== -1; // covers /latest and /latest-win
+  }
+
   function bindDownloadButtons() {
-    var buttons = document.querySelectorAll('.btn-download, #download-btn');
+    var buttons = document.querySelectorAll('[data-download-btn], #download-btn');
     for (var i = 0; i < buttons.length; i++) {
       (function (btn) {
         btn.addEventListener('click', function (e) {
-          e.preventDefault();
-          stampPhId(btn);
-          if (typeof posthog !== 'undefined') {
-            posthog.capture('download_click', Object.assign({
-              platform: platformFromHref(btn.href),
-              cta_location: btn.getAttribute('data-cta-location') || 'unknown'
-            }, readUTMs()));
+          var href = btn.href || '';
+          if (isInstallerUrl(href)) {
+            e.preventDefault();
+            stampPhId(btn);
+            if (typeof posthog !== 'undefined') {
+              posthog.capture('download_click', Object.assign({
+                platform: platformFromHref(btn.href),
+                cta_location: btn.getAttribute('data-cta-location') || 'unknown'
+              }, readUTMs()));
+            }
+            window.location.href = btn.href;
+          } else {
+            // Navigation to /download/ page — let browser follow naturally,
+            // track as CTA intent only.
+            if (typeof posthog !== 'undefined') {
+              posthog.capture('cta_click', Object.assign({
+                cta_text: (btn.textContent || '').trim().substring(0, 100),
+                cta_href: href,
+                cta_location: btn.getAttribute('data-cta-location') || 'unknown'
+              }, readUTMs()));
+            }
           }
-          window.location.href = btn.href;
         });
       })(buttons[i]);
     }
@@ -78,8 +103,11 @@
         (function (el) {
           el.addEventListener('click', function () {
             if (typeof posthog !== 'undefined') {
+              var text = el.classList.contains('persona-card')
+                ? (el.querySelector('h3') || el).textContent.trim()
+                : (el.textContent || '').trim().substring(0, 100);
               posthog.capture('cta_click', Object.assign({
-                cta_text: (el.textContent || '').trim().substring(0, 100),
+                cta_text: text,
                 cta_href: el.href || '',
                 cta_location: el.getAttribute('data-cta-location') || 'unknown'
               }, readUTMs()));
