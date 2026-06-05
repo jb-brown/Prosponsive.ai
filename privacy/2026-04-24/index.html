@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy — Prosponsive</title>
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(a!==void 0?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return a!==void 0&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString()+" (stub people)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a]),e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('__POSTHOG_API_KEY__', {
+      api_host: 'https://us.i.posthog.com',
+      autocapture: false,
+      capture_pageview: true,
+      persistence: 'localStorage+cookie',
+      cross_subdomain_cookie: false,
+      disable_session_recording: true
+    });
+  </script>
   <meta name="description" content="Privacy Policy for the Prosponsive desktop application, version 2026-04-24.">
   <link rel="icon" href="/assets/prosponsive-logo-icon.svg?v=2026-05-04" type="image/svg+xml">
   <link rel="alternate icon" href="/assets/favicon.ico?v=2026-05-04">
@@ -72,7 +83,8 @@
 <h3>4.2 Information we collect automatically</h3>
 <ul>
 <li><strong>IP address, at the network edge:</strong> When you download the Prosponsive installer or auto-update package from Amazon CloudFront, AWS sees your IP address as part of normal network routing. We have disabled CloudFront access logging, so we do not retain IP addresses in any access logs we control.</li>
-<li><strong>Device and usage analytics (opt-in only):</strong> If you opt in to analytics, we use PostHog to record event data tied to a randomly generated UUID — we do not associate it with your account, your name, or your email, and we have disabled IP-based geolocation so PostHog does not persist coarse location data on our events. The events cover: feature-usage actions (e.g., conversation lifecycle and tool approvals — including the tool name but not its inputs or outputs, and the length of a message in characters but not its content); basic device and operating-system information; basic AI configuration (the provider and model you're currently using and your configured failover list); and the application's runtime state (app version, container runtime, session timing). For stuck or error events we additionally send a sanitized log tail — file paths, IP addresses, email addresses, and values that look like API keys are stripped before sending. You can opt out at any time in Settings; opting out stops any further events from being sent.</li>
+<li><strong>Marketing website analytics:</strong> The <code>prosponsive.ai</code> marketing website uses PostHog to collect anonymized page view and CTA click data. PostHog assigns a randomly generated UUID on your first visit (stored in localStorage and a browser cookie) and records which pages you visited and which buttons you clicked. No email address, name, or other personally identifiable information is collected. No session recording is enabled. This data is used solely to understand how visitors navigate the site and which download paths are most effective. It is not opt-in; if you prefer not to be tracked, you can block third-party scripts in your browser settings.</li>
+<li><strong>Desktop application analytics (opt-in only):</strong> If you opt in to analytics in the Prosponsive desktop application, we use PostHog to record event data tied to a randomly generated UUID — we do not associate it with your account, your name, or your email, and we have disabled IP-based geolocation so PostHog does not persist coarse location data on our events. The events cover: feature-usage actions (e.g., conversation lifecycle and tool approvals — including the tool name but not its inputs or outputs, and the length of a message in characters but not its content); basic device and operating-system information; basic AI configuration (the provider and model you're currently using and your configured failover list); and the application's runtime state (app version, container runtime, session timing). For stuck or error events we additionally send a sanitized log tail — file paths, IP addresses, email addresses, and values that look like API keys are stripped before sending. You can opt out at any time in Settings; opting out stops any further events from being sent.</li>
 <li><strong>Acceptance records:</strong> When you accept this Privacy Policy or our Terms of Service, we record your user ID, the document you accepted, the version, the timestamp, and the application version. We also record a salted SHA-256 hash of your IP address (not the raw IP) and the user agent string. The hash is computed at our API gateway using a server-side pepper that is never logged. These records are append-only and are retained indefinitely for legal defensibility (see §9).</li>
 </ul>
 <h3>4.3 Information generated by your use of the app</h3>
@@ -204,5 +216,6 @@
       <a href="/legal/">All legal documents</a>
     </nav>
   </main>
+  <script src="/js/analytics.js"></script>
 </body>
 </html>

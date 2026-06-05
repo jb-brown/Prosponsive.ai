@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prosponsive vs. Claude Cowork</title>
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(a!==void 0?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return a!==void 0&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString()+" (stub people)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a]),e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('__POSTHOG_API_KEY__', {
+      api_host: 'https://us.i.posthog.com',
+      autocapture: false,
+      capture_pageview: true,
+      persistence: 'localStorage+cookie',
+      cross_subdomain_cookie: false,
+      disable_session_recording: true
+    });
+  </script>
   <link rel="icon" href="../../assets/prosponsive-logo-icon.svg?v=2026-05-04" type="image/svg+xml">
   <link rel="alternate icon" href="../../assets/favicon.ico?v=2026-05-04">
   <link rel="apple-touch-icon" href="../../assets/icon.png?v=2026-05-04">
@@ -63,7 +74,7 @@
       <a href="/for/teams/">For Teams</a>
       <a href="/how-it-works/">How It Works</a>
       <a href="../user-guide.html">Guides</a>
-      <a href="/download/" class="nav-cta">Download</a>
+      <a href="/download/" class="nav-cta" data-cta-location="nav">Download</a>
     </nav>
   </div>
 </header>
@@ -264,5 +275,6 @@
   </div>
 </footer>
 
+  <script src="/js/analytics.js"></script>
 </body>
 </html>
