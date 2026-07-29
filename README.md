@@ -1,29 +1,23 @@
 # Prosponsive
 
-**AI-powered productivity for your desktop.**
+Prosponsive has wound down. It was fun to build, but other opportunities have
+come along.
 
 ## About This Repository
 
-This repository serves two purposes:
+This repository holds the source for [prosponsive.ai](https://prosponsive.ai),
+which stays online as a record of what the product was. The site is served by
+GitHub Pages from `main`.
 
-1. **Release Artifacts** -- Hosts GitHub Releases and electron-updater metadata for Prosponsive desktop app auto-updates.
-2. **User Feedback** -- Accepts bug reports and feature requests from Prosponsive users through structured issue templates.
-
-## Submitting Feedback
-
-We welcome bug reports and feature requests. Use the issue templates to submit feedback:
-
-- **[Report a Bug](../../issues/new?template=bug_report.yml)** -- Something isn't working as expected
-- **[Request a Feature](../../issues/new?template=feature_request.yml)** -- Suggest a new feature or improvement
-
-All feedback is reviewed by the Prosponsive team. Actionable reports that lead to merged fixes earn credits toward free subscription months.
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how the feedback system works.
-
-## Current Engineering Focus
-
-See [PRIORITIES.md](PRIORITIES.md) for the current engineering focus areas.
+The Prosponsive desktop app is no longer distributed, and the download links
+have been removed — the artifacts they pointed to are gone.
 
 ## Status
 
-This repository is currently private and will be made public after end-to-end testing of the feedback system is complete.
+Archived and no longer maintained.
+
+- Bug reports and feature requests are no longer accepted. The feedback
+  system, and the API behind it, have been shut down.
+- Nothing here is under active development.
+
+Thanks to everyone who tried it, broke it, and told us what they thought.

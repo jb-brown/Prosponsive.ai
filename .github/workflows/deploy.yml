@@ -23,13 +23,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Substitute build-time tokens
-        env:
-          POSTHOG_API_KEY: ${{ secrets.POSTHOG_API_KEY }}
-        run: |
-          find . -name "*.html" -not -path "./.git/*" \
-            -exec sed -i "s/__POSTHOG_API_KEY__/${POSTHOG_API_KEY}/g" {} +
-
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
