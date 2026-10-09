@@ -24,7 +24,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const ROOT = path.join(__dirname, '..', '..');
-const VERSION = '2026-04-24';
+const VERSION = '2026-10-09';
 
 function read(relativePath) {
   return fs.readFileSync(path.join(ROOT, relativePath), 'utf8');
@@ -32,20 +32,20 @@ function read(relativePath) {
 
 test('/privacy redirect points at /privacy/<current>/', () => {
   const html = read('privacy/index.html');
-  assert.match(html, /meta http-equiv="refresh" content="0; url=\/privacy\/2026-04-24\/"/);
-  assert.match(html, /window\.location\.replace\('\/privacy\/2026-04-24\/'\)/);
+  assert.match(html, /meta http-equiv="refresh" content="0; url=\/privacy\/2026-10-09\/"/);
+  assert.match(html, /window\.location\.replace\('\/privacy\/2026-10-09\/'\)/);
 });
 
 test('/terms redirect points at /terms/<current>/', () => {
   const html = read('terms/index.html');
-  assert.match(html, /meta http-equiv="refresh" content="0; url=\/terms\/2026-04-24\/"/);
-  assert.match(html, /window\.location\.replace\('\/terms\/2026-04-24\/'\)/);
+  assert.match(html, /meta http-equiv="refresh" content="0; url=\/terms\/2026-10-09\/"/);
+  assert.match(html, /window\.location\.replace\('\/terms\/2026-10-09\/'\)/);
 });
 
 test('/eula redirect points at /eula/<current>/', () => {
   const html = read('eula/index.html');
-  assert.match(html, /meta http-equiv="refresh" content="0; url=\/eula\/2026-04-24\/"/);
-  assert.match(html, /window\.location\.replace\('\/eula\/2026-04-24\/'\)/);
+  assert.match(html, /meta http-equiv="refresh" content="0; url=\/eula\/2026-10-09\/"/);
+  assert.match(html, /window\.location\.replace\('\/eula\/2026-10-09\/'\)/);
 });
 
 test('dated Privacy Policy page exists at /privacy/<version>/ and has expected heading', () => {
@@ -69,7 +69,7 @@ test('dated EULA page exists at /eula/<version>/ and has expected heading', () =
 
 test('Terms of Service ships only Alternate A (Delaware courts) — no arbitration text', () => {
   const html = read(`terms/${VERSION}/index.html`);
-  // User decision 1 (2026-04-24): Alternate A only. Guard against accidental
+  // User decision 1 (2026-10-09): Alternate A only. Guard against accidental
   // re-inclusion of Alternate B (JAMS arbitration) in a future bump.
   assert.ok(!/JAMS/i.test(html), 'Terms must not reference JAMS (Alternate B removed).');
   assert.ok(!/Alternate A|Alternate B/i.test(html), 'Terms must not contain alternate selection markers.');

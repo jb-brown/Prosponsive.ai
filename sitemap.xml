@@ -177,7 +177,19 @@
   </url>
 
   <url>
+    <loc>https://prosponsive.ai/privacy/2026-10-09/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
     <loc>https://prosponsive.ai/terms/2026-04-24/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://prosponsive.ai/terms/2026-10-09/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
