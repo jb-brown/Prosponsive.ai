@@ -1750,3 +1750,75 @@ footer a:focus-visible {
 @media (max-width: 600px) {
   .catalog-grid { grid-template-columns: 1fr; }
 }
+
+/* ================================================================
+   SMS program CTA (header) and disclosure (footer)
+   ================================================================ */
+
+.site-header-inner {
+  gap: 1.5rem;
+}
+
+.site-nav {
+  margin-left: auto;
+}
+
+.header-sms-cta {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.header-sms-cta:hover,
+.header-sms-cta:focus-visible {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.header-sms-cta:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Mobile: logo + SMS CTA on the first row, nav links scroll on a second row */
+@media (max-width: 767px) {
+  .site-header-inner {
+    flex-wrap: wrap;
+    height: auto;
+    row-gap: 0;
+    padding-top: 0.625rem;
+  }
+  .site-header-logo {
+    height: 40px;
+  }
+  .header-sms-cta {
+    margin-left: auto;
+    font-size: 0.8125rem;
+  }
+  .site-nav {
+    order: 3;
+    flex: 1 0 100%;
+    margin-left: 0;
+    overflow-x: auto;
+    padding: 0.25rem 0 0.75rem;
+    scrollbar-width: none;
+  }
+  .site-nav a {
+    white-space: nowrap;
+  }
+}
+
+footer > p.footer-sms {
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  footer > p.footer-sms {
+    text-align: left;
+  }
+}
