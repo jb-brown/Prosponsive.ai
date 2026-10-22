@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="/js/gtag.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMS Opt-In — Prosponsive</title>
+  <meta name="description" content="Opt in to receive text messages from Prosponsive's AI QC Agent.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://prosponsive.ai/sms-consent/">
+  <link rel="icon" href="../assets/prosponsive-logo-icon.svg?v=2026-05-04" type="image/svg+xml">
+  <link rel="alternate icon" href="../assets/favicon.ico?v=2026-05-04">
+  <link rel="apple-touch-icon" href="../assets/icon.png?v=2026-05-04">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .sms-form-wrap { max-width: 36rem; margin: 0 auto; padding: 2.5rem 1.25rem 3rem; }
+    .sms-form-wrap h1 { font-size: 1.75rem; line-height: 1.2; margin: 0 0 0.75rem; color: var(--text-primary); }
+    .sms-form-wrap .sms-lede { font-size: 0.9375rem; line-height: 1.65; color: var(--text-secondary); margin: 0 0 1.5rem; }
+    .sms-field { margin-bottom: 1.125rem; }
+    .sms-field label.sms-label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.375rem; }
+    .sms-field .sms-optional { font-weight: 400; color: var(--text-secondary); }
+    .sms-field input[type="text"],
+    .sms-field input[type="tel"] {
+      width: 100%; box-sizing: border-box; padding: 0.625rem 0.75rem; font: inherit; font-size: 1rem;
+      color: var(--text-primary); background: #fff; border: 1px solid var(--border); border-radius: 6px;
+    }
+    .sms-field input:focus-visible,
+    .sms-consent input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .sms-consent { display: flex; gap: 0.75rem; align-items: flex-start; padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; }
+    .sms-consent input[type="checkbox"] { flex: none; width: 1.125rem; height: 1.125rem; margin-top: 0.2rem; accent-color: var(--accent); }
+    .sms-consent label { font-size: 0.8125rem; line-height: 1.55; color: var(--text-primary); }
+    .sms-submit { margin-top: 1.25rem; width: 100%; padding: 0.75rem 1rem; font: inherit; font-size: 1rem; font-weight: 600; color: #fff; background: var(--accent); border: 0; border-radius: 6px; cursor: pointer; }
+    .sms-submit:hover, .sms-submit:focus-visible { background: var(--accent-hover); }
+    .sms-error { margin-top: 0.375rem; font-size: 0.8125rem; color: #9b2c2c; }
+    .sms-confirmation { padding: 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; font-size: 0.9375rem; line-height: 1.65; }
+    .sms-small { margin-top: 1.25rem; font-size: 0.75rem; line-height: 1.55; color: var(--text-secondary); }
+  </style>
+</head>
+<body class="page-wrapper">
+
+  <!-- Minimal header: this page is intentionally not part of the main site navigation. -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="/" class="site-header-logo" aria-label="Prosponsive home">
+        <img src="../assets/prosponsive-wordmark.svg" alt="Prosponsive">
+      </a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="sms-form-wrap">
+      <h1>Get text messages from Prosponsive's AI QC Agent</h1>
+      <p class="sms-lede">Enter your mobile number to receive recurring automated text messages from Prosponsive's AI QC Agent, including quality-control feedback requests and marketing messages. After you submit, we will text you to confirm. Your opt-in is not complete until you reply YES.</p>
+
+      <form id="sms-optin-form" novalidate>
+        <div class="sms-field">
+          <label class="sms-label" for="first-name">First name <span class="sms-optional">(optional)</span></label>
+          <input type="text" id="first-name" name="first_name" autocomplete="given-name" maxlength="60">
+        </div>
+
+        <div class="sms-field">
+          <label class="sms-label" for="mobile">Mobile phone number</label>
+          <input type="tel" id="mobile" name="mobile" inputmode="tel" autocomplete="tel-national"
+                 placeholder="(555) 555-5555" maxlength="20" required aria-describedby="mobile-error">
+          <div class="sms-error" id="mobile-error" role="alert" hidden>Please enter a valid 10-digit US mobile number.</div>
+        </div>
+
+        <div class="sms-field">
+          <div class="sms-consent">
+            <input type="checkbox" id="sms-consent" name="sms_consent" value="yes" required aria-describedby="consent-error">
+            <label for="sms-consent">I agree to receive recurring automated marketing and feedback text messages from Prosponsive's AI QC Agent at the mobile number provided. Consent is not a condition of purchase. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to cancel, HELP for help. Mobile opt-in data will not be shared with third parties or affiliates for marketing or promotional purposes. See our <a href="/privacy/2026-10-09/">Privacy Policy</a> and <a href="/terms/">Terms of Service</a>.</label>
+          </div>
+          <div class="sms-error" id="consent-error" role="alert" hidden>Please check the box to agree before continuing.</div>
+        </div>
+
+        <button type="submit" class="sms-submit">Sign me up</button>
+      </form>
+
+      <div id="sms-confirmation" class="sms-confirmation" role="status" tabindex="-1" hidden>
+        Thank you. We will text you shortly to confirm. <strong>Reply YES to complete your opt-in.</strong> You will not receive further messages until you do. Reply STOP at any time to cancel or HELP for help.
+      </div>
+
+      <p class="sms-small">Prosponsive, Inc. &middot; Questions: <a href="mailto:privacy@prosponsive.ai">privacy@prosponsive.ai</a></p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-copy">&copy; 2026 Prosponsive, Inc. All rights reserved.</p>
+      <nav class="footer-nav" aria-label="Footer links">
+        <a href="/terms/">Terms</a>
+        <a href="/privacy/">Privacy</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Client-side only: nothing is sent or stored from this page yet.
+    (function () {
+      var form = document.getElementById('sms-optin-form');
+      var mobile = document.getElementById('mobile');
+      var consent = document.getElementById('sms-consent');
+      var mobileErr = document.getElementById('mobile-error');
+      var consentErr = document.getElementById('consent-error');
+      var done = document.getElementById('sms-confirmation');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var digits = mobile.value.replace(/\D/g, '');
+        if (digits.length === 11 && digits.charAt(0) === '1') digits = digits.slice(1);
+        var phoneOk = digits.length === 10;
+        var consentOk = consent.checked;
+        mobileErr.hidden = phoneOk;
+        consentErr.hidden = consentOk;
+        mobile.setAttribute('aria-invalid', String(!phoneOk));
+        if (!phoneOk) { mobile.focus(); return; }
+        if (!consentOk) { consent.focus(); return; }
+        form.hidden = true;
+        done.hidden = false;
+        done.focus();
+      });
+    })();
+  </script>
+
+</body>
+</html>
